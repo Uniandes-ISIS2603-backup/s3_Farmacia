@@ -25,5 +25,6 @@ hs_err_pid*
 
 
 /frontstepbystep-web/nb-configuration.xml
-/palabraclave-back/target/
-/sX_palabraclave-back/target/
+/farmacia-back/target/
+/s3_farmacia-back/target/
+/s3_farmacia-back/target/

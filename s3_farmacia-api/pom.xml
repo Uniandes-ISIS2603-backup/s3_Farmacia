@@ -22,7 +22,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>co.edu.uniandes.cssw</groupId>
+            <groupId>co.edu.uniandes.csw</groupId>
             <artifactId>s3_drugshouse-back</artifactId>
             <version>1.0</version>
         </dependency>
