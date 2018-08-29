@@ -8,14 +8,18 @@ package co.edu.uniandes.csw.farmacia.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.logging.Logger;
+import javax.persistence.Entity;
+import javax.persistence.Temporal;
 
 /**
  *
  * @author estudiante
  */
-public class ProductoDTO extends BaseEntity implements Serializable {
+
+@Entity
+public class ProductoEntity extends BaseEntity implements Serializable {
     
-    private enum TipoProducto {
+    public enum TipoProducto {
         Suministro, Terminado
     }
     
@@ -35,7 +39,7 @@ public class ProductoDTO extends BaseEntity implements Serializable {
     
     private static final Logger LOGGER = Logger.getLogger(ProveedorEntity.class.getName());
     
-    public Boolean perecedero;
+    private Boolean perecedero;
 
     //setter
     public void setPerecedero(Boolean perecedero) {
@@ -47,7 +51,7 @@ public class ProductoDTO extends BaseEntity implements Serializable {
         return perecedero;
     }
     
-    public TipoProducto tipoProducto;
+    private TipoProducto tipoProducto;
 
     public TipoProducto getTipoProducto() {
         return tipoProducto;
@@ -57,7 +61,7 @@ public class ProductoDTO extends BaseEntity implements Serializable {
         this.tipoProducto = tipoProducto;
     }
     
-    public Double precio;
+    private Double precio;
 
     public Double getPrecio() {
         return precio;
@@ -67,7 +71,7 @@ public class ProductoDTO extends BaseEntity implements Serializable {
         this.precio = precio;
     }
     
-    public Integer cantidad;
+    private Integer cantidad;
 
     public Integer getCantidad() {
         return cantidad;
@@ -77,7 +81,8 @@ public class ProductoDTO extends BaseEntity implements Serializable {
         this.cantidad = cantidad;
     }
     
-    public Date fecha;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date fecha;
 
     public Date getFecha() {
         return fecha;
@@ -87,7 +92,7 @@ public class ProductoDTO extends BaseEntity implements Serializable {
         this.fecha = fecha;
     }
     
-    public Integer unidadesDisponibles;
+    private Integer unidadesDisponibles;
 
     public Integer getUnidadesDisponibles() {
         return unidadesDisponibles;
@@ -97,7 +102,7 @@ public class ProductoDTO extends BaseEntity implements Serializable {
         this.unidadesDisponibles = unidadesDisponibles;
     }
     
-    public PhotoType[] fotos;
+    private PhotoType[] fotos;
 
     public PhotoType[] getFotos() {
         return fotos;
@@ -107,7 +112,7 @@ public class ProductoDTO extends BaseEntity implements Serializable {
         this.fotos = fotos;
     }
     
-    public PhotoType[] videos;
+    private PhotoType[] videos;
 
     public PhotoType[] getVideos() {
         return videos;

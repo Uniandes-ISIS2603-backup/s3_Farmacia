@@ -9,7 +9,7 @@ import co.edu.uniandes.csw.farmacia.entities.ProductoEntity;
 import java.util.Date;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
+import java.io.Serializable;
 /**
  *
  * @author estudiante
@@ -36,7 +36,7 @@ public class ProductoDTO implements Serializable {
     }
     
     public ProductoEntity toEntity() {
-        ProductoEntity producto = new FacturaEntity();
+        ProductoEntity producto = new ProductoEntity();
         producto.setFecha(fecha);
         producto.setId(id);
         producto.setPrecio(precio);

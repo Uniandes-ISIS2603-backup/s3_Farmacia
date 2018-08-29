@@ -7,13 +7,18 @@ package co.edu.uniandes.csw.farmacia.resources;
 
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.PUT;
+import javax.ws.rs.POST;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
+import co.edu.uniandes.csw.farmacia.dto.ProductoDTO;
+import co.edu.uniandes.csw.farmacia.entities.ProductoEntity;
 
 /**
  *
@@ -28,7 +33,7 @@ public class ProductoResource {
     
     @POST
     public ProductoDTO createProducto(ProductoDTO producto)
-            throws BussinesLogicException {
+            throws BusinessLogicException {
         return producto;
     }
     
@@ -38,7 +43,7 @@ public class ProductoResource {
     }
     
     @GET
-    @PATH("{id:\\d+}")
+    @Path("{id:\\d+}")
     public ProductoDTO getProducto(@PathParam("id") Long id) {
         ProductoDTO producto = new ProductoDTO(new ProductoEntity());
         producto.setId(id);
@@ -53,7 +58,7 @@ public class ProductoResource {
     
     @PUT
     @Path("{productoId: \\d+}")
-    public ClienteDTO refreshDataCliente ( @PathParam("productoId") 
+    public ProductoDTO refreshDataCliente ( @PathParam("productoId") 
             Long productoId, 
             ProductoDTO producto)throws WebApplicationException{
         return producto;
