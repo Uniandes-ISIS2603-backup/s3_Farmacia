@@ -7,11 +7,14 @@ package co.edu.uniandes.csw.farmacia.entities;
 
 import java.io.Serializable;
 import java.util.logging.Logger;
+import javax.persistence.Entity;
+
 
 /**
  *
  * @author estudiante
  */
+@Entity 
 public class ProveedorEntity extends BaseEntity implements Serializable
 {
     private String nombre;

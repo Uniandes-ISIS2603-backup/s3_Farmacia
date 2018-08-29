@@ -1,0 +1,117 @@
+{
+	"info": {
+		"_postman_id": "8e074703-7930-475e-840c-cc4fe31f5486",
+		"name": "pruebas Proveedor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear un proveedor",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"id\" : 1 ,\n\t\"nombre\" : \"Nestle\"\n\t\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_farmacia-api/api/proveedores/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"proveedores",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un proveedor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s3_farmacia-api/api/proveedores/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"proveedores",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar un proveedor determinado",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s3_farmacia-api/api/proveedores/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"proveedores",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar el nombre de un Proveedor.",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\" : 1,\n\t\"nombre\" : \"Bayer\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_farmacia-api/api/proveedores/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"proveedores",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
