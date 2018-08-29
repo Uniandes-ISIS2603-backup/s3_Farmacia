@@ -14,8 +14,10 @@ import javax.persistence.Entity;
  */
 @Entity
 public class RegistroEntity extends BaseEntity implements Serializable {
-    
+     
     private int cantidad;
+    private String tipoRegistro;
+    
     //FALTA TIPO
     
     public int getCantidad(){
@@ -24,6 +26,14 @@ public class RegistroEntity extends BaseEntity implements Serializable {
     
     public void setCantidad(int cantidad){
         this.cantidad = cantidad;
+    }
+    
+    public String getTipoRegistro(){
+        return tipoRegistro;
+    }
+    
+    public void setTipoRegistro(String tipo){
+        this.tipoRegistro = tipo;
     }
     
     

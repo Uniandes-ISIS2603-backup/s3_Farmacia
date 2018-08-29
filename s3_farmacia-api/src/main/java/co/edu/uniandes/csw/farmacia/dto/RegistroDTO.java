@@ -15,8 +15,16 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public class RegistroDTO implements Serializable{
     
+    public static final String ORDEN_REAPROVISONAMIENTO = "ORDEN_REAPROVISONAMIENTO";
+    public static final String TRASLADO_BODEGA = "TRASLADO_BODEGA";
+    public static final String DESPACHO_CLIENTE = "DESPACHO_CLIENTE";
+    public static final String ROBO = "ROBO";
+    public static final String PERDIDA = "PERDIDA";
+    public static final String VENCIMIENTO = "VENCIMIENTO";
+    
     private Long id;
     private int cantidad;
+    private String tipoRegistro;
     //TIPO DE REGISTRO
     
     public RegistroDTO(){
@@ -27,6 +35,7 @@ public class RegistroDTO implements Serializable{
         if ( registroEntity != null){
             this.id = registroEntity.getId();
             this.cantidad = registroEntity.getCantidad();
+            this.tipoRegistro = registroEntity.getTipoRegistro();
         }
     }
     
@@ -56,10 +65,19 @@ public class RegistroDTO implements Serializable{
         this.cantidad = cantidad;
     }
     
+    public String getTipoRegistro(){
+        return tipoRegistro;
+    }
+    
+    public void setTipoRegistro(String tipo){
+        this.tipoRegistro = tipo;
+    }
+    
     public RegistroEntity toEntity(){
         RegistroEntity registroEntity = new RegistroEntity();
         registroEntity.setId(this.id);
         registroEntity.setCantidad(this.cantidad);
+        registroEntity.setTipoRegistro(this.tipoRegistro);
         return registroEntity;
     }
     

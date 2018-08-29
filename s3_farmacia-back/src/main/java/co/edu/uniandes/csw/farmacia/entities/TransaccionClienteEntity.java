@@ -13,7 +13,6 @@ import java.io.Serializable;
  */
 public class TransaccionClienteEntity extends BaseEntity implements Serializable
 {    
-    private Long id;
     
     private Double monto;
     
@@ -58,15 +57,6 @@ public class TransaccionClienteEntity extends BaseEntity implements Serializable
     public String getTipoDePago()
     {
         return tipoDePago;
-    }
-   public void setId(Long pID)
-    {
-        id=pID;
-    }
-    
-    public long getId()
-    {
-        return id;
     }
     
     public void setParcial(boolean pParcial)
