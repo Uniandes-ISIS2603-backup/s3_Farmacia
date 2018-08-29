@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.farmacia.resources;
 
 import co.edu.uniandes.csw.farmacia.dto.ClienteDTO;
+import co.edu.uniandes.csw.farmacia.entities.ClienteEntity;
 import co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
@@ -40,9 +41,33 @@ public class ClienteResource {
         return cliente;
     }
     
+    @GET
+    public ClienteDTO getClientes(){
+        return new ClienteDTO();
+    }
+    
+    @GET
+    @Path("{id: \\d+}")
+    public ClienteDTO getCliente(@PathParam("id") Long id){
+        ClienteDTO c = new ClienteDTO(new ClienteEntity());
+        c.setId(id);
+        c.setNombre("Harry");
+        c.setApellido("Potter");
+        c.setCiudad("Privet Drive");
+        c.setDireccionEnvio("Cra6#1-39");
+        System.out.println("co.edu.uniandes.csw.farmacia.resources.ClienteResource.getCliente()"+c.getNombre());
+        return c;
+    }
+    
+    @DELETE
+    @Path("{id:\\d+")
+    public void deleteCliente(@PathParam("id") Long id){
+        
+    }
+    
     @PUT
     @Path("{clientesId: \\d+}")
-    public ClienteDTO updateCliente ( @PathParam("clientesId") Long clientesId, ClienteDTO cliente)throws WebApplicationException{
+    public ClienteDTO refreshDataCliente ( @PathParam("clientesId") Long clientesId, ClienteDTO cliente)throws WebApplicationException{
         return cliente;
     } 
     
