@@ -51,7 +51,7 @@ public class ProductoResource {
     }
     
     @DELETE
-    @Path("{id:\\d+")
+    @Path("{id:\\d+}")
     public void deleteProducto(@PathParam("id") Long id){
         
     }
