@@ -51,13 +51,13 @@ public class TransaccionProveedorResource extends TransaccionProveedorDTO {
     @Path("{id: \\d+}")
     public TransaccionProveedorDTO crearTransaccion(TransaccionProveedorDTO transaccion)
     {
-        LOGGER.log(Level.INFO, "EditorialResource createEditorial: input: {0}", transaccion.toString());
+        //LOGGER.log(Level.INFO, "EditorialResource createEditorial: input: {0}", transaccion.toString());
         // Convierte el DTO (json) en un objeto Entity para ser manejado por la lógica.
-        TransaccionProveedorEntity transaccionEntity = transaccion.toEntity();
+        //TransaccionProveedorEntity transaccionEntity = transaccion.toEntity();
         // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
-        TransaccionProveedorDTO nuevaTransaccionDTO = new TransaccionProveedorDTO(transaccionEntity);
-        LOGGER.log(Level.INFO, "EditorialResource createEditorial: output: {0}", nuevaTransaccionDTO.toString());
-        return nuevaTransaccionDTO;
+        //TransaccionProveedorDTO nuevaTransaccionDTO = new TransaccionProveedorDTO(transaccionEntity);
+        //LOGGER.log(Level.INFO, "EditorialResource createEditorial: output: {0}", nuevaTransaccionDTO.toString());
+        return transaccion;
     }
     
 }
