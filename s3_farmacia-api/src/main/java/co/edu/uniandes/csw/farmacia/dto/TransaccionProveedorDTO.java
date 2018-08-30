@@ -68,9 +68,14 @@ public class TransaccionProveedorDTO implements Serializable {
     /**
      * @return Cantidad de tiempo que tardo la transacción.
      */
-    public String darTiempo()
+    public String getTiempo()
     {
         return tiempo;
+    }
+    
+    public void setId(long id)
+    {
+        this.id = id;
     }
     
     /**

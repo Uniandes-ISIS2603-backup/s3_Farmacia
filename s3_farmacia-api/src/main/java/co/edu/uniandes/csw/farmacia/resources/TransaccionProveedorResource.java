@@ -7,14 +7,16 @@ package co.edu.uniandes.csw.farmacia.resources;
 
 import co.edu.uniandes.csw.farmacia.dto.TransaccionProveedorDTO;
 import co.edu.uniandes.csw.farmacia.entities.TransaccionProveedorEntity;
-import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
+//import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 /**
@@ -26,14 +28,30 @@ import javax.ws.rs.Produces;
  @Path("transaccionProveedor")
 public class TransaccionProveedorResource extends TransaccionProveedorDTO {
     
+    private static final Logger LOGGER = Logger.getLogger(ProveedorResource.class.getName());
      /**
       * @return Informacion de la transaccion.
       */
     @GET
     @Path("{id: \\d+}" )
-    public TransaccionProveedorDTO obtenerDinero()
+    public TransaccionProveedorDTO obtenerTransaccion(@PathParam("id")Long id)
     {
-         return this;      
+                  LOGGER.log(Level.INFO, "ProveedorResource getEditorial: input: {0}", id);
+      //  ProveedorEntity proveedorEntity = proveedorLogic.getProveedor(id);
+     //   if (proveedorEntity == null) {
+           // throw new WebApplicationException("El recurso /proveedores/" + id + " no existe.", 404);
+        
+      //  ProveedorDetailDTO detailDTO = new ProveedorDetailDTO(editorialEntity);
+      //  LOGGER.log(Level.INFO, "ProveedorResource getEditorial: output: {0}", detailDTO.toString());
+      //  return detailDTO;
+      TransaccionProveedorDTO p = new TransaccionProveedorDTO(new TransaccionProveedorEntity());
+      p.setId(id);
+      p.setMonto(3.0);
+      p.setTiempo("13");
+      
+        System.out.println("co.edu.uniandes.csw.farmacia.resources.ProveedorResource.getProveedor()"+p.getMonto() + p.getTiempo());
+      //Este el caso de prueba para verificar que si sirvan las pruebas de Postman
+        return p;    
     }
     
     /**
@@ -41,10 +59,9 @@ public class TransaccionProveedorResource extends TransaccionProveedorDTO {
      */
     @PUT
     @Path("{id: \\d+}" )
-    public void actualizarInformacion(TransaccionProveedorDTO transaccion)
+    public TransaccionProveedorDTO actualizarInformacion(@PathParam("id") Long id, TransaccionProveedorDTO tProveedor)
     {
-        this.monto = transaccion.getMonto();
-        this.tiempo = transaccion.darTiempo();
+        return tProveedor;
     }
     
     @POST
