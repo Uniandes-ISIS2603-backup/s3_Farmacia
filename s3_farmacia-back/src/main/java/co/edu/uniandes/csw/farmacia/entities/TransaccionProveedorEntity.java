@@ -10,9 +10,9 @@ import java.util.logging.Logger;
 
 /**
  *Clase que contiene la entidad de transaccionProvedor
- * @author ra.ariasr
+ * @author jd.florezg1
  */
-public class transaccionProvedorEntity extends BaseEntity implements Serializable
+public class TransaccionProveedorEntity extends BaseEntity implements Serializable
 {
     /**
      * atributo que hace referencia al timepo empleado en la transaccion
@@ -24,7 +24,7 @@ public class transaccionProvedorEntity extends BaseEntity implements Serializabl
      */
     private Double monto;
     
-    private static final Logger LOGGER = Logger.getLogger(transaccionProvedorEntity.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TransaccionProveedorEntity.class.getName());
     
     public void setTiempo(String pTiempo)
     {
