@@ -1,0 +1,117 @@
+{
+	"info": {
+		"_postman_id": "337be0d6-2c17-4b0c-96ce-644f8092a6ce",
+		"name": "pruebas Cliente",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crea un cliente",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\":1,\"nombre\":\"Harry\", \"apellido\":\"Potter\", \"ciudad\":\"Privet Drive\", \"direccionEnvio\":\"CRA6#1-39\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_farmacia-api/api/clientes/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un cliente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s3_farmacia-api/api/clientes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar un cliente determinado",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s3_farmacia-api/api/clientes/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar un cliente",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\":2, \"nombre\":\"Draco\", \"apellido\":\"Malfoy\", \"ciudad\":\"Hogwarts\", \"direccionEnvio\":\"CRA7#1-39\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_farmacia-api/api/clientes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
