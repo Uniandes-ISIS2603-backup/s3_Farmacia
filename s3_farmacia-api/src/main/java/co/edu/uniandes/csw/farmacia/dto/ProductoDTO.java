@@ -7,8 +7,6 @@ package co.edu.uniandes.csw.farmacia.dto;
 
 import co.edu.uniandes.csw.farmacia.entities.ProductoEntity;
 import java.util.Date;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import java.io.Serializable;
 /**
  *
@@ -22,7 +20,7 @@ public class ProductoDTO implements Serializable {
     
     public ProductoDTO(ProductoEntity producto) {
         if(producto != null) {
-            System.err.println("ProductoEntity has been built");
+            System.out.println("ProductoEntity has been built");
             this.id = producto.getId();
             this.fecha = producto.getFecha();
             this.precio = producto.getPrecio();
@@ -121,23 +119,23 @@ public class ProductoDTO implements Serializable {
         this.unidadesDisponibles = unidadesDisponibles;
     }
     
-    private ProductoEntity.PhotoType[] fotos;
+    private String[] fotos;
 
-    public ProductoEntity.PhotoType[] getFotos() {
+    public String[] getFotos() {
         return fotos;
     }
 
-    public void setFotos(ProductoEntity.PhotoType[] fotos) {
+    public void setFotos(String[] fotos) {
         this.fotos = fotos;
     }
     
-    private ProductoEntity.PhotoType[] videos;
+    private String[] videos;
 
-    public ProductoEntity.PhotoType[] getVideos() {
+    public String[] getVideos() {
         return videos;
     }
 
-    public void setVideos(ProductoEntity.PhotoType[] videos) {
+    public void setVideos(String[] videos) {
         this.videos = videos;
     }
     
@@ -145,6 +143,6 @@ public class ProductoDTO implements Serializable {
     public String toString()
     {
         //Ctrl+shift+i importar.
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return super.toString();
     }
 }

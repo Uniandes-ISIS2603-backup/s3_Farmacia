@@ -26,7 +26,7 @@ import javax.ws.rs.Produces;
  *
  * @author ra.ariasr
  */
-@Path("proveedores")
+@Path("transaccionCliente")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped

@@ -60,13 +60,13 @@ public class ClienteResource {
     }
     
     @DELETE
-    @Path("{id:\\d+")
+    @Path("{id:\\d+}")
     public void deleteCliente(@PathParam("id") Long id){
         
     }
     
     @PUT
-    @Path("{clientesId: \\d+}")
+    @Path("{clientesId:\\d+}")
     public ClienteDTO refreshDataCliente ( @PathParam("clientesId") Long clientesId, ClienteDTO cliente)throws WebApplicationException{
         return cliente;
     } 

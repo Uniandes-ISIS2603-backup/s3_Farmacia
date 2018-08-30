@@ -23,9 +23,11 @@ public class ProductoEntity extends BaseEntity implements Serializable {
         Suministro, Terminado
     }
     
-    public class PhotoType extends BaseEntity {
+   /* public class PhotoType extends BaseEntity implements Serializable {
         public String url;
 
+        public PhotoType(){}
+        
         public String getUrl() {
             return url;
         }
@@ -34,8 +36,9 @@ public class ProductoEntity extends BaseEntity implements Serializable {
             this.url = url;
         }
         
-        
     }
+    */
+    public ProductoEntity(){}
     
     private static final Logger LOGGER = Logger.getLogger(ProveedorEntity.class.getName());
     
@@ -81,7 +84,6 @@ public class ProductoEntity extends BaseEntity implements Serializable {
         this.cantidad = cantidad;
     }
     
-    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
 
     public Date getFecha() {
@@ -102,23 +104,23 @@ public class ProductoEntity extends BaseEntity implements Serializable {
         this.unidadesDisponibles = unidadesDisponibles;
     }
     
-    private PhotoType[] fotos;
+    private String[] fotos;
 
-    public PhotoType[] getFotos() {
+    public String[] getFotos() {
         return fotos;
     }
 
-    public void setFotos(PhotoType[] fotos) {
+    public void setFotos(String[] fotos) {
         this.fotos = fotos;
     }
     
-    private PhotoType[] videos;
+    private String[] videos;
 
-    public PhotoType[] getVideos() {
+    public String[] getVideos() {
         return videos;
     }
 
-    public void setVideos(PhotoType[] videos) {
+    public void setVideos(String[] videos) {
         this.videos = videos;
     }
     
