@@ -18,7 +18,6 @@ public class FacturaEntity extends BaseEntity implements Serializable {
         public enum TipoFactura{
         REAPROVISIONAMIENTO, DESPACHO     
     }
-    private Long id;
     
     private String Fecha;
     
@@ -29,10 +28,6 @@ public class FacturaEntity extends BaseEntity implements Serializable {
     private Integer unidades;
     
     private TipoFactura tipo;
-
-    public Long getId() {
-        return id;
-    }
 
     public String getFecha() {
         return Fecha;
@@ -52,12 +47,6 @@ public class FacturaEntity extends BaseEntity implements Serializable {
 
     public TipoFactura getTipo() {
         return tipo;
-    }
-    
-    
-    
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public void setFecha(String Fecha) {
