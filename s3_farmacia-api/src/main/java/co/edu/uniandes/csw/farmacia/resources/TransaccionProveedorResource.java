@@ -30,6 +30,7 @@ public class TransaccionProveedorResource extends TransaccionProveedorDTO {
     
     private static final Logger LOGGER = Logger.getLogger(ProveedorResource.class.getName());
      /**
+     * @param id
       * @return Informacion de la transaccion.
       */
     @GET
@@ -56,6 +57,9 @@ public class TransaccionProveedorResource extends TransaccionProveedorDTO {
     
     /**
      * Cambia los datos de la transacción por los que llegan por parametro.
+     * @param id
+     * @param tProveedor
+     * @return 
      */
     @PUT
     @Path("{id: \\d+}" )

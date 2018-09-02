@@ -1,0 +1,109 @@
+{
+	"info": {
+		"_postman_id": "1539e626-77ae-4453-9761-32395c120a5b",
+		"name": "Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "TestGet",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TestPost",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d5295256-5a20-4621-af1f-13bfcb04801f",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonObject = xml2Json(responseBody);",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 2,\n\t\"monto\": 3,\n\t\"tiempo\": \"24\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_farmacia-api/api/transaccionProveedor/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"transaccionProveedor",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TestPut",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d5295256-5a20-4621-af1f-13bfcb04801f",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonObject = xml2Json(responseBody);",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 2,\n\t\"monto\": 3,\n\t\"tiempo\": \"24\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_farmacia-api/api/transaccionProveedor/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"transaccionProveedor",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
