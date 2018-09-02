@@ -23,7 +23,7 @@ import javax.ws.rs.Produces;
 
 /**
  *
- * @author estudiante
+ * @author Francisco
  */
 @Path("proveedores")
 @Produces("application/json")

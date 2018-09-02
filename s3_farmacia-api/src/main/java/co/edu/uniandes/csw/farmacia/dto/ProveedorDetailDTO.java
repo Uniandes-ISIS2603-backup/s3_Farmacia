@@ -7,14 +7,15 @@ package co.edu.uniandes.csw.farmacia.dto;
 
 import co.edu.uniandes.csw.farmacia.entities.ProveedorEntity;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
- * @author estudiante
+ * @author Francisco
  */
 public class ProveedorDetailDTO extends ProveedorDTO implements Serializable
 {
-   // private List<ProductoDTO> productos;
+    private List<ProductoDTO> productos;
     
     public ProveedorDetailDTO()
     {
@@ -26,7 +27,7 @@ public class ProveedorDetailDTO extends ProveedorDTO implements Serializable
         super(proveedorEntity);
         if(proveedorEntity != null)
         {
-         //   if(proveedorEntity.getProductos() 1= null)
+         //   if(proveedorEntity.getProductos() = null)
          //  {
          //       productos = new ArrayList<>();
          //     for(ProductorEntity entityProduct : proveedorEntity.getProducts())
