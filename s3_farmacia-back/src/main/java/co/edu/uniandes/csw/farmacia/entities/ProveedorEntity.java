@@ -15,6 +15,8 @@ import javax.persistence.Entity;
  * @author estudiante
  */
 @Entity 
+//BaseEntity clase madre.
+//JPA recompila los datos y crea la respectiva base
 public class ProveedorEntity extends BaseEntity implements Serializable
 {
     private String nombre;
