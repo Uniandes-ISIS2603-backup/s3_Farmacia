@@ -1,0 +1,242 @@
+{
+	"id": "fa3ff878-a6a0-44f2-9a3e-d9cd67834a86",
+	"name": "ProductosCollection",
+	"allTests": [],
+	"timestamp": "2018-08-30T15:40:36.094Z",
+	"collection_id": "d323391f-99d4-4101-b814-f4eec58613dc",
+	"folder_id": 0,
+	"target_type": "collection",
+	"environment_id": "0",
+	"data": [],
+	"delay": 0,
+	"count": 1,
+	"collection": {
+		"id": "d323391f-99d4-4101-b814-f4eec58613dc",
+		"name": "ProductosCollection",
+		"description": "",
+		"auth": null,
+		"events": null,
+		"variables": [],
+		"order": [
+			"96813d73-7c55-44a3-b3b2-f57706142548",
+			"3771a857-19e3-44ad-88e2-99959329d260",
+			"5f34b351-f9a3-4134-b736-36856bc2cd32",
+			"d011b653-c075-4721-a1e4-72eba96e636a",
+			"c7f7b724-47e1-4df6-b667-01125d592fc2"
+		],
+		"folders_order": [],
+		"owner": "0",
+		"permissions": {},
+		"favorite": false,
+		"shared": false,
+		"type": "collection",
+		"depth": 0
+	},
+	"folder": null,
+	"environment": null,
+	"globals": null,
+	"results": [
+		{
+			"name": "getProducto",
+			"id": "96813d73-7c55-44a3-b3b2-f57706142548",
+			"url": "http://localhost:8080/s3_farmacia-api/api/productos",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {},
+			"times": [
+				"28"
+			],
+			"allTests": [
+				{}
+			],
+			"time": "28",
+			"totalRequestTime": "28",
+			"iterationResults": {}
+		},
+		{
+			"name": "getProducto/id",
+			"id": "3771a857-19e3-44ad-88e2-99959329d260",
+			"url": "http://localhost:8080/s3_farmacia-api/api/productos/10",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {},
+			"times": [
+				"5"
+			],
+			"allTests": [
+				{}
+			],
+			"time": "5",
+			"totalRequestTime": "5",
+			"iterationResults": {}
+		},
+		{
+			"name": "postProducto",
+			"id": "5f34b351-f9a3-4134-b736-36856bc2cd32",
+			"url": "http://localhost:8080/s3_farmacia-api/api/productos",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {},
+			"times": [
+				"13"
+			],
+			"allTests": [
+				{}
+			],
+			"time": "13",
+			"totalRequestTime": "13",
+			"iterationResults": {}
+		},
+		{
+			"name": "putProducto/id",
+			"id": "d011b653-c075-4721-a1e4-72eba96e636a",
+			"url": "http://localhost:8080/s3_farmacia-api/api/productos/10",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {},
+			"times": [
+				"5"
+			],
+			"allTests": [
+				{}
+			],
+			"time": "5",
+			"totalRequestTime": "5",
+			"iterationResults": {}
+		},
+		{
+			"name": "deleteProducto/id",
+			"id": "c7f7b724-47e1-4df6-b667-01125d592fc2",
+			"url": "http://localhost:8080/s3_farmacia-api/api/productos/10",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content",
+				"detail": {
+					"name": "No Content",
+					"detail": "The server successfully processed the request, but is not returning any content."
+				}
+			},
+			"testPassFailCounts": {},
+			"times": [
+				"3"
+			],
+			"allTests": [
+				{}
+			],
+			"time": "3",
+			"totalRequestTime": "3",
+			"iterationResults": {}
+		}
+	],
+	"totalPass": 0,
+	"totalFail": 0,
+	"totalTime": 54,
+	"lifecycle": "done",
+	"requests": [
+		{
+			"name": "getProducto",
+			"id": "96813d73-7c55-44a3-b3b2-f57706142548",
+			"url": "http://localhost:8080/s3_farmacia-api/api/productos",
+			"time": "2018-08-30T15:40:36.094Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {}
+		},
+		{
+			"name": "getProducto/id",
+			"id": "3771a857-19e3-44ad-88e2-99959329d260",
+			"url": "http://localhost:8080/s3_farmacia-api/api/productos/10",
+			"time": "2018-08-30T15:40:36.094Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {}
+		},
+		{
+			"name": "postProducto",
+			"id": "5f34b351-f9a3-4134-b736-36856bc2cd32",
+			"url": "http://localhost:8080/s3_farmacia-api/api/productos",
+			"time": "2018-08-30T15:40:36.094Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {}
+		},
+		{
+			"name": "putProducto/id",
+			"id": "d011b653-c075-4721-a1e4-72eba96e636a",
+			"url": "http://localhost:8080/s3_farmacia-api/api/productos/10",
+			"time": "2018-08-30T15:40:36.094Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {}
+		},
+		{
+			"name": "deleteProducto/id",
+			"id": "c7f7b724-47e1-4df6-b667-01125d592fc2",
+			"url": "http://localhost:8080/s3_farmacia-api/api/productos/10",
+			"time": "2018-08-30T15:40:36.094Z",
+			"responseCode": {
+				"code": 204,
+				"name": "No Content",
+				"detail": {
+					"name": "No Content",
+					"detail": "The server successfully processed the request, but is not returning any content."
+				}
+			},
+			"testPassFailCounts": {}
+		}
+	],
+	"synced": false
+}
