@@ -12,21 +12,24 @@ import java.util.logging.Level;
 import java.util.List;
 import javax.persistence.TypedQuery;
 import co.edu.uniandes.csw.farmacia.entities.ProveedorEntity;
+import javax.ejb.Stateless;
 
 /**
  *
  * @author francisco
  */
+@Stateless
 public class ProveedorPersistence {
 
     private static final Logger LOGGER = Logger.getLogger(ProveedorPersistence.class.getName());
 
-    @PersistenceContext(unitName = "DrugsHousePU")
+        @PersistenceContext(unitName = "DrugsHousePU")
     protected EntityManager em;
 
     public ProveedorEntity create(ProveedorEntity proveedorEntity) {
         LOGGER.log(Level.INFO, "Creando un nuevo proveedor");
 
+        //Crea.
         em.persist(proveedorEntity);
         LOGGER.log(Level.INFO, "Saliendo de crear un nuevo proveedor.");
         return proveedorEntity;
