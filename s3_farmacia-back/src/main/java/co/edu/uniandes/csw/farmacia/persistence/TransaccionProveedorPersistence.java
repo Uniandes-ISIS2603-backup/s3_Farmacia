@@ -10,6 +10,7 @@ import co.edu.uniandes.csw.farmacia.entities.TransaccionProveedorEntity;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -18,9 +19,10 @@ import javax.persistence.TypedQuery;
  *
  * @author jd.florezg1
  */
+@Stateless
 public class TransaccionProveedorPersistence {
     
-    private static final Logger LOGGER = Logger.getLogger(ProveedorPersistence.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TransaccionProveedorPersistence.class.getName());
 
     @PersistenceContext(unitName = "DrugsHousePU")
     protected EntityManager em;
