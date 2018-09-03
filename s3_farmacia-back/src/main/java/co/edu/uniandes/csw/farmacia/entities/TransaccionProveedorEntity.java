@@ -7,11 +7,13 @@ package co.edu.uniandes.csw.farmacia.entities;
 
 import java.io.Serializable;
 import java.util.logging.Logger;
+import javax.persistence.Entity;
 
 /**
  *Clase que contiene la entidad de transaccionProvedor
  * @author jd.florezg1
  */
+@Entity
 public class TransaccionProveedorEntity extends BaseEntity implements Serializable
 {
     /**
