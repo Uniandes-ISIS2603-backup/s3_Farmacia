@@ -50,13 +50,6 @@ public class FacturaResource {
     public FacturaDTO getFactura(@PathParam("id") Long id){
 
         FacturaDTO f = new FacturaDTO();
-        f.setId(id);
-        f.setFecha("29/08/2018");
-        f.setPrecio(20.200);
-        f.setProductos("Acetaminofen");
-        f.setUnidades(Integer.SIZE);
-        f.setTipo(FacturaDTO.TipoFactura.DESPACHO);
-        System.out.println("co.edu.uniandes.csw.farmacia.resources.ClienteResource.getCliente()"+f.getProductos());
         return f;
     }
     
