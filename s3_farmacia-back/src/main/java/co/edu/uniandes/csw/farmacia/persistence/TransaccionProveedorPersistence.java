@@ -75,7 +75,7 @@ public class TransaccionProveedorPersistence {
     /**
      * Borra a una transaccionProveedor.
      *
-     * @param proveedorId
+     * @param transaccionProveedorId
      */
     public void delete(Long transaccionProveedorId) {
         LOGGER.log(Level.INFO, "Borrando proveedor con id={0}", transaccionProveedorId);
