@@ -12,7 +12,7 @@ import javax.persistence.Entity;
 
 /**
  *
- * @author estudiante
+ * @author francisco
  */
 @Entity 
 //BaseEntity clase madre.
