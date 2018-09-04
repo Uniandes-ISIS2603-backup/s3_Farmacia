@@ -28,10 +28,10 @@ public class TransaccionProveedorPersistence {
     protected EntityManager em;
 
     public TransaccionProveedorEntity create(TransaccionProveedorEntity transaccionProveedorEntity) {
-        LOGGER.log(Level.INFO, "Creando un nuevo proveedor");
+        LOGGER.log(Level.INFO, "Creando una nueva TransaccionProveedor");
 
         em.persist(transaccionProveedorEntity);
-        LOGGER.log(Level.INFO, "Saliendo de crear un nuevo proveedor.");
+        LOGGER.log(Level.INFO, "Saliendo de crear una nueva TransaccionProveedor.");
         return transaccionProveedorEntity;
     }
     
