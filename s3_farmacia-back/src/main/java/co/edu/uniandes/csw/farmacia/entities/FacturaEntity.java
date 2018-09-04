@@ -26,8 +26,13 @@ public class FacturaEntity extends BaseEntity implements Serializable {
     private String productos;
     
     private Integer unidades;
-    
+
+
     private TipoFactura tipo;
+    
+    private ClienteEntity cliente;
+
+
 
     public String getFecha() {
         return Fecha;
@@ -48,7 +53,10 @@ public class FacturaEntity extends BaseEntity implements Serializable {
     public TipoFactura getTipo() {
         return tipo;
     }
-
+    public ClienteEntity getCliente() {
+        return cliente;
+    }
+    
     public void setFecha(String Fecha) {
         this.Fecha = Fecha;
     }
@@ -64,7 +72,10 @@ public class FacturaEntity extends BaseEntity implements Serializable {
     public void setUnidades(Integer unidades) {
         this.unidades = unidades;
     }
-
+    
+    public void setCliente(ClienteEntity cliente) {
+        this.cliente = cliente;
+    }
     public void setTipo(TipoFactura tipo) {
         this.tipo = tipo;
     }
