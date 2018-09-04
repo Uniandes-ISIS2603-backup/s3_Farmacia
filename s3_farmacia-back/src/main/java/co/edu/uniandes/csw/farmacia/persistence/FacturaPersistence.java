@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.farmacia.persistence;
 
 import co.edu.uniandes.csw.farmacia.entities.FacturaEntity;
-import co.edu.uniandes.csw.farmacia.entities.ProveedorEntity;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
