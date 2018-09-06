@@ -24,7 +24,7 @@ import co.edu.uniandes.csw.farmacia.entities.ProductoEntity;
  *
  * @author estudiante
  */
-@Path("producto")
+@Path("productos")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
