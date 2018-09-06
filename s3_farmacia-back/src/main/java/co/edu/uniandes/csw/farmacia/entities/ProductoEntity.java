@@ -42,6 +42,7 @@ public class ProductoEntity extends BaseEntity implements Serializable {
     
     private static final Logger LOGGER = Logger.getLogger(ProveedorEntity.class.getName());
     
+    
     private Boolean perecedero;
 
     //setter
