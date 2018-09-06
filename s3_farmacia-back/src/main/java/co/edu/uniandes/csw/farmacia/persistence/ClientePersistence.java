@@ -17,7 +17,8 @@ import javax.ejb.Stateless;
 /**
  *
  * @author estudiante
- */@Stateless
+ */
+@Stateless
 public class ClientePersistence {
     
     private static final Logger LOGGER = Logger.getLogger(ClientePersistence.class.getName());
@@ -59,7 +60,7 @@ public class ClientePersistence {
      * @return 
      */
     public ClienteEntity update (ClienteEntity clienteEntity){
-        LOGGER.log(Level.INFO, "Actualizando cliente con id = {0}");
+        LOGGER.log(Level.INFO, "Actualizando cliente con id = {0}", clienteEntity.getId());
         LOGGER.log(Level.INFO, "Saliendo de actualizar la info del proveedor con id = {0}", clienteEntity.getId());
         return em.merge(clienteEntity);
     }
