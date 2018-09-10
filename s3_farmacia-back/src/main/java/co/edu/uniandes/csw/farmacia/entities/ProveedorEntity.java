@@ -27,9 +27,9 @@ public class ProveedorEntity extends BaseEntity implements Serializable
     
     private static final Logger LOGGER = Logger.getLogger(ProveedorEntity.class.getName());
     
-    /*@PodamExclude
-    @OneToMany(mappedBy = "productos", orphanRemoval = true)
-    private List<ProductoEntity> productos = new ArrayList<ProductoEntity>();*/
+    @PodamExclude
+    @OneToMany(mappedBy = "proveedor")
+    private List<ProductoEntity> productos = new ArrayList<ProductoEntity>();
 
     public void setNombre(String pNombre)
     {

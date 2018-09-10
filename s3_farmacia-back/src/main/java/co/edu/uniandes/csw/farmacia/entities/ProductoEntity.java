@@ -9,7 +9,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.logging.Logger;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -38,6 +43,21 @@ public class ProductoEntity extends BaseEntity implements Serializable {
         
     }
     */
+    
+    @PodamExclude
+    @ManyToOne
+    private ProveedorEntity proveedor;
+
+    public ProveedorEntity getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(ProveedorEntity proveedor) {
+        this.proveedor = proveedor;
+    }
+
+    
+    
     public ProductoEntity(){}
     
     private static final Logger LOGGER = Logger.getLogger(ProveedorEntity.class.getName());
@@ -85,6 +105,7 @@ public class ProductoEntity extends BaseEntity implements Serializable {
         this.cantidad = cantidad;
     }
     
+    @Temporal(TemporalType.DATE)
     private Date fecha;
 
     public Date getFecha() {
