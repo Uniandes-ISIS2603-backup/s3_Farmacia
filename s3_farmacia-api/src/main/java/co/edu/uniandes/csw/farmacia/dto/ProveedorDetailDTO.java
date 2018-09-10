@@ -54,14 +54,14 @@ public class ProveedorDetailDTO extends ProveedorDTO implements Serializable
         return proveedorEntity;
     }
     
-   // public List<ProductoDTO> getProductos()
-   // {
-     //   return productos;
-    // }
- //   public void setProductos(List<ProductoDTO> pProducts)
- //   {
-  //      this.productos = pProducts;
-  //  }
+    public List<ProductoDTO> getProductos()
+    {
+        return productos;
+    }
+    public void setProductos(List<ProductoDTO> pProducts)
+    {
+        this.productos = pProducts;
+    }
     
 }
 

@@ -44,8 +44,10 @@ public class ProveedorProductosResource
    // @DELETE
       // public void deleteProductos(@PathParam("proveedorId") Long proveedorId) {}
     
-    //FALTAN IMPLEMENTAR LOS MÉTODOS DE CONVERSIÓN DE PRODUCTOsENTITY A DTO Y DE ProductosDTO A ENTITY
-
-   
+    // private List<ProductoDetailDTO> productListEntityToDTO(List <ProductoEntity> entityList){}
     
+    //private List<ProductoEntity> productListDTOToEntity(List <ProductoDetailDTO> dtoList){}
+    
+   
+
 }
