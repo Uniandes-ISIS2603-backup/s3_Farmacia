@@ -10,7 +10,10 @@
     <packaging>pom</packaging>
     <name>s3_drugshouse</name>
  
-    <modules></modules>
+    <modules>
+        <module>s3_farmacia-api</module>
+        <module>s3_farmacia-back</module>
+    </modules>
     
     <repositories>
         <repository>
