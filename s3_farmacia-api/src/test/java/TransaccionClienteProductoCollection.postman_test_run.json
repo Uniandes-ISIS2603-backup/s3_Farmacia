@@ -1,0 +1,162 @@
+{
+	"id": "689d2c94-5a35-4609-9678-9c27823a0c62",
+	"name": "TransaccionClienteProductoCollection",
+	"allTests": [],
+	"timestamp": "2018-09-10T19:04:12.205Z",
+	"collection_id": "e72575f8-529b-45ea-b50a-b5e2977a0daf",
+	"folder_id": 0,
+	"target_type": "collection",
+	"environment_id": "0",
+	"data": [],
+	"delay": 0,
+	"count": 1,
+	"collection": {
+		"id": "e72575f8-529b-45ea-b50a-b5e2977a0daf",
+		"name": "TransaccionClienteProductoCollection",
+		"description": "",
+		"auth": null,
+		"events": null,
+		"variables": [],
+		"order": [
+			"0e88e672-c8b5-40d0-ac80-21881740e406",
+			"89492de6-8c4e-44aa-989b-6f64b5f9bad9",
+			"909a66a7-06a1-417f-af47-a30c7215854c"
+		],
+		"folders_order": [],
+		"owner": "0",
+		"permissions": {},
+		"favorite": false,
+		"shared": false,
+		"type": "collection",
+		"depth": 0
+	},
+	"folder": null,
+	"environment": null,
+	"globals": null,
+	"results": [
+		{
+			"name": "list",
+			"id": "0e88e672-c8b5-40d0-ac80-21881740e406",
+			"url": "http://localhost:8080/s3_farmacia-api/api/transaccionesCliente/1/productos",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {},
+			"times": [
+				"7"
+			],
+			"allTests": [
+				{}
+			],
+			"time": "7",
+			"totalRequestTime": "7",
+			"iterationResults": {}
+		},
+		{
+			"name": "create",
+			"id": "89492de6-8c4e-44aa-989b-6f64b5f9bad9",
+			"url": "http://localhost:8080/s3_farmacia-api/api/transaccionesCliente/1/productos/1",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content",
+				"detail": {
+					"name": "No Content",
+					"detail": "The server successfully processed the request, but is not returning any content."
+				}
+			},
+			"testPassFailCounts": {},
+			"times": [
+				"4"
+			],
+			"allTests": [
+				{}
+			],
+			"time": "4",
+			"totalRequestTime": "4",
+			"iterationResults": {}
+		},
+		{
+			"name": "delete",
+			"id": "909a66a7-06a1-417f-af47-a30c7215854c",
+			"url": "http://localhost:8080/s3_farmacia-api/api/transaccionesCliente/1/productos/1",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content",
+				"detail": {
+					"name": "No Content",
+					"detail": "The server successfully processed the request, but is not returning any content."
+				}
+			},
+			"testPassFailCounts": {},
+			"times": [
+				"4"
+			],
+			"allTests": [
+				{}
+			],
+			"time": "4",
+			"totalRequestTime": "4",
+			"iterationResults": {}
+		}
+	],
+	"totalPass": 0,
+	"totalFail": 0,
+	"totalTime": 15,
+	"lifecycle": "done",
+	"requests": [
+		{
+			"name": "list",
+			"id": "0e88e672-c8b5-40d0-ac80-21881740e406",
+			"url": "http://localhost:8080/s3_farmacia-api/api/transaccionesCliente/1/productos",
+			"time": "2018-09-10T19:04:12.205Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {}
+		},
+		{
+			"name": "create",
+			"id": "89492de6-8c4e-44aa-989b-6f64b5f9bad9",
+			"url": "http://localhost:8080/s3_farmacia-api/api/transaccionesCliente/1/productos/1",
+			"time": "2018-09-10T19:04:12.205Z",
+			"responseCode": {
+				"code": 204,
+				"name": "No Content",
+				"detail": {
+					"name": "No Content",
+					"detail": "The server successfully processed the request, but is not returning any content."
+				}
+			},
+			"testPassFailCounts": {}
+		},
+		{
+			"name": "delete",
+			"id": "909a66a7-06a1-417f-af47-a30c7215854c",
+			"url": "http://localhost:8080/s3_farmacia-api/api/transaccionesCliente/1/productos/1",
+			"time": "2018-09-10T19:04:12.205Z",
+			"responseCode": {
+				"code": 204,
+				"name": "No Content",
+				"detail": {
+					"name": "No Content",
+					"detail": "The server successfully processed the request, but is not returning any content."
+				}
+			},
+			"testPassFailCounts": {}
+		}
+	],
+	"synced": false
+}
