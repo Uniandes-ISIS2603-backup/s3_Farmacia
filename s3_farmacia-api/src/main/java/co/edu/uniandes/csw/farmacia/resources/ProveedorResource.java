@@ -49,11 +49,11 @@ public class ProveedorResource {
      */
     @POST
     public ProveedorDTO createProveedor(ProveedorDTO proveedor) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "ProveedorResource.createProveedor: input:{0}", proveedor.toString());
+        LOGGER.log(Level.INFO, "ProveedorResource.createProveedor: input:{0}", proveedor);
         ProveedorEntity proveedorEntity = proveedor.toEntity();
         ProveedorEntity nuevoProveedorEntity = proveedorLogic.createProveedor(proveedorEntity);
         ProveedorDTO nuevoProveedorDTO = new ProveedorDTO(nuevoProveedorEntity);
-        LOGGER.log(Level.INFO, "ProveedorResource createProveedor: output: {0}", nuevoProveedorDTO.toString());
+        LOGGER.log(Level.INFO, "ProveedorResource createProveedor: output: {0}", nuevoProveedorDTO);
         return nuevoProveedorDTO;
     }
 
@@ -62,7 +62,7 @@ public class ProveedorResource {
     {
         LOGGER.info("ProveedorResource getProveedores: input: void");
         List<ProveedorDetailDTO> listaProveedores = listEntity2DetailDTO(proveedorLogic.getProveedores());
-        LOGGER.log(Level.INFO, "ProveedorResource getProveedores: output : {0}", listaProveedores.toString());
+        LOGGER.log(Level.INFO, "ProveedorResource getProveedores: output : {0}", listaProveedores);
         return listaProveedores;
     }
 
@@ -76,7 +76,7 @@ public class ProveedorResource {
         }
 
             ProveedorDetailDTO detailDTO = new ProveedorDetailDTO(proveedorEntity);
-            LOGGER.log(Level.INFO, "ProveedorResource getEditorial: output: {0}", detailDTO.toString());
+            LOGGER.log(Level.INFO, "ProveedorResource getEditorial: output: {0}", detailDTO);
             return detailDTO;
         
     }
@@ -99,7 +99,7 @@ public class ProveedorResource {
     @Path("{id:\\d+}")
     public ProveedorDetailDTO updateProveedor(@PathParam("id") Long id, ProveedorDTO proveedor)
    {
-        LOGGER.log(Level.INFO, "ProveedorResource updateProveedor: input: id:{0} , proveedor: {1}", new Object[]{id, proveedor.toString()});
+        LOGGER.log(Level.INFO, "ProveedorResource updateProveedor: input: id:{0} , proveedor: {1}", new Object[]{id, proveedor});
         
        proveedor.setId(id);
        if(proveedorLogic.getProveedor(id)== null)
