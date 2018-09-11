@@ -83,7 +83,7 @@ public class RegistroPersistence {
      * @param name Nombre del registro que se esta buscando
      * @return null si no existe ninguna editorial con el nombre del argumento
      * Si existe alguno devuelve el primero
-     */
+     
     public RegistroEntity findByName(String name){
         LOGGER.log(Level.INFO, "Consultando registro por nombre", name);
         TypedQuery query = em.createQuery("Select e From RegistroEntity e where e.name = :name", RegistroEntity.class);
@@ -100,4 +100,5 @@ public class RegistroPersistence {
         LOGGER.log(Level.INFO,"Saliendo de consultar registro por nombre", name);
         return result;
     }
+    */
 }
