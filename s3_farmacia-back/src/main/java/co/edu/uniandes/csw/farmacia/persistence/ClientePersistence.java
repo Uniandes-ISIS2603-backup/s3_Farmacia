@@ -76,6 +76,7 @@ public class ClientePersistence {
        LOGGER.log(Level.INFO, "Saliendo de eliminar a un cliente con id={0}", clienteId);
     }
     
+    /**
     public ClienteEntity findByName(String name){
         LOGGER.log(Level.INFO, "Consultando cliente por nombre ", name);
         TypedQuery query = em.createQuery("Select e From ClienteEntity e where e.nombre = :nombre", ClienteEntity.class);
@@ -92,5 +93,6 @@ public class ClientePersistence {
         LOGGER.log(Level.INFO,"Saliendo de consultar un cliente por nombre", name);
         return result;
     }
+    **/
     
 }
