@@ -11,12 +11,14 @@ import co.edu.uniandes.csw.farmacia.persistence.ProveedorPersistence;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author francisco
  */
+@Stateless
 public class ProveedorLogic {
 
     //Hacer qye la variable apunte a algún objeto de la clase ProveedorPersistence.

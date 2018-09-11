@@ -16,7 +16,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
- * @author francisco
+ * @author fj.gonzalez
  */
 @Entity 
 //BaseEntity clase madre.
@@ -39,7 +39,7 @@ public class ProveedorEntity extends BaseEntity implements Serializable
     {
         return nombre;
     }
-    /*public List<ProductoEntity> getProductos()
+    public List<ProductoEntity> getProductos()
     {
         return productos;
     }
@@ -47,5 +47,5 @@ public class ProveedorEntity extends BaseEntity implements Serializable
     public void setProductos(List<ProductoEntity> pProductos)
     {
         productos = pProductos;
-    }*/
+    }
 }
