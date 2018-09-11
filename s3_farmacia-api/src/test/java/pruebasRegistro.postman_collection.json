@@ -1,0 +1,117 @@
+{
+	"info": {
+		"_postman_id": "30685bfb-b0fe-4289-a319-8451f8c974c3",
+		"name": "pruebasRegistro",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crea un registro",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\":\"1\",\"cantidad\":\"10\",\"tipoRegistro\":\"TRASLADO_BODEGA\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_farmacia-api/api/registros/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"registros",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtiene un registro",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s3_farmacia-api/api/registros/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"registros",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Elimina un registro",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s3_farmacia-api/api/registros/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"registros",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualiza un registro",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\":2, \"cantidad\":\"7\", \"tipoRegistro\":\"PERDIDA\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_farmacia-api/api/registros/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"registros",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
