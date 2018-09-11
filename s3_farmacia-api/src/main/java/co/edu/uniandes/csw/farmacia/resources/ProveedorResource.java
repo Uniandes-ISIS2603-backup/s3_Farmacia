@@ -40,6 +40,10 @@ public class ProveedorResource {
     private ProveedorLogic proveedorLogic;
 
     private static final Logger LOGGER = Logger.getLogger(ProveedorResource.class.getName());
+    
+    private static final String A1 = "El recurso /proveedores/";
+    
+    private static final String A2 = " no existe.";
 
     /**
      *
@@ -72,7 +76,7 @@ public class ProveedorResource {
         LOGGER.log(Level.INFO, "ProveedorResource getEditorial: input: {0}", id);
         ProveedorEntity proveedorEntity = proveedorLogic.getProveedor(id);
         if (proveedorEntity == null) {
-            throw new WebApplicationException("El recurso /proveedores/" + id + " no existe.", 404);
+            throw new WebApplicationException(A1 + id + A2, 404);
         }
 
             ProveedorDetailDTO detailDTO = new ProveedorDetailDTO(proveedorEntity);
@@ -88,7 +92,7 @@ public class ProveedorResource {
         LOGGER.log(Level.INFO, "ProveedorResource deleteProveedor: input{0}", id);
         if(proveedorLogic.getProveedor(id)==null)
         {
-            throw new WebApplicationException("El recurso /proveedores/" + id + " no existe.", 404);
+            throw new WebApplicationException(A1 + id + A2, 404);
         }
         proveedorLogic.deleteProveedor(id);
         
@@ -103,7 +107,7 @@ public class ProveedorResource {
         
        proveedor.setId(id);
        if(proveedorLogic.getProveedor(id)== null)
-          throw new WebApplicationException("El recurso /proveedores/" + id + " no existe.", 404);
+            throw new WebApplicationException(A1 + id + A2, 404);
        
        ProveedorDetailDTO proDetailDTO = new ProveedorDetailDTO(proveedorLogic.updateProveedor(id, proveedor.toEntity()));
        
