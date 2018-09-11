@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.farmacia.test.persistence;
+package co.edu.uniandes.csw.farmacia.test.logic;
 
+import co.edu.uniandes.csw.farmacia.ejb.TransaccionProveedorLogic;
 import co.edu.uniandes.csw.farmacia.entities.TransaccionProveedorEntity;
 import co.edu.uniandes.csw.farmacia.persistence.TransaccionProveedorPersistence;
 import java.util.ArrayList;
@@ -12,11 +13,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.NotSupportedException;
-import javax.transaction.RollbackException;
-import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -34,16 +30,18 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author jd.florezg1
  */
 @RunWith(Arquillian.class)
-public class TransaccionProveedorPersistenceTest {
+public class TransaccionProveedorLogicTest {
     
-    @Inject
-    private TransaccionProveedorPersistence transaccionProveedorPersistence;
+    private PodamFactory factory = new PodamFactoryImpl();
 
-    
+    @Inject
+    private TransaccionProveedorLogic transaccionProveedorLogic;
+
     @PersistenceContext
     private EntityManager em;
-   @Inject
-   UserTransaction utx;
+
+    @Inject
+    private UserTransaction utx;
 
     private List<TransaccionProveedorEntity> data = new ArrayList<TransaccionProveedorEntity>();
     
@@ -55,8 +53,9 @@ public class TransaccionProveedorPersistenceTest {
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
-                .addPackage(TransaccionProveedorEntity.class.getPackage())
+                .addPackage(TransaccionProveedorLogic.class.getPackage())
                 .addPackage(TransaccionProveedorPersistence.class.getPackage())
+                .addPackage(TransaccionProveedorEntity.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -65,65 +64,66 @@ public class TransaccionProveedorPersistenceTest {
      * Configuración inicial de la prueba.
      */
     @Before
-    public void configTest()
-    {
+    public void configTest() {
         try {
             utx.begin();
-            em.joinTransaction();
             clearData();
             insertData();
             utx.commit();
-        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) 
-        {
+        } catch (Exception e) {
+            e.printStackTrace();
             try {
                 utx.rollback();
-            } catch (IllegalStateException | SecurityException | SystemException e1) 
-            {
+            } catch (Exception e1) {
                 e1.printStackTrace();
             }
         }
     }
     
-     private void clearData(){
+    /**
+     * Limpia las tablas que están implicadas en la prueba.
+     */
+    private void clearData() {
         em.createQuery("delete from TransaccionProveedorEntity").executeUpdate();
     }
-    private void insertData(){
-        PodamFactory factory = new PodamFactoryImpl();
-        for(int i=0; i<3; i++){
+
+    /**
+     * Inserta los datos iniciales para el correcto funcionamiento de las
+     * pruebas.
+     */
+    private void insertData() {
+
+        for (int i = 0; i < 3; i++) {
             TransaccionProveedorEntity entity = factory.manufacturePojo(TransaccionProveedorEntity.class);
             em.persist(entity);
             data.add(entity);
-            System.out.println(transaccionProveedorPersistence.findAll().size());
         }
     }
     
+    /**
+     * Prueba para crear una TransaccionProveedor.
+     */
     @Test
-    public void createTransaccionProveedorTest()
-    {
-        //Crea objetos aleatorios
-        PodamFactory factory = new PodamFactoryImpl();
-        TransaccionProveedorEntity newTransaccionProveedorEntity = factory.manufacturePojo(TransaccionProveedorEntity.class);
-        TransaccionProveedorEntity result = transaccionProveedorPersistence.create(newTransaccionProveedorEntity);
-        
-        Assert.assertNotNull(result);    
-        
+    public void createTransaccionProveedorTest() {
+        TransaccionProveedorEntity newEntity = factory.manufacturePojo(TransaccionProveedorEntity.class);
+        TransaccionProveedorEntity result = transaccionProveedorLogic.createTransaccionProveedor(newEntity);
+        Assert.assertNotNull(result);
         TransaccionProveedorEntity entity = em.find(TransaccionProveedorEntity.class, result.getId());
-        
-        Assert.assertEquals(newTransaccionProveedorEntity.getMonto(), entity.getMonto());
-        
+        Assert.assertEquals(newEntity.getId(), entity.getId());
+        Assert.assertEquals(newEntity.getMonto(), entity.getMonto());
     }
     
     /**
-     * Prueba para consultar la lista de TransaccionesProveedor.
+     * Prueba para consultar la lista de Transacciones proveedor.
      */
     @Test
     public void getTransaccionesProveedorTest() {
-        List<TransaccionProveedorEntity> list = transaccionProveedorPersistence.findAll();
+        List<TransaccionProveedorEntity> list = transaccionProveedorLogic.getTransaccionesProveedor();
         Assert.assertEquals(data.size(), list.size());
-        for (TransaccionProveedorEntity ent : list) {
+        for (TransaccionProveedorEntity entity : list) {
             boolean found = false;
-            for (TransaccionProveedorEntity entity : data) {
-                if (ent.getId().equals(entity.getId())) {
+            for (TransaccionProveedorEntity storedEntity : data) {
+                if (entity.getId().equals(storedEntity.getId())) {
                     found = true;
                 }
             }
@@ -137,20 +137,10 @@ public class TransaccionProveedorPersistenceTest {
     @Test
     public void getTransaccionProveedorTest() {
         TransaccionProveedorEntity entity = data.get(0);
-        TransaccionProveedorEntity newEntity = transaccionProveedorPersistence.find(entity.getId());
-        Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getMonto(), newEntity.getMonto());
-    }
-    
-    /**
-     * Prueba para eliminar una TransaccionProveedor.
-     */
-    @Test
-    public void deleteTransaccionProveedorTest() {
-        TransaccionProveedorEntity entity = data.get(0);
-        transaccionProveedorPersistence.delete(entity.getId());
-        TransaccionProveedorEntity deleted = em.find(TransaccionProveedorEntity.class, entity.getId());
-        Assert.assertNull(deleted);
+        TransaccionProveedorEntity resultEntity = transaccionProveedorLogic.getTransaccionProveedor(entity.getId());
+        Assert.assertNotNull(resultEntity);
+        Assert.assertEquals(entity.getId(), resultEntity.getId());
+        Assert.assertEquals(entity.getMonto(), resultEntity.getMonto());
     }
     
     /**
@@ -159,16 +149,22 @@ public class TransaccionProveedorPersistenceTest {
     @Test
     public void updateTransaccionProveedorTest() {
         TransaccionProveedorEntity entity = data.get(0);
-        PodamFactory factory = new PodamFactoryImpl();
-        TransaccionProveedorEntity newEntity = factory.manufacturePojo(TransaccionProveedorEntity.class);
-
-        newEntity.setId(entity.getId());
-
-        transaccionProveedorPersistence.update(newEntity);
-
+        TransaccionProveedorEntity pojoEntity = factory.manufacturePojo(TransaccionProveedorEntity.class);
+        pojoEntity.setId(entity.getId());
+        transaccionProveedorLogic.updateTransaccionProveedor(pojoEntity.getId(), pojoEntity);
         TransaccionProveedorEntity resp = em.find(TransaccionProveedorEntity.class, entity.getId());
-
-        Assert.assertEquals(newEntity.getMonto(), resp.getMonto());
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+        Assert.assertEquals(pojoEntity.getMonto(), resp.getMonto());
     }
-
+        
+     /**
+     * Prueba para eliminar una TransaccionProveedor.
+     */
+    @Test
+    public void deleteTransaccionProveedorTest() {
+        TransaccionProveedorEntity entity = data.get(1);
+        transaccionProveedorLogic.deleteEditorial(entity.getId());
+        TransaccionProveedorEntity deleted = em.find(TransaccionProveedorEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
 }

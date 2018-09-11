@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.farmacia.persistence;
-
-import co.edu.uniandes.csw.farmacia.entities.ProveedorEntity;
 import co.edu.uniandes.csw.farmacia.entities.TransaccionProveedorEntity;
 import java.util.List;
 import java.util.logging.Level;
@@ -42,9 +40,9 @@ public class TransaccionProveedorPersistence {
      * @return
      */
     public List<TransaccionProveedorEntity> findAll() {
-        LOGGER.log(Level.INFO, "Consultando todos los proveedores.");
+        LOGGER.log(Level.INFO, "Consultando todas las TransaccionesProveedor.");
 
-        TypedQuery query = em.createQuery("select u from ProveedorEntity u", TransaccionProveedorEntity.class);
+        TypedQuery query = em.createQuery("select u from TransaccionProveedorEntity u", TransaccionProveedorEntity.class);
 
         return query.getResultList();
     }
@@ -55,9 +53,9 @@ public class TransaccionProveedorPersistence {
      * @param transaccionProveedorId
      * @return
      */
-    public ProveedorEntity find(Long transaccionProveedorId) {
-        LOGGER.log(Level.INFO, "Consultando proveedor con id={0}", transaccionProveedorId);
-        return em.find(ProveedorEntity.class, transaccionProveedorId);
+    public TransaccionProveedorEntity find(Long transaccionProveedorId) {
+        LOGGER.log(Level.INFO, "Consultando TransaccionProveedor con id={0}", transaccionProveedorId);
+        return em.find(TransaccionProveedorEntity.class, transaccionProveedorId);
     }
     
     /**
@@ -67,9 +65,9 @@ public class TransaccionProveedorPersistence {
      * @return
      */
     public TransaccionProveedorEntity update(TransaccionProveedorEntity transaccionProveedorEntity) {
-        LOGGER.log(Level.INFO, "Actualizando proveedor con id = {0}", transaccionProveedorEntity.getId());
+        LOGGER.log(Level.INFO, "Actualizando TransaccionProveedor con id = {0}", transaccionProveedorEntity.getId());
 
-        LOGGER.log(Level.INFO, "Saliendo de actualizar la info del proveedor con id = {0}", transaccionProveedorEntity.getId());
+        LOGGER.log(Level.INFO, "Saliendo de actualizar la info de la TransaccionProveedor con id = {0}", transaccionProveedorEntity.getId());
 
         return em.merge(transaccionProveedorEntity);
     }
@@ -80,12 +78,12 @@ public class TransaccionProveedorPersistence {
      * @param transaccionProveedorId
      */
     public void delete(Long transaccionProveedorId) {
-        LOGGER.log(Level.INFO, "Borrando proveedor con id={0}", transaccionProveedorId);
+        LOGGER.log(Level.INFO, "Borrando TransaccionProveedor con id={0}", transaccionProveedorId);
         TransaccionProveedorEntity entity = em.find(TransaccionProveedorEntity.class, transaccionProveedorId);
 
         em.remove(entity);
 
-        LOGGER.log(Level.INFO, "Saliendo de eliminar un proveedor con id={0}", transaccionProveedorId);
+        LOGGER.log(Level.INFO, "Saliendo de eliminar una TransaccionProveedor con id={0}", transaccionProveedorId);
     }
     
 }
