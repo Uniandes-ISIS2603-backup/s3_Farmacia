@@ -41,7 +41,7 @@ public class RegistroPersistence {
     public List<RegistroEntity> findAll(){
         LOGGER.log(Level.INFO, "Consultando todos los registros.");
         
-        TypedQuery query = em.createQuery("Select u from ClienteEntity u", RegistroEntity.class);
+        TypedQuery query = em.createQuery("Select u from RegistroEntity u", RegistroEntity.class);
         return query.getResultList();
     }
     

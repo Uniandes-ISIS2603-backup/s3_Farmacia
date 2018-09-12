@@ -95,6 +95,7 @@ public class ClientePersistenceTest {
         ClienteEntity entity = em.find(ClienteEntity.class, result.getId());
         Assert.assertEquals(newClienteEntity.getNombre(),entity.getNombre());
         Assert.assertEquals(newClienteEntity.getApellido(), entity.getApellido());
+        Assert.assertEquals(newClienteEntity.getCedula(), entity.getCedula());
     }
     
     /**
@@ -125,6 +126,7 @@ public class ClientePersistenceTest {
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
         Assert.assertEquals(entity.getApellido(), newEntity.getApellido());
+        Assert.assertEquals(entity.getCedula(), newEntity.getCedula());
     }
     
     /**
@@ -155,20 +157,23 @@ public class ClientePersistenceTest {
 
         Assert.assertEquals(newEntity.getNombre(), resp.getNombre());
         Assert.assertEquals(newEntity.getApellido(), resp.getApellido());
+        Assert.assertEquals(newEntity.getCedula(), resp.getCedula());
     }
     
     /**
      * Prueba para consultar un cliente por nombre.
+     *
+     */
     @Test
-    public void findClienteByNameTest() {
+    public void findClienteByCedulaTest() {
         ClienteEntity entity = data.get(0);
-        ClienteEntity newEntity = clientePersistence.findByName(entity.getNombre());
+        ClienteEntity newEntity = clientePersistence.findByCedula(entity.getCedula());
         Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+        Assert.assertEquals(entity.getCedula(), newEntity.getCedula());
 
-        newEntity = clientePersistence.findByName(null);
+        newEntity = clientePersistence.findByCedula(0L);
         Assert.assertNull(newEntity);
     }
-    */
+    
     
 }

@@ -113,11 +113,37 @@ public class ClienteLogicTest {
     public void createClienteTest() throws BusinessLogicException {
         ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
         ClienteEntity result = clienteLogic.createCliente(newEntity);
+        //result.setCedula(1075690311L);
         Assert.assertNotNull(result);
         ClienteEntity entity = em.find(ClienteEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
         Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
         Assert.assertEquals(newEntity.getApellido(), entity.getApellido());
+    }
+    
+    /**
+     * Prueba para crear un cliente con el mismo cedula de un cliente que ya
+     * existe.
+     *
+     * @throws co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void createClienteConMismaCedulaTest() throws BusinessLogicException {
+        ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
+        newEntity.setCedula(data.get(0).getCedula());
+        clienteLogic.createCliente(newEntity);
+    }
+    
+    /**
+     * Prueba para crear un cliente con cedula inválido
+     *
+     * @throws co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void createClienteTestConCedulaInvalida() throws BusinessLogicException {
+        ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
+        newEntity.setCedula(999999999L);
+        clienteLogic.createCliente(newEntity);
     }
     
     /**
@@ -153,9 +179,10 @@ public class ClienteLogicTest {
     
     /**
      * Prueba para actualizar un Cliente.
+     * @throws co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException
      */
     @Test
-    public void updateClienteTest() {
+    public void updateClienteTest()throws BusinessLogicException {
         ClienteEntity entity = data.get(0);
         ClienteEntity pojoEntity = factory.manufacturePojo(ClienteEntity.class);
 
@@ -168,6 +195,21 @@ public class ClienteLogicTest {
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
         Assert.assertEquals(pojoEntity.getNombre(), resp.getNombre());
         Assert.assertEquals(pojoEntity.getApellido(), resp.getApellido());
+        Assert.assertEquals(pojoEntity.getCedula(), resp.getCedula());
+    }
+    
+    /**
+     * Prueba para actualizar un Cliente.
+     * @throws co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void updateClienteConCedulaInvalidaTest()throws BusinessLogicException {
+        ClienteEntity entity = data.get(0);
+        ClienteEntity pojoEntity = factory.manufacturePojo(ClienteEntity.class);
+
+        pojoEntity.setCedula(96543L);
+
+        clienteLogic.updateCliente(pojoEntity.getId(), pojoEntity);
     }
     
     /**

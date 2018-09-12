@@ -38,6 +38,7 @@ public class RegistroLogic {
      * @throws BusinessLogicException Si el ISBN es inválido o ya existe en la
      * persistencia.
      
+     
     public RegistroEntity createRegistro(RegistroEntity registroEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación del registro");
         if (bookEntity.getEditorial() == null || editorialPersistence.find(bookEntity.getEditorial().getId()) == null) {
@@ -53,7 +54,8 @@ public class RegistroLogic {
         LOGGER.log(Level.INFO, "Termina proceso de creación del libro");
         return bookEntity;
     }
-     */
+    */
+     
     
     /**
      * Devuelve todos los registros que hay en la base de datos.

@@ -135,7 +135,7 @@ public class ClienteResource {
      */
     @PUT
     @Path("{id:\\d+}")
-    public ClienteDTO updateCliente ( @PathParam("id") Long id, ClienteDTO cliente)throws WebApplicationException{
+    public ClienteDTO updateCliente ( @PathParam("id") Long id, ClienteDTO cliente)throws WebApplicationException,BusinessLogicException{
          LOGGER.log(Level.INFO, "ClienteResource updateCliente: input: id:{0} , cliente: {1}", new Object[]{id, cliente.toString()});
         cliente.setId(id);
         if (clienteLogic.getCliente(id) == null) {

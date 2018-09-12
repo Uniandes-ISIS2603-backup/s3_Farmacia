@@ -37,9 +37,12 @@ public class ClienteLogic {
     public ClienteEntity createCliente(ClienteEntity clienteEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la cliente");
         // Verifica la regla de negocio que dice que no puede haber dos clientes con el mismo nombre
-        //if (persistence.findByName(clienteEntity.getNombre()) != null) {
-          //  throw new BusinessLogicException("Ya existe una Cliente con el nombre \"" + clienteEntity.getNombre() + "\"");
-        //}
+        if(!validateCedula(clienteEntity.getCedula())){
+            throw new BusinessLogicException("La cedula es invalida");
+        }
+        if (persistence.findByCedula(clienteEntity.getCedula()) != null) {
+            throw new BusinessLogicException("Ya existe una Cliente con el nombre \"" + clienteEntity.getNombre() + "\"");
+        }
         // Invoca la persistencia para crear el cliente
         persistence.create(clienteEntity);
         LOGGER.log(Level.INFO, "Termina proceso de creación del cliente");
@@ -85,9 +88,12 @@ public class ClienteLogic {
      * por ejemplo el nombre.
      * @return el cliente con los cambios actualizados en la base de datos.
      */
-    public ClienteEntity updateCliente(Long clienteId, ClienteEntity clienteEntity) {
+    public ClienteEntity updateCliente(Long clienteId, ClienteEntity clienteEntity)throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar el cliente con id = {0}", clienteId);
         // Note que, por medio de la inyección de dependencias se llama al método "update(entity)" que se encuentra en la persistencia.
+        if(!validateCedula(clienteEntity.getCedula())){
+            throw new BusinessLogicException("La cedula es inválida");
+        }
         ClienteEntity newEntity = persistence.update(clienteEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar el cliente con id = {0}", clienteEntity.getId());
         return newEntity;
@@ -101,7 +107,12 @@ public class ClienteLogic {
     public void deleteCliente(Long clienteId) {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el cliente con id = {0}", clienteId);
         // Note que, por medio de la inyección de dependencias se llama al método "delete(id)" que se encuentra en la persistencia.
+        
         persistence.delete(clienteId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar el cliente con id = {0}", clienteId);
+    }
+    
+    private boolean validateCedula(Long cedula){
+        return cedula>=1000000000;
     }
 }

@@ -76,23 +76,23 @@ public class ClientePersistence {
        LOGGER.log(Level.INFO, "Saliendo de eliminar a un cliente con id={0}", clienteId);
     }
     
-    /**
-    public ClienteEntity findByName(String name){
-        LOGGER.log(Level.INFO, "Consultando cliente por nombre ", name);
-        TypedQuery query = em.createQuery("Select e From ClienteEntity e where e.nombre = :nombre", ClienteEntity.class);
-        query = query.setParameter("nombre", name);
-        List<ClienteEntity> sameName = query.getResultList();
+    
+    public ClienteEntity findByCedula(Long cedula){
+        LOGGER.log(Level.INFO, "Consultando cliente por cedula ", cedula);
+        TypedQuery query = em.createQuery("Select e From ClienteEntity e where e.cedula = :cedula", ClienteEntity.class);
+        query = query.setParameter("cedula", cedula);
+        List<ClienteEntity> sameCedula = query.getResultList();
         ClienteEntity result;
-        if(sameName == null){
+        if(sameCedula == null){
             result = null;
-        }else if (sameName.isEmpty()){
+        }else if (sameCedula.isEmpty()){
             result = null;
         }else{
-            result = sameName.get(0);
+            result = sameCedula.get(0);
         }
-        LOGGER.log(Level.INFO,"Saliendo de consultar un cliente por nombre", name);
+        LOGGER.log(Level.INFO,"Saliendo de consultar un cliente por nombre",cedula );
         return result;
     }
-    **/
+    
     
 }

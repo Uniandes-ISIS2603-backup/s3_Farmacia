@@ -20,6 +20,7 @@ public class ClienteDTO implements Serializable {
     private String apellido;
     private String ciudad;
     private String direccionEnvio;
+    private Long cedula;
     
     public ClienteDTO(){
         
@@ -75,6 +76,14 @@ public class ClienteDTO implements Serializable {
         this.direccionEnvio = direccionEnvio;
     }
     
+    public Long getCedula(){
+        return cedula;
+    }
+    
+    public void setCedula(Long cedula){
+        this.cedula = cedula;
+    }
+    
     public ClienteEntity toEntity(){
         ClienteEntity clienteEntity = new ClienteEntity();
         clienteEntity.setId(this.id);
@@ -82,6 +91,7 @@ public class ClienteDTO implements Serializable {
         clienteEntity.setNombre(this.nombre);
         clienteEntity.setCiudad(this.ciudad);
         clienteEntity.setDireccionEnvio(this.direccionEnvio);
+        clienteEntity.setCedula(this.cedula);
         return clienteEntity;
     }
     
