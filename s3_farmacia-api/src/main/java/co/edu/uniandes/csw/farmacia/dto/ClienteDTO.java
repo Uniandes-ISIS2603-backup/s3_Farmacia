@@ -26,6 +26,10 @@ public class ClienteDTO implements Serializable {
         
     }
     
+    /**
+     * Crea un clienteDTO a partir de un ClienteEntity
+     * @param clienteEntity 
+     */
     public ClienteDTO ( ClienteEntity clienteEntity){
         if (clienteEntity != null){
             this.id = clienteEntity.getId();
@@ -85,6 +89,10 @@ public class ClienteDTO implements Serializable {
         this.cedula = cedula;
     }
     
+    /**
+     * Tranforma un ClienteDTO a un ClienteEntity
+     * @return 
+     */
     public ClienteEntity toEntity(){
         ClienteEntity clienteEntity = new ClienteEntity();
         clienteEntity.setId(this.id);

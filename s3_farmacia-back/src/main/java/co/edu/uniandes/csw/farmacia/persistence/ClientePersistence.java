@@ -26,6 +26,11 @@ public class ClientePersistence {
     @PersistenceContext (unitName = "DrugsHousePU")
     protected EntityManager em;
     
+    /**
+     * Metodo para persisitir la entidad en la base de datos
+     * @param clienteEntity objeto cliente que se creara en la base de datos
+     * @return devuelve la entiudad creada con un id dado por la base de datos.
+     */
     public ClienteEntity create(ClienteEntity clienteEntity){
         LOGGER.log(Level.INFO, "Creando un nuevo cliente");
         
@@ -76,7 +81,12 @@ public class ClientePersistence {
        LOGGER.log(Level.INFO, "Saliendo de eliminar a un cliente con id={0}", clienteId);
     }
     
-    
+    /**
+     * Encuentra un cliente por medio de la cedula, esta numero de cedula
+     * es unico
+     * @param cedula el numero de cedula del cliente que se quiere encontrar
+     * @return 
+     */
     public ClienteEntity findByCedula(Long cedula){
         LOGGER.log(Level.INFO, "Consultando cliente por cedula ", cedula);
         TypedQuery query = em.createQuery("Select e From ClienteEntity e where e.cedula = :cedula", ClienteEntity.class);

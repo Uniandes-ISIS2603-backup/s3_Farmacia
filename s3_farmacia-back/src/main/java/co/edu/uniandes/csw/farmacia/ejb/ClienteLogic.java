@@ -112,6 +112,12 @@ public class ClienteLogic {
         LOGGER.log(Level.INFO, "Termina proceso de borrar el cliente con id = {0}", clienteId);
     }
     
+    /**
+     * valida el numero de cedula de un cliente.
+     * Para que una cedula sea valida debe tener estrictamente 10 digitos.
+     * @param cedula el numero de cedula que se quiere validar
+     * @return true si es valida, false de lo contrario
+     */
     private boolean validateCedula(Long cedula){
         return (cedula>=1000000000L && cedula<=9999999999L);
     }
