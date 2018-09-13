@@ -24,16 +24,20 @@ SOFTWARE.
 package co.edu.uniandes.csw.farmacia.tests.postman;
 
 import co.edu.uniandes.csw.farmacia.mappers.BusinessLogicExceptionMapper;
+import co.edu.uniandes.csw.farmacia.dto.ClienteDTO;
 import co.edu.uniandes.csw.farmacia.resources.ClienteResource;
 import co.edu.uniandes.csw.postman.tests.PostmanTestBuilder;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,48 +49,56 @@ import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
 public class DrugsHouseIT {
 
+    private int sumaPeticiones;
+
     @Deployment(testable = true)
     public static WebArchive createDeployment() {
-        return ShrinkWrap.create(WebArchive.class, "frontstepbystep-web.war")
+        return ShrinkWrap.create(WebArchive.class, "s3_drugshouse-api.war")//War del modulo api
                 // Se agrega las dependencias
                 .addAsLibraries(Maven.resolver().loadPomFromFile("pom.xml")
                         .importRuntimeDependencies().resolve()
                         .withTransitivity().asFile())
                 // Se agregan los compilados de los paquetes de servicios
-                .addPackage(ClienteResource.class.getPackage())
+                .addPackage(ClienteResource.class.getPackage()) //No importa cual recurso usar, lo importante es agregar el paquet
+                .addPackage(ClienteDTO.class.getPackage()) //No importa cual dto usar, lo importante es agregar el paquete.
                 .addPackage(BusinessLogicExceptionMapper.class.getPackage())
                 // El archivo que contiene la configuracion a la base de datos.
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
                 // El archivo beans.xml es necesario para injeccion de dependencias.
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/beans.xml"))
                 // El archivo web.xml es necesario para el despliegue de los servlets
-                .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"));
-
+                .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
+                .addAsWebInfResource(new File("src/main/webapp/WEB-INF/glassfish-resources.xml"));
     }
-    
+
     @Test
     @RunAsClient
     public void postman() throws IOException {
-        
-        PostmanTestBuilder tp = new PostmanTestBuilder();
-        tp.setTestWithoutLogin("backstepbystep-paso1.postman_collection");
-        String desiredResult = "0";
-        if (tp.getAssertions_failed() != null) {
-            Assert.assertEquals(desiredResult, tp.getAssertions_failed());
-        }
-        if (tp.getIterations_failed() != null) {
-            Assert.assertEquals(desiredResult, tp.getIterations_failed());
-        }
-        if (tp.getPrerequest_scripts_failed() != null) {
-            Assert.assertEquals(desiredResult, tp.getPrerequest_scripts_failed());
-        }
-        if (tp.getRequests_failed() != null) {
-            Assert.assertEquals(desiredResult, tp.getRequests_failed());
-        }
-        if (tp.getTest_scripts_failed() != null) {
-            Assert.assertEquals(desiredResult, tp.getTest_scripts_failed());
-        }
+        File[] colecciones = new File(System.getProperty("user.dir").concat("\\collections")).listFiles();
+        for (File coleccion : colecciones) {
+            if (!coleccion.getName().contains("postman_environment")) {
+                PostmanTestBuilder tp = new PostmanTestBuilder();
+                tp.setTestWithoutLogin(coleccion.getName().replaceFirst(".json", ""), "Entorno-IT.postman_environment");
+                String desiredResult = "0";
+                String nombre = coleccion.getName().replaceFirst(".postman_environment.json", "");
 
+                Assert.assertEquals("Error en Iterations de: " + nombre, desiredResult, tp.getIterations_failed());
+
+                Assert.assertEquals("Error en Requests de: " + nombre, desiredResult, tp.getRequests_failed());
+
+                Assert.assertEquals("Error en Test-Scripts de: " + nombre, desiredResult, tp.getTest_scripts_failed());
+
+                Assert.assertEquals("Error en Prerequest-Scripts de: " + nombre, desiredResult, tp.getPrerequest_scripts_failed());
+
+                Assert.assertEquals("Error en Assertions de: " + nombre, desiredResult, tp.getAssertions_failed());
+
+                sumaPeticiones += Integer.parseInt(tp.getTotal_Requests());
+            }
+        }
     }
-
+    
+    @After
+    public void totalPeticiones(){
+        Logger.getLogger(DrugsHouseIT.class.getName()).log(Level.INFO, "TOTAL-PETICIONES: {0}", sumaPeticiones);
+    }
 }
