@@ -17,7 +17,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"id\":1,\"nombre\":\"Harry\", \"apellido\":\"Potter\", \"ciudad\":\"Privet Drive\", \"direccionEnvio\":\"CRA6#1-39\"}"
+					"raw": "{\"id\":1,\"nombre\":\"Harry\", \"apellido\":\"Potter\", \"ciudad\":\"Privet Drive\", \"direccionEnvio\":\"CRA6#1-39\",\"cedula\":1075690311}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/s3_farmacia-api/api/clientes/",
@@ -94,7 +94,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"id\":2, \"nombre\":\"Draco\", \"apellido\":\"Malfoy\", \"ciudad\":\"Hogwarts\", \"direccionEnvio\":\"CRA7#1-39\"}"
+					"raw": "{\"id\":2, \"nombre\":\"Draco\", \"apellido\":\"Malfoy\", \"ciudad\":\"Hogwarts\", \"direccionEnvio\":\"CRA7#1-39\",\"cedula\":1075790311}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/s3_farmacia-api/api/clientes/1",

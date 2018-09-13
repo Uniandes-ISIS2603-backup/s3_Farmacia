@@ -112,8 +112,8 @@ public class ClienteLogicTest {
     @Test
     public void createClienteTest() throws BusinessLogicException {
         ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
+        newEntity.setCedula(1075690311L);
         ClienteEntity result = clienteLogic.createCliente(newEntity);
-        //result.setCedula(1075690311L);
         Assert.assertNotNull(result);
         ClienteEntity entity = em.find(ClienteEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
@@ -187,6 +187,7 @@ public class ClienteLogicTest {
         ClienteEntity pojoEntity = factory.manufacturePojo(ClienteEntity.class);
 
         pojoEntity.setId(entity.getId());
+        pojoEntity.setCedula(1075790311L);
 
         clienteLogic.updateCliente(pojoEntity.getId(), pojoEntity);
 

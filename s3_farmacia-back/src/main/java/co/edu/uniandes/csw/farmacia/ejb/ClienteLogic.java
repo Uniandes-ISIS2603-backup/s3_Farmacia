@@ -113,6 +113,6 @@ public class ClienteLogic {
     }
     
     private boolean validateCedula(Long cedula){
-        return cedula>=1000000000;
+        return (cedula>=1000000000L && cedula<=9999999999L);
     }
 }

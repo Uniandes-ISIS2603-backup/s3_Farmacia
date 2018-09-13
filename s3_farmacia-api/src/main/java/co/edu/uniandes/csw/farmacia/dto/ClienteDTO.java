@@ -33,6 +33,7 @@ public class ClienteDTO implements Serializable {
             this.apellido = clienteEntity.getApellido();
             this.ciudad = clienteEntity.getCiudad();
             this.direccionEnvio = clienteEntity.getDireccionEnvio();
+            this.cedula = clienteEntity.getCedula();
         }
     }
     
