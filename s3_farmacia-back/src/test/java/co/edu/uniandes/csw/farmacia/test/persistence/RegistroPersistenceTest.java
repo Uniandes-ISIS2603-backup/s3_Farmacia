@@ -95,5 +95,81 @@ public class RegistroPersistenceTest {
         Assert.assertNotNull(result);     
         RegistroEntity entity = em.find(RegistroEntity.class, result.getId());
         Assert.assertEquals(newRegistroEntity.getTipoRegistro(),entity.getTipoRegistro());
+        Assert.assertEquals(newRegistroEntity.getCantidad(),entity.getCantidad());
     }
+    
+    /**
+     * Prueba para consultar la lista de registros.
+     */
+    @Test
+    public void getRegistrosTest() {
+        List<RegistroEntity> list = registroPersistence.findAll();
+        Assert.assertEquals(data.size(), list.size());
+        for (RegistroEntity ent : list) {
+            boolean found = false;
+            for (RegistroEntity entity : data) {
+                if (ent.getId().equals(entity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+    
+    /**
+     * Prueba para consultar un Registro.
+     */
+    @Test
+    public void getRegistroTest() {
+        RegistroEntity entity = data.get(0);
+        RegistroEntity newEntity = registroPersistence.find(entity.getId());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getTipoRegistro(), newEntity.getTipoRegistro());
+        Assert.assertEquals(entity.getCantidad(), newEntity.getCantidad());
+    }
+    
+    /**
+     * Prueba para eliminar un Registro.
+     */
+    @Test
+    public void deleteRegistroTest() {
+        RegistroEntity entity = data.get(0);
+        registroPersistence.delete(entity.getId());
+        RegistroEntity deleted = em.find(RegistroEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
+    
+    /**
+     * Prueba para actualizar un Registro.
+     */
+    @Test
+    public void updateRegistroTest() {
+        RegistroEntity entity = data.get(0);
+        PodamFactory factory = new PodamFactoryImpl();
+        RegistroEntity newEntity = factory.manufacturePojo(RegistroEntity.class);
+
+        newEntity.setId(entity.getId());
+
+        registroPersistence.update(newEntity);
+
+        RegistroEntity resp = em.find(RegistroEntity.class, entity.getId());
+
+        Assert.assertEquals(newEntity.getTipoRegistro(), resp.getTipoRegistro());
+        Assert.assertEquals(newEntity.getCantidad(), resp.getCantidad());
+    }
+    
+    /**
+     * Prueba para consultasr un Book por ISBN.
+     
+    @Test
+    public void findBookByISBNTest() {
+        BookEntity entity = data.get(0);
+        BookEntity newEntity = bookPersistence.findByISBN(entity.getIsbn());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getIsbn(), newEntity.getIsbn());
+
+        newEntity = bookPersistence.findByISBN(null);
+        Assert.assertNull(newEntity);
+    }
+    */
 }

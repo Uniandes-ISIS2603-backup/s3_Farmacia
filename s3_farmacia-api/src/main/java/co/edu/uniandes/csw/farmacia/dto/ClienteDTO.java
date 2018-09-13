@@ -20,11 +20,16 @@ public class ClienteDTO implements Serializable {
     private String apellido;
     private String ciudad;
     private String direccionEnvio;
+    private Long cedula;
     
     public ClienteDTO(){
         
     }
     
+    /**
+     * Crea un clienteDTO a partir de un ClienteEntity
+     * @param clienteEntity 
+     */
     public ClienteDTO ( ClienteEntity clienteEntity){
         if (clienteEntity != null){
             this.id = clienteEntity.getId();
@@ -32,6 +37,7 @@ public class ClienteDTO implements Serializable {
             this.apellido = clienteEntity.getApellido();
             this.ciudad = clienteEntity.getCiudad();
             this.direccionEnvio = clienteEntity.getDireccionEnvio();
+            this.cedula = clienteEntity.getCedula();
         }
     }
     
@@ -75,6 +81,18 @@ public class ClienteDTO implements Serializable {
         this.direccionEnvio = direccionEnvio;
     }
     
+    public Long getCedula(){
+        return cedula;
+    }
+    
+    public void setCedula(Long cedula){
+        this.cedula = cedula;
+    }
+    
+    /**
+     * Tranforma un ClienteDTO a un ClienteEntity
+     * @return 
+     */
     public ClienteEntity toEntity(){
         ClienteEntity clienteEntity = new ClienteEntity();
         clienteEntity.setId(this.id);
@@ -82,6 +100,7 @@ public class ClienteDTO implements Serializable {
         clienteEntity.setNombre(this.nombre);
         clienteEntity.setCiudad(this.ciudad);
         clienteEntity.setDireccionEnvio(this.direccionEnvio);
+        clienteEntity.setCedula(this.cedula);
         return clienteEntity;
     }
     

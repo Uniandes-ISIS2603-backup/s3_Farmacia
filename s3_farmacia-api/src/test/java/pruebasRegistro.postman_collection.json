@@ -1,12 +1,12 @@
 {
 	"info": {
-		"_postman_id": "337be0d6-2c17-4b0c-96ce-644f8092a6ce",
-		"name": "pruebas Cliente",
+		"_postman_id": "30685bfb-b0fe-4289-a319-8451f8c974c3",
+		"name": "pruebasRegistro",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Crea un cliente",
+			"name": "Crea un registro",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -17,10 +17,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"id\":1,\"nombre\":\"Harry\", \"apellido\":\"Potter\", \"ciudad\":\"Privet Drive\", \"direccionEnvio\":\"CRA6#1-39\",\"cedula\":1075690311}"
+					"raw": "{\"id\":\"1\",\"cantidad\":\"10\",\"tipoRegistro\":\"TRASLADO_BODEGA\"}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s3_farmacia-api/api/clientes/",
+					"raw": "http://localhost:8080/s3_farmacia-api/api/registros/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -29,7 +29,7 @@
 					"path": [
 						"s3_farmacia-api",
 						"api",
-						"clientes",
+						"registros",
 						""
 					]
 				}
@@ -37,13 +37,13 @@
 			"response": []
 		},
 		{
-			"name": "Obtener un cliente",
+			"name": "Obtiene un registro",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/s3_farmacia-api/api/clientes/1",
+					"raw": "http://localhost:8080/s3_farmacia-api/api/registros/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -52,7 +52,7 @@
 					"path": [
 						"s3_farmacia-api",
 						"api",
-						"clientes",
+						"registros",
 						"1"
 					]
 				}
@@ -60,13 +60,13 @@
 			"response": []
 		},
 		{
-			"name": "Eliminar un cliente determinado",
+			"name": "Elimina un registro",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/s3_farmacia-api/api/clientes/2",
+					"raw": "http://localhost:8080/s3_farmacia-api/api/registros/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -75,7 +75,7 @@
 					"path": [
 						"s3_farmacia-api",
 						"api",
-						"clientes",
+						"registros",
 						"2"
 					]
 				}
@@ -83,7 +83,7 @@
 			"response": []
 		},
 		{
-			"name": "Actualizar un cliente",
+			"name": "Actualiza un registro",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -94,10 +94,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"id\":2, \"nombre\":\"Draco\", \"apellido\":\"Malfoy\", \"ciudad\":\"Hogwarts\", \"direccionEnvio\":\"CRA7#1-39\",\"cedula\":1075790311}"
+					"raw": "{\"id\":2, \"cantidad\":\"7\", \"tipoRegistro\":\"PERDIDA\"}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s3_farmacia-api/api/clientes/1",
+					"raw": "http://localhost:8080/s3_farmacia-api/api/registros/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -106,7 +106,7 @@
 					"path": [
 						"s3_farmacia-api",
 						"api",
-						"clientes",
+						"registros",
 						"1"
 					]
 				}

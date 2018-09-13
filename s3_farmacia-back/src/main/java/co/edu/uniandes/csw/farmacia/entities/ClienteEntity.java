@@ -19,6 +19,7 @@ public class ClienteEntity extends BaseEntity implements Serializable{
     private String apellido;
     private String ciudad;
     private String direccionEnvio;
+    private Long cedula;
     
     public String getNombre(){
         return nombre;
@@ -50,6 +51,14 @@ public class ClienteEntity extends BaseEntity implements Serializable{
     
     public void setDireccionEnvio(String direccionEnvio){
         this.direccionEnvio = direccionEnvio;
+    }
+    
+    public Long getCedula(){
+        return cedula;
+    }
+    
+    public void setCedula(Long cedula){
+        this.cedula = cedula;
     }
     
 }

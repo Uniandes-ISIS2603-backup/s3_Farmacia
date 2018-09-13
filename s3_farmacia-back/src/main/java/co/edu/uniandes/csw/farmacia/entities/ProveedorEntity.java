@@ -16,7 +16,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
- * @author francisco
+ * @author fj.gonzalez
  */
 @Entity 
 //BaseEntity clase madre.
@@ -27,9 +27,9 @@ public class ProveedorEntity extends BaseEntity implements Serializable
     
     private static final Logger LOGGER = Logger.getLogger(ProveedorEntity.class.getName());
     
-    /*@PodamExclude
-    @OneToMany(mappedBy = "productos", orphanRemoval = true)
-    private List<ProductoEntity> productos = new ArrayList<ProductoEntity>();*/
+    @PodamExclude
+    @OneToMany(mappedBy = "proveedor")
+    private List<ProductoEntity> productos = new ArrayList<ProductoEntity>();
 
     public void setNombre(String pNombre)
     {
@@ -39,7 +39,7 @@ public class ProveedorEntity extends BaseEntity implements Serializable
     {
         return nombre;
     }
-    /*public List<ProductoEntity> getProductos()
+    public List<ProductoEntity> getProductos()
     {
         return productos;
     }
@@ -47,5 +47,5 @@ public class ProveedorEntity extends BaseEntity implements Serializable
     public void setProductos(List<ProductoEntity> pProductos)
     {
         productos = pProductos;
-    }*/
+    }
 }

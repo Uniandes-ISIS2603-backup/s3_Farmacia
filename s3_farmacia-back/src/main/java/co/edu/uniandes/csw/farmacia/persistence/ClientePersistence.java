@@ -26,6 +26,11 @@ public class ClientePersistence {
     @PersistenceContext (unitName = "DrugsHousePU")
     protected EntityManager em;
     
+    /**
+     * Metodo para persisitir la entidad en la base de datos
+     * @param clienteEntity objeto cliente que se creara en la base de datos
+     * @return devuelve la entiudad creada con un id dado por la base de datos.
+     */
     public ClienteEntity create(ClienteEntity clienteEntity){
         LOGGER.log(Level.INFO, "Creando un nuevo cliente");
         
@@ -61,7 +66,7 @@ public class ClientePersistence {
      */
     public ClienteEntity update (ClienteEntity clienteEntity){
         LOGGER.log(Level.INFO, "Actualizando cliente con id = {0}", clienteEntity.getId());
-        LOGGER.log(Level.INFO, "Saliendo de actualizar la info del proveedor con id = {0}", clienteEntity.getId());
+        LOGGER.log(Level.INFO, "Saliendo de actualizar la info del cliente con id = {0}", clienteEntity.getId());
         return em.merge(clienteEntity);
     }
     /**
@@ -76,21 +81,28 @@ public class ClientePersistence {
        LOGGER.log(Level.INFO, "Saliendo de eliminar a un cliente con id={0}", clienteId);
     }
     
-    public ClienteEntity findByName(String name){
-        LOGGER.log(Level.INFO, "Consultando cliente por nombre ", name);
-        TypedQuery query = em.createQuery("Select e From ClienteEntity e where e.nombre = :nombre", ClienteEntity.class);
-        query = query.setParameter("nombre", name);
-        List<ClienteEntity> sameName = query.getResultList();
+    /**
+     * Encuentra un cliente por medio de la cedula, esta numero de cedula
+     * es unico
+     * @param cedula el numero de cedula del cliente que se quiere encontrar
+     * @return 
+     */
+    public ClienteEntity findByCedula(Long cedula){
+        LOGGER.log(Level.INFO, "Consultando cliente por cedula ", cedula);
+        TypedQuery query = em.createQuery("Select e From ClienteEntity e where e.cedula = :cedula", ClienteEntity.class);
+        query = query.setParameter("cedula", cedula);
+        List<ClienteEntity> sameCedula = query.getResultList();
         ClienteEntity result;
-        if(sameName == null){
+        if(sameCedula == null){
             result = null;
-        }else if (sameName.isEmpty()){
+        }else if (sameCedula.isEmpty()){
             result = null;
         }else{
-            result = sameName.get(0);
+            result = sameCedula.get(0);
         }
-        LOGGER.log(Level.INFO,"Saliendo de consultar un cliente por nombre", name);
+        LOGGER.log(Level.INFO,"Saliendo de consultar un cliente por nombre",cedula );
         return result;
     }
+    
     
 }
