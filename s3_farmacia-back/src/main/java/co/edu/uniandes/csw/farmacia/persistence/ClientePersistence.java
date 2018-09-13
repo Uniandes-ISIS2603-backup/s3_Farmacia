@@ -66,7 +66,7 @@ public class ClientePersistence {
      */
     public ClienteEntity update (ClienteEntity clienteEntity){
         LOGGER.log(Level.INFO, "Actualizando cliente con id = {0}", clienteEntity.getId());
-        LOGGER.log(Level.INFO, "Saliendo de actualizar la info del proveedor con id = {0}", clienteEntity.getId());
+        LOGGER.log(Level.INFO, "Saliendo de actualizar la info del cliente con id = {0}", clienteEntity.getId());
         return em.merge(clienteEntity);
     }
     /**
