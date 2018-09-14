@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.farmacia.persistence;
 
 import co.edu.uniandes.csw.farmacia.entities.FacturaEntity;
-import co.edu.uniandes.csw.farmacia.entities.ProveedorEntity;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,20 +27,20 @@ public class FacturaPersistence {
     @PersistenceContext(unitName = "DrugsHousePU")
     protected EntityManager em;
     
-    public FacturaEntity create(FacturaEntity entity){
-        
+    public FacturaEntity create(FacturaEntity facturaEntity)
+    {
         LOGGER.log(Level.INFO, "Creando una nueva factura");
-        em.persist(entity);
-        LOGGER.log(Level.INFO, "Saliendo de crear una nueva factura");
         
-        return entity;
-      
+        em.persist(facturaEntity);
+        LOGGER.log(Level.INFO, "Saliendo de crear una nueva factura.");
+        return facturaEntity;   
     }
     
+    
         public List<FacturaEntity> findAll() {
-        LOGGER.log(Level.INFO, "Consultando todos los proveedores.");
+        LOGGER.log(Level.INFO, "Consultando todos las facturas.");
 
-        TypedQuery query = em.createQuery("select u from ProveedorEntity u", FacturaEntity.class);
+        TypedQuery query = em.createQuery("select u from FacturaEntity u", FacturaEntity.class);
 
         return query.getResultList(); 
     }
@@ -61,12 +60,12 @@ public class FacturaPersistence {
     }
         
         public void delete(Long facturaId) {
-        LOGGER.log(Level.INFO, "Borrando proveedor con id={0}", facturaId);
+        LOGGER.log(Level.INFO, "Borrando factura con id={0}", facturaId);
         FacturaEntity entity = em.find(FacturaEntity.class, facturaId);
 
         em.remove(entity);
 
-        LOGGER.log(Level.INFO, "Saliendo de eliminar un proveedor con id={0}", facturaId);
+        LOGGER.log(Level.INFO, "Saliendo de eliminar una factura con id={0}", facturaId);
     }
         
 
