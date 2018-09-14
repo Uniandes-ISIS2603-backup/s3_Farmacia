@@ -125,7 +125,7 @@ public class TransaccionClientePersistenceTest {
         TransaccionClienteEntity newEntity = TransaccionClientePersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getTipoDePago(), newEntity.getTipoDePago());
-        Assert.assertEquals(entity.GetMonto(), newEntity.GetMonto());
+        Assert.assertEquals(entity.getMonto(), newEntity.getMonto());
         Assert.assertEquals(entity.getParcial(), newEntity.getParcial());
         Assert.assertEquals(entity.getTiempo(), newEntity.getTiempo()); 
         
@@ -150,7 +150,7 @@ public class TransaccionClientePersistenceTest {
 
         TransaccionClienteEntity resp = em.find(TransaccionClienteEntity.class, entity.getId());
 
-        Assert.assertEquals(newEntity.GetMonto(), resp.GetMonto());
+        Assert.assertEquals(newEntity.getMonto(), resp.getMonto());
         Assert.assertEquals(newEntity.getParcial(), resp.getParcial());
         Assert.assertEquals(newEntity.getTiempo(), resp.getTiempo());
         Assert.assertEquals(newEntity.getTipoDePago(), resp.getTipoDePago());

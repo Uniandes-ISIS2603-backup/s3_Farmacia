@@ -8,6 +8,8 @@ package co.edu.uniandes.csw.farmacia.entities;
 import java.io.Serializable;
 import java.util.logging.Logger;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -24,7 +26,9 @@ public class TransaccionClienteEntity extends BaseEntity implements Serializable
     private boolean parcial;
     
     private String tipoDePago;
-
+    
+    @PodamExclude
+    @ManyToOne
     private ClienteEntity cliente;
      private static final Logger LOGGER = Logger.getLogger(TransaccionClienteEntity.class.getName());
     public void setTipoDePago(String pTipoDePago)
@@ -39,7 +43,7 @@ public class TransaccionClienteEntity extends BaseEntity implements Serializable
     {
         monto=pMonto;
     }
-    public Double GetMonto()
+    public Double getMonto()
     {
        return monto;
     }

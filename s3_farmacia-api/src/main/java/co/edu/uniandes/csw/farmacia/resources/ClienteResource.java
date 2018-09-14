@@ -88,8 +88,8 @@ public class ClienteResource {
      * Error de lógica que se genera cuando no se encuentra el cliente.
      */
     @GET
-    @Path("{id: \\d+}")
-    public ClienteDTO getCliente(@PathParam("id") Long id){
+    @Path("{clientesId: \\d+}")
+    public ClienteDTO getCliente(@PathParam("clientesId") Long id){
         LOGGER.log(Level.INFO, "ClienteResource getCliente: input: {0}", id);
         ClienteEntity clienteEntity = clienteLogic.getCliente(id);
         if (clienteEntity == null) {
@@ -111,8 +111,8 @@ public class ClienteResource {
      * Error de lógica que se genera cuando no se encuentra el cliente.
      */
     @DELETE
-    @Path("{id:\\d+}")
-    public void deleteCliente(@PathParam("id") Long id)throws BusinessLogicException{
+    @Path("{clientesId:\\d+}")
+    public void deleteCliente(@PathParam("clientesId") Long id)throws BusinessLogicException{
         LOGGER.log(Level.INFO, "ClienteResource deleteCliente: input: {0}", id);
         if (clienteLogic.getCliente(id) == null) {
             throw new WebApplicationException("El recurso /clientes/" + id + " no existe.", 404);
@@ -134,8 +134,8 @@ public class ClienteResource {
      * actualizar.
      */
     @PUT
-    @Path("{id:\\d+}")
-    public ClienteDTO updateCliente ( @PathParam("id") Long id, ClienteDTO cliente)throws WebApplicationException,BusinessLogicException{
+    @Path("{clientesId:\\d+}")
+    public ClienteDTO updateCliente ( @PathParam("clientesId") Long id, ClienteDTO cliente)throws WebApplicationException,BusinessLogicException{
          LOGGER.log(Level.INFO, "ClienteResource updateCliente: input: id:{0} , cliente: {1}", new Object[]{id, cliente.toString()});
         cliente.setId(id);
         if (clienteLogic.getCliente(id) == null) {
@@ -145,6 +145,28 @@ public class ClienteResource {
         LOGGER.log(Level.INFO, "ClienteResource updateCliente: output: {0}", detailDTO.toString());
         return detailDTO;
     } 
+    
+     /**
+     * Conexión con el servicio de transaccionesCliente para un cliente.
+     * {@link ClienteTransaccionesClienteResource}
+     *
+     * Este método conecta la ruta de /clientes con las rutas de /transaccionesCliente que
+     * dependen del cliente, es una redirección al servicio que maneja el
+     * segmento de la URL que se encarga las transaccionesCliente de un cliente.
+     *
+     * @paramclientesId El ID del cliebte con respecto a la cual se
+     * accede al servicio.
+     * @return El servicio de transaccionesCliente para este cliente en paricular.
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra el cliente.
+     */
+    @Path("{clientesId: \\d+}/transaccionesCliente")
+    public Class<ClienteTransaccionesClienteResource> getClienteTransaccionesClienteResource(@PathParam("clientesId") Long clientesId) {
+        if (clienteLogic.getCliente(clientesId) == null) {
+            throw new WebApplicationException("El recurso /clientes/" + clientesId + " no existe.", 404);
+        }
+        return ClienteTransaccionesClienteResource.class;
+    }
     
     /**
      * Convierte una lista de entidades a DTO.

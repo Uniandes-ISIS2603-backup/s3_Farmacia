@@ -26,7 +26,7 @@ import javax.ws.rs.Produces;
  *
  * @author ra.ariasr
  */
-@Path("transaccionCliente")
+@Path("transaccionesCliente")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
@@ -45,8 +45,8 @@ public class TransaccionClienteResource
         return new TransaccionClienteDTO();
     }
     @GET
-    @Path("{id: \\d+}")
-    public TransaccionClienteDTO getTransaccionCliente(@PathParam("id")Long id )
+    @Path("{transaccionesClienteId: \\d+}")
+    public TransaccionClienteDTO getTransaccionCliente(@PathParam("transaccionesClienteId")Long id )
     {
       LOGGER.log(Level.INFO, "TransacionClienteResource getEditorial: input: {0}", id);
         
@@ -62,14 +62,14 @@ public class TransaccionClienteResource
       return p;
     }
         @DELETE
-    @Path("{id:\\d+}")
-    public void deleteTransaccionCliente(@PathParam("id")Long id)
+    @Path("{transaccionesClienteId:\\d+}")
+    public void deleteTransaccionCliente(@PathParam("transaccionesClienteId")Long id)
     {
         
     }
     @PUT
-    @Path("{id:\\d+}")
-    public TransaccionClienteDTO refreshDataTransaccionCliente(@PathParam("id") Long id, TransaccionClienteDTO proveedor)
+    @Path("{transaccionesClienteId:\\d+}")
+    public TransaccionClienteDTO refreshDataTransaccionCliente(@PathParam("transaccionesClienteId") Long id, TransaccionClienteDTO proveedor)
     {
         return proveedor;
     }

@@ -5,11 +5,13 @@
  */
 package co.edu.uniandes.csw.farmacia.dto;
 
+import java.io.Serializable;
+
 /**
  *
  * @author RAMÓN
  */
-public class TransaccionClienteDetailDTO 
+public class TransaccionClienteDetailDTO extends TransaccionClienteDTO implements Serializable
 {
     
 }

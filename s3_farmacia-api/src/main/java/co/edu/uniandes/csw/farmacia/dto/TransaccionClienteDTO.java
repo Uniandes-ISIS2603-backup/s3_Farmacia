@@ -33,7 +33,7 @@ public class TransaccionClienteDTO
         {
             this.id = tran.getId();
             this.tiempo= tran.getTiempo();
-            this.monto= tran.GetMonto();
+            this.monto= tran.getMonto();
             this.tipoDePago= tran.getTipoDePago();
             this.parcial= tran.getParcial();
             this.tipoDePago=tran.getTipoDePago();

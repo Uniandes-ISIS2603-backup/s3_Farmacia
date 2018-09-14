@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -22,6 +24,9 @@ public class ClienteEntity extends BaseEntity implements Serializable{
     private String ciudad;
     private String direccionEnvio;
     private Long cedula;
+    
+    @PodamExclude
+    @OneToMany(mappedBy = "cliente")
     private List<TransaccionClienteEntity> transacciones = new ArrayList<TransaccionClienteEntity>();
     
     public String getNombre(){
@@ -64,12 +69,12 @@ public class ClienteEntity extends BaseEntity implements Serializable{
         this.cedula = cedula;
     }
     
-    public void setTransacciones(List<TransaccionClienteEntity> pTransacciones)
+    public void setTransaccionesCliente(List<TransaccionClienteEntity> pTransacciones)
     {
         transacciones= pTransacciones;
     }
     
-    public List<TransaccionClienteEntity> getTransacciones()
+    public List<TransaccionClienteEntity> getTransaccionesCliente()
     {
         return transacciones;
     }

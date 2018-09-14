@@ -108,7 +108,7 @@ public class ClienteTransaccionLogicTest
         Assert.assertNotNull(result);
         TransaccionClienteEntity entity = em.find(TransaccionClienteEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
-        Assert.assertEquals(newEntity.GetMonto(), entity.GetMonto());
+        Assert.assertEquals(newEntity.getMonto(), entity.getMonto());
         Assert.assertEquals(newEntity.getTiempo(), entity.getTiempo());
         Assert.assertEquals(newEntity.getTipoDePago(), entity.getTipoDePago());
         
@@ -132,10 +132,10 @@ public class ClienteTransaccionLogicTest
     @Test
     public void getTransaccionClienteTest() {
         TransaccionClienteEntity entity = data.get(0);
-        TransaccionClienteEntity resultEntity = TransaccionClienteLogic.getTransaccion(dataCliente.get(1).getId(), entity.getId());
+        TransaccionClienteEntity resultEntity = TransaccionClienteLogic.getTransaccionCliente(dataCliente.get(1).getId(), entity.getId());
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
-        Assert.assertEquals(entity.GetMonto(), resultEntity.GetMonto());
+        Assert.assertEquals(entity.getMonto(), resultEntity.getMonto());
         Assert.assertEquals(entity.getTiempo(), resultEntity.getTiempo());
         Assert.assertEquals(entity.getTipoDePago(), resultEntity.getTipoDePago());
         Assert.assertEquals(entity.getParcial(), resultEntity.getParcial());
@@ -155,7 +155,7 @@ public class ClienteTransaccionLogicTest
         TransaccionClienteEntity resp = em.find(TransaccionClienteEntity.class, entity.getId());
 
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
-        Assert.assertEquals(pojoEntity.GetMonto(), resp.GetMonto());
+        Assert.assertEquals(pojoEntity.getMonto(), resp.getMonto());
         Assert.assertEquals(pojoEntity.getParcial(), resp.getParcial());
         Assert.assertEquals(pojoEntity.getTiempo(), resp.getTiempo());
         Assert.assertEquals(pojoEntity.getTipoDePago(), resp.getTipoDePago());
@@ -165,7 +165,7 @@ public class ClienteTransaccionLogicTest
     public void deleteTransaccionTest() throws BusinessLogicException
     {
         TransaccionClienteEntity entity = data.get(0);
-        TransaccionClienteLogic.deleteTransaccionCLiente(dataCliente.get(1).getId(), entity.getId());
+        TransaccionClienteLogic.deleteTransaccionCliente(dataCliente.get(1).getId(), entity.getId());
         TransaccionClienteEntity deleted = em.find(TransaccionClienteEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
@@ -174,7 +174,7 @@ public class ClienteTransaccionLogicTest
     public void deleteTransaccionConClienteAsociadoTest() throws BusinessLogicException 
     {
         TransaccionClienteEntity entity = data.get(0);
-        TransaccionClienteLogic.deleteTransaccionCLiente(dataCliente.get(0).getId(), entity.getId());
+        TransaccionClienteLogic.deleteTransaccionCliente(dataCliente.get(0).getId(), entity.getId());
     }
 
 }
