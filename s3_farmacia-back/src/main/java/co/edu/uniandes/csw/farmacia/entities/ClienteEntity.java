@@ -6,6 +6,8 @@
 package co.edu.uniandes.csw.farmacia.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 
 /**
@@ -20,6 +22,7 @@ public class ClienteEntity extends BaseEntity implements Serializable{
     private String ciudad;
     private String direccionEnvio;
     private Long cedula;
+    private List<TransaccionClienteEntity> transacciones = new ArrayList<TransaccionClienteEntity>();
     
     public String getNombre(){
         return nombre;
@@ -61,4 +64,13 @@ public class ClienteEntity extends BaseEntity implements Serializable{
         this.cedula = cedula;
     }
     
+    public void setTransacciones(List<TransaccionClienteEntity> pTransacciones)
+    {
+        transacciones= pTransacciones;
+    }
+    
+    public List<TransaccionClienteEntity> getTransacciones()
+    {
+        return transacciones;
+    }
 }

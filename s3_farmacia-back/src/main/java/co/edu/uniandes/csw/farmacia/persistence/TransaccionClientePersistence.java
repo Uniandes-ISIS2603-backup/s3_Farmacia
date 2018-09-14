@@ -78,4 +78,22 @@ public class TransaccionClientePersistence
         LOGGER.log(Level.INFO, "Saliendo de eliminar una transaccion con id = {0}", transId);
     }
     
+    public TransaccionClienteEntity find(Long clienteId,Long transaccionId)
+    {
+        LOGGER.log(Level.INFO, "Consultando la transaccion con id = {0} del cliente con id = " + clienteId, transaccionId);
+        TypedQuery<TransaccionClienteEntity> q = em.createQuery("select p from TransaccionClienteEntity p where (p.clinete.id = :clienteid) and (p.id = :transaccionClienteId)", TransaccionClienteEntity.class);
+        q.setParameter("clineteid", clienteId);
+        q.setParameter("trasnaccionClienteId", transaccionId);
+        List<TransaccionClienteEntity> results = q.getResultList();
+        TransaccionClienteEntity transaccion = null;
+        if (results == null) {
+            transaccion = null;
+        } else if (results.isEmpty()) {
+            transaccion = null;
+        } else if (results.size() >= 1) {
+            transaccion = results.get(0);
+        }
+        LOGGER.log(Level.INFO, "Saliendo de consultar el review con id = {0} del libro con id =" + clienteId, transaccionId);
+        return transaccion;
+    }
 }

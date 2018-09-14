@@ -6,11 +6,14 @@
 package co.edu.uniandes.csw.farmacia.entities;
 
 import java.io.Serializable;
+import java.util.logging.Logger;
+import javax.persistence.Entity;
 
 /**
  *
  * @author estudiante
  */
+@Entity
 public class TransaccionClienteEntity extends BaseEntity implements Serializable
 {    
     
@@ -22,11 +25,13 @@ public class TransaccionClienteEntity extends BaseEntity implements Serializable
     
     private String tipoDePago;
 
-    public void setMonto(String pTipoDePago)
+    private ClienteEntity cliente;
+     private static final Logger LOGGER = Logger.getLogger(TransaccionClienteEntity.class.getName());
+    public void setTipoDePago(String pTipoDePago)
     {
         tipoDePago=pTipoDePago;
     }
-    public String getMonto()
+    public String getTipoDePago()
     {
         return tipoDePago;
     }
@@ -49,15 +54,6 @@ public class TransaccionClienteEntity extends BaseEntity implements Serializable
         return tiempo;
     }
     
-    public void setTipoDePago(String pTipoDePago)
-    {
-        tipoDePago=pTipoDePago;
-    }
-    
-    public String getTipoDePago()
-    {
-        return tipoDePago;
-    }
     
     public void setParcial(boolean pParcial)
     {
@@ -68,4 +64,16 @@ public class TransaccionClienteEntity extends BaseEntity implements Serializable
     {
         return parcial;
     }
+    
+    public ClienteEntity getCliente()
+    {
+        return cliente;
+    }
+    
+    public void setCliente(ClienteEntity pCliente)
+    {
+        cliente= pCliente;
+    }
+    
+    
 }
