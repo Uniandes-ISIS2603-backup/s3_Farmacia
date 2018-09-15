@@ -71,7 +71,8 @@ public class TransaccionClientePersistence
      * Borra una transacción
      * @param transId 
      */
-    public void delete(Long transId){
+    public void delete(Long transId)
+    {
         LOGGER.log(Level.INFO, "Borrando transaccion con id = {0}", transId);
         TransaccionClienteEntity entity = em.find(TransaccionClienteEntity.class, transId);
         em.remove(entity);

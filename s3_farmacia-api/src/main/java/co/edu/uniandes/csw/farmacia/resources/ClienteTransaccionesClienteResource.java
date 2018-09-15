@@ -147,7 +147,7 @@ public class ClienteTransaccionesClienteResource {
     private List<TransaccionClienteDetailDTO> transaccionesClienteListEntity2DTO(List<TransaccionClienteEntity> entityList) {
         List<TransaccionClienteDetailDTO> list = new ArrayList();
         for (TransaccionClienteEntity entity : entityList) {
-           // list.add(new TransaccionClienteDetailDTO(entity));
+            list.add(new TransaccionClienteDetailDTO(entity));
         }
         return list;
     }

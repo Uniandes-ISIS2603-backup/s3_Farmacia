@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.farmacia.ejb.TransaccionClienteLogic;
 import co.edu.uniandes.csw.farmacia.entities.ClienteEntity;
 import co.edu.uniandes.csw.farmacia.entities.TransaccionClienteEntity;
 import co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.farmacia.persistence.TransaccionClientePersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -31,7 +32,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author RAMÓN
  */
 @RunWith(Arquillian.class)
-public class ClienteTransaccionLogicTest 
+public class TransaccionClienteLogicTest 
 {
     private PodamFactory factory = new PodamFactoryImpl();
     
@@ -53,7 +54,7 @@ public class ClienteTransaccionLogicTest
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(TransaccionClienteEntity.class.getPackage())
                 .addPackage(TransaccionClienteLogic.class.getPackage())
-                .addPackage(TransaccionClienteLogic.class.getPackage())
+                .addPackage(TransaccionClientePersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -90,21 +91,26 @@ public class ClienteTransaccionLogicTest
             ClienteEntity cliente = factory.manufacturePojo(ClienteEntity.class);
             em.persist(cliente);
             dataCliente.add(cliente);
+          
         }
         for(int j=0; j<3;j++)
         {
             TransaccionClienteEntity transaccion = factory.manufacturePojo(TransaccionClienteEntity.class);
-            transaccion.setCliente(dataCliente.get(j));
+            transaccion.setCliente(dataCliente.get(0));
+           
             em.persist(transaccion);
             data.add(transaccion);
         }
+        
     }
     @Test
-    public void createReviewTest()
+    public void createTransaccionClienteTest() throws BusinessLogicException
     {
         TransaccionClienteEntity newEntity = factory.manufacturePojo(TransaccionClienteEntity.class);
-        newEntity.setCliente(dataCliente.get(1));
-        TransaccionClienteEntity result = TransaccionClienteLogic.createTransaccionCliente(dataCliente.get(1).getId(), newEntity);
+        newEntity.setCliente(dataCliente.get(0));
+        System.out.println(newEntity.getCliente()==null);
+        TransaccionClienteEntity result = TransaccionClienteLogic.createTransaccionCliente(newEntity);
+
         Assert.assertNotNull(result);
         TransaccionClienteEntity entity = em.find(TransaccionClienteEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
@@ -117,7 +123,7 @@ public class ClienteTransaccionLogicTest
     @Test
     public void geTransaccionTest() 
     {
-        List<TransaccionClienteEntity> list = TransaccionClienteLogic.getTransaccionesCliente(dataCliente.get(1).getId());
+        List<TransaccionClienteEntity> list = TransaccionClienteLogic.getTransaccionesCliente();
         Assert.assertEquals(data.size(), list.size());
         for (TransaccionClienteEntity entity : list) {
             boolean found = false;
@@ -132,7 +138,7 @@ public class ClienteTransaccionLogicTest
     @Test
     public void getTransaccionClienteTest() {
         TransaccionClienteEntity entity = data.get(0);
-        TransaccionClienteEntity resultEntity = TransaccionClienteLogic.getTransaccionCliente(dataCliente.get(1).getId(), entity.getId());
+        TransaccionClienteEntity resultEntity = TransaccionClienteLogic.getTransaccionCliente(entity.getId());
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
         Assert.assertEquals(entity.getMonto(), resultEntity.getMonto());
@@ -147,13 +153,9 @@ public class ClienteTransaccionLogicTest
     {
         TransaccionClienteEntity entity = data.get(0);
         TransaccionClienteEntity pojoEntity = factory.manufacturePojo(TransaccionClienteEntity.class);
-
         pojoEntity.setId(entity.getId());
-
-        TransaccionClienteLogic.updateTransaccionCliente(dataCliente.get(1).getId(), pojoEntity);
-
+        TransaccionClienteLogic.updateTransaccionCliente(pojoEntity.getId(), pojoEntity);
         TransaccionClienteEntity resp = em.find(TransaccionClienteEntity.class, entity.getId());
-
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
         Assert.assertEquals(pojoEntity.getMonto(), resp.getMonto());
         Assert.assertEquals(pojoEntity.getParcial(), resp.getParcial());
@@ -165,16 +167,16 @@ public class ClienteTransaccionLogicTest
     public void deleteTransaccionTest() throws BusinessLogicException
     {
         TransaccionClienteEntity entity = data.get(0);
-        TransaccionClienteLogic.deleteTransaccionCliente(dataCliente.get(1).getId(), entity.getId());
+        TransaccionClienteLogic.deleteTransaccionCliente(entity.getId());
         TransaccionClienteEntity deleted = em.find(TransaccionClienteEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
     
-    @Test(expected = BusinessLogicException.class)
-    public void deleteTransaccionConClienteAsociadoTest() throws BusinessLogicException 
+    @Test
+    public void deleteTransaccionConClienteTest() throws BusinessLogicException 
     {
         TransaccionClienteEntity entity = data.get(0);
-        TransaccionClienteLogic.deleteTransaccionCliente(dataCliente.get(0).getId(), entity.getId());
+        TransaccionClienteLogic.deleteTransaccionCliente( entity.getId());
     }
 
 }

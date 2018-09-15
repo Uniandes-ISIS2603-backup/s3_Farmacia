@@ -6,6 +6,8 @@
 package co.edu.uniandes.csw.farmacia.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -26,6 +28,8 @@ public class TransaccionClienteEntity extends BaseEntity implements Serializable
     private boolean parcial;
     
     private String tipoDePago;
+    
+    private List<ProductoEntity> productos;
     
     @PodamExclude
     @ManyToOne
@@ -79,5 +83,13 @@ public class TransaccionClienteEntity extends BaseEntity implements Serializable
         cliente= pCliente;
     }
     
+    public void setProductos(List<ProductoEntity> pProductos)
+    {
+       productos= pProductos;
+    }
+    public List<ProductoEntity> getProductos()
+    {
+       return productos;
+    }
     
 }
