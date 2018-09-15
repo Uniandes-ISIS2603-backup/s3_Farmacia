@@ -103,13 +103,13 @@ public class ClienteTransaccionesClienteResource {
     @Path("{transaccionesClienteId: \\d+}")
     public TransaccionClienteDetailDTO getTransaccionCliente(@PathParam("transaccionesClienteId") Long transaccionesClienteId, @PathParam("clientesId") Long clientesId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "ClienteTransaccionesClienteResource getTransaccionCliente: input: clientesID: {0} , transaccionesClienteId: {1}", new Object[]{clientesId, transaccionesClienteId});
-        //if (transaccionClienteLogic.getTransaccionCliente(transaccionesClienteId) == null) {
-          //  throw new WebApplicationException("El recurso /clientes/" + clientesId + "/transaccionesCliente/" + transaccionesClienteId + " no existe.", 404);
-        //}
-        //TransaccionClienteDetailDTO transaccionClienteDetailDTO = new TransaccionClientekDetailDTO(clienteTransaccionesClienteLogic.getTransaccionCliente(clientesId, transaccionesClienteId));
-       // LOGGER.log(Level.INFO, "ClienteTransaccionesClienteResource getTransaccionCliente: output: {0}", transaccionClienteDetailDTO.toString());
-        //return transaccionClienteDetailDTO;
-        return null;
+        if (transaccionClienteLogic.getTransaccionCliente(transaccionesClienteId) == null) {
+          throw new WebApplicationException("El recurso /clientes/" + clientesId + "/transaccionesCliente/" + transaccionesClienteId + " no existe.", 404);
+        }
+        TransaccionClienteDetailDTO transaccionClienteDetailDTO = new TransaccionClienteDetailDTO(clienteTransaccionesClienteLogic.getTransaccionCliente(clientesId, transaccionesClienteId));
+        LOGGER.log(Level.INFO, "ClienteTransaccionesClienteResource getTransaccionCliente: output: {0}", transaccionClienteDetailDTO.toString());
+       return transaccionClienteDetailDTO;
+       
     }
     
     /**
@@ -128,14 +128,14 @@ public class ClienteTransaccionesClienteResource {
     public List<TransaccionClienteDetailDTO> replaceTransaccionesCliente(@PathParam("clientesId") Long clientesId, List<TransaccionClienteDetailDTO> transaccionesCliente) {
         LOGGER.log(Level.INFO, "ClienteTransaccionesClienteResource replaceTransaccionesCliente: input: clientesId: {0} , transaccionesCliente: {1}", new Object[]{clientesId, transaccionesCliente.toString()});
         for (TransaccionClienteDetailDTO transaccion : transaccionesCliente) {
-           // if (transaccionClienteLogic.getTransaccionCliente(transaccion.getId()) == null) {
-                //throw new WebApplicationException("El recurso /transaccionesCliente/" + transaccion.getId() + " no existe.", 404);
-            //}
+           if (transaccionClienteLogic.getTransaccionCliente(transaccion.getId()) == null) {
+                throw new WebApplicationException("El recurso /transaccionesCliente/" + transaccion.getId() + " no existe.", 404);
+            }
         }
-       // List<TransaccionClienteDetailDTO> listaDetailDTOs = transaccionesClienteListEntity2DTO(clienteTransaccionesClienteLogic.replaceTransaccionesCliente(clientesId, transaccionesClienteListDTO2Entity(transaccionesCliente)));
-        //LOGGER.log(Level.INFO, "ClienteTransaccionesClienteResource replaceTransaccionesCliente: output: {0}", listaDetailDTOs.toString());
-        //return listaDetailDTOs;
-        return null;
+        List<TransaccionClienteDetailDTO> listaDetailDTOs = transaccionesClienteListEntity2DTO(clienteTransaccionesClienteLogic.replaceTransaccionesCliente(clientesId, transaccionesClienteListDTO2Entity(transaccionesCliente)));
+        LOGGER.log(Level.INFO, "ClienteTransaccionesClienteResource replaceTransaccionesCliente: output: {0}", listaDetailDTOs.toString());
+        return listaDetailDTOs;
+        
     }
     
     /**
