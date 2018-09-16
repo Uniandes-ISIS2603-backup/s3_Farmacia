@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -39,11 +40,14 @@ public class TransaccionClientePersistence
      * @return 
      */
     public List<TransaccionClienteEntity> findAll(){
-        LOGGER.log(Level.INFO, "Consultando todos las transacciones.");
+        //LOGGER.log(Level.INFO, "Consultando todos las transacciones.");
         
-        TypedQuery query = em.createQuery("Select u from TransaccionClienteEntity u", TransaccionClienteEntity.class);
+        //TypedQuery query = em.createQuery("Select u from TransaccionClienteEntity u", TransaccionClienteEntity.class);
        
-        return query.getResultList();
+        //return query.getResultList();
+        LOGGER.log(Level.INFO, "Consultando todas las trnasaciconesCliente");
+        Query q = em.createQuery("select u from TransaccionClienteEntity u");
+        return q.getResultList();
     }
     
     /**
@@ -78,7 +82,7 @@ public class TransaccionClientePersistence
         em.remove(entity);
         LOGGER.log(Level.INFO, "Saliendo de eliminar una transaccion con id = {0}", transId);
     }
-    
+    /**
     public TransaccionClienteEntity find(Long clienteId,Long transaccionId)
     {
         LOGGER.log(Level.INFO, "Consultando la transaccion con id = {0} del cliente con id = " + clienteId, transaccionId);
@@ -97,4 +101,5 @@ public class TransaccionClientePersistence
         LOGGER.log(Level.INFO, "Saliendo de consultar el review con id = {0} del libro con id =" + clienteId, transaccionId);
         return transaccion;
     }
+    */
 }

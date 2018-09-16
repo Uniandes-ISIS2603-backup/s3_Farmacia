@@ -106,9 +106,10 @@ public class ClienteTransaccionesClienteResource {
         if (transaccionClienteLogic.getTransaccionCliente(transaccionesClienteId) == null) {
           throw new WebApplicationException("El recurso /clientes/" + clientesId + "/transaccionesCliente/" + transaccionesClienteId + " no existe.", 404);
         }
-        TransaccionClienteDetailDTO transaccionClienteDetailDTO = new TransaccionClienteDetailDTO(clienteTransaccionesClienteLogic.getTransaccionCliente(clientesId, transaccionesClienteId));
-        LOGGER.log(Level.INFO, "ClienteTransaccionesClienteResource getTransaccionCliente: output: {0}", transaccionClienteDetailDTO.toString());
-       return transaccionClienteDetailDTO;
+        //TransaccionClienteDetailDTO transaccionClienteDetailDTO = new TransaccionClienteDetailDTO(clienteTransaccionesClienteLogic.getTransaccionCliente(clientesId, transaccionesClienteId));
+        //LOGGER.log(Level.INFO, "ClienteTransaccionesClienteResource getTransaccionCliente: output: {0}", transaccionClienteDetailDTO.toString());
+       //return transaccionClienteDetailDTO;
+       return null;
        
     }
     
@@ -147,7 +148,7 @@ public class ClienteTransaccionesClienteResource {
     private List<TransaccionClienteDetailDTO> transaccionesClienteListEntity2DTO(List<TransaccionClienteEntity> entityList) {
         List<TransaccionClienteDetailDTO> list = new ArrayList();
         for (TransaccionClienteEntity entity : entityList) {
-            list.add(new TransaccionClienteDetailDTO(entity));
+       //     list.add(new TransaccionClienteDetailDTO(entity));
         }
         return list;
     }

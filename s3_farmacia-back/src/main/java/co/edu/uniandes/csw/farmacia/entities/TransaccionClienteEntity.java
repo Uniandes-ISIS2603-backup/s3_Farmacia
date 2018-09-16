@@ -29,7 +29,7 @@ public class TransaccionClienteEntity extends BaseEntity implements Serializable
     
     private String tipoDePago;
     
-    private List<ProductoEntity> productos;
+    
     
     @PodamExclude
     @ManyToOne
@@ -83,13 +83,6 @@ public class TransaccionClienteEntity extends BaseEntity implements Serializable
         cliente= pCliente;
     }
     
-    public void setProductos(List<ProductoEntity> pProductos)
-    {
-       productos= pProductos;
-    }
-    public List<ProductoEntity> getProductos()
-    {
-       return productos;
-    }
+    
     
 }

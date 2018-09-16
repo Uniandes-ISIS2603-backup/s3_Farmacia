@@ -57,21 +57,22 @@ public class TransaccionClientePersistenceTest {
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
+    /**
+     * Configuración inicial de la prueba.
+     */
     @Before
-    public void configTest()
-    {
+    public void configTest() {
         try {
             utx.begin();
             em.joinTransaction();
             clearData();
             insertData();
             utx.commit();
-        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException e) 
-        {
+        } catch (Exception e) {
+            e.printStackTrace();
             try {
                 utx.rollback();
-            } catch (IllegalStateException | SecurityException | SystemException e1) 
-            {
+            } catch (Exception e1) {
                 e1.printStackTrace();
             }
         }
@@ -100,11 +101,11 @@ public class TransaccionClientePersistenceTest {
         PodamFactory factory = new PodamFactoryImpl();
         TransaccionClienteEntity newTransaccionClienteEntity = factory.manufacturePojo(TransaccionClienteEntity.class);
         TransaccionClienteEntity result = TransaccionClientePersistence.create(newTransaccionClienteEntity);
-        Assert.assertNotNull(result);        
+        Assert.assertNotNull(result);       
         
     }
  @Test
-     public void getRegistrosTest() 
+     public void getTransaccionesClienteTest() 
      {
         List<TransaccionClienteEntity> list = TransaccionClientePersistence.findAll();
         Assert.assertEquals(listaDePrueba.size(), list.size());
@@ -131,7 +132,7 @@ public class TransaccionClientePersistenceTest {
         
     }
     @Test
-    public void deleteRegistroTest() 
+    public void deleteTransaccionTest() 
     {
         TransaccionClienteEntity entity = listaDePrueba.get(0);
         TransaccionClientePersistence.delete(entity.getId());
@@ -139,6 +140,7 @@ public class TransaccionClientePersistenceTest {
         Assert.assertNull(deleted);
     }
     
+    @Test
        public void updateRegistroTest() {
         TransaccionClienteEntity entity = listaDePrueba.get(0);
         PodamFactory factory = new PodamFactoryImpl();
