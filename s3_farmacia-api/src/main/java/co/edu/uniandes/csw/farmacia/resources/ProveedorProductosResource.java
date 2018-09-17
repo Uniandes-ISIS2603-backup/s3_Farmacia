@@ -27,8 +27,8 @@ public class ProveedorProductosResource
    // @Inject
     // private ProveedorProductosLogic proveedorProductosLogic;
     
-  //  @Inject
-   //  private ProductoLogic productoLogic;
+   // @Inject
+     //private ProductoLogic productoLogic;
     
     
  //  @GET

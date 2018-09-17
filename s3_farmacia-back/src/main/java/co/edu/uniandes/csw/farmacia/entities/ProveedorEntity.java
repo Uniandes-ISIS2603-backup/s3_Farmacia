@@ -13,52 +13,48 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 
-
 /**
  *
  * @author fj.gonzalez
  */
-@Entity 
+@Entity
 //BaseEntity clase madre.
 //JPA recompila los datos y crea la respectiva base
-public class ProveedorEntity extends BaseEntity implements Serializable
-{
+public class ProveedorEntity extends BaseEntity implements Serializable {
+
     private String nombre;
-    
+
     private static final Logger LOGGER = Logger.getLogger(ProveedorEntity.class.getName());
-    
+
     @PodamExclude
     @OneToMany(mappedBy = "proveedor")
     private List<ProductoEntity> productos = new ArrayList<ProductoEntity>();
-    
-    //@PodamExclude
-   // @OneToMany(mappedBy = "proveedor")
-   // private List<TransaccionProveedorEntity> transacciones = new ArrayList<TransaccionProveedorEntity>();
 
-    public void setNombre(String pNombre)
-    {
+    @PodamExclude
+    @OneToMany(mappedBy = "proveedor")
+    private List<TransaccionProveedorEntity> transacciones = new ArrayList<TransaccionProveedorEntity>();
+
+    public void setNombre(String pNombre) {
         nombre = pNombre;
     }
-    public String getNombre()
-    {
+
+    public String getNombre() {
         return nombre;
     }
-    public List<ProductoEntity> getProductos()
-    {
+
+    public List<ProductoEntity> getProductos() {
         return productos;
     }
-    
-    public void setProductos(List<ProductoEntity> pProductos)
-    {
+
+    public void setProductos(List<ProductoEntity> pProductos) {
         productos = pProductos;
     }
-    
-  //  public List<TransaccionProveedorEntity> getTransacciones()
-    //{
-      //  return transacciones;
-    //}
-   // public void setTransacciones(List<TransaccionProveedorEntity> pTrans)
-  //  {
-    //    transacciones = pTrans;
-    //}
+
+    public List<TransaccionProveedorEntity> getTransacciones() {
+        return transacciones;
+    }
+
+    public void setTransacciones(List<TransaccionProveedorEntity> pTrans) {
+        transacciones = pTrans;
+    }
 }
