@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.farmacia.entities;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import uk.co.jemos.podam.common.PodamExclude;
 import javax.persistence.Entity;
@@ -19,12 +20,19 @@ import javax.persistence.TemporalType;
  */
 @Entity
 public class RegistroEntity extends BaseEntity implements Serializable {
+    
+    public static final String ORDEN_REAPROVISONAMIENTO = "ORDEN_REAPROVISONAMIENTO";
+    public static final String TRASLADO_BODEGA = "TRASLADO_BODEGA";
+    public static final String DESPACHO_CLIENTE = "DESPACHO_CLIENTE";
+    public static final String ROBO = "ROBO";
+    public static final String PERDIDA = "PERDIDA";
+    public static final String VENCIMIENTO = "VENCIMIENTO";
      
     private int cantidad;
     private String tipoRegistro;
     
     @PodamExclude
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private ProductoEntity producto;
     
     //FALTA TIPO

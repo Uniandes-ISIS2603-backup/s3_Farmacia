@@ -118,7 +118,7 @@ public class RegistroPersistenceTest {
     
     /**
      * Prueba para consultar un Registro.
-     */
+     
     @Test
     public void getRegistroTest() {
         RegistroEntity entity = data.get(0);
@@ -127,6 +127,7 @@ public class RegistroPersistenceTest {
         Assert.assertEquals(entity.getTipoRegistro(), newEntity.getTipoRegistro());
         Assert.assertEquals(entity.getCantidad(), newEntity.getCantidad());
     }
+    */
     
     /**
      * Prueba para eliminar un Registro.

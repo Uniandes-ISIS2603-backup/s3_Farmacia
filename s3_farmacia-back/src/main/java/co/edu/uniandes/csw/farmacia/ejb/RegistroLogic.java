@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.farmacia.ejb;
 
+import co.edu.uniandes.csw.farmacia.entities.ProductoEntity;
 import co.edu.uniandes.csw.farmacia.entities.RegistroEntity;
 import co.edu.uniandes.csw.farmacia.persistence.RegistroPersistence;
 import co.edu.uniandes.csw.farmacia.persistence.ProductoPersistence;
@@ -28,61 +29,54 @@ public class RegistroLogic {
     private RegistroPersistence persistence;
 
     @Inject
-    private RegistroPersistence registroPersistence;
+    private ProductoPersistence productoPersistence;
     
-    /**
-     * Guardar un nuevo registrp
-     *
-     * @param registroEntity La entidad de tipo libro del nuevo registro a persistir.
-     * @return La entidad luego de persistirla
-     * @throws BusinessLogicException Si el ISBN es inválido o ya existe en la
-     * persistencia.
+    
      
-     
-    public RegistroEntity createRegistro(RegistroEntity registroEntity) throws BusinessLogicException {
+     /**
+      * Se encargar de crear un Registro en la base de datos
+      * @param productosId el id ek cyal sera padre del nuevo Registro
+      * @param registroEntity objeto de RegistroEntity con los datos nuevos
+      * @return
+      * @throws BusinessLogicException 
+      */
+    public RegistroEntity createRegistro(Long productosId, RegistroEntity registroEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación del registro");
-        if (bookEntity.getEditorial() == null || editorialPersistence.find(bookEntity.getEditorial().getId()) == null) {
-            throw new BusinessLogicException("La editorial es inválida");
+        if (registroEntity.getTipoRegistro()== null) {
+            throw new BusinessLogicException("El registro es inválido");
         }
-        if (!validateISBN(bookEntity.getIsbn())) {
+        if (!validateRegistro(registroEntity.getTipoRegistro())) {
             throw new BusinessLogicException("El ISBN es inválido");
         }
-        if (persistence.findByISBN(bookEntity.getIsbn()) != null) {
-            throw new BusinessLogicException("El ISBN ya existe");
-        }
-        persistence.create(bookEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de creación del libro");
-        return bookEntity;
+        ProductoEntity producto = productoPersistence.find(productosId);
+        registroEntity.setProducto(producto);
+        LOGGER.log(Level.INFO, "Termina proceso de creación del registro");
+        return persistence.create(registroEntity);
     }
-    */
      
     
     /**
-     * Devuelve todos los registros que hay en la base de datos.
-     *
-     * @return Lista de entidades de tipo registro.
+     *obtiene la lista de los registros de Registro que pertecen a un Producto 
+     * @param productosId el id del producto el cual es padre de los registros
+     * @return Coleccion de objetos RegistroEntity
      */
-    public List<RegistroEntity> getRegistros() {
+    public List<RegistroEntity> getRegistros(Long productosId) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los registros");
-        List<RegistroEntity> registros = persistence.findAll();
+        ProductoEntity productoEntity = productoPersistence.find(productosId);
         LOGGER.log(Level.INFO, "Termina proceso de consultar todos los registros");
-        return registros;
+        return productoEntity.getRegistros();
     }
     
     /**
-     * Busca un registro por ID
-     *
-     * @param registroId El id del registro a buscar
-     * @return El registro encontrado, null si no lo encuentra.
+     * Obtiene los datos de una instancia de Registro a partir de su ID. la
+     * existencia del elemento padre Producto se debe garantizar
+     * @param productosId El id del producto buscado
+     * @param registrosId Identificador del Registro a cosultar
+     * @return Instancia de RegistroEntity con los datos del Registro consultado.
      */
-    public RegistroEntity getRegistro(Long registroId) {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar el registro con id = {0}", registroId);
-        RegistroEntity registroEntity = persistence.find(registroId);
-        if (registroEntity == null) {
-            LOGGER.log(Level.SEVERE, "El libro con el id = {0} no existe", registroId);
-        }
-        LOGGER.log(Level.INFO, "Termina proceso de consultar el registro con id = {0}", registroId);
-        return registroEntity;
+    public RegistroEntity getRegistro(Long productosId,Long registrosId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar el registro con id = {0} del producto con id = " + productosId, registrosId);
+        return persistence.find(productosId, registrosId);
     }
     
     /**
@@ -93,14 +87,16 @@ public class RegistroLogic {
      * @return La entidad del registro luego de actualizarla
      * @throws BusinessLogicException Si el IBN de la actualización es inválido
      */
-    public RegistroEntity updateRegistro(Long registroId, RegistroEntity registroEntity) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de actualizar el registro con id = {0}", registroId);
-        //if (!validateISBN(bookEntity.getIsbn())) {
-          //  throw new BusinessLogicException("El ISBN es inválido");
-        //}
-        RegistroEntity newEntity = persistence.update(registroEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de actualizar el registro con id = {0}", registroEntity.getId());
-        return newEntity;
+    public RegistroEntity updateRegistro(Long productosId, RegistroEntity registroEntity) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar el registro con id = {0} del producto con id = " + productosId, registroEntity.getId());
+        if (!validateRegistro(registroEntity.getTipoRegistro())) {
+           throw new BusinessLogicException("El ISBN es inválido");
+        }
+        ProductoEntity productoEntity = productoPersistence.find(productosId);
+        registroEntity.setProducto(productoEntity);
+        persistence.update(registroEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar el registro con id = {0} del producto con id = " + productosId, registroEntity.getId());
+        return registroEntity;
     }
     
     /**
@@ -108,22 +104,27 @@ public class RegistroLogic {
      *
      * @param registroId El ID del registro a eliminar
      */
-    public void deleteRegistro(Long registroId) {
-        LOGGER.log(Level.INFO, "Inicia proceso de borrar el registro con id = {0}", registroId);
-        persistence.delete(registroId);
-        LOGGER.log(Level.INFO, "Termina proceso de borrar el registro con id = {0}", registroId);
+    public void deleteRegistro(Long productosId, Long registrosId)throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar el registro con id = {0} del producto con id = " + productosId, registrosId);
+        RegistroEntity old = getRegistro(productosId, registrosId);
+        if (old == null) {
+            throw new BusinessLogicException("El registro con id = " + registrosId + " no esta asociado a el producto con id = " + productosId);
+        }
+        persistence.delete(old.getId());
+        LOGGER.log(Level.INFO, "Termina proceso de borrar el registro con id = {0} del producto con id = " + productosId, registrosId);
     }
     
     /**
-     * Verifica que el ISBN no sea invalido.
-     *
-     * @param isbn a verificar
-     * @return true si el ISBN es valido.
-     
-    private boolean validateISBN(String isbn) {
-        return !(isbn == null || isbn.isEmpty());
+     * Valida qu un registro pertenezca a una de la categorias posibles
+     * @param tipoRegistro el tipo de registro a validar
+     * @return true si es valido, false de lo contrario
+     */
+    private boolean validateRegistro(String tipoRegistro) {
+        return (tipoRegistro.equalsIgnoreCase(RegistroEntity.DESPACHO_CLIENTE)||tipoRegistro.equalsIgnoreCase(RegistroEntity.ORDEN_REAPROVISONAMIENTO) ||
+                tipoRegistro.equalsIgnoreCase(RegistroEntity.PERDIDA) || tipoRegistro.equalsIgnoreCase(RegistroEntity.ROBO) || tipoRegistro.equalsIgnoreCase(RegistroEntity.TRASLADO_BODEGA)||
+                tipoRegistro.equalsIgnoreCase(RegistroEntity.VENCIMIENTO));
     }
-    */
+    
 
     
 }
