@@ -26,16 +26,32 @@ public class RegistroDTO implements Serializable{
     private int cantidad;
     private String tipoRegistro;
     //TIPO DE REGISTRO
+    /**
+     * Relacion con el producto con el que esta asociado
+     */
+    private ProductoDTO producto;
     
+    /**
+     * Contructir por defecto
+     */
     public RegistroDTO(){
         
     }
     
+    /**
+     * Contructor apartir de una entidad
+     * @param registroEntity 
+     */
     public RegistroDTO(RegistroEntity registroEntity){
         if ( registroEntity != null){
             this.id = registroEntity.getId();
             this.cantidad = registroEntity.getCantidad();
             this.tipoRegistro = registroEntity.getTipoRegistro();
+            if (registroEntity.getProducto() != null){
+                this.producto = new ProductoDTO(registroEntity.getProducto());
+            }else{
+                this.producto = null;
+            }
         }
     }
     
@@ -57,6 +73,10 @@ public class RegistroDTO implements Serializable{
         this.id = id;
     }
     
+    /**
+     * Obtiene la cantidad de producto que indica el registro
+     * @return 
+     */
      public int getCantidad(){
         return cantidad;
     }
@@ -65,6 +85,10 @@ public class RegistroDTO implements Serializable{
         this.cantidad = cantidad;
     }
     
+    /**
+     * Obtiene el tipo de registro del registro
+     * @return 
+     */
     public String getTipoRegistro(){
         return tipoRegistro;
     }
@@ -73,11 +97,30 @@ public class RegistroDTO implements Serializable{
         this.tipoRegistro = tipo;
     }
     
+    /**
+     * Obtiene el prodcito al que esta relacionado el registro
+     * @return 
+     */
+    public ProductoDTO getProducto(){
+        return producto;
+    }
+    
+    public void setProducto(ProductoDTO producto){
+        this.producto = producto;
+    }
+    
+    /**
+     * Metodo para trasformar el DTO a una entidad
+     * @return La entidad de este registro
+     */
     public RegistroEntity toEntity(){
         RegistroEntity registroEntity = new RegistroEntity();
         registroEntity.setId(this.id);
         registroEntity.setCantidad(this.cantidad);
         registroEntity.setTipoRegistro(this.tipoRegistro);
+        if(this.producto != null){
+            registroEntity.setProducto(this.producto.toEntity());
+        }
         return registroEntity;
     }
     

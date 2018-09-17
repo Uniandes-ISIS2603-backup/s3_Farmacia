@@ -26,9 +26,14 @@ public class RegistroPersistence {
     @PersistenceContext (unitName = "DrugsHousePU")
     protected EntityManager em;
     
+    /**
+     * Crea un registro
+     * Crea un nuevo regsitro con la informacion recibida en la entidad
+     * @param registroEntity La entidad que representa el nuevo registro
+     * @return La entidad creada
+     */
     public RegistroEntity create (RegistroEntity registroEntity){
         LOGGER.log(Level.INFO, "Creando un nuevo registro");
-        
         em.persist(registroEntity);
         LOGGER.log(Level.INFO, "Saliendo de crear un registro.");
         return registroEntity;
@@ -46,19 +51,34 @@ public class RegistroPersistence {
     }
     
     /**
-     * Busca un registro entre todos los registros que esten en la base de datos
-     * @param registroId
-     * @return 
+     * Busca si hay algun registro asociado con un producto y con un ID especifico
+     * @param registrosId el Id del registro buscado
+     * @param productosId el Id del libro respecto al cual se busa
+     * @return El registro encontrado o null. (Si existe un uno o mas registros 
+     * devuelce siempre el primero que se encuentra)
      */
-    public RegistroEntity find (Long registroId){
-        LOGGER.log(Level.INFO, "Consultando registro con id={0}", registroId);
-        return em.find(RegistroEntity.class, registroId);
+    public RegistroEntity find (Long productosId, Long registrosId){
+        LOGGER.log(Level.INFO, "Consultando el registro con id = {0} del producto con id = " + productosId, registrosId);
+        TypedQuery<RegistroEntity> q = em.createQuery("select p from RegistroEntity p where (p.producto.id = :productoid) and (p.id = :registrosId)", RegistroEntity.class);
+        q.setParameter("productoid", productosId);
+        q.setParameter("registrosId", registrosId);
+        List<RegistroEntity> results = q.getResultList();
+        RegistroEntity review = null;
+        if (results == null) {
+            review = null;
+        } else if (results.isEmpty()) {
+            review = null;
+        } else if (results.size() >= 1) {
+            review = results.get(0);
+        }
+        LOGGER.log(Level.INFO, "Saliendo de consultar el registro con id = {0} del producto con id =" + productosId, registrosId);
+        return review;
     }
     
     /**
      * Actualiza un registro
-     * @param registroEntity
-     * @return 
+     * @param registroEntity La entidad actualizada que se desea guardar
+     * @return la entidad resultante luego de la actualizacion
      */
     public RegistroEntity update(RegistroEntity registroEntity){
         LOGGER.log(Level.INFO, "Actualizando registro con id = {0}", registroEntity.getId());
@@ -74,31 +94,8 @@ public class RegistroPersistence {
         LOGGER.log(Level.INFO, "Borrando registro con id = {0}", registroId);
         RegistroEntity entity = em.find(RegistroEntity.class, registroId);
         em.remove(entity);
-        LOGGER.log(Level.INFO, "Saliendo de eliminar un proveedor con id = {0}", registroId);
+        LOGGER.log(Level.INFO, "Saliendo de eliminar un registro con id = {0}", registroId);
     }
     
-    /**
-     * Busca si hay un registro con el nombre que se envia de argumento
-     * 
-     * @param name Nombre del registro que se esta buscando
-     * @return null si no existe ninguna editorial con el nombre del argumento
-     * Si existe alguno devuelve el primero
-     
-    public RegistroEntity findByName(String name){
-        LOGGER.log(Level.INFO, "Consultando registro por nombre", name);
-        TypedQuery query = em.createQuery("Select e From RegistroEntity e where e.name = :name", RegistroEntity.class);
-        query = query.setParameter("name", name);
-        List<RegistroEntity> sameName = query.getResultList();
-        RegistroEntity result;
-        if(sameName == null){
-            result = null;
-        }else if (sameName.isEmpty()){
-            result = null;
-        }else{
-            result = sameName.get(0);
-        }
-        LOGGER.log(Level.INFO,"Saliendo de consultar registro por nombre", name);
-        return result;
-    }
-    */
+    
 }

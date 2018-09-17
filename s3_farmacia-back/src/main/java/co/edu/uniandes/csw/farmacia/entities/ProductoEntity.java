@@ -6,12 +6,16 @@
 package co.edu.uniandes.csw.farmacia.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Logger;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -24,9 +28,11 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class ProductoEntity extends BaseEntity implements Serializable {
     
+    
     public enum TipoProducto {
         Suministro, Terminado
     }
+    
     
    /* public class PhotoType extends BaseEntity implements Serializable {
         public String url;
@@ -43,6 +49,9 @@ public class ProductoEntity extends BaseEntity implements Serializable {
         
     }
     */
+    @PodamExclude
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.PERSIST, orphanRemoval = true )
+    private List<RegistroEntity> registros = new ArrayList<RegistroEntity>();
     
     @PodamExclude
     @ManyToOne
@@ -144,6 +153,14 @@ public class ProductoEntity extends BaseEntity implements Serializable {
 
     public void setVideos(String[] videos) {
         this.videos = videos;
+    }
+    
+    public List<RegistroEntity> getRegistros(){
+        return registros;
+    }
+    
+    public void setRegistros(List<RegistroEntity> registros){
+        this.registros = registros;
     }
     
     
