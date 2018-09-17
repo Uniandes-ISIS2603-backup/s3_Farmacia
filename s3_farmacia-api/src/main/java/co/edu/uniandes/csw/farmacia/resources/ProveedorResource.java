@@ -87,7 +87,7 @@ public class ProveedorResource {
 
     @DELETE
     @Path("{id:\\d+}")
-    public void deleteProveedor(@PathParam("id") Long id) 
+    public void deleteProveedor(@PathParam("id") Long id) throws BusinessLogicException 
     {
         LOGGER.log(Level.INFO, "ProveedorResource deleteProveedor: input{0}", id);
         if(proveedorLogic.getProveedor(id)==null)

@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.farmacia.test.logic;
 import co.edu.uniandes.csw.farmacia.ejb.ProveedorLogic;
 import co.edu.uniandes.csw.farmacia.entities.ProductoEntity;
 import co.edu.uniandes.csw.farmacia.entities.ProveedorEntity;
+import co.edu.uniandes.csw.farmacia.entities.TransaccionProveedorEntity;
 import co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.farmacia.persistence.ProveedorPersistence;
 import java.util.ArrayList;
@@ -49,6 +50,9 @@ public class ProveedorLogicTest
     private List<ProveedorEntity> data = new ArrayList<>();
     
     private List<ProductoEntity> productosData = new ArrayList<>();
+    
+     private List<TransaccionProveedorEntity> transaccionesData = new ArrayList<>();
+
     
     @Deployment
     public static JavaArchive createDeployment() 
@@ -95,6 +99,12 @@ public class ProveedorLogicTest
             em.persist(producto);
             productosData.add(producto);   
         }
+        for(int i=0; i < 3 ; i++)
+        {
+            TransaccionProveedorEntity transaccion = factory.manufacturePojo(TransaccionProveedorEntity.class);
+            em.persist(transaccion);
+            transaccionesData.add(transaccion);
+        }
         for (int i = 0; i < 5; i++)
         {
             ProveedorEntity proveedor = factory.manufacturePojo(ProveedorEntity.class);
@@ -103,6 +113,7 @@ public class ProveedorLogicTest
             if(i==2)
             {
                 productosData.get(i).setProveedor(proveedor);
+              //  transaccionesData.get(i).setProveedor(proveedor);
             }
             
         }
@@ -119,6 +130,70 @@ public class ProveedorLogicTest
         Assert.assertEquals(e.getNombre(), verificacion.getNombre());
         
     }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void createProveedorConMismoNombreTest() throws BusinessLogicException 
+    {
+        ProveedorEntity newEntity = factory.manufacturePojo(ProveedorEntity.class);
+        newEntity.setNombre(data.get(0).getNombre());
+        proveedorLogic.createProveedor(newEntity);
+    }
+    
+    @Test
+    public void getProveedoresTest()
+    {
+        List<ProveedorEntity> listi = proveedorLogic.getProveedores();
+        Assert.assertEquals(data.size(), listi.size());
+        for(ProveedorEntity entity : listi)
+        {
+            boolean found = false;
+            for(ProveedorEntity storEntity : data)
+            {
+                if(entity.getId().equals(storEntity.getId()))
+                {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+    @Test
+    public void getProveedorTest()
+    {
+        ProveedorEntity entity = data.get(1);
+        ProveedorEntity resul = proveedorLogic.getProveedor(entity.getId());
+        Assert.assertNotNull(resul);
+        Assert.assertEquals(entity.getId(), resul.getId());
+        Assert.assertEquals(entity.getNombre(), resul.getNombre());
+    }
+    @Test
+    public void updateProveedorTest()
+    {
+        ProveedorEntity provEntity = data.get(0);
+        ProveedorEntity entityPojo = factory.manufacturePojo(ProveedorEntity.class);
+        entityPojo.setId(provEntity.getId());
+        proveedorLogic.updateProveedor(entityPojo.getId(), entityPojo);
+        ProveedorEntity resultado = em.find(ProveedorEntity.class, provEntity.getId());
+        Assert.assertEquals(entityPojo.getId(), resultado.getId());
+        Assert.assertEquals(entityPojo.getNombre(), resultado.getNombre());
+    }
+    @Test
+    public void deleteProveedorTest() throws BusinessLogicException 
+    {
+         ProveedorEntity entity = data.get(1);
+        proveedorLogic.deleteProveedor(entity.getId());
+        ProveedorEntity deleted = em.find(ProveedorEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
+    @Test(expected = BusinessLogicException.class)
+   public void deleteProveedorConProductosTest() throws BusinessLogicException
+    {
+        ProveedorEntity ent = data.get(2);
+        proveedorLogic.deleteProveedor(ent.getId());
+    }
+
+
+    
 
     
     

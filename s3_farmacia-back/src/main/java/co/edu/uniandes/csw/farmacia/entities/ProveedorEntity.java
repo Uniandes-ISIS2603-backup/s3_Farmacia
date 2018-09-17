@@ -30,6 +30,10 @@ public class ProveedorEntity extends BaseEntity implements Serializable
     @PodamExclude
     @OneToMany(mappedBy = "proveedor")
     private List<ProductoEntity> productos = new ArrayList<ProductoEntity>();
+    
+    //@PodamExclude
+   // @OneToMany(mappedBy = "proveedor")
+   // private List<TransaccionProveedorEntity> transacciones = new ArrayList<TransaccionProveedorEntity>();
 
     public void setNombre(String pNombre)
     {
@@ -48,4 +52,13 @@ public class ProveedorEntity extends BaseEntity implements Serializable
     {
         productos = pProductos;
     }
+    
+  //  public List<TransaccionProveedorEntity> getTransacciones()
+    //{
+      //  return transacciones;
+    //}
+   // public void setTransacciones(List<TransaccionProveedorEntity> pTrans)
+  //  {
+    //    transacciones = pTrans;
+    //}
 }
