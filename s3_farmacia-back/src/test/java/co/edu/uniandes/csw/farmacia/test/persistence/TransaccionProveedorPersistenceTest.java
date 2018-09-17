@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.farmacia.test.persistence;
 
+import co.edu.uniandes.csw.farmacia.entities.ProveedorEntity;
 import co.edu.uniandes.csw.farmacia.entities.TransaccionProveedorEntity;
 import co.edu.uniandes.csw.farmacia.persistence.TransaccionProveedorPersistence;
 import java.util.ArrayList;
@@ -46,6 +47,8 @@ public class TransaccionProveedorPersistenceTest {
    UserTransaction utx;
 
     private List<TransaccionProveedorEntity> data = new ArrayList<TransaccionProveedorEntity>();
+    
+    private List<ProveedorEntity> dataProveedor = new ArrayList<ProveedorEntity>();
     
     /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
@@ -89,6 +92,11 @@ public class TransaccionProveedorPersistenceTest {
     }
     private void insertData(){
         PodamFactory factory = new PodamFactoryImpl();
+        for (int i = 0; i < 3; i++) {
+            ProveedorEntity entity = factory.manufacturePojo(ProveedorEntity.class);
+            em.persist(entity);
+            dataProveedor.add(entity);
+        }
         for(int i=0; i<3; i++){
             TransaccionProveedorEntity entity = factory.manufacturePojo(TransaccionProveedorEntity.class);
             em.persist(entity);
@@ -137,7 +145,7 @@ public class TransaccionProveedorPersistenceTest {
     @Test
     public void getTransaccionProveedorTest() {
         TransaccionProveedorEntity entity = data.get(0);
-        TransaccionProveedorEntity newEntity = transaccionProveedorPersistence.find(entity.getId());
+        TransaccionProveedorEntity newEntity = transaccionProveedorPersistence.find(dataProveedor.get(0).getId(),entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getMonto(), newEntity.getMonto());
     }

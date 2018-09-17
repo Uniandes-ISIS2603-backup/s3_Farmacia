@@ -6,7 +6,9 @@
 package co.edu.uniandes.csw.farmacia.test.logic;
 
 import co.edu.uniandes.csw.farmacia.ejb.TransaccionProveedorLogic;
+import co.edu.uniandes.csw.farmacia.entities.ProveedorEntity;
 import co.edu.uniandes.csw.farmacia.entities.TransaccionProveedorEntity;
+import co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.farmacia.persistence.TransaccionProveedorPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +46,8 @@ public class TransaccionProveedorLogicTest {
     private UserTransaction utx;
 
     private List<TransaccionProveedorEntity> data = new ArrayList<TransaccionProveedorEntity>();
+    
+    private List<ProveedorEntity> proveedorData = new ArrayList();
     
     /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
@@ -92,7 +96,11 @@ public class TransaccionProveedorLogicTest {
      * pruebas.
      */
     private void insertData() {
-
+        for (int i = 0; i < 3; i++) {
+            ProveedorEntity proveedor = factory.manufacturePojo(ProveedorEntity.class);
+            em.persist(proveedor);
+            proveedorData.add(proveedor);
+        }
         for (int i = 0; i < 3; i++) {
             TransaccionProveedorEntity entity = factory.manufacturePojo(TransaccionProveedorEntity.class);
             em.persist(entity);
@@ -106,7 +114,8 @@ public class TransaccionProveedorLogicTest {
     @Test
     public void createTransaccionProveedorTest() {
         TransaccionProveedorEntity newEntity = factory.manufacturePojo(TransaccionProveedorEntity.class);
-        TransaccionProveedorEntity result = transaccionProveedorLogic.createTransaccionProveedor(newEntity);
+        newEntity.setProveedor(proveedorData.get(1));
+        TransaccionProveedorEntity result = transaccionProveedorLogic.createTransaccionProveedor( newEntity, proveedorData.get(1).getId() );
         Assert.assertNotNull(result);
         TransaccionProveedorEntity entity = em.find(TransaccionProveedorEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
@@ -118,7 +127,7 @@ public class TransaccionProveedorLogicTest {
      */
     @Test
     public void getTransaccionesProveedorTest() {
-        List<TransaccionProveedorEntity> list = transaccionProveedorLogic.getTransaccionesProveedor();
+        List<TransaccionProveedorEntity> list = transaccionProveedorLogic.getTransaccionesProveedor(proveedorData.get(1).getId());
         Assert.assertEquals(data.size(), list.size());
         for (TransaccionProveedorEntity entity : list) {
             boolean found = false;
@@ -137,7 +146,7 @@ public class TransaccionProveedorLogicTest {
     @Test
     public void getTransaccionProveedorTest() {
         TransaccionProveedorEntity entity = data.get(0);
-        TransaccionProveedorEntity resultEntity = transaccionProveedorLogic.getTransaccionProveedor(entity.getId());
+        TransaccionProveedorEntity resultEntity = transaccionProveedorLogic.getTransaccionProveedor(proveedorData.get(1).getId(),entity.getId());
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
         Assert.assertEquals(entity.getMonto(), resultEntity.getMonto());
@@ -151,7 +160,7 @@ public class TransaccionProveedorLogicTest {
         TransaccionProveedorEntity entity = data.get(0);
         TransaccionProveedorEntity pojoEntity = factory.manufacturePojo(TransaccionProveedorEntity.class);
         pojoEntity.setId(entity.getId());
-        transaccionProveedorLogic.updateTransaccionProveedor(pojoEntity.getId(), pojoEntity);
+        transaccionProveedorLogic.updateTransaccionProveedor(proveedorData.get(1).getId(), pojoEntity);
         TransaccionProveedorEntity resp = em.find(TransaccionProveedorEntity.class, entity.getId());
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
         Assert.assertEquals(pojoEntity.getMonto(), resp.getMonto());
@@ -159,11 +168,12 @@ public class TransaccionProveedorLogicTest {
         
      /**
      * Prueba para eliminar una TransaccionProveedor.
+     * @throws co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException
      */
     @Test
-    public void deleteTransaccionProveedorTest() {
-        TransaccionProveedorEntity entity = data.get(1);
-        transaccionProveedorLogic.deleteEditorial(entity.getId());
+    public void deleteTransaccionProveedorTest() throws BusinessLogicException {
+        TransaccionProveedorEntity entity = data.get(0);
+        transaccionProveedorLogic.deleteTransaccionProveedor(proveedorData.get(1).getId(), entity.getId());
         TransaccionProveedorEntity deleted = em.find(TransaccionProveedorEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }

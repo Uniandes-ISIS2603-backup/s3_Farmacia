@@ -7,7 +7,10 @@ package co.edu.uniandes.csw.farmacia.entities;
 
 import java.io.Serializable;
 import java.util.logging.Logger;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *Clase que contiene la entidad de transaccionProvedor
@@ -16,6 +19,11 @@ import javax.persistence.Entity;
 @Entity
 public class TransaccionProveedorEntity extends BaseEntity implements Serializable
 {
+    
+    @PodamExclude
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private ProveedorEntity proveedor;
+    
     /**
      * atributo que hace referencia al timepo empleado en la transaccion
      */
@@ -45,6 +53,16 @@ public class TransaccionProveedorEntity extends BaseEntity implements Serializab
     public Double getMonto()
     {
         return monto;
+    }
+    
+    public ProveedorEntity getProveedor()
+    {
+        return proveedor;
+    }
+    
+    public void setProveedor(ProveedorEntity proveedorEntity)
+    {
+        this.proveedor = proveedorEntity;
     }
     
 }

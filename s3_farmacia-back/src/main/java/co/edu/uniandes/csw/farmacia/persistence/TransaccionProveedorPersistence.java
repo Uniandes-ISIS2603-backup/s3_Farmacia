@@ -48,14 +48,31 @@ public class TransaccionProveedorPersistence {
     }
     
     /**
-     * Busca una transaccionProveedor en la base de datos.
+     * Buscar una reseña
      *
-     * @param transaccionProveedorId
-     * @return
+     * Busca si hay alguna reseña asociada a un libro y con un ID específico
+     *
+     * @param proveedorId El ID del proveedor con respecto al cual se busca
+     * @param transaccionProveedorId El ID de la transaccion proveedor buscada
+     * @return La reseña encontrada o null. Nota: Si existe una o más reseñas
+     * devuelve siempre la primera que encuentra
      */
-    public TransaccionProveedorEntity find(Long transaccionProveedorId) {
-        LOGGER.log(Level.INFO, "Consultando TransaccionProveedor con id={0}", transaccionProveedorId);
-        return em.find(TransaccionProveedorEntity.class, transaccionProveedorId);
+    public TransaccionProveedorEntity find(Long proveedorId, Long transaccionProveedorId) {
+        LOGGER.log(Level.INFO, "Consultando la transaccionProveedor con id = {0} del proveedor con id = " + proveedorId, transaccionProveedorId);
+        TypedQuery<TransaccionProveedorEntity> q = em.createQuery("select p from TransaccionProveedorEntity p where (p.proveedor.id = :proveedorid) and (p.id = :transaccionProveedorId)", TransaccionProveedorEntity.class);
+        q.setParameter("proveedorId", proveedorId);
+        q.setParameter("transaccionProveedorId", transaccionProveedorId);
+        List<TransaccionProveedorEntity> results = q.getResultList();
+        TransaccionProveedorEntity transaccionProveedor = null;
+        if (results == null) {
+            transaccionProveedor = null;
+        } else if (results.isEmpty()) {
+            transaccionProveedor = null;
+        } else if (results.size() >= 1) {
+            transaccionProveedor = results.get(0);
+        }
+        LOGGER.log(Level.INFO, "Saliendo de consultar la transaccionProveedor con id = {0} del proveedor con id =" + proveedorId, transaccionProveedorId);
+        return transaccionProveedor;
     }
     
     /**

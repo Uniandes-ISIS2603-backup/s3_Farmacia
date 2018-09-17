@@ -40,7 +40,7 @@ public class ProveedorTransaccionesProveedorResource {
     @Path("{transaccionId: \\d+}")
     public TransaccionProveedorDetailDTO addTransaccionProveedor(@PathParam("id") Long provId, @PathParam("transaccionId") Long transaccionId) {
         LOGGER.log(Level.INFO, "ProveedorTransaccionesProveedorResource addTransaccionProveedor: input: id {0} , transaccionId {1}", new Object[]{provId, transaccionId});
-        if (transcProLogic.getTransaccionProveedor(transaccionId) != null) {
+        if (transcProLogic.getTransaccionProveedor(provId, transaccionId) != null) {
             //TransaccionProveedorDetailDTO transDetailDTO = new TransaccionProveedorDetailDTO(provLogic.addTransaccionProveedor());
             //  LOGGER.log(Level.INFO, "ProveedorTransaccionesProveedorResource addTransaccionProveedor: output: {0}", transDetailDTO.toString());
             // return transDetailDTO;
@@ -63,7 +63,7 @@ public class ProveedorTransaccionesProveedorResource {
     public TransaccionProveedorDetailDTO getTransaccionProveedor(@PathParam("id") Long provId ,@PathParam("transaccionId") Long transaccionId )
     {
         LOGGER.log(Level.INFO, "ProveedorTransaccionesProveedor getProveedor: input: provId {0} , transaccionId {1}", new Object[]{provId, transaccionId});
-        if(transcProLogic.getTransaccionProveedor(transaccionId)== null)
+        if(transcProLogic.getTransaccionProveedor(provId,transaccionId)== null)
         {
             throw new WebApplicationException("El recurso /transaccionProveedor/" + transaccionId + " no existe.", 404);
         }
@@ -91,7 +91,7 @@ public class ProveedorTransaccionesProveedorResource {
     @Path("{authorsId: \\d+}")
     public void removeTransaccionProveedor(@PathParam("id") Long provId, @PathParam("transaccionId") Long transaccionId) {
         LOGGER.log(Level.INFO, "ProveedorTransaccionesProveedor removeTransaccionProveedor: input: provId {0} , transaccionId {1}", new Object[]{provId, transaccionId});
-        if (transcProLogic.getTransaccionProveedor(transaccionId) == null) {
+        if (transcProLogic.getTransaccionProveedor(provId,transaccionId) == null) {
             throw new WebApplicationException("El recurso /transaccionProveedor/" + transaccionId + " no existe.", 404);
         }
       //  provTransLogic.removeAuthor(provId, transaccionId);
