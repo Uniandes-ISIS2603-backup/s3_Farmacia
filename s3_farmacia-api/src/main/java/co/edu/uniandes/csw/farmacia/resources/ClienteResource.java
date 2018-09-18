@@ -145,29 +145,13 @@ public class ClienteResource {
         LOGGER.log(Level.INFO, "ClienteResource updateCliente: output: {0}", detailDTO.toString());
         return detailDTO;
     } 
-    
-     /**
-     * Conexión con el servicio de transaccionesCliente para un cliente.
-     * {@link ClienteTransaccionesClienteResource}
-     *
-     * Este método conecta la ruta de /clientes con las rutas de /transaccionesCliente que
-     * dependen del cliente, es una redirección al servicio que maneja el
-     * segmento de la URL que se encarga las transaccionesCliente de un cliente.
-     *
-     * @paramclientesId El ID del cliebte con respecto a la cual se
-     * accede al servicio.
-     * @return El servicio de transaccionesCliente para este cliente en paricular.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra el cliente.
-     */
     @Path("{clientesId: \\d+}/transaccionesCliente")
-    public Class<ClienteTransaccionesClienteResource> getClienteTransaccionesClienteResource(@PathParam("clientesId") Long clientesId) {
-        if (clienteLogic.getCliente(clientesId) == null) {
-            throw new WebApplicationException("El recurso /clientes/" + clientesId + " no existe.", 404);
+    public Class<TransaccionClienteResource> getTransaccionClienteResource(@PathParam("clienteId") Long clienteId) {
+        if (clienteLogic.getCliente(clienteId) == null) {
+            throw new WebApplicationException("El recurso /clientes/" + clienteId + "/transaccionesCliente no existe.", 404);
         }
-        return ClienteTransaccionesClienteResource.class;
+        return TransaccionClienteResource.class;
     }
-    
     /**
      * Convierte una lista de entidades a DTO.
      *
