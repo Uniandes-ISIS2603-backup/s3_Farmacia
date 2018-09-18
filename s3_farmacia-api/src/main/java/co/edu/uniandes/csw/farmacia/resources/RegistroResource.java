@@ -30,6 +30,7 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author estudiante
  */
+//@Path("registros") En ReviewsResource no hay Path y esta clase es parecida.
 @Produces("application/json")
 @Consumes("application/json")
 public class RegistroResource {
