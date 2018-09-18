@@ -29,6 +29,8 @@ public class TransaccionProveedorDTO implements Serializable {
     
     protected long id;
     
+    private ProveedorDTO proveedor;
+    
     //Constructor
     public TransaccionProveedorDTO()
     {
@@ -41,6 +43,12 @@ public class TransaccionProveedorDTO implements Serializable {
             this.id = trans.getId();
             this.tiempo = trans.getTiempo();
             this.monto = trans.getMonto();
+            if(trans.getProveedor() != null)
+            {
+                this.proveedor = new ProveedorDTO(trans.getProveedor());
+            } else {
+                this.proveedor = null;
+            }
         }
     }
     
@@ -54,6 +62,9 @@ public class TransaccionProveedorDTO implements Serializable {
         transaccionProveedorEntity.setId(this.id);
         transaccionProveedorEntity.setMonto(this.monto);
         transaccionProveedorEntity.setTiempo(this.tiempo);
+        if (this.proveedor != null) {
+            transaccionProveedorEntity.setProveedor(this.proveedor.toEntity());
+        }
         return transaccionProveedorEntity;
     }
     
@@ -63,6 +74,21 @@ public class TransaccionProveedorDTO implements Serializable {
     public double getMonto()
     {
         return monto;
+    }
+    
+    public ProveedorDTO getProveedor()
+    {
+        return proveedor;
+    }
+    
+    public void setProveedor(ProveedorDTO proveedor)
+    {
+        this.proveedor = proveedor;
+    }
+    
+    public double getId()
+    {
+        return id;
     }
     
     /**

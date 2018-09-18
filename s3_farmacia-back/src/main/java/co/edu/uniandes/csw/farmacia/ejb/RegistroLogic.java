@@ -46,7 +46,7 @@ public class RegistroLogic {
             throw new BusinessLogicException("El registro es inválido");
         }
         if (!validateRegistro(registroEntity.getTipoRegistro())) {
-            throw new BusinessLogicException("El ISBN es inválido");
+            throw new BusinessLogicException("El TipoRegistro es inválido");
         }
         ProductoEntity producto = productoPersistence.find(productosId);
         registroEntity.setProducto(producto);
@@ -82,15 +82,15 @@ public class RegistroLogic {
     /**
      * Actualizar un registro por ID
      *
-     * @param registroId El ID del registro a actualizar
+     * @param productosId El ID del producto el cual sera el padre del registro actualizado
      * @param registroEntity La entidad del registro con los cambios deseados
      * @return La entidad del registro luego de actualizarla
-     * @throws BusinessLogicException Si el IBN de la actualización es inválido
+     * @throws BusinessLogicException Si el tipo de reigstro ya no es valido
      */
     public RegistroEntity updateRegistro(Long productosId, RegistroEntity registroEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar el registro con id = {0} del producto con id = " + productosId, registroEntity.getId());
         if (!validateRegistro(registroEntity.getTipoRegistro())) {
-           throw new BusinessLogicException("El ISBN es inválido");
+           throw new BusinessLogicException("El TipoRegistro es inválido");
         }
         ProductoEntity productoEntity = productoPersistence.find(productosId);
         registroEntity.setProducto(productoEntity);
@@ -100,9 +100,10 @@ public class RegistroLogic {
     }
     
     /**
-     * Eliminar un registro por ID
-     *
-     * @param registroId El ID del registro a eliminar
+     * Elimina una isntancia de registro de la base de datos
+     * @param productosId El id del producto el cual es el padre del registro
+     * @param registrosId El identificador d ela isntancia a eliminar
+     * @throws BusinessLogicException Si el registro no esta asociado al producto
      */
     public void deleteRegistro(Long productosId, Long registrosId)throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el registro con id = {0} del producto con id = " + productosId, registrosId);

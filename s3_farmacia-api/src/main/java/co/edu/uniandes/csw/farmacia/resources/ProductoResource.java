@@ -43,22 +43,22 @@ public class ProductoResource {
     }
     
     @GET
-    @Path("{id:\\d+}")
-    public ProductoDTO getProducto(@PathParam("id") Long id) {
+    @Path("{productosId:\\d+}")
+    public ProductoDTO getProducto(@PathParam("productosId") Long id) {
         ProductoDTO producto = new ProductoDTO(new ProductoEntity());
         producto.setId(id);
         return producto;
     }
     
     @DELETE
-    @Path("{id:\\d+}")
-    public void deleteProducto(@PathParam("id") Long id){
+    @Path("{productosId:\\d+}")
+    public void deleteProducto(@PathParam("productosId") Long id){
         
     }
     
     @PUT
-    @Path("{productoId: \\d+}")
-    public ProductoDTO refreshDataCliente ( @PathParam("productoId") 
+    @Path("{productosId: \\d+}")
+    public ProductoDTO refreshDataCliente ( @PathParam("productosId") 
             Long productoId, 
             ProductoDTO producto)throws WebApplicationException{
         return producto;
