@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -59,9 +59,9 @@ public class TransaccionProveedorPersistence {
      */
     public TransaccionProveedorEntity find(Long proveedorId, Long transaccionProveedorId) {
         LOGGER.log(Level.INFO, "Consultando la transaccionProveedor con id = {0} del proveedor con id = " + proveedorId, transaccionProveedorId);
-        TypedQuery<TransaccionProveedorEntity> q = em.createQuery("select p from TransaccionProveedorEntity p where (p.proveedor.id = :proveedorId) and (p.id = :transaccionProveedorId)", TransaccionProveedorEntity.class);
-        q.setParameter("proveedorId", proveedorId);
-        q.setParameter("transaccionProveedorId", transaccionProveedorId);
+        TypedQuery<TransaccionProveedorEntity> q = em.createQuery("select p from TransaccionProveedorEntity p where (p.proveedor.id = :proveedor_Id) and (p.id = :id)", TransaccionProveedorEntity.class);
+        q.setParameter("proveedor_Id", proveedorId);
+        q.setParameter("id", transaccionProveedorId);
         List<TransaccionProveedorEntity> results = q.getResultList();
         TransaccionProveedorEntity transaccionProveedor = null;
         if (results == null) {
