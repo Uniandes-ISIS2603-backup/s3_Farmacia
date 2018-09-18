@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -34,6 +35,11 @@ public class TransaccionClienteEntity extends BaseEntity implements Serializable
     @PodamExclude
     @ManyToOne
     private ClienteEntity cliente;
+    
+    @PodamExclude
+    @OneToMany
+    private List<ProductoEntity> productos = new ArrayList<>();
+    
      private static final Logger LOGGER = Logger.getLogger(TransaccionClienteEntity.class.getName());
     public void setTipoDePago(String pTipoDePago)
     {
@@ -83,6 +89,13 @@ public class TransaccionClienteEntity extends BaseEntity implements Serializable
         cliente= pCliente;
     }
     
+    public void setProductos(List<ProductoEntity> pProductos)
+    {
+        productos=pProductos;
+    }
     
-    
+    public List<ProductoEntity> getProductos()
+    {
+        return productos;
+    }
 }

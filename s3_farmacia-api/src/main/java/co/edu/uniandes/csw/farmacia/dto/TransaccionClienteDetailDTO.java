@@ -23,7 +23,7 @@ public class TransaccionClienteDetailDTO extends TransaccionClienteDTO implement
     {
         super();
     }
-    /**
+    
     public TransaccionClienteDetailDTO(TransaccionClienteEntity transaccion)
     {
         super(transaccion);
@@ -35,7 +35,7 @@ public class TransaccionClienteDetailDTO extends TransaccionClienteDTO implement
             }
         }
     }
-    */
+    
     
     
     /**
