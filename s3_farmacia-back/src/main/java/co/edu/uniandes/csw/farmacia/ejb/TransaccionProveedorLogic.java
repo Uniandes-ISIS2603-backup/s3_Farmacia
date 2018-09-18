@@ -49,13 +49,14 @@ public class TransaccionProveedorLogic {
      *
      * Obtener todas las transacciones proveedor existentes en la base de datos.
      *
+     * @param proveedorId
      * @return una lista de editoriales.
      */
     public List<TransaccionProveedorEntity> getTransaccionesProveedor(Long proveedorId) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar todas las transacciones proveedor");
         ProveedorEntity proveedorEntity = proveedorPersistence.find(proveedorId);
         LOGGER.log(Level.INFO, "Termina proceso de consultar todas las transacciones proveedor");
-        return null;
+        return proveedorEntity.getTransacciones();
     }
 
     /**
@@ -66,13 +67,8 @@ public class TransaccionProveedorLogic {
      * @return la transaccion proveedor solicitada por medio de su id.
      */
     public TransaccionProveedorEntity getTransaccionProveedor(Long proveedorId,Long transaccionProveedorId) {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar la transaccionProveedor con id = {0}", transaccionProveedorId);
-        TransaccionProveedorEntity transaccionProveedorEntity = persistence.find(proveedorId, transaccionProveedorId);
-        if (transaccionProveedorEntity == null) {
-            LOGGER.log(Level.SEVERE, "La transaccionProveedor con el id = {0} no existe", transaccionProveedorId);
-        }
-        LOGGER.log(Level.INFO, "Termina proceso de consultar la transaccionProveedor con id = {0}", transaccionProveedorId);
-        return transaccionProveedorEntity;
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar la transaccion con id = {0} del proveedor con id = " + proveedorId, transaccionProveedorId);
+        return persistence.find(proveedorId, transaccionProveedorId);
     }
 
     /**
