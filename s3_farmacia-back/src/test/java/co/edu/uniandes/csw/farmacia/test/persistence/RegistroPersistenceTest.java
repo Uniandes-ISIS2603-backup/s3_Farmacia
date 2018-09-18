@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.farmacia.test.persistence;
 
+import co.edu.uniandes.csw.farmacia.entities.ProductoEntity;
 import co.edu.uniandes.csw.farmacia.entities.RegistroEntity;
 import co.edu.uniandes.csw.farmacia.persistence.RegistroPersistence;
 import java.util.ArrayList;
@@ -43,6 +44,13 @@ public class RegistroPersistenceTest {
     
     private List<RegistroEntity> data = new ArrayList<RegistroEntity>();
     
+    private List<ProductoEntity> dataProducto = new ArrayList<ProductoEntity>();
+    
+    /**
+     * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
+     * El jar contiene las clases, el descriptor de la base de datos y el
+     * archivo beans.xml para resolver la inyección de dependencias.
+     */
     @Deployment
     public static JavaArchive createDeployment() 
     {
@@ -53,6 +61,9 @@ public class RegistroPersistenceTest {
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
     
+    /**
+     * Configuración inicial de la prueba.
+     */
     @Before
     public void configTest(){
         try{
@@ -71,19 +82,38 @@ public class RegistroPersistenceTest {
         }
     }
     
+    /**
+     * Limpia las tablas que están implicadas en la prueba.
+     */
     private void clearData(){
         em.createQuery("delete from RegistroEntity").executeUpdate();
+        em.createQuery("delete from ProductoEntity").executeUpdate();
     }
     
+    /**
+     * Inserta los datos iniciales para el correcto funcionamiento de las
+     * pruebas.
+     */
     private void insertData(){
         PodamFactory factory = new PodamFactoryImpl();
-        for(int i=0; i<3; i++){
+        for (int i = 0; i < 3; i++) {
+            ProductoEntity entity = factory.manufacturePojo(ProductoEntity.class);
+            em.persist(entity);
+            dataProducto.add(entity);
+        }
+        for (int i = 0; i < 3; i++) {
             RegistroEntity entity = factory.manufacturePojo(RegistroEntity.class);
+            if (i == 0) {
+                entity.setProducto(dataProducto.get(0));
+            }
             em.persist(entity);
             data.add(entity);
         }
     }
     
+    /**
+     * Prueba para crear un regsitro
+     */
     @Test
     public void createRegistroTest()
     {
@@ -98,36 +128,20 @@ public class RegistroPersistenceTest {
         Assert.assertEquals(newRegistroEntity.getCantidad(),entity.getCantidad());
     }
     
-    /**
-     * Prueba para consultar la lista de registros.
-     */
-    @Test
-    public void getRegistrosTest() {
-        List<RegistroEntity> list = registroPersistence.findAll();
-        Assert.assertEquals(data.size(), list.size());
-        for (RegistroEntity ent : list) {
-            boolean found = false;
-            for (RegistroEntity entity : data) {
-                if (ent.getId().equals(entity.getId())) {
-                    found = true;
-                }
-            }
-            Assert.assertTrue(found);
-        }
-    }
     
     /**
      * Prueba para consultar un Registro.
+     */
      
     @Test
     public void getRegistroTest() {
         RegistroEntity entity = data.get(0);
-        RegistroEntity newEntity = registroPersistence.find(entity.getId());
+        RegistroEntity newEntity = registroPersistence.find(dataProducto.get(0).getId(), entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getTipoRegistro(), newEntity.getTipoRegistro());
         Assert.assertEquals(entity.getCantidad(), newEntity.getCantidad());
     }
-    */
+    
     
     /**
      * Prueba para eliminar un Registro.
@@ -159,18 +173,4 @@ public class RegistroPersistenceTest {
         Assert.assertEquals(newEntity.getCantidad(), resp.getCantidad());
     }
     
-    /**
-     * Prueba para consultasr un Book por ISBN.
-     
-    @Test
-    public void findBookByISBNTest() {
-        BookEntity entity = data.get(0);
-        BookEntity newEntity = bookPersistence.findByISBN(entity.getIsbn());
-        Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getIsbn(), newEntity.getIsbn());
-
-        newEntity = bookPersistence.findByISBN(null);
-        Assert.assertNull(newEntity);
-    }
-    */
 }

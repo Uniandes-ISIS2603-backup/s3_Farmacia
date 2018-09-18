@@ -40,17 +40,6 @@ public class RegistroPersistence {
     }
     
     /**
-     * Busca todos los registros que esten en la base de datos
-     * @return 
-     */
-    public List<RegistroEntity> findAll(){
-        LOGGER.log(Level.INFO, "Consultando todos los registros.");
-        
-        TypedQuery query = em.createQuery("Select u from RegistroEntity u", RegistroEntity.class);
-        return query.getResultList();
-    }
-    
-    /**
      * Busca si hay algun registro asociado con un producto y con un ID especifico
      * @param registrosId el Id del registro buscado
      * @param productosId el Id del libro respecto al cual se busa
