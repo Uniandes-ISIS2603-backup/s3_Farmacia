@@ -96,7 +96,7 @@ public class TransaccionClienteLogicTest
         for(int j=0; j<3;j++)
         {
             TransaccionClienteEntity transaccion = factory.manufacturePojo(TransaccionClienteEntity.class);
-            transaccion.setCliente(dataCliente.get(0));
+            transaccion.setCliente(dataCliente.get(1));
            
             em.persist(transaccion);
             data.add(transaccion);
@@ -107,10 +107,8 @@ public class TransaccionClienteLogicTest
     public void createTransaccionClienteTest() throws BusinessLogicException
     {
         TransaccionClienteEntity newEntity = factory.manufacturePojo(TransaccionClienteEntity.class);
-        newEntity.setCliente(dataCliente.get(0));
-        System.out.println(newEntity.getCliente()==null);
-        TransaccionClienteEntity result = TransaccionClienteLogic.createTransaccionCliente(newEntity);
-
+        newEntity.setCliente(dataCliente.get(1));
+        TransaccionClienteEntity result = TransaccionClienteLogic.createTransaccionCliente(dataCliente.get(1).getId(), newEntity);
         Assert.assertNotNull(result);
         TransaccionClienteEntity entity = em.find(TransaccionClienteEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
@@ -121,9 +119,9 @@ public class TransaccionClienteLogicTest
     }
     
     @Test
-    public void geTransaccionTest() 
+    public void geTransaccionesTest() 
     {
-        List<TransaccionClienteEntity> list = TransaccionClienteLogic.getTransaccionesCliente();
+        List<TransaccionClienteEntity> list = TransaccionClienteLogic.getTransaccionesCliente(dataCliente.get(1).getId());
         Assert.assertEquals(data.size(), list.size());
         for (TransaccionClienteEntity entity : list) {
             boolean found = false;
@@ -138,7 +136,7 @@ public class TransaccionClienteLogicTest
     @Test
     public void getTransaccionClienteTest() {
         TransaccionClienteEntity entity = data.get(0);
-        TransaccionClienteEntity resultEntity = TransaccionClienteLogic.getTransaccionCliente(entity.getId());
+        TransaccionClienteEntity resultEntity = TransaccionClienteLogic.getTransaccionCliente(dataCliente.get(1).getId(),entity.getId());
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
         Assert.assertEquals(entity.getMonto(), resultEntity.getMonto());
@@ -153,9 +151,13 @@ public class TransaccionClienteLogicTest
     {
         TransaccionClienteEntity entity = data.get(0);
         TransaccionClienteEntity pojoEntity = factory.manufacturePojo(TransaccionClienteEntity.class);
+        
         pojoEntity.setId(entity.getId());
-        TransaccionClienteLogic.updateTransaccionCliente(pojoEntity.getId(), pojoEntity);
+        
+        TransaccionClienteLogic.updateTransaccionCliente(dataCliente.get(1).getId(), pojoEntity);
+       
         TransaccionClienteEntity resp = em.find(TransaccionClienteEntity.class, entity.getId());
+        
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
         Assert.assertEquals(pojoEntity.getMonto(), resp.getMonto());
         Assert.assertEquals(pojoEntity.getParcial(), resp.getParcial());
@@ -167,16 +169,11 @@ public class TransaccionClienteLogicTest
     public void deleteTransaccionTest() throws BusinessLogicException
     {
         TransaccionClienteEntity entity = data.get(0);
-        TransaccionClienteLogic.deleteTransaccionCliente(entity.getId());
+        TransaccionClienteLogic.deleteTransaccionCliente(dataCliente.get(1).getId(),entity.getId());
         TransaccionClienteEntity deleted = em.find(TransaccionClienteEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
     
-    @Test
-    public void deleteTransaccionConClienteTest() throws BusinessLogicException 
-    {
-        TransaccionClienteEntity entity = data.get(0);
-        TransaccionClienteLogic.deleteTransaccionCliente( entity.getId());
-    }
+
 
 }
