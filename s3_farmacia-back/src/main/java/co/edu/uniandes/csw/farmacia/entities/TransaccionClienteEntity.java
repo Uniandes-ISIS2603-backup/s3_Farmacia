@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -38,7 +39,7 @@ public class TransaccionClienteEntity extends BaseEntity implements Serializable
     private ClienteEntity cliente;
     
     @PodamExclude
-    @OneToMany
+    @ManyToMany(mappedBy = "transaccionesCliente")
     private List<ProductoEntity> productos = new ArrayList<>();
     
     @PodamExclude

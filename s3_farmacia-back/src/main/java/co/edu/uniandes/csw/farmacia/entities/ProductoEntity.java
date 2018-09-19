@@ -14,6 +14,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -50,12 +51,26 @@ public class ProductoEntity extends BaseEntity implements Serializable {
     }
     */
     @PodamExclude
-    @OneToMany(mappedBy = "producto", cascade = CascadeType.PERSIST, orphanRemoval = true )
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.PERSIST, 
+            orphanRemoval = true )
     private List<RegistroEntity> registros = new ArrayList<RegistroEntity>();
     
     @PodamExclude
     @ManyToOne
     private ProveedorEntity proveedor;
+    
+    @PodamExclude
+    @ManyToMany
+    private List<TransaccionClienteEntity> transaccionesCliente;
+
+    public List<TransaccionClienteEntity> getTransaccionesCliente() {
+        return transaccionesCliente;
+    }
+
+    public void setTransaccionesCliente(
+            List<TransaccionClienteEntity> transaccionesCliente) {
+        this.transaccionesCliente = transaccionesCliente;
+    }
 
     public ProveedorEntity getProveedor() {
         return proveedor;
