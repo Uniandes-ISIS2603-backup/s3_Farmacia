@@ -6,10 +6,13 @@
 package co.edu.uniandes.csw.farmacia.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -24,6 +27,10 @@ public class TransaccionProveedorEntity extends BaseEntity implements Serializab
     @ManyToOne(cascade = CascadeType.PERSIST)
     private ProveedorEntity proveedor;
     
+    @PodamExclude
+    @OneToMany
+    private List<ProductoEntity> productos = new ArrayList<>();
+    
     /**
      * atributo que hace referencia al timepo empleado en la transaccion
      */
@@ -35,6 +42,8 @@ public class TransaccionProveedorEntity extends BaseEntity implements Serializab
     private Double monto;
     
     private static final Logger LOGGER = Logger.getLogger(TransaccionProveedorEntity.class.getName());
+    
+    
     
     public void setTiempo(String pTiempo)
     {
@@ -63,6 +72,15 @@ public class TransaccionProveedorEntity extends BaseEntity implements Serializab
     public void setProveedor(ProveedorEntity proveedorEntity)
     {
         this.proveedor = proveedorEntity;
+    }
+    
+    public List<ProductoEntity> getProductos()
+    {
+        return productos;
+    }
+    public void setProductos(List<ProductoEntity> lista)
+    {
+        productos = lista;
     }
     
 }

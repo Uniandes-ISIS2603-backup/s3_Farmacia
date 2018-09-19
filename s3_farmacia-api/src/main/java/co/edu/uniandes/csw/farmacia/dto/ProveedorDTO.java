@@ -49,9 +49,8 @@ public class ProveedorDTO implements Serializable{
 
     public ProveedorDTO(ProveedorEntity prove)
     {
-        if (prove != null) 
+        if (prove != null)  
         {
-            System.out.println("-------------------");
             this.id = prove.getId();
             this.nombre = prove.getNombre();
         }
@@ -68,7 +67,6 @@ public class ProveedorDTO implements Serializable{
        @Override
     public String toString()
     {
-        //Ctrl+shift+i importar.
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 
