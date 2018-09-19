@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -39,6 +40,10 @@ public class TransaccionClienteEntity extends BaseEntity implements Serializable
     @PodamExclude
     @OneToMany
     private List<ProductoEntity> productos = new ArrayList<>();
+    
+    @PodamExclude
+    @OneToOne
+    private FacturaEntity factura;
     
      private static final Logger LOGGER = Logger.getLogger(TransaccionClienteEntity.class.getName());
     public void setTipoDePago(String pTipoDePago)
@@ -97,5 +102,15 @@ public class TransaccionClienteEntity extends BaseEntity implements Serializable
     public List<ProductoEntity> getProductos()
     {
         return productos;
+    }
+    
+    public void setFactura(FacturaEntity fac)
+    {
+        factura= fac;
+    }
+    
+    public FacturaEntity getFactura()
+    {
+        return factura;
     }
 }

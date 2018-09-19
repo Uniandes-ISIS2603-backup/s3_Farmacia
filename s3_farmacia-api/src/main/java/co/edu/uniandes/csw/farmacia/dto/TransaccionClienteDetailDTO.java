@@ -38,7 +38,7 @@ public class TransaccionClienteDetailDTO extends TransaccionClienteDTO implement
     
     
     
-    /**
+    
     @Override
     public TransaccionClienteEntity toEntity() 
     {
@@ -52,7 +52,7 @@ public class TransaccionClienteDetailDTO extends TransaccionClienteDTO implement
         }
            return transaccion;
     }
-    */
+    
       
     public List<ProductoDTO> getProductos()
     {

@@ -32,7 +32,7 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author ra.ariasr
  */
-@Path("transaccionesCliente")
+@Path("/transaccionesCliente")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
@@ -44,60 +44,68 @@ public class TransaccionClienteResource
     private static final Logger LOGGER = Logger.getLogger(ProveedorResource.class.getName());
     
     @POST
-    public TransaccionClienteDTO createTransacionCliente(TransaccionClienteDTO transaccion) throws BusinessLogicException
+    public TransaccionClienteDTO createTransacionCliente(@PathParam("clienteId")Long id,TransaccionClienteDTO transaccion) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "TransaccionResource createTransaccion: input: {0}", transaccion.toString());
-        TransaccionClienteDTO DTO = new TransaccionClienteDTO(logic.createTransaccionCliente(transaccion.toEntity()));
+        TransaccionClienteDTO DTO = new TransaccionClienteDTO(logic.createTransaccionCliente(id,transaccion.toEntity()));
         LOGGER.log(Level.INFO, "TransaccionResource createTransaccion: output: {0}", DTO.toString());
         return DTO;
     }
     @GET
-    public List<TransaccionClienteDetailDTO> getTransacciones()
+    public List<TransaccionClienteDTO> getTransacciones(@PathParam("clienteId")Long id)
     {
-         LOGGER.info("BookResource getBooks: input: void");
-        List<TransaccionClienteDetailDTO> listaBooks = listEntity2DetailDTO(logic.getTransaccionesCliente());
-        LOGGER.log(Level.INFO, "BookResource getBooks: output: {0}", listaBooks.toString());
-        return listaBooks;
+         LOGGER.log(Level.INFO, "TransaccionClienteResource getTransacciones: input: {0}", id);
+        List<TransaccionClienteDTO> lista = listEntity2DetailDTO(logic.getTransaccionesCliente(id));
+        LOGGER.log(Level.INFO, "BookResource getBooks: output: {0}", lista.toString());
+        return lista;
     }
     
-    /*
+    
     @GET
     @Path("{transaccionesClienteId: \\d+}")
-    public TransaccionClienteDetailDTO getTransaccionCliente(@PathParam("transaccionesClienteId")Long id )
+    public TransaccionClienteDTO getTransaccionCliente(@PathParam("id")Long idCli,@PathParam("transaccionesClienteId")Long id  )
     {
-       LOGGER.log(Level.INFO, "BookResource getBook: input: {0}", id);
-        TransaccionClienteEntity transaccionEntity = logic.getTransaccionCliente(id);
-        if (transaccionEntity == null) {
-            throw new WebApplicationException("El recurso /books/" + id + " no existe.", 404);
+        LOGGER.log(Level.INFO, "TransaccionClienteResource getTransaccionCliente: input: {0}", id);
+        TransaccionClienteEntity entity = logic.getTransaccionCliente(idCli, id);
+        if (entity == null) {
+            throw new WebApplicationException("El recurso /cliente/" + idCli + "/transacciones/" + id + " no existe.", 404);
         }
-        TransaccionClienteDetailDTO DetailDTO = new TransaccionClienteDetailDTO(transaccionEntity);
-        LOGGER.log(Level.INFO, "BookResource getBook: output: {0}", bookDetailDTO.toString());
-        return DetailDTO;
+       TransaccionClienteDTO DTO = new TransaccionClienteDTO(entity);
+        LOGGER.log(Level.INFO, "TransaccionClienteResource getTransaccion: output: {0}", DTO.toString());
+        return DTO;
     }
-*/
+
    
         @DELETE
     @Path("{transaccionesClienteId:\\d+}")
-    public void deleteTransaccionCliente(@PathParam("transaccionesClienteId")Long id) throws BusinessLogicException
+    public void deleteTransaccionCliente(@PathParam("ClienteId")Long idCLi,@PathParam("transaccionClienteId")Long id) throws BusinessLogicException
     {
-        LOGGER.log(Level.INFO, "TransaccionClienteResource deleteBook: input: {0}", id);
-        TransaccionClienteEntity entity = logic.getTransaccionCliente(id);
+        TransaccionClienteEntity entity = logic.getTransaccionCliente(idCLi, id);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /transaccionCliente/" + id + " no existe.", 404);
+            throw new WebApplicationException("El recurso /cliente/" + idCLi + "/transaccion/" + id + " no existe.", 404);
         }
-        
-        logic.deleteTransaccionCliente( id );
-        LOGGER.info("TransaccionClienteResource deleteBook: output: void");
+    logic.deleteTransaccionCliente(idCLi, id);
     }
     @PUT
     @Path("{transaccionesClienteId:\\d+}")
-    public TransaccionClienteDTO refreshDataTransaccionCliente(@PathParam("transaccionesClienteId") Long id, TransaccionClienteDTO proveedor)
+    public TransaccionClienteDTO refreshDataTransaccionCliente(@PathParam("clienteId") Long idCli, @PathParam("transaccionClienteId") Long id, TransaccionClienteDTO trans) throws BusinessLogicException
     {
-        return proveedor;
+        LOGGER.log(Level.INFO, "TransaccionClienteResource refreshData: input: clienteId: {0} , transaccionId: {1} , transaccionCliente:{2}", new Object[]{idCli, id, trans.toString()});
+        if (id.equals(trans.getId())) {
+            throw new BusinessLogicException("Los ids de la transaccion no coinciden.");
+        }
+        TransaccionClienteEntity entity = logic.getTransaccionCliente(idCli, id);
+        if (entity == null) {
+            throw new WebApplicationException("El recurso /books/" + idCli + "/reviews/" + id + " no existe.", 404);
+
+        }
+        TransaccionClienteDTO reviewDTO = new TransaccionClienteDTO(logic.updateTransaccionCliente(idCli, trans.toEntity()));
+        LOGGER.log(Level.INFO, "ReviewResource updateReview: output:{0}", reviewDTO.toString());
+        return reviewDTO;
     }
     
-       private List<TransaccionClienteDetailDTO> listEntity2DetailDTO(List<TransaccionClienteEntity> entityList) {
-        List<TransaccionClienteDetailDTO> list = new ArrayList<>();
+       private List<TransaccionClienteDTO> listEntity2DetailDTO(List<TransaccionClienteEntity> entityList) {
+        List<TransaccionClienteDTO> list = new ArrayList<>();
         for (TransaccionClienteEntity entity : entityList) {
             list.add(new TransaccionClienteDetailDTO(entity));
         }

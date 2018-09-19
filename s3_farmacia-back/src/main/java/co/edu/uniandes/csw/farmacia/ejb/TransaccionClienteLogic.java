@@ -31,55 +31,50 @@ public class TransaccionClienteLogic
      @Inject
     private ClientePersistence clientePersistence;
      
-      public TransaccionClienteEntity createTransaccionCliente( TransaccionClienteEntity transaccionClienteEntity) throws BusinessLogicException
+      public TransaccionClienteEntity createTransaccionCliente( Long Id, TransaccionClienteEntity trans) throws BusinessLogicException
       {
-        LOGGER.log(Level.INFO, "Inicia proceso de crear una transaccion del cliente");
-                 
-       if(transaccionClienteEntity.getCliente()==null )
-          {
-           throw new BusinessLogicException("El cliente es invalido"); 
-          }
- 
-       persistence.create(transaccionClienteEntity);
-       LOGGER.log(Level.INFO,"Termina proceso de creacion de la transaccion");
-        return transaccionClienteEntity;
+         LOGGER.log(Level.INFO, "Inicia proceso de consultar las transacciones asociados al cliente con id = {0}", Id);
+        ClienteEntity Entity = clientePersistence.find(Id);
+        trans.setCliente(Entity);
+        LOGGER.log(Level.INFO, "Termina proceso de consultar las transacciones asociados al Cliente con id = {0}", Id);
+        return persistence.create(trans);          
       }
       
       
-    public List<TransaccionClienteEntity> getTransaccionesCliente()
+    public List<TransaccionClienteEntity> getTransaccionesCliente(Long Id)
     {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar todas las transacciones");
-       List<TransaccionClienteEntity> clienteEntity = persistence.findAll();
+       ClienteEntity clienteEntity = clientePersistence.find(Id);
         LOGGER.log(Level.INFO, "Termina proceso de consultar todas las transacciones");
-        return clienteEntity;
+        return clienteEntity.getTransaccionesCliente();
     }
     
-    public TransaccionClienteEntity getTransaccionCliente(Long transacionclienteId)
+    public TransaccionClienteEntity getTransaccionCliente(Long idCliente,Long transacionclienteId)
     {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar la transaccion con id = {0}",transacionclienteId );
-        TransaccionClienteEntity transaccion= persistence.find(transacionclienteId);
-        if(transaccion==null)
-        {
-            LOGGER.log(Level.SEVERE,"La transaccion con el id={0} no existe", transacionclienteId);
+        return persistence.find(idCliente, transacionclienteId);
+    }
+    
+    public TransaccionClienteEntity updateTransaccionCliente(Long ClienteId, TransaccionClienteEntity transaccionCliente)
+    {
+       LOGGER.log(Level.INFO, "Inicia proceso de actualizar la transaccion con id = {0} del cliente con id = " + ClienteId, transaccionCliente.getId());
+        ClienteEntity entity = clientePersistence.find(ClienteId);
+        transaccionCliente.setCliente(entity);
+        persistence.update(transaccionCliente);
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar la transaccion con id = {0} del cliente con id = " + ClienteId, transaccionCliente.getId());
+        return transaccionCliente;
+    }
+    
+    
+    public void deleteTransaccionCliente( Long clienteId,Long transaccionClienteId) throws BusinessLogicException
+    {
+         LOGGER.log(Level.INFO, "Inicia proceso de borrar la transaccion con id = {0} del cliente con id = " + clienteId, transaccionClienteId);
+        TransaccionClienteEntity old = getTransaccionCliente(clienteId, transaccionClienteId);
+        if (old == null) {
+            throw new BusinessLogicException("la transaccion con id = " + transaccionClienteId + " no esta asociado a el cliente con id = " + clienteId);
         }
-        LOGGER.log(Level.INFO,"Termina el proceso de consulta de la transaccion con id = {0}",transacionclienteId);
-        return transaccion;
-    }
-    
-    public TransaccionClienteEntity updateTransaccionCliente(Long transaccionClienteId, TransaccionClienteEntity transaccionCliente)
-    {
-        LOGGER.log(Level.INFO, "Inicia proceso de actualizar la transaccionCliente con id = {0} " , transaccionClienteId);
-        TransaccionClienteEntity newEntity = persistence.update(transaccionCliente);
-        LOGGER.log(Level.INFO, "Termina proceso de actualizar una transaccion con id = {0}", transaccionCliente.getId());
-        return newEntity;
-    }
-    
-    
-    public void deleteTransaccionCliente( Long transaccionClienteId) throws BusinessLogicException
-    {
-        LOGGER.log(Level.INFO, "Inicia proceso de borrar la transaccion con id = {0}", transaccionClienteId);
-        persistence.delete(transaccionClienteId);
-        LOGGER.log(Level.INFO, "Inicia proceso de borrar la transaccion con id = {0}", transaccionClienteId);
+        persistence.delete(old.getId());
+        LOGGER.log(Level.INFO, "Termina proceso de borrar la transaccion con id = {0} del cliente con id = " + clienteId, transaccionClienteId);
    
     }
     
