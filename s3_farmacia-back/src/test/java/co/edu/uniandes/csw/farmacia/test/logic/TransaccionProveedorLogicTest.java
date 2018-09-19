@@ -103,6 +103,7 @@ public class TransaccionProveedorLogicTest {
         }
         for (int i = 0; i < 3; i++) {
             TransaccionProveedorEntity entity = factory.manufacturePojo(TransaccionProveedorEntity.class);
+            entity.setProveedor(proveedorData.get(1));
             em.persist(entity);
             data.add(entity);
         }

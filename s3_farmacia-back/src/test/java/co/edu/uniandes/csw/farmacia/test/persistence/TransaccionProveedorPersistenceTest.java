@@ -99,6 +99,9 @@ public class TransaccionProveedorPersistenceTest {
         }
         for(int i=0; i<3; i++){
             TransaccionProveedorEntity entity = factory.manufacturePojo(TransaccionProveedorEntity.class);
+             if (i == 0) {
+                entity.setProveedor(dataProveedor.get(0));
+            }
             em.persist(entity);
             data.add(entity);
             System.out.println(transaccionProveedorPersistence.findAll().size());
@@ -110,14 +113,15 @@ public class TransaccionProveedorPersistenceTest {
     {
         //Crea objetos aleatorios
         PodamFactory factory = new PodamFactoryImpl();
-        TransaccionProveedorEntity newTransaccionProveedorEntity = factory.manufacturePojo(TransaccionProveedorEntity.class);
-        TransaccionProveedorEntity result = transaccionProveedorPersistence.create(newTransaccionProveedorEntity);
-        
-        Assert.assertNotNull(result);    
-        
+        TransaccionProveedorEntity newEntity = factory.manufacturePojo(TransaccionProveedorEntity.class);
+        TransaccionProveedorEntity result = transaccionProveedorPersistence.create(newEntity);
+
+        Assert.assertNotNull(result);
+
         TransaccionProveedorEntity entity = em.find(TransaccionProveedorEntity.class, result.getId());
-        
-        Assert.assertEquals(newTransaccionProveedorEntity.getMonto(), entity.getMonto());
+
+        Assert.assertEquals(newEntity.getMonto(), entity.getMonto());
+        Assert.assertEquals(newEntity.getTiempo(), entity.getTiempo());
         
     }
     

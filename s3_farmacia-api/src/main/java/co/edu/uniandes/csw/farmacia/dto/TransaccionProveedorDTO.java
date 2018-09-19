@@ -3,6 +3,38 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+/**
+ * TransaccionProveedorDTO . Los DTO contienen las
+ * representaciones de los JSON que se transfieren entre el cliente y el
+ * servidor.
+ *
+ * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ * <pre>
+ *   {
+ *      "id": number,
+ *      "monto": number,
+ *      "tiempo": string,
+ *      "proveedor": {@link ProveedorDTO}
+ *   }
+ * </pre> Por ejemplo una reseña se representa asi:<br>
+ *
+ * <pre>
+ *
+ *   {
+ *      "id": 123,
+ *      "monto": 4000,
+ *      "tiempo": "40",
+ *      "proveedor":
+ *      {
+ *          "id": 123,
+ *          "nombre" : "Nestle"
+ *      }
+ *   }
+ *
+ * </pre>
+ *
+ * @author ISIS2603
+ */
 package co.edu.uniandes.csw.farmacia.dto;
 
 import co.edu.uniandes.csw.farmacia.entities.TransaccionProveedorEntity;
@@ -16,6 +48,7 @@ public class TransaccionProveedorDTO implements Serializable {
     
     //Atributos
     
+    protected long id;
     /**
      * Cantidad de dinero manejada en la transacción
      */
@@ -26,9 +59,7 @@ public class TransaccionProveedorDTO implements Serializable {
      * Tiempo que tomo realizar la transacción
      */
     protected String tiempo;
-    
-    protected long id;
-    
+        
     private ProveedorDTO proveedor;
     
     //Constructor

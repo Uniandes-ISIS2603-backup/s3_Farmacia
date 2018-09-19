@@ -30,8 +30,6 @@ import javax.ws.rs.WebApplicationException;
  */
  @Produces("application/json")
  @Consumes("application/json")
- @RequestScoped
- @Path("transaccionProveedor")
 public class TransaccionProveedorResource extends TransaccionProveedorDTO {
     
     private static final Logger LOGGER = Logger.getLogger(ProveedorResource.class.getName());
@@ -45,7 +43,7 @@ public class TransaccionProveedorResource extends TransaccionProveedorDTO {
       */
     @GET
     @Path("{transaccionProveedorId: \\d+}" )
-    public TransaccionProveedorDTO getTransaccionProveedor(@PathParam("proveedorId") Long proveedorId, @PathParam("id")Long id)
+    public TransaccionProveedorDTO getTransaccionProveedor(@PathParam("id") Long proveedorId, @PathParam("id")Long id)
     {
       LOGGER.log(Level.INFO, "TransaccionProveedorResource getTransaccionProveedor: input: {0}", id);
       TransaccionProveedorEntity entity = transaccionProveedorLogic.getTransaccionProveedor(proveedorId, id);
@@ -65,7 +63,7 @@ public class TransaccionProveedorResource extends TransaccionProveedorDTO {
      * proveedor. Si no hay ninguna retorna una lista vacía.
      */
     @GET
-    public List<TransaccionProveedorDTO> getTransaccionesProveedor(@PathParam("booksId") Long proveedorId) {
+    public List<TransaccionProveedorDTO> getTransaccionesProveedor(@PathParam("id") Long proveedorId) {
         LOGGER.log(Level.INFO, "TransaccionProveedorResource getTransaccionProveedor: input: {0}", proveedorId);
         List<TransaccionProveedorDTO> listaDTOs = listEntity2DTO(transaccionProveedorLogic.getTransaccionesProveedor(proveedorId));
         return listaDTOs;
@@ -81,7 +79,7 @@ public class TransaccionProveedorResource extends TransaccionProveedorDTO {
      */
     @PUT
     @Path("{transaccionProveedorId: \\d+}" )
-    public TransaccionProveedorDTO updateInformacion(@PathParam("booksId") Long proveedorId, @PathParam("id") Long transaccionProveedorId, TransaccionProveedorDTO transaccionProveedor) throws BusinessLogicException, BusinessLogicException
+    public TransaccionProveedorDTO updateInformacion(@PathParam("id") Long proveedorId, @PathParam("id") Long transaccionProveedorId, TransaccionProveedorDTO transaccionProveedor) throws BusinessLogicException, BusinessLogicException
     {
         LOGGER.log(Level.INFO, "TransaccionProveedorResource updateTransaccionProveedor: input: proveedorId: {0} , transaccionProveedorId: {1} , transaccionProveedor:{2}", new Object[]{proveedorId, transaccionProveedorId, transaccionProveedor.toString()});
         if (transaccionProveedorId.equals(transaccionProveedor.getId())) {
@@ -98,7 +96,7 @@ public class TransaccionProveedorResource extends TransaccionProveedorDTO {
     }
     
     @POST
-    public TransaccionProveedorDTO createTransaccionProveedor(@PathParam("proveedorId") Long proveedorId, TransaccionProveedorDTO transaccionProveedor)
+    public TransaccionProveedorDTO createTransaccionProveedor(@PathParam("id") Long proveedorId, TransaccionProveedorDTO transaccionProveedor)
     {
         LOGGER.log(Level.INFO, "TransaccionProveedorResource createTransaccionProveedor: input: {0}", transaccionProveedor.toString());
         TransaccionProveedorDTO nuevaTransaccionProveedorDTO = new TransaccionProveedorDTO(transaccionProveedorLogic.createTransaccionProveedor(transaccionProveedor.toEntity(), proveedorId ));
@@ -118,7 +116,7 @@ public class TransaccionProveedorResource extends TransaccionProveedorDTO {
      */
     @DELETE
     @Path("{transaccionProveedorId: \\d+}")
-    public void deleteReview(@PathParam("booksId") Long proveedorId, @PathParam("reviewsId") Long transaccionProveedorId) throws BusinessLogicException {
+    public void deleteReview(@PathParam("id") Long proveedorId, @PathParam("reviewsId") Long transaccionProveedorId) throws BusinessLogicException {
         TransaccionProveedorEntity entity = transaccionProveedorLogic.getTransaccionProveedor(proveedorId, transaccionProveedorId);
         if (entity == null) {
             throw new WebApplicationException("El recurso /proveedor/" + proveedorId + "/transaccionProveedor/" + transaccionProveedorId + " no existe.", 404);
