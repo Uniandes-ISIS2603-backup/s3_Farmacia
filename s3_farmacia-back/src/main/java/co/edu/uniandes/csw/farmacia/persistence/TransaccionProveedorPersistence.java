@@ -27,7 +27,6 @@ public class TransaccionProveedorPersistence {
 
     public TransaccionProveedorEntity create(TransaccionProveedorEntity transaccionProveedorEntity) {
         LOGGER.log(Level.INFO, "Creando una nueva TransaccionProveedor");
-
         em.persist(transaccionProveedorEntity);
         LOGGER.log(Level.INFO, "Saliendo de crear una nueva TransaccionProveedor.");
         return transaccionProveedorEntity;
@@ -59,8 +58,8 @@ public class TransaccionProveedorPersistence {
      */
     public TransaccionProveedorEntity find(Long proveedorId, Long transaccionProveedorId) {
         LOGGER.log(Level.INFO, "Consultando la transaccionProveedor con id = {0} del proveedor con id = " + proveedorId, transaccionProveedorId);
-        TypedQuery<TransaccionProveedorEntity> q = em.createQuery("select p from TransaccionProveedorEntity p where (p.proveedor.id = :proveedor_Id) and (p.id = :id)", TransaccionProveedorEntity.class);
-        q.setParameter("proveedor_Id", proveedorId);
+        TypedQuery<TransaccionProveedorEntity> q = em.createQuery("select p from TransaccionProveedorEntity p where (p.proveedor.id = :proveedorid) and (p.id = :id)", TransaccionProveedorEntity.class);
+        q.setParameter("proveedorid", proveedorId);
         q.setParameter("id", transaccionProveedorId);
         List<TransaccionProveedorEntity> results = q.getResultList();
         TransaccionProveedorEntity transaccionProveedor = null;

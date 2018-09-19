@@ -23,6 +23,9 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class TransaccionProveedorEntity extends BaseEntity implements Serializable
 {
     
+    private static final Logger LOGGER = Logger.getLogger(TransaccionProveedorEntity.class.getName());
+
+        
     @PodamExclude
     @ManyToOne(cascade = CascadeType.PERSIST)
     private ProveedorEntity proveedor;
@@ -39,15 +42,12 @@ public class TransaccionProveedorEntity extends BaseEntity implements Serializab
     /**
      * atributo que hace referencua al monto empleado en la transaccion
      */
-    private Double monto;
-    
-    private static final Logger LOGGER = Logger.getLogger(TransaccionProveedorEntity.class.getName());
-    
+    private Double monto;    
     
     
     public void setTiempo(String pTiempo)
     {
-        tiempo= pTiempo;
+        tiempo = pTiempo;
     }
     public String getTiempo()
     {
@@ -56,7 +56,7 @@ public class TransaccionProveedorEntity extends BaseEntity implements Serializab
     
     public void setMonto(Double pMonto)
     {
-        monto= pMonto;
+        monto = pMonto;
     }
     
     public Double getMonto()

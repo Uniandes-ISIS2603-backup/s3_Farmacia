@@ -92,6 +92,15 @@ public class ProveedorDetailDTO extends ProveedorDTO implements Serializable
     {
         this.productos = pProducts;
     }
+    public List<TransaccionProveedorDTO> getTransaccionesProveedor()
+    {
+        return transaccionesProveedor;
+    }
+    public void setTransaccionesProveedor(List<TransaccionProveedorDTO> pListaTrans )
+    {
+        this.transaccionesProveedor = pListaTrans;
+        
+    }
     
 }
 
