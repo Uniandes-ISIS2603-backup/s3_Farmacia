@@ -36,7 +36,7 @@ public class TransaccionProveedorLogic {
      * @param proveedorId
      * @return La entiddad de la transaccionProveedor luego de persistirla.
      */
-    public TransaccionProveedorEntity createTransaccionProveedor(TransaccionProveedorEntity transaccionProveedorEntity, Long proveedorId){
+    public TransaccionProveedorEntity createTransaccionProveedor( Long proveedorId,TransaccionProveedorEntity transaccionProveedorEntity){
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la transaccion proveedor");
         persistence.create(transaccionProveedorEntity);
         ProveedorEntity proveedor = proveedorPersistence.find(proveedorId);

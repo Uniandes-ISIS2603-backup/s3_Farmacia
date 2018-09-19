@@ -116,7 +116,7 @@ public class TransaccionProveedorLogicTest {
     public void createTransaccionProveedorTest() {
         TransaccionProveedorEntity newEntity = factory.manufacturePojo(TransaccionProveedorEntity.class);
         newEntity.setProveedor(proveedorData.get(1));
-        TransaccionProveedorEntity result = transaccionProveedorLogic.createTransaccionProveedor( newEntity, proveedorData.get(1).getId() );
+        TransaccionProveedorEntity result = transaccionProveedorLogic.createTransaccionProveedor( proveedorData.get(1).getId() , newEntity);
         Assert.assertNotNull(result);
         TransaccionProveedorEntity entity = em.find(TransaccionProveedorEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
