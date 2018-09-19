@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -31,7 +32,7 @@ public class ProductoPersistence {
     
     public List<ProductoEntity> list() {
         return em
-                .createStoredProcedureQuery("SELECT * FROM ProductoEntity", 
+                .createQuery("select e from ProductoEntity e", 
                         ProductoEntity.class)
                 .getResultList();
     }
@@ -41,8 +42,7 @@ public class ProductoPersistence {
     }
     
     public ProductoEntity update(ProductoEntity producto) {
-        em.merge(producto);
-        return producto;
+        return em.merge(producto);
     }
     
     public void delete(Long id) {
@@ -50,7 +50,8 @@ public class ProductoPersistence {
     }
     
     public void getByName(String name) {
-        //TypedQuery query = em.createQuery("select producto", type)
+        //TypedQuery query = em.createQuery("select * from producto where producto.nombre = :nombre", ProductoEntity.class);
+        //query = query.setParameter("nombre", name);
         //return em.find(Producto.class, );
     }
 }
