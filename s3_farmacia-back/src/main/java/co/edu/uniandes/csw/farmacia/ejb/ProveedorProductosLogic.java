@@ -44,6 +44,35 @@ public class ProveedorProductosLogic
         }
         return null;
     }
+    
+        public ProductoEntity addProducto(Long proveedorId, Long productoId) 
+        {
+        LOGGER.log(Level.INFO, "Inicia proceso de asociarle un producto al proveedor con id = {0}", proveedorId);
+        ProductoEntity productoEntity = productoPersistence.find(productoId);
+        ProveedorEntity proveedorEntity = proveedorPersistence.find(proveedorId);
+        proveedorEntity.getProductos().add(productoEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de asociarle un producto al proveedor con id = {0}", proveedorId);
+        return productoPersistence.find(productoId);
+            
+        }
+        
+        public List<ProductoEntity> replaceProductos(Long provId, List<ProductoEntity> list) 
+        {
+         LOGGER.log(Level.INFO, "Inicia proceso de reemplazar los productos del proveedor con id = {0}", provId);
+            ProveedorEntity proveedorEntity = proveedorPersistence.find(provId);
+            proveedorEntity.setProductos(list);
+            LOGGER.log(Level.INFO, "Termina proceso de reemplazar los productos del proveedor con id = {0}", provId);
+            return proveedorPersistence.find(provId).getProductos();
+        }
+        
+        public void removeProducto(Long proveedorId, Long productoId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar un producto del proveedor con id = {0}", proveedorId);
+        ProductoEntity productoEntity = productoPersistence.find(authorsId);
+        ProveedorEntity proveedorEntity = proveedorPersistence.find(proveedorId);
+        proveedorEntity.getProductos().remove(productoEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de  borrar un producto del proveedor con  id = {0}", proveedorId);
+    }
+    
     */
     
     

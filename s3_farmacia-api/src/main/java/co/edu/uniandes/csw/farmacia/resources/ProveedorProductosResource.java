@@ -43,7 +43,7 @@ public class ProveedorProductosResource
     
     @GET
     @Path("{productoId \\ d+ }")
-    public ProductoDetailDTO getProducto(@PathParam("proveedorId") Long proveedorId , @PathParam("productoId") Long productoId ) throws BusinessLogicException 
+    public ProductoDetailDTO getProducto(@PathParam("id") Long proveedorId , @PathParam("productoId") Long productoId ) throws BusinessLogicException 
     {
         LOGGER.log(Level.INFO, "ProveedorProductosResource getProducto: input: proveedorId {0} , productoId {1}", new Object[]{proveedorId, productoId});
         //  if(productoLogic.getProducto(productoId)==null)
@@ -55,7 +55,7 @@ public class ProveedorProductosResource
        return detailDTO;
     }
   @GET
-   public List<ProductoDetailDTO> getProductos(@PathParam("proveedorId") Long proveedorId) 
+   public List<ProductoDetailDTO> getProductos(@PathParam("id") Long proveedorId) 
    {
        LOGGER.log(Level.INFO, "ProveedorProductosResource getProductos: input: {0}", proveedorId);
       List<ProductoDetailDTO> lista = productListEntityToDTO(proveedorProductosLogic.getProductos(proveedorId));
@@ -65,7 +65,7 @@ public class ProveedorProductosResource
    }
     @POST
    @Path("{productoId \\ d+ }")
-    public ProductoDetailDTO addProducto(@PathParam("proveedorId") Long proveedorId , @PathParam("productoId") Long productoId)
+    public ProductoDetailDTO addProducto(@PathParam("id") Long proveedorId , @PathParam("productoId") Long productoId)
     {
         LOGGER.log(Level.INFO,"ProveedorProductosResource addProducto: input: proveedorId {0} , productoId {1} ",new Object[]{proveedorId, productoId});
        //  if (productoLogic.getProducto(productoId) == null) {
@@ -74,14 +74,45 @@ public class ProveedorProductosResource
       return null;
     }
    // @PUT
-   // public List<ProductoDetailDTO> replaceProductos(@PathParam("proveedorId") Long proveedorId, List<ProductoDetailDTO> producto){}
-  // @DELETE
-   //   public void deleteProductos(@PathParam("proveedorId") Long proveedorId) {}
+   // public List<ProductoDetailDTO> replaceProductos(@PathParam("id") Long proveedorId, List<ProductoDetailDTO> producto)
+    {
+         LOGGER.log(Level.INFO, "ProveedorProductosResource replaceProductos: input: proveedorId {0} , producots {1}", new Object[]{proveedorId, producto.toString()});
+        for (ProductoDetailDTO produ : producs) {
+            if (productoLogic.getProducto(produ.getId()) == null) {
+                throw new WebApplicationException("El recurso /productos/" + produ.getId() + " no existe.", 404);
+            }
+        }
+        List<ProductoDetailDTO> lista = productsListEntity2DTO(proveedorProductosLogic.replaceProductos(proveedorId, productsListDTO2Entity(producto)));
+        LOGGER.log(Level.INFO, "ProveedorProductosResource replaceProductos: output:{0}", lista.toString());
+        return lista;
+    }
+        @DELETE
+           @Path("{productoId: \\d+}")
+           public void removeProducto(@PathParam("id") Long proveedorId, @PathParam("authorsId") Long productoId) {
+               LOGGER.log(Level.INFO, "ProveedorProductosResource removeProducto: input: proveedorId {0} , productoId {1}", new Object[]{proveedorId, productoId});
+               if (productoLogic.getProducto(productoId) == null) {
+                   throw new WebApplicationException("El recurso /productos/" + productoId + " no existe.", 404);
+               }
+               proveedorProductos.removeProducto(proveedorId, productoId);
+               LOGGER.info("ProveedorProductosResource removeProducto: output: void");
+           }
     
-     private List<ProductoDetailDTO> productListEntityToDTO(List <ProductoEntity> entityList){return null;}
+     private List<ProductoDetailDTO> productListEntityToDTO(List <ProductoEntity> entityList)
+    {
+        List<ProductoDetailDTO> list = new ArrayList<>();
+        for (ProductoEntity entity : entityList) {
+            list.add(new ProductoDetailDTO(entity));
+        }
+        return list;
+    }
     
-    //private List<ProductoEntity> productListDTOToEntity(List <ProductoDetailDTO> dtoList){}
-    
-   
+    //private List<ProductoEntity> productListDTOToEntity(List <ProductoDetailDTO> dtoList)
+    {
+        List<ProductoEntity> list = new ArrayList<>();
+        for (ProductoDetailDTO dto : dtos) {
+            list.add(dto.toEntity());
+        }
+        return list;
+    }
 */
 }

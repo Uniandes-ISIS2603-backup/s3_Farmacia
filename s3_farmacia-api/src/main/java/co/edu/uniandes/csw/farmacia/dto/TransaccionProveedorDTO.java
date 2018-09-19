@@ -72,7 +72,6 @@ public class TransaccionProveedorDTO implements Serializable {
     {
         if (trans != null) {
             this.id = trans.getId();
-            
             this.tiempo = trans.getTiempo();
             this.monto = trans.getMonto();
             if(trans.getProveedor() != null)
