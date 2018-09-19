@@ -33,7 +33,7 @@
  *
  * </pre>
  *
- * @author ISIS2603
+ * @author ISIS2603.
  */
 package co.edu.uniandes.csw.farmacia.dto;
 
