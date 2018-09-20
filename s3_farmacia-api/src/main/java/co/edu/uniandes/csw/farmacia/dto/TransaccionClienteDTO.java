@@ -5,12 +5,13 @@
  */
 package co.edu.uniandes.csw.farmacia.dto;
 import co.edu.uniandes.csw.farmacia.entities.TransaccionClienteEntity;
+import java.io.Serializable;
 
 /**
  *
  * @author estudiante
  */
-public class TransaccionClienteDTO
+public class TransaccionClienteDTO implements Serializable
 {
     private Long id;
     
@@ -18,7 +19,7 @@ public class TransaccionClienteDTO
     
     private Double tiempo;
     
-    private boolean parcial;
+    private Boolean parcial;
     
     private String tipoDePago;
 
@@ -80,12 +81,12 @@ public class TransaccionClienteDTO
         tiempo=pTiempo;
     }
     
-    public boolean getParcial()
+    public Boolean getParcial()
     {
      return parcial;   
     }
     
-    public void setParcial(boolean pParcial)
+    public void setParcial(Boolean pParcial)
     {
         parcial=pParcial;
     }

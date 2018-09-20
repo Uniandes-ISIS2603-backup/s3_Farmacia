@@ -23,7 +23,7 @@ public class TransaccionClienteDetailDTO extends TransaccionClienteDTO implement
     {
         super();
     }
-    /**
+    
     public TransaccionClienteDetailDTO(TransaccionClienteEntity transaccion)
     {
         super(transaccion);
@@ -35,10 +35,10 @@ public class TransaccionClienteDetailDTO extends TransaccionClienteDTO implement
             }
         }
     }
-    */
     
     
-    /**
+    
+    
     @Override
     public TransaccionClienteEntity toEntity() 
     {
@@ -52,7 +52,7 @@ public class TransaccionClienteDetailDTO extends TransaccionClienteDTO implement
         }
            return transaccion;
     }
-    */
+    
       
     public List<ProductoDTO> getProductos()
     {

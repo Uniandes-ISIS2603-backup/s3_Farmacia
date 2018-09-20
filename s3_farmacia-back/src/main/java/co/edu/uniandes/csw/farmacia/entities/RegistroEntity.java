@@ -28,7 +28,7 @@ public class RegistroEntity extends BaseEntity implements Serializable {
     public static final String PERDIDA = "PERDIDA";
     public static final String VENCIMIENTO = "VENCIMIENTO";
      
-    private int cantidad;
+    private Integer cantidad;
     private String tipoRegistro;
     
     @PodamExclude
@@ -41,7 +41,7 @@ public class RegistroEntity extends BaseEntity implements Serializable {
      * Retorna la cantidad que indica el registro
      * @return 
      */
-    public int getCantidad(){
+    public Integer getCantidad(){
         return cantidad;
     }
     
@@ -49,7 +49,7 @@ public class RegistroEntity extends BaseEntity implements Serializable {
      * Modifica la cantidad del registro
      * @param cantidad 
      */
-    public void setCantidad(int cantidad){
+    public void setCantidad(Integer cantidad){
         this.cantidad = cantidad;
     }
     

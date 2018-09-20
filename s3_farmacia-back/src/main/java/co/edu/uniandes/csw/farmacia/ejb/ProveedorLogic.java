@@ -18,7 +18,7 @@ import javax.inject.Inject;
 
 /**
  *
- * @author francisco
+ * @author fj.gonzalez
  */
 @Stateless
 public class ProveedorLogic {

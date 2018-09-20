@@ -6,10 +6,13 @@
 package co.edu.uniandes.csw.farmacia.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -20,9 +23,16 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class TransaccionProveedorEntity extends BaseEntity implements Serializable
 {
     
+    private static final Logger LOGGER = Logger.getLogger(TransaccionProveedorEntity.class.getName());
+
+        
     @PodamExclude
     @ManyToOne(cascade = CascadeType.PERSIST)
     private ProveedorEntity proveedor;
+    
+    @PodamExclude
+    @OneToMany
+    private List<ProductoEntity> productos = new ArrayList<>();
     
     /**
      * atributo que hace referencia al timepo empleado en la transaccion
@@ -32,13 +42,12 @@ public class TransaccionProveedorEntity extends BaseEntity implements Serializab
     /**
      * atributo que hace referencua al monto empleado en la transaccion
      */
-    private Double monto;
+    private Double monto;    
     
-    private static final Logger LOGGER = Logger.getLogger(TransaccionProveedorEntity.class.getName());
     
     public void setTiempo(String pTiempo)
     {
-        tiempo= pTiempo;
+        tiempo = pTiempo;
     }
     public String getTiempo()
     {
@@ -47,7 +56,7 @@ public class TransaccionProveedorEntity extends BaseEntity implements Serializab
     
     public void setMonto(Double pMonto)
     {
-        monto= pMonto;
+        monto = pMonto;
     }
     
     public Double getMonto()
@@ -63,6 +72,15 @@ public class TransaccionProveedorEntity extends BaseEntity implements Serializab
     public void setProveedor(ProveedorEntity proveedorEntity)
     {
         this.proveedor = proveedorEntity;
+    }
+    
+    public List<ProductoEntity> getProductos()
+    {
+        return productos;
+    }
+    public void setProductos(List<ProductoEntity> lista)
+    {
+        productos = lista;
     }
     
 }

@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.farmacia.ejb.RegistroLogic;
 import co.edu.uniandes.csw.farmacia.entities.ProductoEntity;
 import co.edu.uniandes.csw.farmacia.entities.RegistroEntity;
 import co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.farmacia.persistence.ProductoPersistence;
 import co.edu.uniandes.csw.farmacia.persistence.RegistroPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,7 @@ public class RegistroLogicTest {
     
     @Inject
     private RegistroLogic registroLogic;
+    
     
     @PersistenceContext
     private EntityManager em;
@@ -121,7 +123,8 @@ public class RegistroLogicTest {
         RegistroEntity newEntity = factory.manufacturePojo(RegistroEntity.class);
         newEntity.setProducto(dataProducto.get(1));
         newEntity.setTipoRegistro("ORDEN_REAPROVISONAMIENTO");
-        RegistroEntity result = registroLogic.createRegistro(dataProducto.get(1).getId(), newEntity);
+        RegistroEntity result = registroLogic.createRegistro( newEntity);
+        newEntity.setProducto(dataProducto.get(1));
         Assert.assertNotNull(result);
         RegistroEntity entity = em.find(RegistroEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
@@ -139,7 +142,7 @@ public class RegistroLogicTest {
         RegistroEntity newEntity = factory.manufacturePojo(RegistroEntity.class);
         newEntity.setProducto(dataProducto.get(1));
         newEntity.setTipoRegistro("ganada");
-        RegistroEntity result = registroLogic.createRegistro(dataProducto.get(1).getId(), newEntity);
+        RegistroEntity result = registroLogic.createRegistro( newEntity);
     }
     
     /**

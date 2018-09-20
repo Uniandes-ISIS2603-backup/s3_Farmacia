@@ -30,7 +30,7 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author estudiante
  */
-//@Path("registros") En ReviewsResource no hay Path y esta clase es parecida.
+@Path("registros")
 @Produces("application/json")
 @Consumes("application/json")
 public class RegistroResource {
@@ -49,9 +49,9 @@ public class RegistroResource {
      * @throws BusinessLogicException 
      */
     @POST
-    public RegistroDTO createRegistro(@PathParam("productosId") Long productosId, RegistroDTO registro) throws BusinessLogicException {
+    public RegistroDTO createRegistro(RegistroDTO registro) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "RegistroResource createRegistro: input: {0}", registro.toString());
-        RegistroDTO nuevoRegistroDTO = new RegistroDTO(registroLogic.createRegistro(productosId, registro.toEntity()));
+        RegistroDTO nuevoRegistroDTO = new RegistroDTO(registroLogic.createRegistro( registro.toEntity()));
         LOGGER.log(Level.INFO, "RegistroResource createRegistro: output: {0}", nuevoRegistroDTO.toString());
         return nuevoRegistroDTO;
     }
@@ -61,6 +61,7 @@ public class RegistroResource {
      * @param productosId el Id del producto del cual se buscan los registros
      * @return JSON array - los registros encontrados en el producto
      */
+    @Path("{productosId: \\d+}")
     @GET
     public List<RegistroDTO> getRegistros(@PathParam("productosId") Long productosId) {
         LOGGER.log(Level.INFO, "RegistroResource getRegistros: input: {0}", productosId);
@@ -78,7 +79,7 @@ public class RegistroResource {
      * @throws BusinessLogicException 
      */
     @GET
-    @Path("{registrosId: \\d+}")
+    @Path("{productosId: \\d+}/{registrosId: \\d+}")
     public RegistroDTO getRegistro(@PathParam("productosId") Long productosId, @PathParam("registrosId") Long registrosId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "RegistroResource getRegistro: input: {0}", registrosId);
         RegistroEntity entity = registroLogic.getRegistro(productosId, registrosId);
@@ -100,7 +101,7 @@ public class RegistroResource {
      * @throws BusinessLogicException 
      */
     @PUT
-    @Path("{registrosId: \\d+}")
+    @Path("{productosId: \\d+}/{registrosId: \\d+}")
     public RegistroDTO updateRegistro(@PathParam("productosId") Long productosId, @PathParam("registrosId") Long registrosId, RegistroDTO registro) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "RegistroResource updateRegistro: input: productosId: {0} , registrosId: {1} , registro:{2}", new Object[]{productosId, registrosId, registro.toString()});
         if (registrosId.equals(registro.getId())) {
@@ -124,7 +125,7 @@ public class RegistroResource {
      * @throws BusinessLogicException 
      */
     @DELETE
-    @Path("{registrosId: \\d+}")
+    @Path("{productosId: \\d+}/{registrosId: \\d+}")
     public void deleteRegistro(@PathParam("productosId") Long productosId, @PathParam("registrosId") Long registrosId) throws BusinessLogicException {
         RegistroEntity entity = registroLogic.getRegistro(productosId, registrosId);
         if (entity == null) {

@@ -23,7 +23,7 @@ public class RegistroDTO implements Serializable{
     public static final String VENCIMIENTO = "VENCIMIENTO";
     
     private Long id;
-    private int cantidad;
+    private Integer cantidad;
     private String tipoRegistro;
     //TIPO DE REGISTRO
     /**
@@ -77,11 +77,11 @@ public class RegistroDTO implements Serializable{
      * Obtiene la cantidad de producto que indica el registro
      * @return 
      */
-     public int getCantidad(){
+     public Integer getCantidad(){
         return cantidad;
     }
     
-    public void setCantidad(int cantidad){
+    public void setCantidad(Integer cantidad){
         this.cantidad = cantidad;
     }
     
@@ -115,12 +115,9 @@ public class RegistroDTO implements Serializable{
      */
     public RegistroEntity toEntity(){
         RegistroEntity registroEntity = new RegistroEntity();
-        registroEntity.setId(this.id);
-        registroEntity.setCantidad(this.cantidad);
-        registroEntity.setTipoRegistro(this.tipoRegistro);
-        if(this.producto != null){
-            registroEntity.setProducto(this.producto.toEntity());
-        }
+        registroEntity.setId(id);
+        registroEntity.setCantidad(cantidad);
+        registroEntity.setTipoRegistro(tipoRegistro);
         return registroEntity;
     }
     
