@@ -51,7 +51,7 @@ public class RegistroResource {
     @POST
     public RegistroDTO createRegistro(@PathParam("productosId") Long productosId, RegistroDTO registro) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "RegistroResource createRegistro: input: {0}", registro.toString());
-        RegistroDTO nuevoRegistroDTO = new RegistroDTO(registroLogic.createRegistro(productosId, registro.toEntity()));
+        RegistroDTO nuevoRegistroDTO = new RegistroDTO(registroLogic.createRegistro( registro.toEntity()));
         LOGGER.log(Level.INFO, "RegistroResource createRegistro: output: {0}", nuevoRegistroDTO.toString());
         return nuevoRegistroDTO;
     }

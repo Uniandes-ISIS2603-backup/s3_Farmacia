@@ -40,7 +40,7 @@ public class RegistroLogic {
       * @return
       * @throws BusinessLogicException 
       */
-    public RegistroEntity createRegistro(Long productosId, RegistroEntity registroEntity) throws BusinessLogicException {
+    public RegistroEntity createRegistro(RegistroEntity registroEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación del registro");
         if (registroEntity.getTipoRegistro()== null) {
             throw new BusinessLogicException("El registro es inválido");
@@ -48,8 +48,7 @@ public class RegistroLogic {
         if (!validateRegistro(registroEntity.getTipoRegistro())) {
             throw new BusinessLogicException("El TipoRegistro es inválido");
         }
-        ProductoEntity producto = productoPersistence.find(productosId);
-        registroEntity.setProducto(producto);
+        
         LOGGER.log(Level.INFO, "Termina proceso de creación del registro");
         return persistence.create(registroEntity);
     }
