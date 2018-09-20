@@ -41,8 +41,10 @@ public class ProductoResource {
     @Inject
     private ProductoLogic logic;
     
+    @Path("registro/{registroId: \\d+}")
     @POST
-    public ProductoDTO createProducto(ProductoDTO producto)
+    public ProductoDTO createProducto(@PathParam("registroId") Long registroId,
+            ProductoDTO producto)
             throws WebApplicationException {
         if (producto == null) {
            throw new WebApplicationException(
@@ -50,7 +52,8 @@ public class ProductoResource {
         }
         try {
             ProductoEntity productoEntity = producto.toEntity();
-            return new ProductoDTO(logic.create(productoEntity));
+            ProductoEntity result = logic.create(productoEntity, registroId);
+            return new ProductoDTO(result);
         } catch (BusinessLogicException ble) {
             throw new WebApplicationException(ble.getMessage(), 400);
         }

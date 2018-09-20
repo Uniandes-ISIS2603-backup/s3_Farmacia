@@ -115,12 +115,9 @@ public class RegistroDTO implements Serializable{
      */
     public RegistroEntity toEntity(){
         RegistroEntity registroEntity = new RegistroEntity();
-        registroEntity.setId(this.id);
-        registroEntity.setCantidad(this.cantidad);
-        registroEntity.setTipoRegistro(this.tipoRegistro);
-        if(this.producto != null){
-            registroEntity.setProducto(this.producto.toEntity());
-        }
+        registroEntity.setId(id);
+        registroEntity.setCantidad(cantidad);
+        registroEntity.setTipoRegistro(tipoRegistro);
         return registroEntity;
     }
     

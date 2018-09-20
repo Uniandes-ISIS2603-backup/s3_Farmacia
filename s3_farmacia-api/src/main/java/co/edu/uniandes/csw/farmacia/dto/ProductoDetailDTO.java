@@ -6,6 +6,9 @@
 package co.edu.uniandes.csw.farmacia.dto;
 
 import co.edu.uniandes.csw.farmacia.entities.ProductoEntity;
+import co.edu.uniandes.csw.farmacia.entities.RegistroEntity;
+import co.edu.uniandes.csw.farmacia.entities.TransaccionClienteEntity;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,11 +28,11 @@ public class ProductoDetailDTO extends ProductoDTO {
         this.proveedor = proveedor;
     }
 
-    public TransaccionClienteDTO getTransaccionCliente() {
+    public List<TransaccionClienteDTO> getTransaccionCliente() {
         return transaccionCliente;
     }
 
-    public void setTransaccionCliente(TransaccionClienteDTO transaccionCliente) {
+    public void setTransaccionCliente(List<TransaccionClienteDTO> transaccionCliente) {
         this.transaccionCliente = transaccionCliente;
     }
 
@@ -41,12 +44,31 @@ public class ProductoDetailDTO extends ProductoDTO {
         this.transaccionProveedor = transaccionProveedor;
     }
     
-    private TransaccionClienteDTO transaccionCliente;
+    private List<TransaccionClienteDTO> transaccionCliente;
     
     private TransaccionProveedorDTO transaccionProveedor;
 
     public ProductoDetailDTO(ProductoEntity producto) {
         super(producto);
+        if (producto != null) {
+            this.proveedor = new ProveedorDTO(producto.getProveedor());
+            this.transaccionProveedor = new TransaccionProveedorDTO(
+                    producto.getTransaccionProveedor());
+            if (producto.getRegistros() != null) {
+                this.registros = new ArrayList<>();
+                for (RegistroEntity registro : producto.getRegistros()) {
+                    this.registros.add(new RegistroDTO(registro));
+                }
+            }
+            if (producto.getTransaccionesCliente() != null) {
+                this.transaccionCliente = new ArrayList<>();
+                for (TransaccionClienteEntity transaccion : 
+                        producto.getTransaccionesCliente()) {
+                    this.transaccionCliente
+                            .add(new TransaccionClienteDTO(transaccion));
+                }
+            }
+        }
     }
 
     public ProductoDetailDTO() {

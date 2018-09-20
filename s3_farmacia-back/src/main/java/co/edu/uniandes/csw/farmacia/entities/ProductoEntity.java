@@ -34,24 +34,8 @@ public class ProductoEntity extends BaseEntity implements Serializable {
         Suministro, Terminado
     }
     
-    
-   /* public class PhotoType extends BaseEntity implements Serializable {
-        public String url;
-
-        public PhotoType(){}
-        
-        public String getUrl() {
-            return url;
-        }
-
-        public void setUrl(String url) {
-            this.url = url;
-        }
-        
-    }
-    */
     @PodamExclude
-    @OneToMany(mappedBy = "producto", cascade = CascadeType.PERSIST, 
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.REMOVE, 
             orphanRemoval = true )
     private List<RegistroEntity> registros = new ArrayList<RegistroEntity>();
     

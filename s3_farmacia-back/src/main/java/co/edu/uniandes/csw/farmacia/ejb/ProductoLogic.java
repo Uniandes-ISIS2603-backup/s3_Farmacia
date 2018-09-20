@@ -6,8 +6,10 @@
 package co.edu.uniandes.csw.farmacia.ejb;
 
 import co.edu.uniandes.csw.farmacia.entities.ProductoEntity;
+import co.edu.uniandes.csw.farmacia.entities.RegistroEntity;
 import co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.farmacia.persistence.ProductoPersistence;
+import co.edu.uniandes.csw.farmacia.persistence.RegistroPersistence;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -17,22 +19,30 @@ import javax.inject.Inject;
  */
 public class ProductoLogic {
     
-    public static final int UNIDADES_MIN = 0;
+    public static final int UNIDADES_MIN = Integer.MIN_VALUE;
     
     public static final int UNIDADES_MAX = Integer.MAX_VALUE;
     
     @Inject
     private ProductoPersistence persistence;
+    
+    @Inject
+    private RegistroPersistence registroPersistence;
             
     /**
      * Crea un nuevo registro en la base de datos
      * @param productoEntity producto a agregar en la bd
+     * @param idRegistro id del registro asociado a la llegada del producto
      * @return el objeto creado por parametro
      * @throws BusinessLogicException 
-     * en caso de que las unidades del producto no sean válidas
+     * en caso de que las unidades del producto no sean válidas, o que el registro no exista
      */
-    public ProductoEntity create(ProductoEntity productoEntity) 
+    public ProductoEntity create(ProductoEntity productoEntity, Long idRegistro) 
             throws BusinessLogicException {
+        RegistroEntity registro = registroPersistence.find(idRegistro);
+        if (registro == null || registro.getProducto() != null)
+            throw new BusinessLogicException(
+                    "El registro no existe o ya tiene un producto asociado");
         if( productoEntity == null || 
                 productoEntity.getUnidadesDisponibles() == null || 
                 productoEntity.getUnidadesDisponibles() < UNIDADES_MIN ||
@@ -41,6 +51,9 @@ public class ProductoLogic {
                     "El numero de unidades disponibles no es válido"
             );
         }
+        List<RegistroEntity> list = productoEntity.getRegistros();
+        list.add(registro);
+        registro.setProducto(productoEntity);
         return persistence.create(productoEntity);
     }
     

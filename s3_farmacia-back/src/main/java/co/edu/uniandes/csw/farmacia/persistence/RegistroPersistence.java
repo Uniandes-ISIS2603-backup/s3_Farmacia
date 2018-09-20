@@ -64,6 +64,28 @@ public class RegistroPersistence {
         return review;
     }
     
+      /**
+     * Busca si hay algun registro asociado con un producto y con un ID especifico
+     * @param registrosId el Id del registro buscado
+     * @return El registro encontrado o null. (Si existe un uno o mas registros 
+     * devuelce siempre el primero que se encuentra)
+     */
+    public RegistroEntity find (Long registrosId){
+        TypedQuery<RegistroEntity> q = em.createQuery("select p from RegistroEntity p where (p.id = :registrosId)", RegistroEntity.class);
+        q.setParameter("registrosId", registrosId);
+        List<RegistroEntity> results = q.getResultList();
+        RegistroEntity review = null;
+        if (results == null) {
+            review = null;
+        } else if (results.isEmpty()) {
+            review = null;
+        } else if (results.size() >= 1) {
+            review = results.get(0);
+        }
+        LOGGER.log(Level.INFO, "Saliendo de consultar el registro con id = " + registrosId);
+        return review;
+    }
+    
     /**
      * Actualiza un registro
      * @param registroEntity La entidad actualizada que se desea guardar
