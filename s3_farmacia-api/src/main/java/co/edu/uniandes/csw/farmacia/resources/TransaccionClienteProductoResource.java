@@ -56,6 +56,7 @@ public class TransaccionClienteProductoResource {
             throw new WebApplicationException("El recurso /transaccionCleinte/" + transId + " no existe.", 404);
         }
         
+        
         relacionLogic.asociate(clienteId, transId, productosId);
            
         }
