@@ -173,6 +173,4 @@ public class ProductoEntity extends BaseEntity implements Serializable {
     public void setRegistros(List<RegistroEntity> registros){
         this.registros = registros;
     }
-    
-    
 }
