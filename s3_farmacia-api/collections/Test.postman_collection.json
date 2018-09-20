@@ -12,7 +12,20 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": ""
+					"raw": "http://localhost:8080/s3_farmacia-api/api/proveedores/1/transaccionProveedor/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"proveedores",
+						"1",
+						"transaccionProveedor",
+						"1"
+					]
 				}
 			},
 			"response": []
@@ -23,10 +36,19 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "d5295256-5a20-4621-af1f-13bfcb04801f",
+						"id": "63aea74c-6772-41e7-9dc2-a7f8a7f96f8e",
 						"type": "text/javascript",
 						"exec": [
-							"var jsonObject = xml2Json(responseBody);",
+							"{",
+							"       \"id\": 1,",
+							"       \"monto\": 4000,",
+							"       \"tiempo\": \"40\",",
+							"       \"proveedor\":",
+							"       {",
+							"           \"id\": 1,",
+							"           \"nombre\" : \"Nestle\"",
+							"       }",
+							"}",
 							""
 						]
 					}
@@ -42,10 +64,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"id\": 2,\n\t\"monto\": 3,\n\t\"tiempo\": \"24\"\n}"
+					"raw": "{\n\t\"id\": 121,\n    \"monto\": 4000,\n    \"tiempo\": \"40\",\n    \"proveedor\":\n    {\n        \"id\": 1,\n        \"nombre\" : \"Nestle\"\n    }\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s3_farmacia-api/api/transaccionProveedor/2",
+					"raw": "http://localhost:8080/s3_farmacia-api/api/proveedores/1/transaccionProveedor",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -54,8 +76,9 @@
 					"path": [
 						"s3_farmacia-api",
 						"api",
-						"transaccionProveedor",
-						"2"
+						"proveedores",
+						"1",
+						"transaccionProveedor"
 					]
 				}
 			},
@@ -67,10 +90,20 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "d5295256-5a20-4621-af1f-13bfcb04801f",
+						"id": "38c4f8eb-ae49-4630-bdbd-6a7a4934a0aa",
 						"type": "text/javascript",
 						"exec": [
-							"var jsonObject = xml2Json(responseBody);",
+							"",
+							"{",
+							"       \"id\": 1,",
+							"       \"monto\": 4000,",
+							"       \"tiempo\": \"40\",",
+							"       \"proveedor\":",
+							"       {",
+							"           \"id\": 1,",
+							"           \"nombre\" : \"Nestle\"",
+							"       }",
+							"}",
 							""
 						]
 					}
@@ -89,7 +122,7 @@
 					"raw": "{\n\t\"id\": 2,\n\t\"monto\": 3,\n\t\"tiempo\": \"24\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s3_farmacia-api/api/transaccionProveedor/2",
+					"raw": "http://localhost:8080/s3_farmacia-api/api/proveedores/1/transaccionProveedor/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -98,8 +131,59 @@
 					"path": [
 						"s3_farmacia-api",
 						"api",
+						"proveedores",
+						"1",
 						"transaccionProveedor",
 						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TestDelete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s3_farmacia-api/api/proveedores/1/transaccionProveedor/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"proveedores",
+						"1",
+						"transaccionProveedor",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TestGet2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s3_farmacia-api/api/proveedores/1/transaccionProveedor",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"proveedores",
+						"1",
+						"transaccionProveedor"
 					]
 				}
 			},
