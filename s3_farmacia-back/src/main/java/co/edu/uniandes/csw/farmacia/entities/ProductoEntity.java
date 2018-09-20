@@ -174,3 +174,4 @@ public class ProductoEntity extends BaseEntity implements Serializable {
         this.registros = registros;
     }
 }
+
