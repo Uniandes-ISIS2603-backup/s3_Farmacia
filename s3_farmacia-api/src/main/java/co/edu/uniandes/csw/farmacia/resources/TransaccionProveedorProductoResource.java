@@ -28,7 +28,7 @@ import javax.ws.rs.Produces;
 @Consumes("application/json")
 @RequestScoped
 public class TransaccionProveedorProductoResource {
-        private static final Logger LOGGER = Logger.getLogger(ProveedorProductosResource.class.getName());
+        private static final Logger LOGGER = Logger.getLogger(TransaccionProveedorProductoResource.class.getName());
 
         @GET
         public List<ProductoDetailDTO> list(

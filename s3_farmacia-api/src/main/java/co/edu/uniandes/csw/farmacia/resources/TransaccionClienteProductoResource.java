@@ -37,7 +37,7 @@ import javax.ws.rs.WebApplicationException;
 @Consumes("application/json")
 @RequestScoped
 public class TransaccionClienteProductoResource {
-      private static final Logger LOGGER = Logger.getLogger(ProveedorProductosResource.class.getName());
+      private static final Logger LOGGER = Logger.getLogger(TransaccionClienteProductoResource.class.getName());
 
         @Inject
         private TransaccionClienteProductosLogic relacionLogic;
