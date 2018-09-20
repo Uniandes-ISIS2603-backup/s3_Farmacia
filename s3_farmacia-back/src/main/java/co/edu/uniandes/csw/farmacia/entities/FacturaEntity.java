@@ -6,14 +6,13 @@
 package co.edu.uniandes.csw.farmacia.entities;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
- * @author estudiante
+ * @author df.machado10
  */
 @Entity
 public class FacturaEntity extends BaseEntity implements Serializable {
@@ -23,6 +22,9 @@ public class FacturaEntity extends BaseEntity implements Serializable {
         REAPROVISIONAMIENTO, DESPACHO     
     }
     
+    @PodamExclude
+    @OneToOne
+    private TransaccionClienteEntity transaccionCLiente;
     private String Fecha;
     
     private Double precio;
@@ -53,6 +55,10 @@ public class FacturaEntity extends BaseEntity implements Serializable {
     public TipoFactura getTipo() {
         return tipo;
     }
+
+    public TransaccionClienteEntity getTransaccionCLiente() {
+        return transaccionCLiente;
+    }
     
     public void setFecha(String Fecha) {
         this.Fecha = Fecha;
@@ -73,5 +79,9 @@ public class FacturaEntity extends BaseEntity implements Serializable {
  
     public void setTipo(TipoFactura tipo) {
         this.tipo = tipo;
-    }    
+    }
+
+    public void setTransaccionCLiente(TransaccionClienteEntity transaccionCLiente) {
+        this.transaccionCLiente = transaccionCLiente;
+    }
 }
