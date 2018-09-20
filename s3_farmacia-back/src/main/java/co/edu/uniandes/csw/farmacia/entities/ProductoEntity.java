@@ -62,6 +62,18 @@ public class ProductoEntity extends BaseEntity implements Serializable {
     @PodamExclude
     @ManyToMany
     private List<TransaccionClienteEntity> transaccionesCliente;
+    
+    @PodamExclude
+    @ManyToOne
+    private TransaccionProveedorEntity transaccionProveedor;
+
+    public TransaccionProveedorEntity getTransaccionProveedor() {
+        return transaccionProveedor;
+    }
+
+    public void setTransaccionProveedor(TransaccionProveedorEntity transaccionProveedor) {
+        this.transaccionProveedor = transaccionProveedor;
+    }
 
     public List<TransaccionClienteEntity> getTransaccionesCliente() {
         return transaccionesCliente;
