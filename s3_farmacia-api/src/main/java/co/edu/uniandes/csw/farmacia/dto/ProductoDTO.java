@@ -59,12 +59,10 @@ public class ProductoDTO implements Serializable {
     
     private Boolean perecedero;
 
-    //setter
     public void setPerecedero(Boolean perecedero) {
         this.perecedero = perecedero;
     }
 
-    //getter
     public Boolean getPerecedero() {
         return perecedero;
     }
@@ -139,7 +137,7 @@ public class ProductoDTO implements Serializable {
         this.videos = videos;
     }
     
-          @Override
+    @Override
     public String toString()
     {
         //Ctrl+shift+i importar.
