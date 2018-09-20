@@ -30,7 +30,7 @@ import java.util.List;
  *      "transaccionesProveedor": [{@link TransaccionProveedorDTO}]
  *   }
  **/
-public class ProveedorDetailDTO extends ProveedorDTO implements Serializable
+public class ProveedorDetailDTO extends ProveedorDTO //implements Serializable
 {
     private List<ProductoDTO> productos;
     
@@ -39,14 +39,17 @@ public class ProveedorDetailDTO extends ProveedorDTO implements Serializable
     public ProveedorDetailDTO()
     {
         super();
+        productos = new ArrayList<>();
+        transaccionesProveedor = new ArrayList<>();
     }
     
     public ProveedorDetailDTO(ProveedorEntity proveedorEntity)
     {
         super(proveedorEntity);
+        productos = new ArrayList<>();
+        transaccionesProveedor = new ArrayList<>();
         if ( proveedorEntity.getProductos() != null) 
         {
-            productos = new ArrayList<>();
             for(ProductoEntity entityProducto : proveedorEntity.getProductos()) 
             {
                 productos.add(new ProductoDTO(entityProducto));
@@ -54,7 +57,6 @@ public class ProveedorDetailDTO extends ProveedorDTO implements Serializable
         }
         if ( proveedorEntity.getTransacciones() != null) 
         {
-            transaccionesProveedor = new ArrayList<>();
             for (TransaccionProveedorEntity entityTransaccion : proveedorEntity.getTransacciones()) 
             {
                 transaccionesProveedor.add(new TransaccionProveedorDTO(entityTransaccion));

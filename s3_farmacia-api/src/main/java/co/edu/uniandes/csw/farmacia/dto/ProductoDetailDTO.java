@@ -14,6 +14,36 @@ import java.util.List;
  */
 public class ProductoDetailDTO extends ProductoDTO {
     private List<RegistroDTO> registros;
+    
+    private ProveedorDTO proveedor;
+
+    public ProveedorDTO getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(ProveedorDTO proveedor) {
+        this.proveedor = proveedor;
+    }
+
+    public TransaccionClienteDTO getTransaccionCliente() {
+        return transaccionCliente;
+    }
+
+    public void setTransaccionCliente(TransaccionClienteDTO transaccionCliente) {
+        this.transaccionCliente = transaccionCliente;
+    }
+
+    public TransaccionProveedorDTO getTransaccionProveedor() {
+        return transaccionProveedor;
+    }
+
+    public void setTransaccionProveedor(TransaccionProveedorDTO transaccionProveedor) {
+        this.transaccionProveedor = transaccionProveedor;
+    }
+    
+    private TransaccionClienteDTO transaccionCliente;
+    
+    private TransaccionProveedorDTO transaccionProveedor;
 
     public ProductoDetailDTO(ProductoEntity producto) {
         super(producto);

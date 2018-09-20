@@ -18,8 +18,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import co.edu.uniandes.csw.farmacia.dto.ProductoDTO;
+import co.edu.uniandes.csw.farmacia.dto.ProductoDetailDTO;
 import co.edu.uniandes.csw.farmacia.ejb.ProductoLogic;
 import co.edu.uniandes.csw.farmacia.entities.ProductoEntity;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import javax.inject.Inject;
@@ -56,12 +58,14 @@ public class ProductoResource {
     }
     
     @GET
-    public ProductoDTO[] getProductos() {
+    public List<ProductoDetailDTO> getProductos() {
         List<ProductoEntity> productos = logic.list();
-        ProductoDTO[] list = new ProductoDTO[productos.size()];
+        List<ProductoDetailDTO> list = new ArrayList<>();
         for(int i = 0; i < productos.size(); i++) {
-            list[i] = new ProductoDTO(productos.get(i));
+            //list[i] = new ProductoDTO(productos.get(i));
+            list.add(new ProductoDetailDTO(productos.get(i)));
         }
+        LOGGER.log(Level.INFO, "ProveedorResource getProveedores: output : {0}", list);
         return list;
     }
     

@@ -48,7 +48,7 @@ public class TransaccionProveedorDTO implements Serializable {
     
     //Atributos
     
-    protected long id;
+    protected Long id;
     /**
      * Cantidad de dinero manejada en la transacción
      */
@@ -102,7 +102,7 @@ public class TransaccionProveedorDTO implements Serializable {
     /**
      * @return Cantidad de dinero manejada en la transacción.
      */
-    public double getMonto()
+    public Double getMonto()
     {
         return monto;
     }
@@ -117,7 +117,7 @@ public class TransaccionProveedorDTO implements Serializable {
         this.proveedor = proveedor;
     }
     
-    public double getId()
+    public Long getId()
     {
         return id;
     }
@@ -130,7 +130,7 @@ public class TransaccionProveedorDTO implements Serializable {
         return tiempo;
     }
     
-    public void setId(long id)
+    public void setId(Long id)
     {
         this.id = id;
     }

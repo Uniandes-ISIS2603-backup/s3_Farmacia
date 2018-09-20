@@ -124,7 +124,6 @@ public class ProveedorResource {
     
     private List<ProveedorDetailDTO> listEntity2DetailDTO(List<ProveedorEntity> entityList) {
         List<ProveedorDetailDTO> list = new ArrayList<>();
-
         for (ProveedorEntity entity : entityList) {
             list.add(new ProveedorDetailDTO(entity));
         }
