@@ -82,9 +82,9 @@ public class TransaccionProveedorResource extends TransaccionProveedorDTO {
     public TransaccionProveedorDTO updateInformacion(@PathParam("id") Long proveedorId, @PathParam("transaccionProveedorId") Long transaccionProveedorId, TransaccionProveedorDTO transaccionProveedor) throws BusinessLogicException, BusinessLogicException
     {
         LOGGER.log(Level.INFO, "TransaccionProveedorResource updateTransaccionProveedor: input: proveedorId: {0} , transaccionProveedorId: {1} , transaccionProveedor:{2}", new Object[]{proveedorId, transaccionProveedorId, transaccionProveedor.toString()});
-        if (transaccionProveedorId.equals(transaccionProveedor.getId())) {
-            throw new BusinessLogicException("Los ids del TransaccionProveedor no coinciden.");
-        }
+       // if (transaccionProveedorId.equals(transaccionProveedor.getId())) {
+         //   throw new BusinessLogicException("Los ids del TransaccionProveedor no coinciden.");
+       // }
         TransaccionProveedorEntity entity = transaccionProveedorLogic.getTransaccionProveedor(proveedorId, transaccionProveedorId);
         if (entity == null) {
             throw new WebApplicationException("El recurso /proveedor/" + proveedorId + "/transaccionProveedor/" + transaccionProveedorId + " no existe.", 404);
