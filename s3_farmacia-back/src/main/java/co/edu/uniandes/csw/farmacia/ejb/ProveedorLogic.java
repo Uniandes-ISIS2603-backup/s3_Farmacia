@@ -7,7 +7,6 @@ package co.edu.uniandes.csw.farmacia.ejb;
 
 import co.edu.uniandes.csw.farmacia.entities.ProductoEntity;
 import co.edu.uniandes.csw.farmacia.entities.ProveedorEntity;
-import co.edu.uniandes.csw.farmacia.entities.TransaccionProveedorEntity;
 import co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.farmacia.persistence.ProveedorPersistence;
 import java.util.List;
@@ -81,11 +80,6 @@ public class ProveedorLogic {
     public void deleteProveedor(Long proveedorId) throws BusinessLogicException
     {
        LOGGER.log(Level.INFO, "Inicia proceso de eliminación del proveedor con id={0} ", proveedorId);
-     //  List<TransaccionProveedorEntity> transacciones = getProveedor(proveedorId).getTransacciones();
-      // if(transacciones != null && !transacciones.isEmpty())
-       //{
-         //  throw new BusinessLogicException("No se puede borrar el proveedor con id " +proveedorId +"debido a que aún tiene transacciones asociadas.");
-      // }
        List<ProductoEntity> productos = getProveedor(proveedorId).getProductos();
        if(productos != null && !productos.isEmpty())
        {

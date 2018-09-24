@@ -6,8 +6,10 @@
 package co.edu.uniandes.csw.farmacia.ejb;
 
 import co.edu.uniandes.csw.farmacia.entities.FacturaEntity;
+import co.edu.uniandes.csw.farmacia.entities.TransaccionClienteEntity;
 import co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.farmacia.persistence.FacturaPersistence;
+import co.edu.uniandes.csw.farmacia.persistence.TransaccionClientePersistence;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +21,99 @@ import javax.inject.Inject;
  * @author df.machado10
  */
 @Stateless
-public class FacturaLogic {
+public class FacturaLogic 
+{
+   
+
+    private static final Logger LOGGER = Logger.getLogger(FacturaLogic.class.getName());
+
+    @Inject
+    private FacturaPersistence prizePersistence;
+
+    @Inject
+    private TransaccionClientePersistence transaccionClientePersistence;
+    
+    
+
+    public FacturaEntity createFactura(FacturaEntity facturaEntity) throws BusinessLogicException {
+        LOGGER.info("Inicia proceso de creación de premio");
+        if (facturaEntity.getTransaccionCLiente() == null) {
+            throw new BusinessLogicException("La factura no está asociada a una transacción.");
+        }
+        TransaccionClienteEntity trEntity = transaccionClientePersistence.find(facturaEntity.getTransaccionCLiente().getCliente().getId(),facturaEntity.getTransaccionCLiente().getId());
+        if (trEntity == null) {
+            throw new BusinessLogicException("La transacción es inválida");
+        }
+        if (trEntity.getFactura() != null) {
+            throw new BusinessLogicException("La transaccion ya tiene factura asociada.");
+        }
+        facturaEntity.setTransaccionCLiente(trEntity);
+        trEntity.setFactura(facturaEntity);
+        facturaEntity = prizePersistence.create(facturaEntity);
+        LOGGER.info("Termina proceso de creación de factura");
+        return facturaEntity;
+    }
+
+    /**
+     * Devuelve todos los premios que hay en la base de datos.
+     *
+     * @return Lista de entidades de tipo premio.
+     */
+//    public List<PrizeEntity> getPrizes() {
+  //      LOGGER.info("Inicia proceso de consultar todos los premios");
+    //    List<PrizeEntity> prizes = prizePersistence.findAll();
+      //  LOGGER.info("Termina proceso de consultar todos los premios");
+        //return prizes;
+    //}
+
+    /**
+     * Busca un premio por ID
+     *
+     * @param prizesId El id del premio a buscar
+     * @return El premio encontrado, null si no lo encuentra.
+     */
+  //  public PrizeEntity getPrize(Long prizesId) {
+  //      LOGGER.log(Level.INFO, "Inicia proceso de consultar premio con id = {0}", prizesId);
+ //       PrizeEntity prize = prizePersistence.find(prizesId);
+  //      if (prize == null) {
+    //        LOGGER.log(Level.SEVERE, "El premio con el id = {0} no existe", prizesId);
+   //     }
+   //     LOGGER.log(Level.INFO, "Termina proceso de consultar premio con id = {0}", prizesId);
+   //     return prize;
+   // }
+
+    /**
+     * Actualizar un premio por ID
+     *
+     * @param prizesId El ID del premio a actualizar
+     * @param prizeEntity La entidad del premio con los cambios deseados
+     * @return La entidad del premio luego de actualizarla
+     */
+//    public PrizeEntity updatePrize(Long prizesId, PrizeEntity prizeEntity) {
+  //      LOGGER.log(Level.INFO, "Inicia proceso de actualizar premio con id = {0}", prizesId);
+    //    PrizeEntity newEntity = prizePersistence.update(prizeEntity);
+      //  LOGGER.log(Level.INFO, "Termina proceso de actualizar premio con id = {0}", prizeEntity.getId());
+      //  return newEntity;
+   // }
+
+    /**
+     * Eliminar un premio por ID
+     *
+     * @param facturaId El ID de la factura a eliminar
+     * @throws BusinessLogicException si el premio tiene un autor asociado.
+     */
+   // public void deleteFactura(Long facturaId) throws BusinessLogicException {
+     //   LOGGER.log(Level.INFO, "Inicia proceso de borrar factura con id = {0}", facturaId);
+      //  if (prizePersistence.find(facturaId).getAuthor() != null) {
+       //     throw new BusinessLogicException("No se puede borrar el premio con id = " + facturaId + " porque tiene un autor asociado");
+       // }
+       // prizePersistence.delete(facturaId);
+       // LOGGER.log(Level.INFO, "Termina proceso de borrar premio con id = {0}", facturaId);
+    //}
+
+}
+
+    /**
     @Inject
     private FacturaPersistence facturaPersistence;
 
@@ -37,7 +131,7 @@ public class FacturaLogic {
         return entity;
     }
         
-    public List<FacturaEntity> findfacturas(){
+    public List<FacturaEntity> findFacturas(){
         return facturaPersistence.findAll();
     }
         
@@ -69,4 +163,5 @@ public class FacturaLogic {
         facturaPersistence.delete(facturaId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar el cliente con id = {0}", facturaId);
     }
-}
+
+**/

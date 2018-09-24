@@ -2,11 +2,9 @@
 package co.edu.uniandes.csw.farmacia.resources;
 
 import co.edu.uniandes.csw.farmacia.dto.ProductoDetailDTO;
-import co.edu.uniandes.csw.farmacia.ejb.ProductoLogic;
 import co.edu.uniandes.csw.farmacia.ejb.ProveedorLogic;
 import co.edu.uniandes.csw.farmacia.ejb.ProveedorProductosLogic;
 import co.edu.uniandes.csw.farmacia.entities.ProductoEntity;
-import co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -17,7 +15,6 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -46,7 +43,7 @@ public class ProveedorProductosResource
     
            
     @POST
-    @Path("{transaccionCliente: \\d+}")
+    @Path("{productosId: \\d+}")
     public void addProducto(@PathParam("id") Long provId, @PathParam("productosId") Long productosId) {
         LOGGER.log(Level.INFO, "ProveedorProductosResource addProducto: input: provId {0} , productosId {1}", new Object[]{provId, productosId});
         if (proveedorLogic.getProveedor(provId) == null) {

@@ -16,7 +16,7 @@ import javax.ejb.Stateless;
 
 /**
  *
- * @author francisco
+ * @author fj.gonzalez
  */
 @Stateless
 public class ProveedorPersistence {
