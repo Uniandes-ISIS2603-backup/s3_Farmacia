@@ -11,6 +11,7 @@ import co.edu.uniandes.csw.farmacia.dto.TransaccionClienteDetailDTO;
 import co.edu.uniandes.csw.farmacia.ejb.TransaccionClienteProductosLogic;
 import co.edu.uniandes.csw.farmacia.ejb.TransaccionClienteLogic;
 import co.edu.uniandes.csw.farmacia.entities.ProductoEntity;
+import co.edu.uniandes.csw.farmacia.entities.TransaccionClienteEntity;
 import co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,12 +49,14 @@ public class TransaccionClienteProductoResource {
         
     @POST
     @Path("{transaccionCliente: \\d+}")
-    public void addProducto(@PathParam("transaccionCienteId") Long transId, @PathParam("productosId") Long productosId,@PathParam("clienteId") Long clienteId) {
+    public void addProducto(@PathParam("transaccionClienteId") Long transId, @PathParam("productosId") Long productosId,@PathParam("clienteId") Long clienteId) {
         try
         {
         LOGGER.log(Level.INFO, "TransaccionClienteProductoResource addProducto: input: transaccionClienteId {0} , ProductoId {1},cleinteId{0}", new Object[]{transId, productosId,clienteId});
-        if (transLogic.getTransaccionCliente(clienteId, transId).getProductos() == null) {
-            throw new WebApplicationException("El recurso /transaccionCleinte/" + transId + " no existe.", 404);
+        TransaccionClienteEntity trans = 
+                transLogic.getTransaccionCliente(clienteId, transId);
+        if ( trans == null || trans.getProductos() == null) {
+            throw new WebApplicationException("El recurso /transaccionCliente/" + transId + " no existe.", 404);
         }
         
         
