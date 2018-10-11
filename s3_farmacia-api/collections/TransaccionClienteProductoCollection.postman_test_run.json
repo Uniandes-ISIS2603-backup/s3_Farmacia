@@ -37,7 +37,7 @@
 		{
 			"name": "list",
 			"id": "0e88e672-c8b5-40d0-ac80-21881740e406",
-			"url": "http://localhost:8080/s3_farmacia-api/api/transaccionesCliente/1/productos",
+			"url": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/transaccionesCliente/1/productos",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 200,
@@ -61,7 +61,7 @@
 		{
 			"name": "create",
 			"id": "89492de6-8c4e-44aa-989b-6f64b5f9bad9",
-			"url": "http://localhost:8080/s3_farmacia-api/api/transaccionesCliente/1/productos/1",
+			"url": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/transaccionesCliente/1/productos/1",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 204,
@@ -85,7 +85,7 @@
 		{
 			"name": "delete",
 			"id": "909a66a7-06a1-417f-af47-a30c7215854c",
-			"url": "http://localhost:8080/s3_farmacia-api/api/transaccionesCliente/1/productos/1",
+			"url": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/transaccionesCliente/1/productos/1",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 204,
@@ -115,7 +115,7 @@
 		{
 			"name": "list",
 			"id": "0e88e672-c8b5-40d0-ac80-21881740e406",
-			"url": "http://localhost:8080/s3_farmacia-api/api/transaccionesCliente/1/productos",
+			"url": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/transaccionesCliente/1/productos",
 			"time": "2018-09-10T19:04:12.205Z",
 			"responseCode": {
 				"code": 200,
@@ -130,7 +130,7 @@
 		{
 			"name": "create",
 			"id": "89492de6-8c4e-44aa-989b-6f64b5f9bad9",
-			"url": "http://localhost:8080/s3_farmacia-api/api/transaccionesCliente/1/productos/1",
+			"url": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/transaccionesCliente/1/productos/1",
 			"time": "2018-09-10T19:04:12.205Z",
 			"responseCode": {
 				"code": 204,
@@ -145,7 +145,7 @@
 		{
 			"name": "delete",
 			"id": "909a66a7-06a1-417f-af47-a30c7215854c",
-			"url": "http://localhost:8080/s3_farmacia-api/api/transaccionesCliente/1/productos/1",
+			"url": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/transaccionesCliente/1/productos/1",
 			"time": "2018-09-10T19:04:12.205Z",
 			"responseCode": {
 				"code": 204,

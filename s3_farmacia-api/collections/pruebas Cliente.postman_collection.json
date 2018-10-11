@@ -20,12 +20,12 @@
 					"raw": "{\"id\":1,\"nombre\":\"Harry\", \"apellido\":\"Potter\", \"ciudad\":\"Privet Drive\", \"direccionEnvio\":\"CRA6#1-39\",\"cedula\":1075690311}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s3_farmacia-api/api/clientes/",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s3_farmacia-api",
 						"api",
@@ -43,12 +43,12 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/s3_farmacia-api/api/clientes/1",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/1",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s3_farmacia-api",
 						"api",
@@ -66,12 +66,12 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/s3_farmacia-api/api/clientes/2",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/2",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s3_farmacia-api",
 						"api",
@@ -97,12 +97,12 @@
 					"raw": "{\"id\":2, \"nombre\":\"Draco\", \"apellido\":\"Malfoy\", \"ciudad\":\"Hogwarts\", \"direccionEnvio\":\"CRA7#1-39\",\"cedula\":1075790311}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s3_farmacia-api/api/clientes/1",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/1",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s3_farmacia-api",
 						"api",
