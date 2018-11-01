@@ -23,6 +23,8 @@ public class TransaccionClienteDTO implements Serializable
     
     private String tipoDePago;
 
+    private ClienteDTO cliente;
+    
     public TransaccionClienteDTO() 
     {
         
@@ -38,6 +40,14 @@ public class TransaccionClienteDTO implements Serializable
             this.tipoDePago= tran.getTipoDePago();
             this.parcial= tran.getParcial();
             this.tipoDePago=tran.getTipoDePago();
+            if(tran.getCliente()!=null)
+            {
+                this.cliente = new ClienteDTO(tran.getCliente());
+            }
+            else
+            {
+                this.cliente=null;
+            }
            
         }
     }
@@ -49,6 +59,10 @@ public class TransaccionClienteDTO implements Serializable
         transaccionEntity.setParcial(this.parcial);
         transaccionEntity.setTiempo(this.tiempo);
         transaccionEntity.setTipoDePago(this.tipoDePago);
+        if(this.cliente !=null)
+        {
+            transaccionEntity.setCliente(this.cliente.toEntity());
+        }
         return transaccionEntity;
     }
     
@@ -98,4 +112,13 @@ public class TransaccionClienteDTO implements Serializable
     {
         tipoDePago=pTipoDePago;
     }
+    public ClienteDTO getClienteDTO()
+    {
+        return cliente;
+    }
+    public void setClienteDTO(ClienteDTO pCiente)
+    {
+        cliente=pCiente;
+    }
+    
 }

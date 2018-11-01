@@ -51,11 +51,13 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable {
     public ClienteEntity toEntity() {
         ClienteEntity clienteEntity = super.toEntity();
         if (transaccionesCliente != null) {
+            
             List<TransaccionClienteEntity> transaccionesEntity = new ArrayList<>();
             for (TransaccionClienteDTO dtoTransaccion : transaccionesCliente) {
                 transaccionesEntity.add(dtoTransaccion.toEntity());
             }
             clienteEntity.setTransaccionesCliente(transaccionesEntity);
+            
         }
         return clienteEntity;
     }
@@ -74,7 +76,7 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable {
      *
      * @param transaccionesCliente las transacciones para poner
      */
-    public void setBooks(List<TransaccionClienteDTO> transaccionesCliente) {
+    public void setTransaccionCiente(List<TransaccionClienteDTO> transaccionesCliente) {
         this.transaccionesCliente = transaccionesCliente;
     }
     
