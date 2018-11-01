@@ -116,7 +116,7 @@ public class TransaccionProveedorResource extends TransaccionProveedorDTO {
      */
     @DELETE
     @Path("{transaccionProveedorId: \\d+}")
-    public void deleteReview(@PathParam("id") Long proveedorId, @PathParam("transaccionProveedorId") Long transaccionProveedorId) throws BusinessLogicException {
+    public void deleteTransaccionProveedor(@PathParam("id") Long proveedorId, @PathParam("transaccionProveedorId") Long transaccionProveedorId) throws BusinessLogicException {
         TransaccionProveedorEntity entity = transaccionProveedorLogic.getTransaccionProveedor(proveedorId, transaccionProveedorId);
         if (entity == null) {
             throw new WebApplicationException("El recurso /proveedor/" + proveedorId + "/transaccionProveedor/" + transaccionProveedorId + " no existe.", 404);

@@ -115,7 +115,7 @@ public class ProveedorResource {
     }
     
       @Path("{id: \\d+}/transaccionProveedor")
-    public Class<TransaccionProveedorResource> getReviewResource(@PathParam("id") Long provId) {
+    public Class<TransaccionProveedorResource> getTransaccionProveedorResource(@PathParam("id") Long provId) {
         if (proveedorLogic.getProveedor(provId) == null) {
             throw new WebApplicationException("El recurso /proveedores/" + provId + "/transaccionProveedor no existe.", 404);
         }

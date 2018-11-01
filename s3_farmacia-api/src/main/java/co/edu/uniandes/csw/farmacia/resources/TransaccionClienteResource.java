@@ -41,7 +41,7 @@ public class TransaccionClienteResource
     @Inject
     private TransaccionClienteLogic logic;
     
-    private static final Logger LOGGER = Logger.getLogger(ProveedorResource.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ClienteResource.class.getName());
     
     @POST
     public TransaccionClienteDTO createTransacionCliente(@PathParam("clienteId")Long id,TransaccionClienteDTO transaccion) throws BusinessLogicException

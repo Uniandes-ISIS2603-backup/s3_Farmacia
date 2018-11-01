@@ -145,7 +145,7 @@ public class ClienteResource {
         LOGGER.log(Level.INFO, "ClienteResource updateCliente: output: {0}", detailDTO.toString());
         return detailDTO;
     } 
-    @Path("{clientesId: \\d+}/transaccionesCliente")
+    @Path("{clienteId: \\d+}/transaccionesCliente")
     public Class<TransaccionClienteResource> getTransaccionClienteResource(@PathParam("clienteId") Long clienteId) {
         if (clienteLogic.getCliente(clienteId) == null) {
             throw new WebApplicationException("El recurso /clientes/" + clienteId + "/transaccionesCliente no existe.", 404);
