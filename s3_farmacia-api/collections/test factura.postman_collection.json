@@ -20,12 +20,12 @@
 					"raw": "{ \n\t\"id\" : 420 ,\n\t\"fecha\" : \"29/08/2018\",\n\t\"precio\" : 20.200,\n\t\"productos\" : \"acetaminofen\",\n\t\"unidades\" : 200\n\t\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s3_farmacia-api/api/facturas/",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/facturas/",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s3_farmacia-api",
 						"api",
@@ -43,12 +43,12 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/s3_farmacia-api/api/facturas/420",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/facturas/420",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s3_farmacia-api",
 						"api",
@@ -74,12 +74,12 @@
 					"raw": "{ \n\t\"id\" : 420 ,\n\t\"fecha\" : \"29/08/2018\",\n\t\"precio\" : 20.300,\n\t\"productos\" : \"acetaminofen\",\n\t\"unidades\" : 200\n\t\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s3_farmacia-api/api/facturas/420",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/facturas/420",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s3_farmacia-api",
 						"api",
@@ -97,12 +97,12 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/s3_farmacia-api/api/facturas/420",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/facturas/420",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s3_farmacia-api",
 						"api",

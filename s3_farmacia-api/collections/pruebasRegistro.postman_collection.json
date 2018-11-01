@@ -20,12 +20,12 @@
 					"raw": "{\"id\":\"1\",\"cantidad\":\"10\",\"tipoRegistro\":\"TRASLADO_BODEGA\"}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s3_farmacia-api/api/registros/",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/registros/",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s3_farmacia-api",
 						"api",
@@ -43,12 +43,12 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/s3_farmacia-api/api/registros/1",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/registros/1",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s3_farmacia-api",
 						"api",
@@ -66,12 +66,12 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/s3_farmacia-api/api/registros/2",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/registros/2",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s3_farmacia-api",
 						"api",
@@ -97,12 +97,12 @@
 					"raw": "{\"id\":2, \"cantidad\":\"7\", \"tipoRegistro\":\"PERDIDA\"}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s3_farmacia-api/api/registros/1",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/registros/1",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s3_farmacia-api",
 						"api",

@@ -20,12 +20,12 @@
 					"raw": "{ \n\t\"id\" : 1 ,\n\t\"nombre\" : \"Nestle\"\n\t\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s3_farmacia-api/api/proveedores/",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s3_farmacia-api",
 						"api",
@@ -43,12 +43,12 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/s3_farmacia-api/api/proveedores/1",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/1",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s3_farmacia-api",
 						"api",
@@ -66,12 +66,12 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/s3_farmacia-api/api/proveedores/2",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/2",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s3_farmacia-api",
 						"api",
@@ -97,12 +97,12 @@
 					"raw": "{\n\t\"id\" : 1,\n\t\"nombre\" : \"Bayer\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s3_farmacia-api/api/proveedores/1",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/1",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s3_farmacia-api",
 						"api",

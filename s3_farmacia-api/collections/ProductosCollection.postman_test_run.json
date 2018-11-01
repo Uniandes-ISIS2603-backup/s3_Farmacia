@@ -39,7 +39,7 @@
 		{
 			"name": "getProducto",
 			"id": "96813d73-7c55-44a3-b3b2-f57706142548",
-			"url": "http://localhost:8080/s3_farmacia-api/api/productos",
+			"url": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 200,
@@ -63,7 +63,7 @@
 		{
 			"name": "getProducto/id",
 			"id": "3771a857-19e3-44ad-88e2-99959329d260",
-			"url": "http://localhost:8080/s3_farmacia-api/api/productos/10",
+			"url": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/10",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 200,
@@ -87,7 +87,7 @@
 		{
 			"name": "postProducto",
 			"id": "5f34b351-f9a3-4134-b736-36856bc2cd32",
-			"url": "http://localhost:8080/s3_farmacia-api/api/productos",
+			"url": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 200,
@@ -111,7 +111,7 @@
 		{
 			"name": "putProducto/id",
 			"id": "d011b653-c075-4721-a1e4-72eba96e636a",
-			"url": "http://localhost:8080/s3_farmacia-api/api/productos/10",
+			"url": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/10",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 200,
@@ -135,7 +135,7 @@
 		{
 			"name": "deleteProducto/id",
 			"id": "c7f7b724-47e1-4df6-b667-01125d592fc2",
-			"url": "http://localhost:8080/s3_farmacia-api/api/productos/10",
+			"url": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/10",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 204,
@@ -165,7 +165,7 @@
 		{
 			"name": "getProducto",
 			"id": "96813d73-7c55-44a3-b3b2-f57706142548",
-			"url": "http://localhost:8080/s3_farmacia-api/api/productos",
+			"url": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos",
 			"time": "2018-08-30T15:40:36.094Z",
 			"responseCode": {
 				"code": 200,
@@ -180,7 +180,7 @@
 		{
 			"name": "getProducto/id",
 			"id": "3771a857-19e3-44ad-88e2-99959329d260",
-			"url": "http://localhost:8080/s3_farmacia-api/api/productos/10",
+			"url": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/10",
 			"time": "2018-08-30T15:40:36.094Z",
 			"responseCode": {
 				"code": 200,
@@ -195,7 +195,7 @@
 		{
 			"name": "postProducto",
 			"id": "5f34b351-f9a3-4134-b736-36856bc2cd32",
-			"url": "http://localhost:8080/s3_farmacia-api/api/productos",
+			"url": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos",
 			"time": "2018-08-30T15:40:36.094Z",
 			"responseCode": {
 				"code": 200,
@@ -210,7 +210,7 @@
 		{
 			"name": "putProducto/id",
 			"id": "d011b653-c075-4721-a1e4-72eba96e636a",
-			"url": "http://localhost:8080/s3_farmacia-api/api/productos/10",
+			"url": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/10",
 			"time": "2018-08-30T15:40:36.094Z",
 			"responseCode": {
 				"code": 200,
@@ -225,7 +225,7 @@
 		{
 			"name": "deleteProducto/id",
 			"id": "c7f7b724-47e1-4df6-b667-01125d592fc2",
-			"url": "http://localhost:8080/s3_farmacia-api/api/productos/10",
+			"url": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/10",
 			"time": "2018-08-30T15:40:36.094Z",
 			"responseCode": {
 				"code": 204,

@@ -60,6 +60,23 @@ public class ProductoResource {
         
     }
     
+    @Path("{productoId: \\d+}/asociate/registro/{registroId: \\d+}")
+    @POST
+    public void asociateProductoRegistro(@PathParam("productoId") Long productoId,
+            @PathParam("registroId") Long registroId) 
+            throws WebApplicationException {
+        try {
+            logic.asociate(productoId, registroId);
+        } catch (BusinessLogicException ble) {
+            if (ble.getMessage()
+                    .equals("El registro ya tiene un producto asociado")) {
+                throw new WebApplicationException(ble.getMessage(), 400);
+            }
+            else 
+                throw new WebApplicationException(ble.getMessage(), 404);
+        }
+    }
+    
     @GET
     public List<ProductoDetailDTO> getProductos() {
         List<ProductoEntity> productos = logic.list();

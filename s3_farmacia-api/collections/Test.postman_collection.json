@@ -12,12 +12,12 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/s3_farmacia-api/api/proveedores/1/transaccionProveedor/1",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/1/transaccionProveedor/1",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s3_farmacia-api",
 						"api",
@@ -67,12 +67,12 @@
 					"raw": "{\n\t\"id\": 121,\n    \"monto\": 4000,\n    \"tiempo\": \"40\",\n    \"proveedor\":\n    {\n        \"id\": 1,\n        \"nombre\" : \"Nestle\"\n    }\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s3_farmacia-api/api/proveedores/1/transaccionProveedor",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/1/transaccionProveedor",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s3_farmacia-api",
 						"api",
@@ -122,12 +122,12 @@
 					"raw": "{\n\t\"id\": 2,\n\t\"monto\": 3,\n\t\"tiempo\": \"24\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s3_farmacia-api/api/proveedores/1/transaccionProveedor/2",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/1/transaccionProveedor/2",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s3_farmacia-api",
 						"api",
@@ -147,12 +147,12 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/s3_farmacia-api/api/proveedores/1/transaccionProveedor/1",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/1/transaccionProveedor/1",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s3_farmacia-api",
 						"api",
@@ -172,12 +172,12 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/s3_farmacia-api/api/proveedores/1/transaccionProveedor",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/1/transaccionProveedor",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"s3_farmacia-api",
 						"api",
