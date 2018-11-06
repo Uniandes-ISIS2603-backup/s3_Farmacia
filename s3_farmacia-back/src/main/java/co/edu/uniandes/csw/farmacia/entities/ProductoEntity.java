@@ -76,7 +76,15 @@ public class ProductoEntity extends BaseEntity implements Serializable {
         this.proveedor = proveedor;
     }
 
-    
+    private String nombre;
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
     
     public ProductoEntity(){}
     

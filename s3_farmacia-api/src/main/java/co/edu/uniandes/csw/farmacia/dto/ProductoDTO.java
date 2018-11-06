@@ -18,6 +18,16 @@ public class ProductoDTO implements Serializable {
         
     }
     
+    private String nombre;
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
     public ProductoDTO(ProductoEntity producto) {
         if(producto != null) {
             System.out.println("ProductoEntity has been built");
@@ -30,6 +40,7 @@ public class ProductoDTO implements Serializable {
             this.videos = producto.getVideos();
             this.perecedero = producto.getPerecedero();
             this.cantidad = producto.getCantidad();
+            this.nombre = producto.getNombre();
         }
     }
     
@@ -44,6 +55,7 @@ public class ProductoDTO implements Serializable {
         producto.setUnidadesDisponibles(unidadesDisponibles);
         producto.setPerecedero(perecedero);
         producto.setCantidad(cantidad);
+        producto.setNombre(nombre);
         return producto;
     }
     
