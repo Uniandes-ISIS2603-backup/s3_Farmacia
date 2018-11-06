@@ -10,6 +10,7 @@ import co.edu.uniandes.csw.farmacia.entities.ProveedorEntity;
 import co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.farmacia.persistence.ProductoPersistence;
 import co.edu.uniandes.csw.farmacia.persistence.ProveedorPersistence;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -54,7 +55,9 @@ public class ProveedorProductosLogic {
        LOGGER.log(Level.INFO, "Inicia proceso de agregarle un producto al proveedor con id = {0}", proveedorId);
         ProveedorEntity provEntity = proveedorPersistence.find(proveedorId);
         ProductoEntity productoEntity = productoPersistence.find(productoId);
-        productoEntity.setProveedor(provEntity);
+        List<ProveedorEntity> proveedores = new ArrayList<>();
+        proveedores.add(provEntity);
+        productoEntity.setProveedor(proveedores);
         LOGGER.log(Level.INFO, "Termina proceso de agregarle un producto al proveedor con id = {0}", proveedorId);
         return productoEntity;
 
@@ -66,7 +69,9 @@ public class ProveedorProductosLogic {
         List<ProductoEntity> productoList = productoPersistence.list();
         for (ProductoEntity p : productoList) {
             if (list.contains(p)) {
-                p.setProveedor(proveedorEntity);
+                List<ProveedorEntity> proveedores = new ArrayList<>();
+                proveedores.add(proveedorEntity);
+                p.setProveedor(proveedores);
             } else if (p.getProveedor()!= null && p.getProveedor().equals(proveedorEntity)) {
                 p.setProveedor(null);
             }

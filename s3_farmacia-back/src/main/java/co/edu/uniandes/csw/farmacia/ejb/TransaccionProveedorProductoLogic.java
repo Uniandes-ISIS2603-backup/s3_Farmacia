@@ -10,6 +10,7 @@ import co.edu.uniandes.csw.farmacia.entities.TransaccionProveedorEntity;
 import co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.farmacia.persistence.ProductoPersistence;
 import co.edu.uniandes.csw.farmacia.persistence.TransaccionProveedorPersistence;
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -41,7 +42,9 @@ public class TransaccionProveedorProductoLogic {
             throw new BusinessLogicException(
                     "No se encontraron los elementos a asociar");
         }
-        producto.setTransaccionProveedor(transaccion);
+        List<TransaccionProveedorEntity> transacciones = new ArrayList<>();
+        transacciones.add(transaccion);
+        producto.setTransaccionProveedor(transacciones);
         productoPersistence.update(producto);
         List<ProductoEntity> productos = transaccion.getProductos();
         productos.add(producto);
@@ -98,7 +101,7 @@ public class TransaccionProveedorProductoLogic {
      * @return la transaccion asociada, null en caso de que el producto no se encuentre asociado
      * @throws BusinessLogicException si no se encuentra el producto
      */
-    public TransaccionProveedorEntity getTransaccion(Long idProducto)
+    public List<TransaccionProveedorEntity> getTransaccion(Long idProducto)
             throws BusinessLogicException {
         ProductoEntity producto = productoPersistence.find(idProducto);
         if (producto == null) {

@@ -6,8 +6,10 @@
 package co.edu.uniandes.csw.farmacia.dto;
 
 import co.edu.uniandes.csw.farmacia.entities.ProductoEntity;
+import co.edu.uniandes.csw.farmacia.entities.ProveedorEntity;
 import co.edu.uniandes.csw.farmacia.entities.RegistroEntity;
 import co.edu.uniandes.csw.farmacia.entities.TransaccionClienteEntity;
+import co.edu.uniandes.csw.farmacia.entities.TransaccionProveedorEntity;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,13 +20,13 @@ import java.util.List;
 public class ProductoDetailDTO extends ProductoDTO {
     private List<RegistroDTO> registros;
     
-    private ProveedorDTO proveedor;
+    private List<ProveedorDTO> proveedor;
 
-    public ProveedorDTO getProveedor() {
+    public List<ProveedorDTO> getProveedor() {
         return proveedor;
     }
 
-    public void setProveedor(ProveedorDTO proveedor) {
+    public void setProveedor(List<ProveedorDTO> proveedor) {
         this.proveedor = proveedor;
     }
 
@@ -36,24 +38,31 @@ public class ProductoDetailDTO extends ProductoDTO {
         this.transaccionCliente = transaccionCliente;
     }
 
-    public TransaccionProveedorDTO getTransaccionProveedor() {
+    public List<TransaccionProveedorDTO> getTransaccionProveedor() {
         return transaccionProveedor;
     }
 
-    public void setTransaccionProveedor(TransaccionProveedorDTO transaccionProveedor) {
+    public void setTransaccionProveedor(List<TransaccionProveedorDTO> transaccionProveedor) {
         this.transaccionProveedor = transaccionProveedor;
     }
     
     private List<TransaccionClienteDTO> transaccionCliente;
     
-    private TransaccionProveedorDTO transaccionProveedor;
+    private List<TransaccionProveedorDTO> transaccionProveedor;
 
     public ProductoDetailDTO(ProductoEntity producto) {
         super(producto);
         if (producto != null) {
-            this.proveedor = new ProveedorDTO(producto.getProveedor());
-            this.transaccionProveedor = new TransaccionProveedorDTO(
-                    producto.getTransaccionProveedor());
+            List<ProveedorDTO> proveedores = new ArrayList<>();
+            for (ProveedorEntity prov : producto.getProveedor()) {
+                proveedores.add(new ProveedorDTO(prov));
+            }
+            this.proveedor = proveedores;
+            List<TransaccionProveedorDTO> transacciones = new ArrayList<>();
+            for (TransaccionProveedorEntity trans: producto.getTransaccionProveedor()) {
+                transacciones.add(new TransaccionProveedorDTO(trans));
+            }
+            this.transaccionProveedor = transacciones;
             if (producto.getRegistros() != null) {
                 this.registros = new ArrayList<>();
                 for (RegistroEntity registro : producto.getRegistros()) {

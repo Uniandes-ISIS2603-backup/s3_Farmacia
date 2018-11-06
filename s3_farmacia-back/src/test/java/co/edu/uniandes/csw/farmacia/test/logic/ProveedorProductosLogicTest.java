@@ -112,11 +112,13 @@ public class ProveedorProductosLogicTest
         }
         for (int i = 0; i < 3; i++) {
             ProveedorEntity entity = factory.manufacturePojo(ProveedorEntity.class);
+            List<ProveedorEntity> proveedores = new ArrayList<>();
+            proveedores.add(entity);
             em.persist(entity);
             data.add(entity);
             if (i == 0) 
             {
-                dataProducto.get(i).setProveedor(entity);
+                dataProducto.get(i).setProveedor(proveedores);
             }
         }
     }
