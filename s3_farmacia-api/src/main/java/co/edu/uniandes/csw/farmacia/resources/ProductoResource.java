@@ -91,11 +91,11 @@ public class ProductoResource {
     
     @GET
     @Path("{productosId:\\d+}")
-    public ProductoDTO getProducto(@PathParam("productosId") Long id) throws
+    public ProductoDetailDTO getProducto(@PathParam("productosId") Long id) throws
             WebApplicationException {
         try {
             ProductoEntity producto = logic.get(id);
-            return new ProductoDTO(producto);
+            return new ProductoDetailDTO(producto);
         }  catch (BusinessLogicException ble) {
                         throw new WebApplicationException(
                                 "El recurso /productos/" + id + " no existe.",

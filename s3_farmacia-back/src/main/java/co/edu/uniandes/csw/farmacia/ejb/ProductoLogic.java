@@ -53,6 +53,7 @@ public class ProductoLogic {
         }
         List<RegistroEntity> list = productoEntity.getRegistros();
         list.add(registro);
+        productoEntity.setRegistros(list);
         registro.setProducto(productoEntity);
         return persistence.create(productoEntity);
     }
