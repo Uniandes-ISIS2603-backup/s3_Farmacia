@@ -14,15 +14,29 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- *
+ *   
+ *   {
+ *      "id": number,
+ *      "nombre": string,
+ *       "apellido": string,
+ *      "ciudad" : string,
+ *      "direccionEnvio" : string,
+ *      "cedula" : number,
+ *      "transaccionesCliente": [{@link TransaccionClienteDTO}]
+ *   }
+ * 
+ * 
+ * 
  * @author estudiante
  */
 public class ClienteDetailDTO extends ClienteDTO implements Serializable {
     
     private List<TransaccionClienteDTO> transaccionesCliente;
     
-    public ClienteDetailDTO(){
-        
+    public ClienteDetailDTO()
+    {
+        super();
+        transaccionesCliente = new ArrayList<TransaccionClienteDTO>();
     }
     
     /**
@@ -32,7 +46,8 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable {
      */
     public ClienteDetailDTO(ClienteEntity clienteEntity) {
         super(clienteEntity);
-        if (clienteEntity != null) {
+        if (clienteEntity != null) 
+        {
             if (clienteEntity.getTransaccionesCliente() != null) {
                 transaccionesCliente = new ArrayList<>();
                 for (TransaccionClienteEntity entityTransaccion : clienteEntity.getTransaccionesCliente()) {
@@ -53,9 +68,9 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable {
         if (transaccionesCliente != null) {
             
             List<TransaccionClienteEntity> transaccionesEntity = new ArrayList<>();
-            for (TransaccionClienteDTO dtoTransaccion : transaccionesCliente) {
+            transaccionesCliente.forEach((dtoTransaccion) -> {
                 transaccionesEntity.add(dtoTransaccion.toEntity());
-            }
+            });
             clienteEntity.setTransaccionesCliente(transaccionesEntity);
             
         }

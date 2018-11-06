@@ -8,7 +8,6 @@ package co.edu.uniandes.csw.farmacia.dto;
 import co.edu.uniandes.csw.farmacia.entities.ProductoEntity;
 import co.edu.uniandes.csw.farmacia.entities.ProveedorEntity;
 import co.edu.uniandes.csw.farmacia.entities.TransaccionProveedorEntity;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +21,6 @@ import java.util.List;
  * documentacion de {@link BookDTO}
  *
  * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
- * <pre>
  *   {
  *      "id": number,
  *      "nombre": string,

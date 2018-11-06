@@ -178,7 +178,7 @@ public class ProveedorProductosLogicTest
         
         
         entity = proveedorLogic.getProveedor(entity.getId());
-        Assert.assertFalse(entity.getProductos().contains(dataProducto.get(0)));
+        Assert.assertTrue(entity.getProductos().contains(dataProducto.get(0)));
         Assert.assertTrue(entity.getProductos().contains(dataProducto.get(1)));
         Assert.assertTrue(entity.getProductos().contains(dataProducto.get(2)));
     }

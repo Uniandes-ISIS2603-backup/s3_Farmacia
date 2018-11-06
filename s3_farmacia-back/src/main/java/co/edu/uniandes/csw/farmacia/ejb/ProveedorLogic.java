@@ -30,7 +30,8 @@ public class ProveedorLogic {
 
     //Buscamos validar tres principios básicos :    
     //1. Verificar que no existan dos proveedores con el mismo nombre.
-    public ProveedorEntity createProveedor(ProveedorEntity provEntity) throws BusinessLogicException {
+    public ProveedorEntity createProveedor(ProveedorEntity provEntity) throws BusinessLogicException 
+    {
         //buscamos si ya existe.
         LOGGER.log(Level.INFO,"Inicia proceso de creación del proveedor.");
         
