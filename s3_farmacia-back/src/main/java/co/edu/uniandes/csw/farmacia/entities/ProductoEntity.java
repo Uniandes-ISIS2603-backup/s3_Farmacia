@@ -40,22 +40,22 @@ public class ProductoEntity extends BaseEntity implements Serializable {
     private List<RegistroEntity> registros = new ArrayList<RegistroEntity>();
     
     @PodamExclude
-    @ManyToOne
-    private ProveedorEntity proveedor;
+    @ManyToMany
+    private List<ProveedorEntity> proveedor;
     
     @PodamExclude
     @ManyToMany
     private List<TransaccionClienteEntity> transaccionesCliente;
     
     @PodamExclude
-    @ManyToOne
-    private TransaccionProveedorEntity transaccionProveedor;
+    @ManyToMany
+    private List<TransaccionProveedorEntity> transaccionProveedor;
 
-    public TransaccionProveedorEntity getTransaccionProveedor() {
+    public List<TransaccionProveedorEntity> getTransaccionProveedor() {
         return transaccionProveedor;
     }
 
-    public void setTransaccionProveedor(TransaccionProveedorEntity transaccionProveedor) {
+    public void setTransaccionProveedor(List<TransaccionProveedorEntity> transaccionProveedor) {
         this.transaccionProveedor = transaccionProveedor;
     }
 
@@ -68,11 +68,11 @@ public class ProductoEntity extends BaseEntity implements Serializable {
         this.transaccionesCliente = transaccionesCliente;
     }
 
-    public ProveedorEntity getProveedor() {
+    public List<ProveedorEntity> getProveedor() {
         return proveedor;
     }
 
-    public void setProveedor(ProveedorEntity proveedor) {
+    public void setProveedor(List<ProveedorEntity> proveedor) {
         this.proveedor = proveedor;
     }
 
