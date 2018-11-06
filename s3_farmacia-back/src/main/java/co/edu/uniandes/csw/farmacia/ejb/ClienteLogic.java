@@ -41,7 +41,7 @@ public class ClienteLogic {
             throw new BusinessLogicException("La cedula es invalida");
         }
         if (persistence.findByCedula(clienteEntity.getCedula()) != null) {
-            throw new BusinessLogicException("Ya existe una Cliente con el nombre \"" + clienteEntity.getNombre() + "\"");
+            throw new BusinessLogicException("Ya existe una Cliente con la cedula \"" + clienteEntity.getCedula() + "\"");
         }
         // Invoca la persistencia para crear el cliente
         persistence.create(clienteEntity);
