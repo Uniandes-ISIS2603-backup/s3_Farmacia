@@ -37,7 +37,7 @@ public class TransaccionProveedorEntity extends BaseEntity implements Serializab
     /**
      * atributo que hace referencia al timepo empleado en la transaccion
      */
-    private String tiempo;
+    private Double tiempo;
     
     /**
      * atributo que hace referencua al monto empleado en la transaccion
@@ -45,11 +45,11 @@ public class TransaccionProveedorEntity extends BaseEntity implements Serializab
     private Double monto;    
     
     
-    public void setTiempo(String pTiempo)
+    public void setTiempo(Double pTiempo)
     {
         tiempo = pTiempo;
     }
-    public String getTiempo()
+    public Double getTiempo()
     {
         return tiempo;
     }

@@ -58,7 +58,7 @@ public class TransaccionProveedorDTO implements Serializable {
     /**
      * Tiempo que tomo realizar la transacción
      */
-    protected String tiempo;
+    protected Double tiempo;
         
     private ProveedorDTO proveedor;
     
@@ -125,7 +125,7 @@ public class TransaccionProveedorDTO implements Serializable {
     /**
      * @return Cantidad de tiempo que tardo la transacción.
      */
-    public String getTiempo()
+    public Double getTiempo()
     {
         return tiempo;
     }
@@ -148,7 +148,7 @@ public class TransaccionProveedorDTO implements Serializable {
      * Cambia el tiempo por el que llega por parámetro
      * @param tiempo Tiempo nuevo.
      */
-    public void setTiempo(String tiempo)
+    public void setTiempo(Double tiempo)
     {
         this.tiempo = tiempo;
     }
