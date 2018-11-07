@@ -30,6 +30,8 @@ public class FacturaDTO {
     
     private TipoFactura tipo; 
     
+    private TransaccionClienteDTO transaccionCliente;
+    
     public FacturaDTO(){
         
     }
@@ -41,7 +43,15 @@ public class FacturaDTO {
             this.id = facturaEntity.getId();
             this.fecha = facturaEntity.getFecha();
             this.precio = facturaEntity.getPrecio();
-            this.unidades = facturaEntity.getUnidades();
+            this.unidades = facturaEntity.getUnidades(); 
+            if(facturaEntity.getTransaccionCliente() != null){
+                this.transaccionCliente = new TransaccionClienteDTO(facturaEntity.getTransaccionCliente());
+            }
+            else
+            {
+                facturaEntity.setTransaccionCliente(null);
+            }
+            
         }
     }
     
@@ -88,6 +98,15 @@ public class FacturaDTO {
         this.tipo = tipo;
     }
     
+    public void setTransaccionCliente(TransaccionClienteDTO transaccionCliente)
+    {
+        this.transaccionCliente = transaccionCliente;
+    }
+    public TransaccionClienteDTO getTransaccionCliente()
+    {
+        return transaccionCliente;
+    }
+    
     public FacturaEntity toEntity(){
         
         FacturaEntity facturaEntity = new FacturaEntity();
@@ -95,7 +114,10 @@ public class FacturaDTO {
         facturaEntity.setFecha(this.fecha);
         facturaEntity.setPrecio(this.precio);
         facturaEntity.setUnidades(this.unidades);
-        
+        if(transaccionCliente != null)
+        {
+           facturaEntity.setTransaccionCliente(transaccionCliente.toEntity());
+        }
         return facturaEntity;      
     }
   
