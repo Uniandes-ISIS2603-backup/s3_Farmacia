@@ -30,6 +30,9 @@ public class TransaccionClienteLogic
      
      @Inject
     private ClientePersistence clientePersistence;
+       
+     
+     
      
       public TransaccionClienteEntity createTransaccionCliente( Long Id, TransaccionClienteEntity trans) throws BusinessLogicException
       {
