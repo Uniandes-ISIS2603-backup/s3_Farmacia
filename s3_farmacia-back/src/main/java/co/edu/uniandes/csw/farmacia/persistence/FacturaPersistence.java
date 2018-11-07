@@ -21,7 +21,7 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class FacturaPersistence {
     
-    private static final Logger LOGGER = Logger.getLogger(ProveedorPersistence.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(FacturaPersistence.class.getName());
     
    
     @PersistenceContext(unitName = "DrugsHousePU")

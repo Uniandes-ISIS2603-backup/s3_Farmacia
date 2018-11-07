@@ -17,7 +17,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class FacturaEntity extends BaseEntity implements Serializable {
     
-    public enum TipoFactura
+    public enum TIPO_FACTURA
     {
         REAPROVISIONAMIENTO, DESPACHO     
     }
@@ -32,7 +32,7 @@ public class FacturaEntity extends BaseEntity implements Serializable {
         
     private Integer unidades;
     
-    private TipoFactura tipo; 
+    private TIPO_FACTURA tipo; 
     
     
     public String getFecha() {
@@ -48,7 +48,7 @@ public class FacturaEntity extends BaseEntity implements Serializable {
         return unidades;
     }
 
-    public TipoFactura getTipo() {
+    public TIPO_FACTURA getTipo() {
         return tipo;
     }
 
@@ -70,7 +70,7 @@ public class FacturaEntity extends BaseEntity implements Serializable {
     }
     
  
-    public void setTipo(TipoFactura tipo) {
+    public void setTipo(TIPO_FACTURA tipo) {
         this.tipo = tipo;
     }
 

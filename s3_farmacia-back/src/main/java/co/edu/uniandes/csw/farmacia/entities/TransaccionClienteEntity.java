@@ -46,7 +46,6 @@ public class TransaccionClienteEntity extends BaseEntity implements Serializable
     @OneToOne(mappedBy = "transaccionCliente", fetch=FetchType.LAZY)
     private FacturaEntity factura;
     
-     private static final Logger LOGGER = Logger.getLogger(TransaccionClienteEntity.class.getName());
     public void setTipoDePago(String pTipoDePago)
     {
         tipoDePago=pTipoDePago;

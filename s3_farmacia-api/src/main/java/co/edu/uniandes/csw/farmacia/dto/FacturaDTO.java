@@ -25,7 +25,7 @@ public class FacturaDTO implements Serializable  {
         
     private Integer unidades;
     
-private FacturaEntity.TipoFactura tipo;     
+private FacturaEntity.TIPO_FACTURA tipo;     
     private TransaccionClienteDTO transaccionCliente;
     
     public FacturaDTO(){
@@ -69,7 +69,7 @@ private FacturaEntity.TipoFactura tipo;
         return unidades;
     }
 
-    public FacturaEntity.TipoFactura getTipo() {
+    public FacturaEntity.TIPO_FACTURA getTipo() {
         return tipo;
     }
     
@@ -91,7 +91,7 @@ private FacturaEntity.TipoFactura tipo;
         this.unidades = unidades;
     }
 
-    public void setTipo(FacturaEntity.TipoFactura tipo) {
+    public void setTipo(FacturaEntity.TIPO_FACTURA tipo) {
         this.tipo = tipo;
     }
     
