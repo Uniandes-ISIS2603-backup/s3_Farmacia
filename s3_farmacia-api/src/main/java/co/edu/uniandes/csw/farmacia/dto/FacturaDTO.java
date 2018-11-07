@@ -25,9 +25,7 @@ public class FacturaDTO {
     private String fecha;
     
     private Double precio;
-    
-    private String productos;
-    
+        
     private Integer unidades;
     
     private TipoFactura tipo; 
@@ -43,7 +41,6 @@ public class FacturaDTO {
             this.id = facturaEntity.getId();
             this.fecha = facturaEntity.getFecha();
             this.precio = facturaEntity.getPrecio();
-            this.productos = facturaEntity.getProductos();
             this.unidades = facturaEntity.getUnidades();
         }
     }
@@ -59,10 +56,6 @@ public class FacturaDTO {
 
     public Double getPrecio() {
         return precio;
-    }
-
-    public String getProductos() {
-        return productos;
     }
 
     public Integer getUnidades() {
@@ -87,10 +80,6 @@ public class FacturaDTO {
         this.precio = precio;
     }
 
-    public void setProductos(String productos) {
-        this.productos = productos;
-    }
-
     public void setUnidades(Integer unidades) {
         this.unidades = unidades;
     }
@@ -105,7 +94,6 @@ public class FacturaDTO {
         facturaEntity.setId(this.id);
         facturaEntity.setFecha(this.fecha);
         facturaEntity.setPrecio(this.precio);
-        facturaEntity.setProductos(this.productos);
         facturaEntity.setUnidades(this.unidades);
         
         return facturaEntity;      

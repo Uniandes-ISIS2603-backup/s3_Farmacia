@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -43,7 +43,7 @@ public class TransaccionClienteEntity extends BaseEntity implements Serializable
     private List<ProductoEntity> productos = new ArrayList<>();
     
     @PodamExclude
-    @OneToOne
+    @OneToOne(mappedBy = "transaccionCliente", fetch=FetchType.LAZY)
     private FacturaEntity factura;
     
      private static final Logger LOGGER = Logger.getLogger(TransaccionClienteEntity.class.getName());

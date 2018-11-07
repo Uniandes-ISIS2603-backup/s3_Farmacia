@@ -30,7 +30,7 @@ public class FacturaDetailDTO extends FacturaDTO implements Serializable{
         if (facturaEntity != null) {
             
             transaccionCliente = new TransaccionClienteDTO();
-            facturaEntity.setTransaccionCLiente(transaccionCliente.toEntity());
+            facturaEntity.setTransaccionCliente(transaccionCliente.toEntity());
             
         }
     }
@@ -45,7 +45,7 @@ public class FacturaDetailDTO extends FacturaDTO implements Serializable{
         if (transaccionCliente != null) {
             TransaccionClienteEntity transaccionEntity = transaccionCliente.toEntity();
 
-            facturaEntity.setTransaccionCLiente(transaccionEntity);
+            facturaEntity.setTransaccionCliente(transaccionEntity);
         }
         return facturaEntity;
     }

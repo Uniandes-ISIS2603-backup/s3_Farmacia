@@ -106,7 +106,7 @@ public class FacturaLogicTest {
             FacturaEntity entity = factory.manufacturePojo(FacturaEntity.class);
             TransaccionClienteEntity transEntity = factory.manufacturePojo(TransaccionClienteEntity.class);
             em.persist(transEntity);
-            entity.setTransaccionCLiente(transEntity);
+            entity.setTransaccionCliente(transEntity);
             transEntity.setFactura(entity);
             em.persist(entity);
             data.add(entity);
@@ -124,11 +124,66 @@ public class FacturaLogicTest {
         TransaccionClienteEntity transaccionClienteEntity = factory.manufacturePojo(TransaccionClienteEntity.class);
         
         transaccionClienteEntity = transLogic.createTransaccionCliente(transData.get(2).getCliente().getId(), transaccionClienteEntity);
-        factEntity.setTransaccionCLiente(transaccionClienteEntity);
+        factEntity.setTransaccionCliente(transaccionClienteEntity);
         FacturaEntity result = facturaLogic.createFactura(factEntity);
         Assert.assertNotNull(result);
         FacturaEntity entity = em.find(FacturaEntity.class, result.getId());
         Assert.assertEquals(factEntity.getId(), entity.getId());
         Assert.assertEquals(factEntity.getPrecio(), entity.getPrecio());
     }
+    
+    @Test
+    public void getFacturasTest() {
+        List<FacturaEntity> list = facturaLogic.getFacturas();
+        Assert.assertEquals(data.size(), list.size());
+        for (FacturaEntity entity : list) {
+            boolean found = false;
+            for (FacturaEntity storedEntity : data) {
+                if (entity.getId().equals(storedEntity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+    
+    @Test
+    public void getFacturaTest() {
+        FacturaEntity entity = data.get(0);
+        FacturaEntity resultEntity = facturaLogic.getFactura(entity.getId());
+        Assert.assertNotNull(resultEntity);
+        Assert.assertEquals(entity.getId(), resultEntity.getId());
+        Assert.assertEquals(entity.getTipo(), resultEntity.getTipo());
+        Assert.assertEquals(entity.getPrecio(), resultEntity.getPrecio());
+        Assert.assertEquals(entity.getUnidades(), resultEntity.getUnidades());
+    }
+
+    /**
+     * Prueba para actualizar un Prize.
+     */
+    @Test
+    public void updateFacturaTest() {
+        FacturaEntity entity = data.get(0);
+        FacturaEntity pojoEntity = factory.manufacturePojo(FacturaEntity.class);
+
+        pojoEntity.setId(entity.getId());
+
+        facturaLogic.updateFactura(pojoEntity.getId(), pojoEntity);
+
+        FacturaEntity resp = em.find(FacturaEntity.class, entity.getId());
+
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+        Assert.assertEquals(pojoEntity.getPrecio(), resp.getPrecio());
+        Assert.assertEquals(pojoEntity.getUnidades(), resp.getUnidades());
+    }
+    
+        @Test(expected = BusinessLogicException.class)
+    public void deleteFacturaTest() throws BusinessLogicException {
+        FacturaEntity entity = data.get(2);
+        facturaLogic.deleteFactura(entity.getId());
+    }
+
+    
+    
+    
 }

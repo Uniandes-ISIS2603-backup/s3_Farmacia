@@ -24,12 +24,12 @@ public class FacturaEntity extends BaseEntity implements Serializable {
     
     @PodamExclude
     @OneToOne
-    private TransaccionClienteEntity transaccionCLiente;
+    private TransaccionClienteEntity transaccionCliente;
+    
     private String Fecha;
     
     private Double precio;
     
-    private String productos;
     
     private Integer unidades;
 
@@ -44,9 +44,6 @@ public class FacturaEntity extends BaseEntity implements Serializable {
         return precio;
     }
 
-    public String getProductos() {
-        return productos;
-    }
 
     public Integer getUnidades() {
         return unidades;
@@ -56,8 +53,8 @@ public class FacturaEntity extends BaseEntity implements Serializable {
         return tipo;
     }
 
-    public TransaccionClienteEntity getTransaccionCLiente() {
-        return transaccionCLiente;
+    public TransaccionClienteEntity getTransaccionCliente() {
+        return transaccionCliente;
     }
     
     public void setFecha(String Fecha) {
@@ -66,10 +63,6 @@ public class FacturaEntity extends BaseEntity implements Serializable {
 
     public void setPrecio(Double precio) {
         this.precio = precio;
-    }
-
-    public void setProductos(String productos) {
-        this.productos = productos;
     }
 
     public void setUnidades(Integer unidades) {
@@ -81,7 +74,7 @@ public class FacturaEntity extends BaseEntity implements Serializable {
         this.tipo = tipo;
     }
 
-    public void setTransaccionCLiente(TransaccionClienteEntity transaccionCLiente) {
-        this.transaccionCLiente = transaccionCLiente;
+    public void setTransaccionCliente(TransaccionClienteEntity transaccionCLiente) {
+        this.transaccionCliente = transaccionCLiente;
     }
 }

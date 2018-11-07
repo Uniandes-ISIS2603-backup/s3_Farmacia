@@ -28,7 +28,7 @@ public class FacturaLogic
     private static final Logger LOGGER = Logger.getLogger(FacturaLogic.class.getName());
 
     @Inject
-    private FacturaPersistence prizePersistence;
+    private FacturaPersistence facturaPersistence;
 
     @Inject
     private TransaccionClientePersistence transaccionClientePersistence;
@@ -37,34 +37,60 @@ public class FacturaLogic
 
     public FacturaEntity createFactura(FacturaEntity facturaEntity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de premio");
-        if (facturaEntity.getTransaccionCLiente() == null) {
+        if (facturaEntity.getTransaccionCliente() == null) {
             throw new BusinessLogicException("La factura no está asociada a una transacción.");
         }
-        TransaccionClienteEntity trEntity = transaccionClientePersistence.find(facturaEntity.getTransaccionCLiente().getCliente().getId(),facturaEntity.getTransaccionCLiente().getId());
+        TransaccionClienteEntity trEntity = transaccionClientePersistence.find(facturaEntity.getTransaccionCliente().getCliente().getId(),facturaEntity.getTransaccionCliente().getId());
         if (trEntity == null) {
             throw new BusinessLogicException("La transacción es inválida");
         }
         if (trEntity.getFactura() != null) {
             throw new BusinessLogicException("La transaccion ya tiene factura asociada.");
         }
-        facturaEntity.setTransaccionCLiente(trEntity);
+        facturaEntity.setTransaccionCliente(trEntity);
         trEntity.setFactura(facturaEntity);
-        facturaEntity = prizePersistence.create(facturaEntity);
+        facturaEntity = facturaPersistence.create(facturaEntity);
         LOGGER.info("Termina proceso de creación de factura");
         return facturaEntity;
     }
 
     /**
-     * Devuelve todos los premios que hay en la base de datos.
+     * Devuelve todas las facturas  que hay en la base de datos.
      *
-     * @return Lista de entidades de tipo premio.
+     * @return Lista de entidades de tipo factura.
      */
-//    public List<PrizeEntity> getPrizes() {
-  //      LOGGER.info("Inicia proceso de consultar todos los premios");
-    //    List<PrizeEntity> prizes = prizePersistence.findAll();
-      //  LOGGER.info("Termina proceso de consultar todos los premios");
-        //return prizes;
-    //}
+    public List<FacturaEntity> getFacturas() {
+       LOGGER.info("Inicia proceso de consultar todas los facturas");
+        List<FacturaEntity> facturas = facturaPersistence.findAll();
+        LOGGER.info("Termina proceso de consultar todas los facturas");
+        return facturas;
+    }
+    public FacturaEntity getFactura(Long facturasId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar premio con id = {0}", facturasId);
+        FacturaEntity factura = facturaPersistence.find(facturasId);
+        if (factura == null) {
+            LOGGER.log(Level.SEVERE, "El premio con el id = {0} no existe", facturasId);
+        }
+        LOGGER.log(Level.INFO, "Termina proceso de consultar premio con id = {0}", facturasId);
+        return factura;
+    }
+    
+        public FacturaEntity updateFactura(Long prizesId, FacturaEntity facturaEntity) {
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar premio con id = {0}", prizesId);
+        FacturaEntity newEntity = facturaPersistence.update(facturaEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar premio con id = {0}", facturaEntity.getId());
+        return newEntity;
+    }
+        
+            public void deleteFactura(Long facturasId) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar premio con id = {0}", facturasId);
+        if (facturaPersistence.find(facturasId).getTransaccionCliente() != null) {
+            throw new BusinessLogicException("No se puede borrar el premio con id = " + facturasId + " porque tiene una transaccion asociada");
+        }
+        facturaPersistence.delete(facturasId);
+        LOGGER.log(Level.INFO, "Termina proceso de borrar premio con id = {0}", facturasId);
+    }
+
 
     /**
      * Busca un premio por ID
