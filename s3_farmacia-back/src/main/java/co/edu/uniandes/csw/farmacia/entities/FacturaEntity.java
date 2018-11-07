@@ -26,7 +26,8 @@ public class FacturaEntity extends BaseEntity implements Serializable {
     @OneToOne
     private TransaccionClienteEntity transaccionCliente;
     
-    private String Fecha;
+    private String Fecha;  
+    
     
     private Double precio;
     
