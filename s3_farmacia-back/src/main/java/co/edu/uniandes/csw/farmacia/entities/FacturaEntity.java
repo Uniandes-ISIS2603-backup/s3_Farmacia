@@ -74,7 +74,7 @@ public class FacturaEntity extends BaseEntity implements Serializable {
         this.tipo = tipo;
     }
 
-    public void setTransaccionCliente(TransaccionClienteEntity transaccionCLiente) {
-        this.transaccionCliente = transaccionCLiente;
+    public void setTransaccionCliente(TransaccionClienteEntity transaccionClienteEntity) {
+        this.transaccionCliente = transaccionClienteEntity;
     }
 }
