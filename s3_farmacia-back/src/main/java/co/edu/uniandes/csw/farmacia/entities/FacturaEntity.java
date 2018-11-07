@@ -63,6 +63,7 @@ public class FacturaEntity extends BaseEntity implements Serializable {
     public void setPrecio(Double precio) {
         this.precio = precio;
     }
+    
 
     public void setUnidades(Integer unidades) {
         this.unidades = unidades;
