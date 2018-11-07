@@ -19,6 +19,10 @@ public class TransaccionClienteDetailDTO extends TransaccionClienteDTO implement
 {
     private List<ProductoDTO> carrito;
     
+    
+    
+    private FacturaDTO factura;
+    
     public TransaccionClienteDetailDTO()
     {
         super();
@@ -33,6 +37,11 @@ public class TransaccionClienteDetailDTO extends TransaccionClienteDTO implement
             for (ProductoEntity entityReview : transaccion.getProductos()) {
                 carrito.add(new ProductoDTO(entityReview));
             }
+        }
+        
+        if(transaccion.getFactura() != null)
+        {
+            this.factura =  new FacturaDTO(transaccion.getFactura());
         }
     }
     
@@ -50,9 +59,21 @@ public class TransaccionClienteDetailDTO extends TransaccionClienteDTO implement
             }
             transaccion.setProductos(productos);
         }
+        if(getFactura() != null)
+        {
+            transaccion.setFactura(getFactura().toEntity());
+        }
            return transaccion;
     }
+    public FacturaDTO getFactura()
+    {
+        return factura;
+    }
     
+    public void setFactura(FacturaDTO factura)
+    {
+        this.factura = factura;
+    }
       
     public List<ProductoDTO> getProductos()
     {
