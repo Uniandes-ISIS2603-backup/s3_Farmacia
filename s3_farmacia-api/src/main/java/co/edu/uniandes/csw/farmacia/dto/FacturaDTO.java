@@ -17,10 +17,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class FacturaDTO implements Serializable  {
 
     
-    public enum TipoFactura{
-        REAPROVISIONAMIENTO, DESPACHO     
-    }
-    
     private Long id;
     
     private String fecha;
@@ -29,8 +25,7 @@ public class FacturaDTO implements Serializable  {
         
     private Integer unidades;
     
-    private TipoFactura tipo; 
-    
+private FacturaEntity.TipoFactura tipo;     
     private TransaccionClienteDTO transaccionCliente;
     
     public FacturaDTO(){
@@ -45,6 +40,7 @@ public class FacturaDTO implements Serializable  {
             this.fecha = facturaEntity.getFecha();
             this.precio = facturaEntity.getPrecio();
             this.unidades = facturaEntity.getUnidades(); 
+            this.tipo = facturaEntity.getTipo();
             if(facturaEntity.getTransaccionCliente() != null){
                 this.transaccionCliente = new TransaccionClienteDTO(facturaEntity.getTransaccionCliente());
             }
@@ -73,7 +69,7 @@ public class FacturaDTO implements Serializable  {
         return unidades;
     }
 
-    public TipoFactura getTipo() {
+    public FacturaEntity.TipoFactura getTipo() {
         return tipo;
     }
     
@@ -95,7 +91,7 @@ public class FacturaDTO implements Serializable  {
         this.unidades = unidades;
     }
 
-    public void setTipo(TipoFactura tipo) {
+    public void setTipo(FacturaEntity.TipoFactura tipo) {
         this.tipo = tipo;
     }
     
@@ -115,6 +111,7 @@ public class FacturaDTO implements Serializable  {
         facturaEntity.setFecha(this.fecha);
         facturaEntity.setPrecio(this.precio);
         facturaEntity.setUnidades(this.unidades);
+        facturaEntity.setTipo(this.tipo);
         if(transaccionCliente != null)
         {
            facturaEntity.setTransaccionCliente(transaccionCliente.toEntity());
