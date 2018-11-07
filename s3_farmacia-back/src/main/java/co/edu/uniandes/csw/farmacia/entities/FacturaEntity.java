@@ -21,7 +21,7 @@ public class FacturaEntity extends BaseEntity implements Serializable {
     {
         REAPROVISIONAMIENTO, DESPACHO     
     }
-    
+      
     @PodamExclude
     @OneToOne
     private TransaccionClienteEntity transaccionCliente;
