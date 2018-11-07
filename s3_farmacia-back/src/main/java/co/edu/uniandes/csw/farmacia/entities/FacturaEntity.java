@@ -26,19 +26,17 @@ public class FacturaEntity extends BaseEntity implements Serializable {
     @OneToOne
     private TransaccionClienteEntity transaccionCliente;
     
-    private String Fecha;  
-    
+    private String fecha;
     
     private Double precio;
-    
-    
+        
     private Integer unidades;
-
-
-    private TipoFactura tipo;
+    
+    private TipoFactura tipo; 
+    
     
     public String getFecha() {
-        return Fecha;
+        return fecha;
     }
 
     public Double getPrecio() {
@@ -58,8 +56,8 @@ public class FacturaEntity extends BaseEntity implements Serializable {
         return transaccionCliente;
     }
     
-    public void setFecha(String Fecha) {
-        this.Fecha = Fecha;
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
     public void setPrecio(Double precio) {

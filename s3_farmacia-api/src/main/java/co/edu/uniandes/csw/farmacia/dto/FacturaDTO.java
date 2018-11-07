@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.farmacia.dto;
 
 import co.edu.uniandes.csw.farmacia.entities.FacturaEntity;
+import java.io.Serializable;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -13,7 +14,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author estudiante
  */
-public class FacturaDTO {
+public class FacturaDTO implements Serializable  {
 
     
     public enum TipoFactura{
