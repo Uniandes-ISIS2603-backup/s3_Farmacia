@@ -123,7 +123,7 @@ public class ProveedorResource {
     }
     
     private List<ProveedorDetailDTO> listEntity2DetailDTO(List<ProveedorEntity> entityList) {
-        List<ProveedorDetailDTO> list = new ArrayList<>();
+        List<ProveedorDetailDTO> list = new ArrayList<ProveedorDetailDTO>();
         for (ProveedorEntity entity : entityList) {
             list.add(new ProveedorDetailDTO(entity));
         }

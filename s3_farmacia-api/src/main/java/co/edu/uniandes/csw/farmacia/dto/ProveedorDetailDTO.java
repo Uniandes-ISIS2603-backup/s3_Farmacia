@@ -37,15 +37,15 @@ public class ProveedorDetailDTO extends ProveedorDTO //implements Serializable
     public ProveedorDetailDTO()
     {
         super();
-        productos = new ArrayList<>();
-        transaccionesProveedor = new ArrayList<>();
+        productos = new ArrayList<ProductoDTO>();
+        transaccionesProveedor = new ArrayList<TransaccionProveedorDTO>();
     }
     
     public ProveedorDetailDTO(ProveedorEntity proveedorEntity)
     {
         super(proveedorEntity);
-        productos = new ArrayList<>();
-        transaccionesProveedor = new ArrayList<>();
+        productos = new ArrayList<ProductoDTO>();
+        transaccionesProveedor = new ArrayList<TransaccionProveedorDTO>();
         if ( proveedorEntity.getProductos() != null) 
         {
             for(ProductoEntity entityProducto : proveedorEntity.getProductos()) 
@@ -67,7 +67,7 @@ public class ProveedorDetailDTO extends ProveedorDTO //implements Serializable
          ProveedorEntity proveedorEntity = super.toEntity();
         if (productos != null)
         {
-            List<ProductoEntity> productosEntity = new ArrayList<>();
+            List<ProductoEntity> productosEntity = new ArrayList<ProductoEntity>();
             for (ProductoDTO dtoProduct : productos) {
                 productosEntity.add(dtoProduct.toEntity());
             }
@@ -75,7 +75,7 @@ public class ProveedorDetailDTO extends ProveedorDTO //implements Serializable
         }
         if (transaccionesProveedor != null)
         {
-            List<TransaccionProveedorEntity> transaccionesEntity = new ArrayList<>();
+            List<TransaccionProveedorEntity> transaccionesEntity = new ArrayList<TransaccionProveedorEntity>();
             for (TransaccionProveedorDTO dtoTrans : transaccionesProveedor) {
                 transaccionesEntity.add(dtoTrans.toEntity());
             }

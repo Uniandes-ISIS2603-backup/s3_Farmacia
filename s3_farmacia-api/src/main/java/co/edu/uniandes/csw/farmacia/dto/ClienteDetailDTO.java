@@ -49,7 +49,7 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable {
         if (clienteEntity != null) 
         {
             if (clienteEntity.getTransaccionesCliente() != null) {
-                transaccionesCliente = new ArrayList<>();
+                transaccionesCliente = new ArrayList<TransaccionClienteDTO>();
                 for (TransaccionClienteEntity entityTransaccion : clienteEntity.getTransaccionesCliente()) {
                     transaccionesCliente.add(new TransaccionClienteDTO(entityTransaccion));
                 }
@@ -67,10 +67,10 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable {
         ClienteEntity clienteEntity = super.toEntity();
         if (transaccionesCliente != null) {
             
-            List<TransaccionClienteEntity> transaccionesEntity = new ArrayList<>();
-            transaccionesCliente.forEach((dtoTransaccion) -> {
+            List<TransaccionClienteEntity> transaccionesEntity = new ArrayList<TransaccionClienteEntity>();
+            for (TransaccionClienteDTO dtoTransaccion: transaccionesCliente)  {
                 transaccionesEntity.add(dtoTransaccion.toEntity());
-            });
+            }
             clienteEntity.setTransaccionesCliente(transaccionesEntity);
             
         }

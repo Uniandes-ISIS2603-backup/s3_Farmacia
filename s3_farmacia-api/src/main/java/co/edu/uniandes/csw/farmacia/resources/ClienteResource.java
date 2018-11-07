@@ -163,7 +163,7 @@ public class ClienteResource {
      * @return la lista de clientes en forma DTO (json)
      */
     private List<ClienteDTO> listEntity2DetailDTO(List<ClienteEntity> entityList) {
-        List<ClienteDTO> list = new ArrayList<>();
+        List<ClienteDTO> list = new ArrayList<ClienteDTO>();
         for (ClienteEntity entity : entityList) {
             list.add(new ClienteDTO(entity));
         }

@@ -33,7 +33,7 @@ public class TransaccionClienteDetailDTO extends TransaccionClienteDTO implement
         super(transaccion);
         if(transaccion.getProductos()!=null)
         {
-            carrito = new ArrayList<>();
+            carrito = new ArrayList<ProductoDTO>();
             for (ProductoEntity entityReview : transaccion.getProductos()) {
                 carrito.add(new ProductoDTO(entityReview));
             }
@@ -53,7 +53,7 @@ public class TransaccionClienteDetailDTO extends TransaccionClienteDTO implement
     {
         TransaccionClienteEntity transaccion = super.toEntity();
         if (carrito != null) {
-            List<ProductoEntity> productos = new ArrayList<>();
+            List<ProductoEntity> productos = new ArrayList<ProductoEntity>();
             for (ProductoDTO dtoReview : getProductos()) {
                 productos.add(dtoReview.toEntity());
             }

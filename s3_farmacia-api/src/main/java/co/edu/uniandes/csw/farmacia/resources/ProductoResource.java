@@ -80,7 +80,7 @@ public class ProductoResource {
     @GET
     public List<ProductoDetailDTO> getProductos() {
         List<ProductoEntity> productos = logic.list();
-        List<ProductoDetailDTO> list = new ArrayList<>();
+        List<ProductoDetailDTO> list = new ArrayList<ProductoDetailDTO>();
         for(int i = 0; i < productos.size(); i++) {
             //list[i] = new ProductoDTO(productos.get(i));
             list.add(new ProductoDetailDTO(productos.get(i)));

@@ -134,7 +134,7 @@ public List<ProductoDetailDTO> getProductos(@PathParam("TransaccionClienteId") L
     }
 
     private List<ProductoEntity> productosListDTO2Entity(List<ProductoDetailDTO> dtos) {
-        List<ProductoEntity> list = new ArrayList<>();
+        List<ProductoEntity> list = new ArrayList<ProductoEntity>();
         for (ProductoDetailDTO dto : dtos) {
             list.add(dto.toEntity());
         }
@@ -142,7 +142,7 @@ public List<ProductoDetailDTO> getProductos(@PathParam("TransaccionClienteId") L
     }
     
    private List<ProductoDetailDTO> productosListEntity2DTO(List<ProductoEntity> entityList) {
-        List<ProductoDetailDTO> list = new ArrayList<>();
+        List<ProductoDetailDTO> list = new ArrayList<ProductoDetailDTO>();
         for (ProductoEntity entity : entityList) {
             list.add(new ProductoDetailDTO(entity));
         }
