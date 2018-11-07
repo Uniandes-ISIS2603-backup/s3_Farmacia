@@ -7,7 +7,7 @@
     <parent>
         <groupId>co.edu.uniandes.csw</groupId>
         <artifactId>s3_drugshouse</artifactId>
-        <version>1.0</version>
+        <version>1.2</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>s3_drugshouse-api</artifactId>
