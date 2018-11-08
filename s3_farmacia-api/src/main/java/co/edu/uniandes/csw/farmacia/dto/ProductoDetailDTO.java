@@ -31,38 +31,38 @@ public class ProductoDetailDTO extends ProductoDTO {
     }
 
     public List<TransaccionClienteDTO> getTransaccionCliente() {
-        return transaccionCliente;
+        return transaccionesCliente;
     }
 
     public void setTransaccionCliente(List<TransaccionClienteDTO> transaccionCliente) {
-        this.transaccionCliente = transaccionCliente;
+        this.transaccionesCliente = transaccionCliente;
     }
 
     public List<TransaccionProveedorDTO> getTransaccionProveedor() {
-        return transaccionProveedor;
+        return transaccionesProveedor;
     }
 
     public void setTransaccionProveedor(List<TransaccionProveedorDTO> transaccionProveedor) {
-        this.transaccionProveedor = transaccionProveedor;
+        this.transaccionesProveedor = transaccionProveedor;
     }
     
-    private List<TransaccionClienteDTO> transaccionCliente;
+    private List<TransaccionClienteDTO> transaccionesCliente;
     
-    private List<TransaccionProveedorDTO> transaccionProveedor;
+    private List<TransaccionProveedorDTO> transaccionesProveedor;
 
     public ProductoDetailDTO(ProductoEntity producto) {
         super(producto);
         if (producto != null) {
-            List<ProveedorDTO> proveedores = new ArrayList<ProveedorDTO>();
+            List<ProveedorDTO> proveedores = new ArrayList<>();
             for (ProveedorEntity prov : producto.getProveedor()) {
                 proveedores.add(new ProveedorDTO(prov));
             }
             this.proveedor = proveedores;
-            List<TransaccionProveedorDTO> transacciones = new ArrayList<TransaccionProveedorDTO>();
+            List<TransaccionProveedorDTO> transacciones = new ArrayList<>();
             for (TransaccionProveedorEntity trans: producto.getTransaccionProveedor()) {
                 transacciones.add(new TransaccionProveedorDTO(trans));
             }
-            this.transaccionProveedor = transacciones;
+            this.transaccionesProveedor = transacciones;
             if (producto.getRegistros() != null) {
                 this.registros = new ArrayList<RegistroDTO>();
                 for (RegistroEntity registro : producto.getRegistros()) {
@@ -70,10 +70,10 @@ public class ProductoDetailDTO extends ProductoDTO {
                 }
             }
             if (producto.getTransaccionesCliente() != null) {
-                this.transaccionCliente = new ArrayList<TransaccionClienteDTO>();
+                this.transaccionesCliente = new ArrayList<TransaccionClienteDTO>();
                 for (TransaccionClienteEntity transaccion : 
                         producto.getTransaccionesCliente()) {
-                    this.transaccionCliente
+                    this.transaccionesCliente
                             .add(new TransaccionClienteDTO(transaccion));
                 }
             }

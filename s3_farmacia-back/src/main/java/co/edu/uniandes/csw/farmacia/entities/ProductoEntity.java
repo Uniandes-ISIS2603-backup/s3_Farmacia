@@ -49,14 +49,14 @@ public class ProductoEntity extends BaseEntity implements Serializable {
     
     @PodamExclude
     @ManyToMany
-    private List<TransaccionProveedorEntity> transaccionProveedor;
+    private List<TransaccionProveedorEntity> transaccionesProveedor;
 
     public List<TransaccionProveedorEntity> getTransaccionProveedor() {
-        return transaccionProveedor;
+        return transaccionesProveedor;
     }
 
     public void setTransaccionProveedor(List<TransaccionProveedorEntity> transaccionProveedor) {
-        this.transaccionProveedor = transaccionProveedor;
+        this.transaccionesProveedor = transaccionProveedor;
     }
 
     public List<TransaccionClienteEntity> getTransaccionesCliente() {

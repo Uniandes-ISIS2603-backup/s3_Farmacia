@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.farmacia.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -20,6 +21,10 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class TransaccionClienteEntity extends BaseEntity implements Serializable
 {    
+    
+    
+    private static final Logger LOGGER = Logger.getLogger(TransaccionClienteEntity.class.getName());
+
     
     private Double monto;
     

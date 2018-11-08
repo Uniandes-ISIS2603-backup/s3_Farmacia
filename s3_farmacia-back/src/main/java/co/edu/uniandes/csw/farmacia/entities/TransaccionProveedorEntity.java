@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -31,7 +32,7 @@ public class TransaccionProveedorEntity extends BaseEntity implements Serializab
     private ProveedorEntity proveedor;
     
     @PodamExclude
-    @OneToMany
+    @ManyToMany(mappedBy = "transaccionesProveedor")
     private List<ProductoEntity> productos = new ArrayList<>();
     
     /**
