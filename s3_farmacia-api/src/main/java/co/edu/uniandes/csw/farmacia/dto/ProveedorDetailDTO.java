@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.farmacia.dto;
 import co.edu.uniandes.csw.farmacia.entities.ProductoEntity;
 import co.edu.uniandes.csw.farmacia.entities.ProveedorEntity;
 import co.edu.uniandes.csw.farmacia.entities.TransaccionProveedorEntity;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,7 @@ import java.util.List;
  *      "transaccionesProveedor": [{@link TransaccionProveedorDTO}]
  *   }
  **/
-public class ProveedorDetailDTO extends ProveedorDTO //implements Serializable
+public class ProveedorDetailDTO extends ProveedorDTO implements Serializable
 {
     private List<ProductoDTO> productos;
     
@@ -37,7 +38,7 @@ public class ProveedorDetailDTO extends ProveedorDTO //implements Serializable
     public ProveedorDetailDTO()
     {
         super();
-        productos = new ArrayList<ProductoDTO>();
+        productos = new ArrayList<>();
         transaccionesProveedor = new ArrayList<TransaccionProveedorDTO>();
     }
     
