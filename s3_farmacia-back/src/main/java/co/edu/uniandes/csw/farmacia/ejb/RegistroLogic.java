@@ -125,6 +125,10 @@ public class RegistroLogic {
                 tipoRegistro.equalsIgnoreCase(RegistroEntity.VENCIMIENTO));
     }
     
+    public List<RegistroEntity> list(){
+        return persistence.list();
+    }
+    
 
     
 }

@@ -118,6 +118,12 @@ public class RegistroResource {
 
     }
     
+    @GET
+    public List<RegistroDTO> listRegistro(){
+        return listEntity2DTO(registroLogic.list());
+        
+    }
+    
     /**
      * Borra el registro con el id asociado recibido en la URL
      * @param productosId el ID del producto del cual se va a eliminar el registro
@@ -133,6 +139,8 @@ public class RegistroResource {
         }
         registroLogic.deleteRegistro(productosId, registrosId);
     }
+    
+    
     
     /**
      * Lista de entidades a DTO

@@ -108,5 +108,12 @@ public class RegistroPersistence {
         LOGGER.log(Level.INFO, "Saliendo de eliminar un registro con id = {0}", registroId);
     }
     
+    public List<RegistroEntity> list() {
+        return em
+                .createQuery("select e from RegistroEntity e",
+                        RegistroEntity.class)
+                .getResultList();
+    }
+    
     
 }
