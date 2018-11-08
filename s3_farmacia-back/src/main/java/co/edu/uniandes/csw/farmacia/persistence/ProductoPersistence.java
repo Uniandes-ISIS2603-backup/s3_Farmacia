@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.farmacia.persistence;
 
 import co.edu.uniandes.csw.farmacia.entities.ProductoEntity;
+import co.edu.uniandes.csw.farmacia.entities.RegistroEntity;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,10 +41,23 @@ public class ProductoPersistence {
      * @return lista de productos
      */
     public List<ProductoEntity> list() {
-        return em
+        List<ProductoEntity> productos = em
                 .createQuery("select e from ProductoEntity e", 
                         ProductoEntity.class)
                 .getResultList();
+        for (ProductoEntity producto:productos) {
+            Long id = producto.getId();
+            List<RegistroEntity> registros = em
+                .createQuery("select r from RegistroEntity r",
+                        RegistroEntity.class)
+                .getResultList();
+            registros.removeIf((RegistroEntity re) -> {
+                return re == null || re.getProducto() == null ||
+                        re.getProducto().getId() != id;
+            });
+            producto.setRegistros(registros);
+        }
+        return productos;
     }
     
     /**

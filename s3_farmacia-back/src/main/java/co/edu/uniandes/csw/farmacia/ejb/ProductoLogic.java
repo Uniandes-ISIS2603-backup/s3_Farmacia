@@ -11,12 +11,14 @@ import co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.farmacia.persistence.ProductoPersistence;
 import co.edu.uniandes.csw.farmacia.persistence.RegistroPersistence;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author jd.pardo
  */
+@Stateless
 public class ProductoLogic {
     
     public static final int UNIDADES_MIN = Integer.MIN_VALUE;
@@ -55,7 +57,9 @@ public class ProductoLogic {
         list.add(registro);
         productoEntity.setRegistros(list);
         registro.setProducto(productoEntity);
-        return persistence.create(productoEntity);
+        persistence.create(productoEntity);
+        registroPersistence.update(registro);
+        return productoEntity;
     }
     
     /**

@@ -103,8 +103,8 @@ public class ProductoLogicTest {
     
     private void clearData() 
    {
-        em.createQuery("delete from ProductoEntity").executeUpdate();
         em.createQuery("delete from RegistroEntity").executeUpdate();
+        em.createQuery("delete from ProductoEntity").executeUpdate();
     }
 
     @Test

@@ -11,12 +11,14 @@ import co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.farmacia.persistence.ProductoPersistence;
 import co.edu.uniandes.csw.farmacia.persistence.TransaccionClientePersistence;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author estudiante
  */
+@Stateless
 public class TransaccionClienteProductosLogic {
     
     @Inject

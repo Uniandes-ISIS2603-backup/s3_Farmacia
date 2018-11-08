@@ -12,12 +12,14 @@ import co.edu.uniandes.csw.farmacia.persistence.ProductoPersistence;
 import co.edu.uniandes.csw.farmacia.persistence.TransaccionProveedorPersistence;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author estudiante
  */
+@Stateless
 public class TransaccionProveedorProductoLogic {
     
     @Inject
