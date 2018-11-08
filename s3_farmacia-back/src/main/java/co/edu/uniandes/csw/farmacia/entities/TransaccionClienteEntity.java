@@ -36,7 +36,7 @@ public class TransaccionClienteEntity extends BaseEntity implements Serializable
     private ClienteEntity cliente;
     
     @PodamExclude
-    @ManyToMany(mappedBy = "transaccionesCliente")
+    @ManyToMany(mappedBy = "transacciones")
     private List<ProductoEntity> productos = new ArrayList<>();
  
     
@@ -90,7 +90,7 @@ public class TransaccionClienteEntity extends BaseEntity implements Serializable
     
     public void setProductos(List<ProductoEntity> pProductos)
     {
-        productos=pProductos;
+        productos= pProductos;
     }
     
     public List<ProductoEntity> getProductos()

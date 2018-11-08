@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class TransaccionClienteDetailDTO extends TransaccionClienteDTO implements Serializable
 {
-    private List<ProductoDTO> carrito;    
+    private List<ProductoDTO> productos;    
     
     public TransaccionClienteDetailDTO()
     {
@@ -29,22 +29,20 @@ public class TransaccionClienteDetailDTO extends TransaccionClienteDTO implement
         super(transaccion);
         if(transaccion.getProductos()!=null)
         {
-            carrito = new ArrayList<ProductoDTO>();
+            productos = new ArrayList<>();
             for (ProductoEntity entityReview : transaccion.getProductos()) {
-                carrito.add(new ProductoDTO(entityReview));
+                productos.add(new ProductoDTO(entityReview));
             }
         }
     }
-    
-    
     
     
     @Override
     public TransaccionClienteEntity toEntity() 
     {
         TransaccionClienteEntity transaccion = super.toEntity();
-        if (carrito != null) {
-            List<ProductoEntity> productos = new ArrayList<ProductoEntity>();
+        if (productos != null) {
+            List<ProductoEntity> productos = new ArrayList<>();
             for (ProductoDTO dtoReview : getProductos()) {
                 productos.add(dtoReview.toEntity());
             }
@@ -56,13 +54,13 @@ public class TransaccionClienteDetailDTO extends TransaccionClienteDTO implement
       
     public List<ProductoDTO> getProductos()
     {
-          return carrito;
+          return productos;
       
     }
     
     public void setProductos(List<ProductoDTO> pProductos)
     {
-        carrito= pProductos;
+        productos = pProductos;
     }
 }
 
