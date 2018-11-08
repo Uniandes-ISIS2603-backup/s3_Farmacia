@@ -27,7 +27,7 @@ public class ClienteEntity extends BaseEntity implements Serializable{
     
     @PodamExclude
     @OneToMany(mappedBy = "cliente")
-    private List<TransaccionClienteEntity> transacciones = new ArrayList<TransaccionClienteEntity>();
+    private List<TransaccionClienteEntity> transaccionesCliente = new ArrayList<TransaccionClienteEntity>();
     
     public String getNombre(){
         return nombre;
@@ -71,11 +71,11 @@ public class ClienteEntity extends BaseEntity implements Serializable{
     
     public void setTransaccionesCliente(List<TransaccionClienteEntity> pTransacciones)
     {
-        transacciones= pTransacciones;
+        transaccionesCliente= pTransacciones;
     }
     
     public List<TransaccionClienteEntity> getTransaccionesCliente()
     {
-        return transacciones;
+        return transaccionesCliente;
     }
 }

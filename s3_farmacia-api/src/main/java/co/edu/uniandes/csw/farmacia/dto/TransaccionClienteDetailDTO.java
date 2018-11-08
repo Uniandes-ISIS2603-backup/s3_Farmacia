@@ -42,11 +42,11 @@ public class TransaccionClienteDetailDTO extends TransaccionClienteDTO implement
     {
         TransaccionClienteEntity transaccion = super.toEntity();
         if (productos != null) {
-            List<ProductoEntity> productos = new ArrayList<>();
+            List<ProductoEntity> productos1 = new ArrayList<>();
             for (ProductoDTO dtoReview : getProductos()) {
-                productos.add(dtoReview.toEntity());
+                productos1.add(dtoReview.toEntity());
             }
-            transaccion.setProductos(productos);
+            transaccion.setProductos(productos1);
         }
            return transaccion;
     }

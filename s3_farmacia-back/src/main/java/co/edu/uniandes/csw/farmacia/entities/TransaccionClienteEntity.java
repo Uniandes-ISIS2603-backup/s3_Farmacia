@@ -36,7 +36,7 @@ public class TransaccionClienteEntity extends BaseEntity implements Serializable
     private ClienteEntity cliente;
     
     @PodamExclude
-    @ManyToMany(mappedBy = "transacciones")
+    @ManyToMany(mappedBy = "transaccionesCliente")
     private List<ProductoEntity> productos = new ArrayList<>();
  
     

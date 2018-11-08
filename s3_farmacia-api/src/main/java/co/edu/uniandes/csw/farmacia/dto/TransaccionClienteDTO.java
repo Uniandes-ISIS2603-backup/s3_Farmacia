@@ -25,6 +25,7 @@ public class TransaccionClienteDTO implements Serializable
 
     private ClienteDTO cliente;
     
+    
     public TransaccionClienteDTO() 
     {
         
@@ -40,6 +41,7 @@ public class TransaccionClienteDTO implements Serializable
             this.tipoDePago= tran.getTipoDePago();
             this.parcial= tran.getParcial();
             this.tipoDePago=tran.getTipoDePago();
+            
             if(tran.getCliente()!=null)
             {
                 this.cliente = new ClienteDTO(tran.getCliente());
