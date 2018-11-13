@@ -114,11 +114,11 @@ public class TransaccionClienteDTO implements Serializable
     {
         tipoDePago=pTipoDePago;
     }
-    public ClienteDTO getClienteDTO()
+    public ClienteDTO getCliente()
     {
         return cliente;
     }
-    public void setClienteDTO(ClienteDTO pCiente)
+    public void setCliente(ClienteDTO pCiente)
     {
         cliente=pCiente;
     }

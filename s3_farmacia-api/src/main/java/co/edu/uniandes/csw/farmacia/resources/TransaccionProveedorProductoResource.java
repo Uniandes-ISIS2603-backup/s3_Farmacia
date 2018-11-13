@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.csw.farmacia.resources;
 
-import co.edu.uniandes.csw.farmacia.dto.ProductoDTO;
 import co.edu.uniandes.csw.farmacia.dto.ProductoDetailDTO;
 import co.edu.uniandes.csw.farmacia.ejb.TransaccionProveedorLogic;
 import co.edu.uniandes.csw.farmacia.ejb.TransaccionProveedorProductoLogic;
@@ -65,7 +64,10 @@ public class TransaccionProveedorProductoResource {
         @DELETE
         @Path("{productoId:\\d+}")
         public void desasociarProducto(@PathParam("proveedorId") Long proveedorId, @PathParam("transaccionProveedorId") Long transaccionProveedorid, @PathParam("productoId") Long productoId) throws BusinessLogicException  {
-            LOGGER.log(Level.INFO, "TransaccionProveedorProductosResource desasociarProducto: input: proveedorId: " + proveedorId + " transaccionProveedorId" + transaccionProveedorid + " productoId "+ productoId );
+            LOGGER.log(Level.INFO, "TransaccionProveedorProductosResource desasociarProducto: input: proveedorId: {0} transaccionProveedorId{1} productoId {2}", new Object[]{proveedorId, transaccionProveedorid, productoId});
+            if(transaccionProveedorLogic.getTransaccionProveedor(proveedorId, transaccionProveedorid) == null){
+                            throw new WebApplicationException("El recurso /transaccionProveedor/" + transaccionProveedorid + " no existe.", 404);
+            }
             transaccionProveedorProductoLogic.deasociate(proveedorId, transaccionProveedorid, productoId);
         }
         

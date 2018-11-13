@@ -10,6 +10,7 @@ import co.edu.uniandes.csw.farmacia.entities.ProveedorEntity;
 import co.edu.uniandes.csw.farmacia.entities.RegistroEntity;
 import co.edu.uniandes.csw.farmacia.entities.TransaccionClienteEntity;
 import co.edu.uniandes.csw.farmacia.entities.TransaccionProveedorEntity;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,7 @@ import java.util.List;
  *
  * @author estudiante
  */
-public class ProductoDetailDTO extends ProductoDTO {
+public class ProductoDetailDTO extends ProductoDTO implements Serializable {
     private List<RegistroDTO> registros;
     
     private List<ProveedorDTO> proveedor;
@@ -64,13 +65,13 @@ public class ProductoDetailDTO extends ProductoDTO {
             }
             this.transaccionesProveedor = transacciones;
             if (producto.getRegistros() != null) {
-                this.registros = new ArrayList<RegistroDTO>();
+                this.registros = new ArrayList<>();
                 for (RegistroEntity registro : producto.getRegistros()) {
                     this.registros.add(new RegistroDTO(registro));
                 }
             }
             if (producto.getTransaccionesCliente() != null) {
-                this.transaccionesCliente = new ArrayList<TransaccionClienteDTO>();
+                this.transaccionesCliente = new ArrayList<>();
                 for (TransaccionClienteEntity transaccion : 
                         producto.getTransaccionesCliente()) {
                     this.transaccionesCliente
