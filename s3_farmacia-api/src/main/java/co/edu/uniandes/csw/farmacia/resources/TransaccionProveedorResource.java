@@ -135,7 +135,7 @@ public class TransaccionProveedorResource extends TransaccionProveedorDTO {
      * @return la lista de transacciones en forma DTO (json)
      */
     private List<TransaccionProveedorDTO> listEntity2DTO(List<TransaccionProveedorEntity> entityList) {
-        List<TransaccionProveedorDTO> list = new ArrayList<TransaccionProveedorDTO>();
+        List<TransaccionProveedorDTO> list = new ArrayList<>();
         for (TransaccionProveedorEntity entity : entityList) {
             list.add(new TransaccionProveedorDTO(entity));
         }

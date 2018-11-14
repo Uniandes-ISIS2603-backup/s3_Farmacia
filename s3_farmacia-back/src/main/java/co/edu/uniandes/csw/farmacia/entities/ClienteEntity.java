@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.farmacia.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -24,6 +25,9 @@ public class ClienteEntity extends BaseEntity implements Serializable{
     private String ciudad;
     private String direccionEnvio;
     private Long cedula;
+    
+        private static final Logger LOGGER = Logger.getLogger(ClienteEntity.class.getName());
+
     
     @PodamExclude
     @OneToMany(mappedBy = "cliente")
@@ -71,7 +75,7 @@ public class ClienteEntity extends BaseEntity implements Serializable{
     
     public void setTransaccionesCliente(List<TransaccionClienteEntity> pTransacciones)
     {
-        transaccionesCliente= pTransacciones;
+        transaccionesCliente = pTransacciones;
     }
     
     public List<TransaccionClienteEntity> getTransaccionesCliente()

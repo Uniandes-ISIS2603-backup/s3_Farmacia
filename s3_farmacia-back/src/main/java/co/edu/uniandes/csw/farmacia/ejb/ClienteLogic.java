@@ -57,9 +57,9 @@ public class ClienteLogic {
     public List<ClienteEntity> getClientes() {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los clientes");
         // Note que, por medio de la inyección de dependencias se llama al método "findAll()" que se encuentra en la persistencia.
-        List<ClienteEntity> editorials = persistence.findAll();
+        List<ClienteEntity> clientes = persistence.findAll();
         LOGGER.log(Level.INFO, "Termina proceso de consultar todos los clientes");
-        return editorials;
+        return clientes;
     }
     
      /**

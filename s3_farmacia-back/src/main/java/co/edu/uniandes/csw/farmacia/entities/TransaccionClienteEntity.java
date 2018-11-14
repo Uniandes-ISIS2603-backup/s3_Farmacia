@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -37,7 +38,7 @@ public class TransaccionClienteEntity extends BaseEntity implements Serializable
     
     
     @PodamExclude
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private ClienteEntity cliente;
     
     @PodamExclude
@@ -90,7 +91,7 @@ public class TransaccionClienteEntity extends BaseEntity implements Serializable
     
     public void setCliente(ClienteEntity pCliente)
     {
-        cliente= pCliente;
+        this.cliente= pCliente;
     }
     
     public void setProductos(List<ProductoEntity> pProductos)

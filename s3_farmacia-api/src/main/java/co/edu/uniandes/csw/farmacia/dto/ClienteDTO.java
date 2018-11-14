@@ -22,7 +22,8 @@ public class ClienteDTO implements Serializable {
     private String direccionEnvio;
     private Long cedula;
     
-    public ClienteDTO(){
+    public ClienteDTO()
+    {
         
     }
     

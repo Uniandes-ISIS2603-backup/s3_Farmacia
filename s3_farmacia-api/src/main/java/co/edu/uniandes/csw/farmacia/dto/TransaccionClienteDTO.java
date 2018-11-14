@@ -42,13 +42,13 @@ public class TransaccionClienteDTO implements Serializable
             this.parcial= tran.getParcial();
             this.tipoDePago=tran.getTipoDePago();
             
-            if(tran.getCliente()!=null)
+            if(tran.getCliente()!= null)
             {
                 this.cliente = new ClienteDTO(tran.getCliente());
             }
             else
             {
-                this.cliente=null;
+                this.cliente = null;
             }
            
         }

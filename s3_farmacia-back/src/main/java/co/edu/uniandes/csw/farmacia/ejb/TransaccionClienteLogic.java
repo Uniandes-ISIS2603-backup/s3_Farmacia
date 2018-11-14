@@ -34,12 +34,12 @@ public class TransaccionClienteLogic
      
      
      
-      public TransaccionClienteEntity createTransaccionCliente( Long Id, TransaccionClienteEntity trans) throws BusinessLogicException
+      public TransaccionClienteEntity createTransaccionCliente( Long clienteId, TransaccionClienteEntity trans) throws BusinessLogicException
       {
-         LOGGER.log(Level.INFO, "Inicia proceso de consultar las transacciones asociados al cliente con id = {0}", Id);
-        ClienteEntity Entity = clientePersistence.find(Id);
-        trans.setCliente(Entity);
-        LOGGER.log(Level.INFO, "Termina proceso de consultar las transacciones asociados al Cliente con id = {0}", Id);
+         LOGGER.log(Level.INFO, "Inicia proceso de consultar las transacciones asociados al cliente con id = {0}", clienteId);
+        ClienteEntity clienteEntity = clientePersistence.find(clienteId);
+        trans.setCliente(clienteEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de consultar las transacciones asociados al Cliente con id = {0}", clienteId);
         return persistence.create(trans);          
       }
       

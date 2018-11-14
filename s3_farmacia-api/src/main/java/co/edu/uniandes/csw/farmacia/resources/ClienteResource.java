@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.farmacia.resources;
 
 import co.edu.uniandes.csw.farmacia.dto.ClienteDTO;
+import co.edu.uniandes.csw.farmacia.dto.ClienteDetailDTO;
 import co.edu.uniandes.csw.farmacia.ejb.ClienteLogic;
 import co.edu.uniandes.csw.farmacia.entities.ClienteEntity;
 import co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException;
@@ -71,9 +72,9 @@ public class ClienteResource {
      * la aplicación. Si no hay ninguna retorna una lista vacía.
      */
     @GET
-    public List<ClienteDTO> getClientes(){
+    public List<ClienteDetailDTO> getClientes(){
         LOGGER.info("ClienteResource getClientes: input: void");
-        List<ClienteDTO> listaClientes = listEntity2DetailDTO(clienteLogic.getClientes());
+        List<ClienteDetailDTO> listaClientes = listEntity2DetailDTO(clienteLogic.getClientes());
         LOGGER.log(Level.INFO, "ClienteResource getClientes: output: {0}", listaClientes.toString());
         return listaClientes;
     }
@@ -89,13 +90,13 @@ public class ClienteResource {
      */
     @GET
     @Path("{clientesId: \\d+}")
-    public ClienteDTO getCliente(@PathParam("clientesId") Long id){
+    public ClienteDetailDTO getCliente(@PathParam("clientesId") Long id){
         LOGGER.log(Level.INFO, "ClienteResource getCliente: input: {0}", id);
         ClienteEntity clienteEntity = clienteLogic.getCliente(id);
         if (clienteEntity == null) {
             throw new WebApplicationException("El recurso /clientes/" + id + " no existe.", 404);
         }
-        ClienteDTO detailDTO = new ClienteDTO(clienteEntity);
+        ClienteDetailDTO detailDTO = new ClienteDetailDTO(clienteEntity);
         LOGGER.log(Level.INFO, "ClienteResource getCliente: output: {0}", detailDTO.toString());
         return detailDTO;
     }
@@ -162,10 +163,10 @@ public class ClienteResource {
      * que vamos a convertir a DTO.
      * @return la lista de clientes en forma DTO (json)
      */
-    private List<ClienteDTO> listEntity2DetailDTO(List<ClienteEntity> entityList) {
-        List<ClienteDTO> list = new ArrayList<ClienteDTO>();
+    private List<ClienteDetailDTO> listEntity2DetailDTO(List<ClienteEntity> entityList) {
+        List<ClienteDetailDTO> list = new ArrayList<>();
         for (ClienteEntity entity : entityList) {
-            list.add(new ClienteDTO(entity));
+            list.add(new ClienteDetailDTO(entity));
         }
         return list;
     }

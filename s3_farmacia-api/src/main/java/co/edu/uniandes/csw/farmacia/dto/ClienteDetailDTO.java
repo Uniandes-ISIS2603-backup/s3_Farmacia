@@ -13,9 +13,11 @@ import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+
 /**
- *   
- *   {
+ *
+ * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+*   {
  *      "id": number,
  *      "nombre": string,
  *       "apellido": string,
@@ -24,11 +26,11 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *      "cedula" : number,
  *      "transaccionesCliente": [{@link TransaccionClienteDTO}]
  *   }
- * 
- * 
- * 
- * @author estudiante
- */
+ **/
+
+
+
+ 
 public class ClienteDetailDTO extends ClienteDTO implements Serializable {
     
     private List<TransaccionClienteDTO> transaccionesCliente;
@@ -36,7 +38,7 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable {
     public ClienteDetailDTO()
     {
         super();
-        transaccionesCliente = new ArrayList<TransaccionClienteDTO>();
+        transaccionesCliente = new ArrayList<>();
     }
     
     /**
@@ -46,15 +48,13 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable {
      */
     public ClienteDetailDTO(ClienteEntity clienteEntity) {
         super(clienteEntity);
-        if (clienteEntity != null) 
-        {
+             transaccionesCliente = new ArrayList<>();
             if (clienteEntity.getTransaccionesCliente() != null) {
-                transaccionesCliente = new ArrayList<TransaccionClienteDTO>();
                 for (TransaccionClienteEntity entityTransaccion : clienteEntity.getTransaccionesCliente()) {
                     transaccionesCliente.add(new TransaccionClienteDTO(entityTransaccion));
                 }
             }
-        }
+        
     }
     
     /**
@@ -67,7 +67,7 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable {
         ClienteEntity clienteEntity = super.toEntity();
         if (transaccionesCliente != null) {
             
-            List<TransaccionClienteEntity> transaccionesEntity = new ArrayList<TransaccionClienteEntity>();
+            List<TransaccionClienteEntity> transaccionesEntity = new ArrayList<>();
             for (TransaccionClienteDTO dtoTransaccion: transaccionesCliente)  {
                 transaccionesEntity.add(dtoTransaccion.toEntity());
             }
@@ -91,7 +91,7 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable {
      *
      * @param transaccionesCliente las transacciones para poner
      */
-    public void setTransaccionCiente(List<TransaccionClienteDTO> transaccionesCliente) {
+    public void setTransaccionesCliente(List<TransaccionClienteDTO> transaccionesCliente) {
         this.transaccionesCliente = transaccionesCliente;
     }
     
