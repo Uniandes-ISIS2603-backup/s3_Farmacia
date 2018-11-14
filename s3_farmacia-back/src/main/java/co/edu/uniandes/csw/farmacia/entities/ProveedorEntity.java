@@ -28,7 +28,7 @@ public class ProveedorEntity extends BaseEntity implements Serializable {
     private static final Logger LOGGER = Logger.getLogger(ProveedorEntity.class.getName());
 
     @PodamExclude
-    @ManyToMany(mappedBy = "proveedor")
+    @ManyToMany(mappedBy = "proveedores")
     private List<ProductoEntity> productos = new ArrayList<ProductoEntity>();
 
     @PodamExclude

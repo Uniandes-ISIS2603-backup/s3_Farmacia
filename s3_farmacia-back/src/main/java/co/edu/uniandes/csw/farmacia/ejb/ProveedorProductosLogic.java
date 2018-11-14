@@ -55,11 +55,10 @@ public class ProveedorProductosLogic {
        LOGGER.log(Level.INFO, "Inicia proceso de agregarle un producto al proveedor con id = {0}", proveedorId);
         ProveedorEntity provEntity = proveedorPersistence.find(proveedorId);
         ProductoEntity productoEntity = productoPersistence.find(productoId);
-        List<ProveedorEntity> proveedores = new ArrayList<>();
-        proveedores.add(provEntity);
-        productoEntity.setProveedor(proveedores);
+        productoEntity.getProveedores().add(provEntity);
+        provEntity.getProductos().add(productoEntity);
         LOGGER.log(Level.INFO, "Termina proceso de agregarle un producto al proveedor con id = {0}", proveedorId);
-        return productoEntity;
+        return productoPersistence.find(productoId);
 
     }
 
@@ -71,13 +70,14 @@ public class ProveedorProductosLogic {
             if (list.contains(p)) {
                 List<ProveedorEntity> proveedores = new ArrayList<>();
                 proveedores.add(proveedorEntity);
-                p.setProveedor(proveedores);
-            } else if (p.getProveedor()!= null && p.getProveedor().equals(proveedorEntity)) {
-                p.setProveedor(null);
+                p.setProveedores(proveedores);
+            } else if (p.getProveedores()!= null && p.getProveedores().equals(proveedorEntity)) {
+                p.setProveedores(null);
             }
         }
+        proveedorEntity.setProductos(productoList);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar la editorial con id = {0}", provId);
-        return list;
+        return proveedorEntity.getProductos();
     }
 
     public void removeProducto(Long proveedorId, Long productoId) {

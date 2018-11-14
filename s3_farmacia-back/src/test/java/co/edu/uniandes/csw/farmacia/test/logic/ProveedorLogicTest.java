@@ -114,7 +114,7 @@ public class ProveedorLogicTest
             proveedores.add(proveedor);
             if(i==2)
             {
-                productosData.get(i).setProveedor(proveedores);
+                productosData.get(i).setProveedores(proveedores);
               //  transaccionesData.get(i).setProveedor(proveedor);
             }
             

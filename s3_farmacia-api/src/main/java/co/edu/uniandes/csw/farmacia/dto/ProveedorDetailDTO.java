@@ -31,22 +31,34 @@ import java.util.List;
  **/
 public class ProveedorDetailDTO extends ProveedorDTO implements Serializable
 {
+    /**
+     * Productos ofrecidos por el proveedor
+     */
     private List<ProductoDTO> productos;
     
+    /**
+     * Transacciones ejecutadas por un proveedor
+     */
     private List<TransaccionProveedorDTO> transaccionesProveedor;
     
+    /**
+     * Constructor vacio
+     */
     public ProveedorDetailDTO()
     {
         super();
         productos = new ArrayList<>();
-        transaccionesProveedor = new ArrayList<TransaccionProveedorDTO>();
+        transaccionesProveedor = new ArrayList<>();
     }
-    
+    /**
+     * Constructor 
+     * @param proveedorEntity 
+     */
     public ProveedorDetailDTO(ProveedorEntity proveedorEntity)
     {
         super(proveedorEntity);
-        productos = new ArrayList<ProductoDTO>();
-        transaccionesProveedor = new ArrayList<TransaccionProveedorDTO>();
+        productos = new ArrayList<>();
+        transaccionesProveedor = new ArrayList<>();
         if ( proveedorEntity.getProductos() != null) 
         {
             for(ProductoEntity entityProducto : proveedorEntity.getProductos()) 
@@ -62,13 +74,17 @@ public class ProveedorDetailDTO extends ProveedorDTO implements Serializable
             }
         }
     }
+    /**
+     * Retorna la entidad asociada al dto con toda su información respectiva.
+     * @return La entidad asociado al dto.
+     */
     @Override
     public ProveedorEntity toEntity()
     {
          ProveedorEntity proveedorEntity = super.toEntity();
         if (productos != null)
         {
-            List<ProductoEntity> productosEntity = new ArrayList<ProductoEntity>();
+            List<ProductoEntity> productosEntity = new ArrayList<>();
             for (ProductoDTO dtoProduct : productos) {
                 productosEntity.add(dtoProduct.toEntity());
             }
@@ -76,7 +92,7 @@ public class ProveedorDetailDTO extends ProveedorDTO implements Serializable
         }
         if (transaccionesProveedor != null)
         {
-            List<TransaccionProveedorEntity> transaccionesEntity = new ArrayList<TransaccionProveedorEntity>();
+            List<TransaccionProveedorEntity> transaccionesEntity = new ArrayList<>();
             for (TransaccionProveedorDTO dtoTrans : transaccionesProveedor) {
                 transaccionesEntity.add(dtoTrans.toEntity());
             }
@@ -84,23 +100,37 @@ public class ProveedorDetailDTO extends ProveedorDTO implements Serializable
         }
         return proveedorEntity;
     }
-    
+    /**
+     * Obtener productos del proveedor
+     * @return los productos
+     */
     public List<ProductoDTO> getProductos()
     {
         return productos;
     }
+    /**
+     * Modificar la lista de productos del proveedor.
+     * @param pProducts Productos a adicionar
+     */
     public void setProductos(List<ProductoDTO> pProducts)
     {
         this.productos = pProducts;
     }
+    /**
+     * Obtener transacciones del proveedor
+     * @return las transacciones del proveedor.
+     */
     public List<TransaccionProveedorDTO> getTransaccionesProveedor()
     {
         return transaccionesProveedor;
     }
+    /**
+     * Modificar la lista de transacciones del proveedor
+     * @param pListaTrans la lista nueva de transacciones.
+     */
     public void setTransaccionesProveedor(List<TransaccionProveedorDTO> pListaTrans )
     {
         this.transaccionesProveedor = pListaTrans;
-        
     }
     
 }
