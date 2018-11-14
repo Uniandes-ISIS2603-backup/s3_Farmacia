@@ -53,7 +53,7 @@ public class DrugsHouseIT {
 
     @Deployment(testable = true)
     public static WebArchive createDeployment() {
-        return ShrinkWrap.create(WebArchive.class, "s3_drugshouse-api.war")//War del modulo api
+        return ShrinkWrap.create(WebArchive.class, "s3_farmacia-api.war")//War del modulo api
                 // Se agrega las dependencias
                 .addAsLibraries(Maven.resolver().loadPomFromFile("pom.xml")
                         .importRuntimeDependencies().resolve()
