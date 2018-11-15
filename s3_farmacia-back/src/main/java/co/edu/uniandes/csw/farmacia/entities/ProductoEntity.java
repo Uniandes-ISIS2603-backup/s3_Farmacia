@@ -12,10 +12,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,9 +26,12 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class ProductoEntity extends BaseEntity implements Serializable {
     
+    private static final Logger LOGGER = Logger.getLogger(ProveedorEntity.class.getName());
+    
+    
     
     public enum TipoProducto {
-        Suministro, Terminado
+        SUMINISTRO, TERMINADO
     }
     
     @PodamExclude
@@ -86,11 +86,7 @@ public class ProductoEntity extends BaseEntity implements Serializable {
         this.nombre = nombre;
     }
     
-    public ProductoEntity(){}
-    
-    private static final Logger LOGGER = Logger.getLogger(ProveedorEntity.class.getName());
-    
-    
+ 
     private Boolean perecedero;
 
     //setter
