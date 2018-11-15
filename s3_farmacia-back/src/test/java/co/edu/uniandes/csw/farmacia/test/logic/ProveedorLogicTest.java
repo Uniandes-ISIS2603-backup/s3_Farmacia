@@ -187,12 +187,7 @@ public class ProveedorLogicTest
         ProveedorEntity deleted = em.find(ProveedorEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
-    @Test(expected = BusinessLogicException.class)
-   public void deleteProveedorConProductosTest() throws BusinessLogicException
-    {
-        ProveedorEntity ent = data.get(2);
-        proveedorLogic.deleteProveedor(ent.getId());
-    }
+
 
 
     

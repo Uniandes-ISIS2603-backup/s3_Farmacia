@@ -38,6 +38,10 @@ public class ProductoResource {
     private static final Logger LOGGER = Logger.getLogger(
             ClienteResource.class.getName());
     
+    private static final String P1 = " El recurso /clientes/ ";
+    
+    private static final String P2 = " no existe.";
+    
     @Inject
     private ProductoLogic logic;
     
@@ -98,7 +102,7 @@ public class ProductoResource {
             return new ProductoDetailDTO(producto);
         }  catch (BusinessLogicException ble) {
                         throw new WebApplicationException(
-                                "El recurso /productos/" + id + " no existe.",
+                               P1 + id + P2,
                                 404);
         }     
     }
@@ -111,7 +115,7 @@ public class ProductoResource {
             logic.delete(id);
         } catch (BusinessLogicException ble) {
          throw new WebApplicationException(
-                 "El recurso /productos/" + id + " no existe.", 404);   
+                 P1 + id + P2, 404);   
         }
     }
     
@@ -131,7 +135,7 @@ public class ProductoResource {
             if(ex.getMessage()
                     .equals("No se encontró el elemento a actualizar")) {
                 throw new WebApplicationException(
-                 "El recurso /productos/" + productoId + " no existe.", 404);
+                 P1 + productoId + P2, 404);
             } else {
                 throw new WebApplicationException(
                  ex.getMessage(), 400);

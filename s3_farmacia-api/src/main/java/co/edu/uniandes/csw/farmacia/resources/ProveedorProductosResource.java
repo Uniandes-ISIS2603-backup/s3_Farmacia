@@ -37,13 +37,17 @@ public class ProveedorProductosResource {
 
     @Inject
     private ProveedorLogic proveedorLogic;
+    
+    private static final String PP1 = " El recurso /proveedor/ ";
+    
+    private static final String PP2 = " no existe.";
 
     @POST
     @Path("{productosId: \\d+}")
     public ProductoDetailDTO addProducto(@PathParam("id") Long provId, @PathParam("productosId") Long productosId) {
         LOGGER.log(Level.INFO, "ProveedorProductosResource addProducto: input: provId {0} , productosId {1}", new Object[]{provId, productosId});
         if (proveedorLogic.getProveedor(provId) == null) {
-            throw new WebApplicationException("El recurso /proveedor/" + provId + " no existe.", 404);
+            throw new WebApplicationException(PP1 + provId + PP2, 404);
         }
         ProductoDetailDTO prodDet = new ProductoDetailDTO(proveedorProductosLogic.addProducto(provId, productosId));
         return prodDet;
@@ -61,7 +65,7 @@ public class ProveedorProductosResource {
     public ProductoDetailDTO getProducto(@PathParam("id") Long provId, @PathParam("productosId") Long productosId) {
         LOGGER.log(Level.INFO, "ProveedorProductosResource getProducto: input: transaccionClienteId {0} , productosId {1}", new Object[]{provId, productosId});
         if (proveedorLogic.getProveedor(provId) == null) {
-            throw new WebApplicationException("El recurso /proveedor/" + provId + " no existe.", 404);
+            throw new WebApplicationException( PP1 + provId + PP2, 404);
         }
         List<ProductoDetailDTO> detailsDTO = productosListEntity2DTO(proveedorProductosLogic.getProductos(provId));
         boolean encontrado = false;
@@ -73,7 +77,7 @@ public class ProveedorProductosResource {
             }
         }
         if (!encontrado) {
-            throw new WebApplicationException("El recurso /producto/" + productosId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /producto/" + productosId + PP2, 404);
         }
         LOGGER.log(Level.INFO, "AuthorBooksResource getBook: output: {0}", detailDTO);
         return detailDTO;
@@ -85,14 +89,14 @@ public class ProveedorProductosResource {
 
         LOGGER.log(Level.INFO, "ProveedorProductosResoruce removeProducto: input: id {0} , productosId {1}", new Object[]{provId, productoId});
         if (proveedorLogic.getProveedor(productoId) == null) {
-            throw new WebApplicationException("El recurso /transaccion/" + provId + " no existe.", 404);
+            throw new WebApplicationException(PP1 + provId + PP2, 404);
         }
         proveedorProductosLogic.removeProducto(provId, productoId);
         LOGGER.info("ProveedorProductosResoruce removeProducto: output: void");
     }
 
     private List<ProductoEntity> productosListDTO2Entity(List<ProductoDetailDTO> dtos) {
-        List<ProductoEntity> list = new ArrayList<ProductoEntity>();
+        List<ProductoEntity> list = new ArrayList<>();
         for (ProductoDetailDTO dto : dtos) {
             list.add(dto.toEntity());
         }
@@ -100,7 +104,7 @@ public class ProveedorProductosResource {
     }
 
     private List<ProductoDetailDTO> productosListEntity2DTO(List<ProductoEntity> entityList) {
-        List<ProductoDetailDTO> list = new ArrayList<ProductoDetailDTO>();
+        List<ProductoDetailDTO> list = new ArrayList<>();
         for (ProductoEntity entity : entityList) {
             list.add(new ProductoDetailDTO(entity));
         }

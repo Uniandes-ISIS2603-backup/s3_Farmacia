@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -37,13 +36,18 @@ public class RegistroResource {
     
     private static final Logger LOGGER = Logger.getLogger(RegistroResource.class.getName());
     
+    private static final String R1 = "El recurso /productos/ ";
+    
+    private static final String R2 = " /registros/ ";
+    
+    private static final String R3 = " no existe.";
+    
     @Inject
     private RegistroLogic registroLogic;
     
     /**
      * Crea un nuevo registro con la infromacion que recibe en le cuerpo de la peticion
      * y se regresa un objeto identico con un id-generado por la base de datos
-     * @param productosId El id del producto el cual se le agrega el registro
      * @param registro El registro que se desea guardar
      * @return JSON - El registo guardado en el atributo id autogenerado
      * @throws BusinessLogicException 
@@ -84,7 +88,7 @@ public class RegistroResource {
         LOGGER.log(Level.INFO, "RegistroResource getRegistro: input: {0}", registrosId);
         RegistroEntity entity = registroLogic.getRegistro(productosId, registrosId);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /productos/" + productosId + "/registros/" + registrosId + " no existe.", 404);
+            throw new WebApplicationException(R1+ productosId + R2 + registrosId + R3, 404);
         }
         RegistroDTO registroDTO = new RegistroDTO(entity);
         LOGGER.log(Level.INFO, "RegistroResource getRegistro: output: {0}", registroDTO.toString());
@@ -109,7 +113,7 @@ public class RegistroResource {
         }
         RegistroEntity entity = registroLogic.getRegistro(productosId, registrosId);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /productos/" + productosId + "/registros/" + registrosId + " no existe.", 404);
+            throw new WebApplicationException(R1 + productosId + R2 + registrosId + R3, 404);
 
         }
         RegistroDTO registroDTO = new RegistroDTO(registroLogic.updateRegistro(productosId, registro.toEntity()));
@@ -135,7 +139,7 @@ public class RegistroResource {
     public void deleteRegistro(@PathParam("productosId") Long productosId, @PathParam("registrosId") Long registrosId) throws BusinessLogicException {
         RegistroEntity entity = registroLogic.getRegistro(productosId, registrosId);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /productos/" + productosId + "/registros/" + registrosId + " no existe.", 404);
+            throw new WebApplicationException(R1 + productosId + R2 + registrosId + R3, 404);
         }
         registroLogic.deleteRegistro(productosId, registrosId);
     }
@@ -151,7 +155,7 @@ public class RegistroResource {
      * @return la lista de registros en forma DTO.
      */
     private List<RegistroDTO> listEntity2DTO(List<RegistroEntity> entityList) {
-        List<RegistroDTO> list = new ArrayList<RegistroDTO>();
+        List<RegistroDTO> list = new ArrayList<>();
         for (RegistroEntity entity : entityList) {
             list.add(new RegistroDTO(entity));
         }
