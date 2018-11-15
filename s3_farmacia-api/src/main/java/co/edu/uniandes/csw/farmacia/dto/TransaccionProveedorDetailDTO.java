@@ -55,7 +55,7 @@ public class TransaccionProveedorDetailDTO extends TransaccionProveedorDTO imple
     public TransaccionProveedorEntity toEntity() {
         TransaccionProveedorEntity transaccion = super.toEntity();
         if (productos != null) {
-            List<ProductoEntity> productos1 = new ArrayList<ProductoEntity>();
+            List<ProductoEntity> productos1 = new ArrayList<>();
             for (ProductoDTO dtoReview : getProductos()) {
                 productos1.add(dtoReview.toEntity());
             }
