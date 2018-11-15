@@ -30,7 +30,6 @@ public class ProductoDTO implements Serializable {
     
     public ProductoDTO(ProductoEntity producto) {
         if(producto != null) {
-            System.out.println("ProductoEntity has been built");
             this.id = producto.getId();
             this.fecha = producto.getFecha();
             this.precio = producto.getPrecio();

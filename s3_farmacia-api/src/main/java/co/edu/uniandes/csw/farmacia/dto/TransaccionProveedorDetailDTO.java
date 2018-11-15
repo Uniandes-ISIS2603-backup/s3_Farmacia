@@ -25,8 +25,8 @@ import java.util.List;
  *      "proveedor": {@link ProveedorDTO},
  *      "productos": [{@link ProductoDTO}],
  *   }
- * 
- **/
+ *
+ * */
 /**
  *
  * @author jd.florezg1
@@ -41,20 +41,18 @@ public class TransaccionProveedorDetailDTO extends TransaccionProveedorDTO imple
 
     public TransaccionProveedorDetailDTO(TransaccionProveedorEntity transaccionProveedorEntity) {
         super(transaccionProveedorEntity);
-        if (transaccionProveedorEntity != null) {
-            if (transaccionProveedorEntity.getProductos() == null) {
-                productos = new ArrayList<>();
-                for (ProductoEntity entityProduct : transaccionProveedorEntity.getProductos()) {
-                    productos.add(new ProductoDTO(entityProduct));
+        if (transaccionProveedorEntity != null && transaccionProveedorEntity.getProductos() == null) {
+            productos = new ArrayList<>();
+            for (ProductoEntity entityProduct : transaccionProveedorEntity.getProductos()) {
+                productos.add(new ProductoDTO(entityProduct));
 
-                }
             }
         }
+
     }
-    
+
     @Override
-    public TransaccionProveedorEntity toEntity() 
-    {
+    public TransaccionProveedorEntity toEntity() {
         TransaccionProveedorEntity transaccion = super.toEntity();
         if (productos != null) {
             List<ProductoEntity> productos1 = new ArrayList<ProductoEntity>();
@@ -63,17 +61,15 @@ public class TransaccionProveedorDetailDTO extends TransaccionProveedorDTO imple
             }
             transaccion.setProductos(productos1);
         }
-           return transaccion;
+        return transaccion;
     }
-    
-    public List<ProductoDTO> getProductos()
-    {
-          return productos;
-      
+
+    public List<ProductoDTO> getProductos() {
+        return productos;
+
     }
-    
-    public void setProductos(List<ProductoDTO> pProductos)
-    {
+
+    public void setProductos(List<ProductoDTO> pProductos) {
         productos = pProductos;
     }
 }

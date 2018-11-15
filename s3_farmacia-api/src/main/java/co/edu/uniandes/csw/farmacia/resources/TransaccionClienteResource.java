@@ -59,10 +59,10 @@ public class TransaccionClienteResource
         return DTO;
     }
     @GET
-    public List<TransaccionClienteDTO> getTransacciones(@PathParam("clienteId")Long id)
+    public List<TransaccionClienteDetailDTO> getTransacciones(@PathParam("clienteId")Long id)
     {
          LOGGER.log(Level.INFO, "TransaccionClienteResource getTransacciones: input: {0}", id);
-        List<TransaccionClienteDTO> lista = listEntity2DetailDTO(logic.getTransaccionesCliente(id));
+        List<TransaccionClienteDetailDTO> lista = listEntity2DetailDTO(logic.getTransaccionesCliente(id));
         LOGGER.log(Level.INFO, "BookResource getBooks: output: {0}", lista.toString());
         return lista;
     }
@@ -70,14 +70,14 @@ public class TransaccionClienteResource
     
     @GET
     @Path("{transaccionesClienteId: \\d+}")
-    public TransaccionClienteDTO getTransaccionCliente(@PathParam("id")Long idCli,@PathParam("transaccionesClienteId")Long id  )
+    public TransaccionClienteDetailDTO getTransaccionCliente(@PathParam("id")Long idCli,@PathParam("transaccionesClienteId")Long id  )
     {
         LOGGER.log(Level.INFO, "TransaccionClienteResource getTransaccionCliente: input: {0}", id);
         TransaccionClienteEntity entity = logic.getTransaccionCliente(idCli, id);
         if (entity == null) {
             throw new WebApplicationException(TC1 + idCli + TC2 + id + TC3, 404);
         }
-       TransaccionClienteDTO DTO = new TransaccionClienteDTO(entity);
+       TransaccionClienteDetailDTO DTO = new TransaccionClienteDetailDTO(entity);
         LOGGER.log(Level.INFO, "TransaccionClienteResource getTransaccion: output: {0}", DTO.toString());
         return DTO;
     }
@@ -111,8 +111,8 @@ public class TransaccionClienteResource
         return reviewDTO;
     }
     
-       private List<TransaccionClienteDTO> listEntity2DetailDTO(List<TransaccionClienteEntity> entityList) {
-        List<TransaccionClienteDTO> list = new ArrayList<>();
+       private List<TransaccionClienteDetailDTO> listEntity2DetailDTO(List<TransaccionClienteEntity> entityList) {
+        List<TransaccionClienteDetailDTO> list = new ArrayList<>();
         for (TransaccionClienteEntity entity : entityList) {
             list.add(new TransaccionClienteDetailDTO(entity));
         }
