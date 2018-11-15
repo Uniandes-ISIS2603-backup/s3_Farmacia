@@ -36,6 +36,11 @@ import javax.ws.rs.WebApplicationException;
 public class TransaccionClienteProductoResource {
 
     private static final Logger LOGGER = Logger.getLogger(TransaccionClienteProductoResource.class.getName());
+    
+    private static final String TCP1 = "El recurso /transaccionCliente/";
+    
+    private static final String TCP2 = " no existe.";
+
 
     @Inject
     private TransaccionClienteProductosLogic relacionLogic;
@@ -51,7 +56,7 @@ public class TransaccionClienteProductoResource {
             TransaccionClienteEntity trans
                     = transLogic.getTransaccionCliente(clienteId, transId);
             if (trans == null || trans.getProductos() == null) {
-                throw new WebApplicationException("El recurso /transaccionCliente/" + transId + " no existe.", 404);
+                throw new WebApplicationException(TCP1 + transId + TCP2, 404);
             }
 
             relacionLogic.asociate(clienteId, transId, productosId);
@@ -78,7 +83,7 @@ public class TransaccionClienteProductoResource {
         try {
             LOGGER.log(Level.INFO, "TransaccionClienteProductoResource getProducto: input: transaccionClienteId {0} , productosId {1} , clienteid{0}", new Object[]{transId, productoId, cliId});
             if (transLogic.getTransaccionCliente(cliId, transId) == null) {
-                throw new WebApplicationException("El recurso /transaccionCliente/" + transId + " no existe.", 404);
+                throw new WebApplicationException(TCP1 + transId + TCP2, 404);
             }
             List<ProductoDetailDTO> detailsDTO = productosListEntity2DTO(relacionLogic.getProductos(cliId, transId));
             boolean encontrado = false;
@@ -90,7 +95,7 @@ public class TransaccionClienteProductoResource {
                 }
             }
             if (!encontrado) {
-                throw new WebApplicationException("El recurso /producto/" + productoId + " no existe.", 404);
+                throw new WebApplicationException("El recurso /producto/" + productoId + TCP2, 404);
             }
             LOGGER.log(Level.INFO, "AuthorBooksResource getBook: output: {0}", detailDTO);
             return detailDTO;
@@ -104,7 +109,7 @@ public class TransaccionClienteProductoResource {
         try {
             LOGGER.log(Level.INFO, "TransaccionClienteResource removeProducto: input: transaccionClienteId {0} , productosId {1},cliente{0}", new Object[]{transId, productoId, cliId});
             if (transLogic.getTransaccionCliente(cliId, transId) == null) {
-                throw new WebApplicationException("El recurso /transaccion/" + transId + " no existe.", 404);
+                throw new WebApplicationException(TCP1 + transId + TCP2, 404);
             }
             relacionLogic.deasociate(cliId, transId, productoId);
             LOGGER.info("TransaccionClienteResource deleteBook: output: void");
@@ -114,7 +119,7 @@ public class TransaccionClienteProductoResource {
     }
 
     private List<ProductoEntity> productosListDTO2Entity(List<ProductoDetailDTO> dtos) {
-        List<ProductoEntity> list = new ArrayList<ProductoEntity>();
+        List<ProductoEntity> list = new ArrayList<>();
         for (ProductoDetailDTO dto : dtos) {
             list.add(dto.toEntity());
         }
@@ -122,7 +127,7 @@ public class TransaccionClienteProductoResource {
     }
 
     private List<ProductoDetailDTO> productosListEntity2DTO(List<ProductoEntity> entityList) {
-        List<ProductoDetailDTO> list = new ArrayList<ProductoDetailDTO>();
+        List<ProductoDetailDTO> list = new ArrayList<>();
         for (ProductoEntity entity : entityList) {
             list.add(new ProductoDetailDTO(entity));
         }

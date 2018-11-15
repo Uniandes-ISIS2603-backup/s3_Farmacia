@@ -43,6 +43,13 @@ public class TransaccionClienteResource
     
     private static final Logger LOGGER = Logger.getLogger(ClienteResource.class.getName());
     
+    private static final String TC1 = "El recurso /cliente/ ";
+    
+    private static final String TC2 = "/transacciones/";
+    
+    private static final String TC3 = " no existe.";
+    
+    
     @POST
     public TransaccionClienteDTO createTransacionCliente(@PathParam("clienteId")Long id,TransaccionClienteDTO transaccion) throws BusinessLogicException
     {
@@ -68,7 +75,7 @@ public class TransaccionClienteResource
         LOGGER.log(Level.INFO, "TransaccionClienteResource getTransaccionCliente: input: {0}", id);
         TransaccionClienteEntity entity = logic.getTransaccionCliente(idCli, id);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /cliente/" + idCli + "/transacciones/" + id + " no existe.", 404);
+            throw new WebApplicationException(TC1 + idCli + TC2 + id + TC3, 404);
         }
        TransaccionClienteDTO DTO = new TransaccionClienteDTO(entity);
         LOGGER.log(Level.INFO, "TransaccionClienteResource getTransaccion: output: {0}", DTO.toString());
@@ -82,7 +89,7 @@ public class TransaccionClienteResource
     {
         TransaccionClienteEntity entity = logic.getTransaccionCliente(idCLi, id);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /cliente/" + idCLi + "/transaccion/" + id + " no existe.", 404);
+            throw new WebApplicationException(TC1 + idCLi + TC2 + id + TC3, 404);
         }
     logic.deleteTransaccionCliente(idCLi, id);
     }
@@ -96,7 +103,7 @@ public class TransaccionClienteResource
         }
         TransaccionClienteEntity entity = logic.getTransaccionCliente(idCli, id);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /books/" + idCli + "/reviews/" + id + " no existe.", 404);
+            throw new WebApplicationException(TC1 + idCli + TC2 + id + TC3, 404);
 
         }
         TransaccionClienteDTO reviewDTO = new TransaccionClienteDTO(logic.updateTransaccionCliente(idCli, trans.toEntity()));
