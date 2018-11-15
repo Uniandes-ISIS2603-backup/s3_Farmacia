@@ -26,6 +26,11 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class ProductoEntity extends BaseEntity implements Serializable {
     
+    
+       public ProductoEntity(){
+       //
+       }
+    
     private static final Logger LOGGER = Logger.getLogger(ProveedorEntity.class.getName());
     
     
