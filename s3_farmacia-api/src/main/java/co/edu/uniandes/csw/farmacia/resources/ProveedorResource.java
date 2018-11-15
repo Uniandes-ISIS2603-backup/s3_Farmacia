@@ -46,9 +46,10 @@ public class ProveedorResource {
     private static final String A2 = " no existe.";
 
     /**
+     * Retorna el proveedor creado con su informacion basica
      *
-     * @param proveedor
-     * @return
+     * @param proveedor El proveedor a ingresar
+     * @return el dto del proveedor ingresado
      * @throws co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException
      */
     @POST
@@ -61,6 +62,11 @@ public class ProveedorResource {
         return nuevoProveedorDTO;
     }
 
+    /**
+     * Retorna la lista de proveedores
+     *
+     * @return la lista de los proveedores con su detalle
+     */
     @GET
     public List<ProveedorDetailDTO> getProveedores() {
         LOGGER.info("ProveedorResource getProveedores: input: void");
@@ -69,6 +75,12 @@ public class ProveedorResource {
         return listaProveedores;
     }
 
+    /**
+     * Retorna el detalle del proveedor con el id especificado.
+     *
+     * @param id el id del proveedor que se desea obtener
+     * @return proveedor
+     */
     @GET
     @Path("{id: \\d+}")
     public ProveedorDetailDTO getProveedor(@PathParam("id") Long id) {
@@ -84,6 +96,13 @@ public class ProveedorResource {
 
     }
 
+    /**
+     * Elimina el proveedor con el id especificado.
+     *
+     * @param id el id del proveedor a eliminar.
+     * @throws BusinessLogicException Si el proveedor que se desea eliminar no
+     * existe
+     */
     @DELETE
     @Path("{id:\\d+}")
     public void deleteProveedor(@PathParam("id") Long id) throws BusinessLogicException {
@@ -96,6 +115,14 @@ public class ProveedorResource {
         LOGGER.info("ProveedorResource deleteProveedor: output : void");
     }
 
+    /**
+     * Modificar la información de un proveedor.
+     *
+     * @param id El id del proveedor a modificar
+     * @param proveedor La información nueva que se le insertará al
+     * proveedor(id)
+     * @return el detalle del proveedor con su nueva informacion
+     */
     @PUT
     @Path("{id:\\d+}")
     public ProveedorDetailDTO updateProveedor(@PathParam("id") Long id, ProveedorDTO proveedor) {
@@ -113,15 +140,28 @@ public class ProveedorResource {
         return proDetailDTO;
 
     }
-    
-      @Path("{id: \\d+}/transaccionProveedor")
+
+    /**
+     * Redirige al recurso transaccion proveedor.
+     *
+     * @param provId El proveedor
+     * @return La clase que contiene las transacciones del proveedor
+     * especificado
+     */
+    @Path("{id: \\d+}/transaccionProveedor")
     public Class<TransaccionProveedorResource> getTransaccionProveedorResource(@PathParam("id") Long provId) {
         if (proveedorLogic.getProveedor(provId) == null) {
             throw new WebApplicationException(A1 + provId + "/transaccionProveedor no existe.", 404);
         }
         return TransaccionProveedorResource.class;
     }
-    
+
+    /**
+     * Convierte al entity del proveedor en un detaildto.
+     *
+     * @param entityList la lista a convetir
+     * @return La lista de detaildto del proveedor.
+     */
     private List<ProveedorDetailDTO> listEntity2DetailDTO(List<ProveedorEntity> entityList) {
         List<ProveedorDetailDTO> list = new ArrayList<>();
         for (ProveedorEntity entity : entityList) {
@@ -129,6 +169,5 @@ public class ProveedorResource {
         }
         return list;
     }
-    
 
 }

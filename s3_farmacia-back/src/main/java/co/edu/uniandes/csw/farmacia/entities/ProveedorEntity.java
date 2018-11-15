@@ -23,38 +23,68 @@ import uk.co.jemos.podam.common.PodamExclude;
 //JPA recompila los datos y crea la respectiva base
 public class ProveedorEntity extends BaseEntity implements Serializable {
 
+    /**
+     * Representa el nombre del proveedor
+     */
     private String nombre;
-
+    /**
+     * La constante que lleva el registro de las transacciones de las entidades
+     */
     private static final Logger LOGGER = Logger.getLogger(ProveedorEntity.class.getName());
 
+    /**
+     * Los productos que ofrece el proveedor
+     */
     @PodamExclude
     @ManyToMany(mappedBy = "proveedores")
     private List<ProductoEntity> productos = new ArrayList<ProductoEntity>();
 
+    /**
+     * Las transacciones que ha ejecutado el proveedor con DrugsHouse
+     */
     @PodamExclude
     @OneToMany(mappedBy = "proveedor")
     private List<TransaccionProveedorEntity> transacciones = new ArrayList<TransaccionProveedorEntity>();
 
+    /**
+     * Modifica el nombre del proveedor
+     * @param pNombre  El nuevo nombre
+     */
     public void setNombre(String pNombre) {
         nombre = pNombre;
     }
-
+    /**
+     * Retorna el nombre del proveedor
+     * @return el nombre del proveedor
+     */
     public String getNombre() {
         return nombre;
     }
-
+    /**
+     * Obtiene los productos del proveedor.
+     * @return los producos ofrecidos por el proveedor 
+    */
     public List<ProductoEntity> getProductos() {
         return productos;
     }
-
+    /**
+     * Reemplaza la lista de productos del proveedor
+     * @param pProductos los nuevos productos del proveedor
+     */
     public void setProductos(List<ProductoEntity> pProductos) {
         productos = pProductos;
     }
-
+    /**
+     * Retorna la lista de transacciones del proveedor
+     * @return la lista d etransacciones ejecutadas por el proveedor
+     */
     public List<TransaccionProveedorEntity> getTransacciones() {
         return transacciones;
     }
-
+    /**
+     * Reemplaza la lista de transacciones.
+     * @param pTrans la nueva lista de transacciones
+     */
     public void setTransacciones(List<TransaccionProveedorEntity> pTrans) {
         transacciones = pTrans;
     }

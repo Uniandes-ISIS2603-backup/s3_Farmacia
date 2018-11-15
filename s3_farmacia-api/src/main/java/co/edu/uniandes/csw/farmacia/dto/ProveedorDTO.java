@@ -32,42 +32,48 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * </pre>
  *
- * @author francisco
+ * @author fj.gonzalez
  */
-public class ProveedorDTO implements Serializable{
+public class ProveedorDTO implements Serializable {
 
+    /**
+     * Id del proveedor
+     */
     private Long id;
-
+    /**
+     * Nombre del proveedor
+     */
     private String nombre;
 
-
-
-    public ProveedorDTO() 
-    {
+    /**
+     * Constructo vacio del proveedor
+     */
+    public ProveedorDTO() {
         //
     }
 
-    public ProveedorDTO(ProveedorEntity prove)
-    {
-        if (prove != null)  
-        {
+    /**
+     * Constructor
+     *
+     * @param prove La representación entidad del proveedor a crear
+     */
+    public ProveedorDTO(ProveedorEntity prove) {
+        if (prove != null) {
             this.id = prove.getId();
             this.nombre = prove.getNombre();
         }
     }
 
-    public ProveedorEntity toEntity() 
-    {
+    /**
+     * Convertir el proveedor del api a uno que pueda ser leido por el back
+     *
+     * @return el proveedorEntity
+     */
+    public ProveedorEntity toEntity() {
         ProveedorEntity proveedorEntity = new ProveedorEntity();
         proveedorEntity.setId(this.id);
         proveedorEntity.setNombre(this.nombre);
         return proveedorEntity;
-    }
-    
-       @Override
-    public String toString()
-    {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 
     /**
@@ -81,7 +87,7 @@ public class ProveedorDTO implements Serializable{
     }
 
     /**
-     * Establece el valor del atributo name.
+     * Establece el valor del atributo nombre.
      *
      * @param pNombre
      *
@@ -89,14 +95,32 @@ public class ProveedorDTO implements Serializable{
     public void setNombre(String pNombre) {
         this.nombre = pNombre;
     }
-    
-      public Long getId() {
+
+    /**
+     * Obteniene el id del proveedor
+     *
+     * @return el id del proveedor.
+     */
+    public Long getId() {
         return id;
     }
 
-    public String getNombre()
-    {
+    /**
+     * Obtiene el nombre del proveedor.
+     * @return el nombre del proveedor.
+     */
+    public String getNombre() {
         return nombre;
+    }
+
+    /**
+     * Metodo toString del proveedor
+     *
+     * @return la cadena de texto que identifica al proveedor
+     */
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 
 }

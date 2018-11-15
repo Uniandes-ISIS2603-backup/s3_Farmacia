@@ -23,10 +23,15 @@ import javax.inject.Inject;
 @Stateless
 public class ProveedorLogic {
 
-    //Hacer qye la variable apunte a algún objeto de la clase ProveedorPersistence.
+    //Hacer que la variable apunte a algún objeto de la clase ProveedorPersistence.
+    /**
+     * Injeccion del proveedor desde la persistencia en la logica.
+     */
     @Inject
     private ProveedorPersistence proveedorPersistence;
-
+    /**
+     * Constante que representa la conexion para llevar el registro respectivo de las transacciones logicas
+     */
     private static final Logger LOGGER = Logger.getLogger(ProveedorLogic.class.getName());
 
     //Buscamos validar tres principios básicos :    
@@ -45,6 +50,10 @@ public class ProveedorLogic {
 
         return provEntity;
     }
+    /**
+     * Obtiene los proveedores
+     * @return la lista de proveedores
+     */
     public List<ProveedorEntity> getProveedores()
     {
         LOGGER.log(Level.INFO,"Iniciamos proceso para obtener los proveedores.");
@@ -55,6 +64,11 @@ public class ProveedorLogic {
         
         return listaDeProveedores;
     }
+    /**
+     * Obtiene un proveedor a partir de su id
+     * @param proveedorId el id del proveedor a buscar
+     * @return el proveedor
+     */
     public ProveedorEntity getProveedor(Long proveedorId)
     {
        LOGGER.log(Level.INFO,"Iniciamos proceso para obtener el proveedor con id = {0}", proveedorId);
@@ -70,6 +84,12 @@ public class ProveedorLogic {
        
        return proveedorEntity;
     }
+    /**
+     * Actualiza la informacion del proveedor identificado con el id especifico
+     * @param proveedorId el id del proveedor a modificar
+     * @param provEntity la nueva representacion del proveedor
+     * @return el proveedor actualizado
+     */
     public ProveedorEntity updateProveedor(Long proveedorId, ProveedorEntity provEntity)
     {
         LOGGER.log(Level.INFO, "Inicia proceso de actualización del proveedor con id={0} ", proveedorId);
@@ -79,6 +99,11 @@ public class ProveedorLogic {
         LOGGER.log(Level.INFO, "Terminando de actualizar el proveedor con id={0}", proveedorId);
         return nuevaEntidadProveedor;
     }
+    /**
+     * Elimina un proveedor a partir de su id
+     * @param proveedorId el id del proveedor a eliminar
+     * @throws BusinessLogicException Si el proveedor que se desea eliminar no existe.
+     */
     public void deleteProveedor(Long proveedorId) throws BusinessLogicException
     {
        LOGGER.log(Level.INFO, "Inicia proceso de eliminación del proveedor con id={0} ", proveedorId);
