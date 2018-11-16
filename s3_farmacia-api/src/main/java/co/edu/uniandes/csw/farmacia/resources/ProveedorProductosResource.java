@@ -88,7 +88,7 @@ public class ProveedorProductosResource {
     public void removeProducto(@PathParam("id") Long provId, @PathParam("productosId") Long productoId) {
 
         LOGGER.log(Level.INFO, "ProveedorProductosResoruce removeProducto: input: id {0} , productosId {1}", new Object[]{provId, productoId});
-        if (proveedorLogic.getProveedor(productoId) == null) {
+        if (proveedorLogic.getProveedor(provId) == null) {
             throw new WebApplicationException(PP1 + provId + PP2, 404);
         }
         proveedorProductosLogic.removeProducto(provId, productoId);

@@ -1,0 +1,257 @@
+{
+	"info": {
+		"_postman_id": "e8c46a20-129f-4f61-af6e-9ceac3b97983",
+		"name": "pruebas ProveedorProductos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Anadir un producto a un proveedor inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d0164059-647a-41e0-8c15-b4ed57f23fa5",
+						"exec": [
+							"tests [\"No se pudo anadir porque el producto no existe\"] = responseCode.code === 404;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/0/productos/200",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"proveedores",
+						"0",
+						"productos",
+						"200"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un proveedor.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cd457d80-dfc4-44fa-bdc5-962ac4eb3f95",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_pr_pd\", data.id);",
+							"tests[\"No hay error\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nombre\" : \"LaRebaja\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"proveedores",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener productos del proveedor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "245024f8-51f4-48a8-8efc-0654fb153387",
+						"exec": [
+							"tests[\"Se obtuvo correctamente la lista\"] = responseCode.code === 200;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr_pd}}/productos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"proveedores",
+						"{{new_id_pr_pd}}",
+						"productos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Anadirle un producto al proveedor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "095b7af0-fc6e-4bce-ad23-a5df2efeab52",
+						"exec": [
+							"tests[\"Se anadio el producto 200 al proveedor especificado \"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr_pd}}/productos/200",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"proveedores",
+						"{{new_id_pr_pd}}",
+						"productos",
+						"200"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener el producto asociado al proveedor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1200e885-6a08-4871-bdd3-eaabbf99a219",
+						"exec": [
+							"tests[\"Se obtuvo el producto 200 del proveedor especificado \"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr_pd}}/productos/200",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"proveedores",
+						"{{new_id_pr_pd}}",
+						"productos",
+						"200"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar producto al proveedor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5faae40b-60c8-49e5-8bdf-b32a24ef9c74",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr_pd}}/productos/200",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"proveedores",
+						"{{new_id_pr_pd}}",
+						"productos",
+						"200"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
