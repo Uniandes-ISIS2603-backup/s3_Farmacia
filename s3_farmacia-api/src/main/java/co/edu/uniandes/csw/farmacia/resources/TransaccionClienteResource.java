@@ -45,7 +45,7 @@ public class TransaccionClienteResource
     
     private static final String TC1 = "El recurso /cliente/ ";
     
-    private static final String TC2 = "/transacciones/";
+    private static final String TC2 = "/transaccionesCliente/";
     
     private static final String TC3 = " no existe.";
     
@@ -70,7 +70,7 @@ public class TransaccionClienteResource
     
     @GET
     @Path("{transaccionesClienteId: \\d+}")
-    public TransaccionClienteDetailDTO getTransaccionCliente(@PathParam("id")Long idCli,@PathParam("transaccionesClienteId")Long id  )
+    public TransaccionClienteDetailDTO getTransaccionCliente(@PathParam("clienteId")Long idCli,@PathParam("transaccionesClienteId")Long id  )
     {
         LOGGER.log(Level.INFO, "TransaccionClienteResource getTransaccionCliente: input: {0}", id);
         TransaccionClienteEntity entity = logic.getTransaccionCliente(idCli, id);

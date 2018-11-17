@@ -38,12 +38,13 @@ public class TransaccionClientePersistence
     /**
      * Busca un transaccion entre todos los transacciones que esten en la base de datos
      * @param transaccionId
+     * @param clienteId
      * @return 
      */
     public TransaccionClienteEntity find (Long clienteId,Long transaccionId){
         LOGGER.log(Level.INFO, "Consultando la transaccion con id = {0} del Cliente con id = " + clienteId, transaccionId);
-        TypedQuery<TransaccionClienteEntity> q = em.createQuery("select p from TransaccionClienteEntity p where (p.cliente.id = :clienteid) and (p.id = :id)", TransaccionClienteEntity.class);
-        q.setParameter("clienteid", clienteId);
+        TypedQuery<TransaccionClienteEntity> q = em.createQuery("select p from TransaccionClienteEntity p where (p.cliente.id = :cliente_id) and (p.id = :id)", TransaccionClienteEntity.class);
+        q.setParameter("cliente_id", clienteId);
         q.setParameter("id", transaccionId);
         List<TransaccionClienteEntity> results = q.getResultList();
         TransaccionClienteEntity transaccion = null;
