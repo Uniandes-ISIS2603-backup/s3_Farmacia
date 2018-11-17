@@ -1,12 +1,142 @@
 {
 	"info": {
-		"_postman_id": "337be0d6-2c17-4b0c-96ce-644f8092a6ce",
+		"_postman_id": "fda64107-33d3-49ce-bd50-dd114c897c34",
 		"name": "pruebas Cliente",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
+			"name": "Obtiene la lista de cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "60447ee1-a795-4094-acfd-0ee491a76cb5",
+						"exec": [
+							"tests[\"Se obtuvo correctamente la lista\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un cliente inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "828f54b0-ba6a-4a88-a5bb-4be2f83f4341",
+						"exec": [
+							"tests[\"Fallo porque el cliente que se quiere obtener no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje de error esperado\"] = responseBody.has(\"El recurso /clientes/ 0 no existe\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar un cliente inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "02c1a211-b6f0-4b58-9d59-3bfdf00062fa",
+						"exec": [
+							"tests[\"No elimina\"] = responseCode.code === 404;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Crea un cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "de7ae748-b3e5-46eb-a944-d0ed07ee4723",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_pr\", data.id);",
+							"tests[\"No hay error\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -17,7 +147,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"id\":1,\"nombre\":\"Harry\", \"apellido\":\"Potter\", \"ciudad\":\"Privet Drive\", \"direccionEnvio\":\"CRA6#1-39\",\"cedula\":1075690311}"
+					"raw": "{\"nombre\":\"Harry\", \"apellido\":\"Potter\", \"ciudad\":\"Privet Drive\", \"direccionEnvio\":\"CRA6#1-39\",\"cedula\":1079690311}"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/",
@@ -38,12 +168,27 @@
 		},
 		{
 			"name": "Obtener un cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9b9a40c1-f65a-41f6-9bb0-311c4a9174aa",
+						"exec": [
+							"tests[\"Se obtuvo correctamente\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/1",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_pr}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -53,37 +198,26 @@
 						"s3_farmacia-api",
 						"api",
 						"clientes",
-						"1"
+						"{{new_id_pr}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Eliminar un cliente determinado",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/2",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s3_farmacia-api",
-						"api",
-						"clientes",
-						"2"
-					]
+			"name": "Actualizar el nombre de un cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "105e4bc4-aa72-43d8-841f-7fd369d20f51",
+						"exec": [
+							"tests[\"Se modifico correctamente\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "Actualizar un cliente",
+			],
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -94,10 +228,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"id\":2, \"nombre\":\"Draco\", \"apellido\":\"Malfoy\", \"ciudad\":\"Hogwarts\", \"direccionEnvio\":\"CRA7#1-39\",\"cedula\":1075790311}"
+					"raw": "{\"id\":{{new_id_pr}},\"nombre\":\"Harry\", \"apellido\":\"Potter\", \"ciudad\":\"Privet Drive\", \"direccionEnvio\":\"CRA6#1-39\",\"cedula\":1079690311}"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/1",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_pr}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -107,7 +241,45 @@
 						"s3_farmacia-api",
 						"api",
 						"clientes",
-						"1"
+						"{{new_id_pr}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar un cliente determinado",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d31136bf-7890-46e1-8188-ffd247fa2639",
+						"exec": [
+							"tests[\"Se elimino correctamente\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_pr}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						"{{new_id_pr}}"
 					]
 				}
 			},
