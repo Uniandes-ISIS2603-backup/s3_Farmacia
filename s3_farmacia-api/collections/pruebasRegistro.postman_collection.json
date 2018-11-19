@@ -1,12 +1,27 @@
 {
 	"info": {
-		"_postman_id": "30685bfb-b0fe-4289-a319-8451f8c974c3",
+		"_postman_id": "a898b190-6f25-4440-885f-1957ac8fc8ab",
 		"name": "pruebasRegistro",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "Crea un registro",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "969cdba3-d898-4d5e-8186-d51ecdcd0747",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_r\", data.id);",
+							"tests[\"No hay error\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -17,7 +32,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"id\":\"1\",\"cantidad\":\"10\",\"tipoRegistro\":\"TRASLADO_BODEGA\"}"
+					"raw": "{\"cantidad\":\"10\",\"tipoRegistro\":\"TRASLADO_BODEGA\"}"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/registros/",
@@ -37,13 +52,38 @@
 			"response": []
 		},
 		{
-			"name": "Obtiene un registro",
+			"name": "Crear un producto ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4a9951ee-5b10-4061-8df4-1aac3c266795",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_pd\", data.id);",
+							"tests[\"No hay error\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t \"fecha\" : \"9/20/2018\",\n\t \"precio\" : 73,\n\t \"tipoProducto\" : \"SUMINISTRO\",\n\t \"unidadesDisponibles\" : 100,\n\t \"perecedero\" : false ,\n\t \"cantidad\" : 95\n}"
+				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/registros/1",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/registro/{{new_id_r}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -52,21 +92,25 @@
 					"path": [
 						"s3_farmacia-api",
 						"api",
-						"registros",
-						"1"
+						"productos",
+						"registro",
+						"{{new_id_r}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Elimina un registro",
+			"name": "Obtiene un registro",
 			"request": {
-				"method": "DELETE",
+				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/registros/2",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/registros/{{new_id_pd}}/{{new_id_r}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -76,7 +120,8 @@
 						"s3_farmacia-api",
 						"api",
 						"registros",
-						"2"
+						"{{new_id_pd}}",
+						"{{new_id_r}}"
 					]
 				}
 			},
@@ -84,6 +129,18 @@
 		},
 		{
 			"name": "Actualiza un registro",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2008681e-7bcc-47af-b657-d2d2246ecee9",
+						"exec": [
+							"tests[\"Se modifico correctamente\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -94,10 +151,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"id\":2, \"cantidad\":\"7\", \"tipoRegistro\":\"PERDIDA\"}"
+					"raw": "{\"cantidad\":\"7\", \"tipoRegistro\":\"PERDIDA\"}"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/registros/1",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/registros/{{new_id_pd}}/{{new_id_r}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -107,7 +164,47 @@
 						"s3_farmacia-api",
 						"api",
 						"registros",
-						"1"
+						"{{new_id_pd}}",
+						"{{new_id_r}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Elimina un registro",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "515e0e30-934f-4d24-a09a-63d719341b2b",
+						"exec": [
+							"tests[\"Se elimino al proveedor\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/registros/{{new_id_pd}}/{{new_id_r}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"registros",
+						"{{new_id_pd}}",
+						"{{new_id_r}}"
 					]
 				}
 			},
