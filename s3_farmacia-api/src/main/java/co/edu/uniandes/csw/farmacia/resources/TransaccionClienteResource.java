@@ -95,7 +95,7 @@ public class TransaccionClienteResource
     }
     @PUT
     @Path("{transaccionesClienteId:\\d+}")
-    public TransaccionClienteDTO refreshDataTransaccionCliente(@PathParam("clienteId") Long idCli, @PathParam("transaccionClienteId") Long id, TransaccionClienteDTO trans) throws BusinessLogicException
+    public TransaccionClienteDetailDTO refreshDataTransaccionCliente(@PathParam("clienteId") Long idCli, @PathParam("transaccionClienteId") Long id, TransaccionClienteDTO trans) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "TransaccionClienteResource refreshData: input: clienteId: {0} , transaccionId: {1} , transaccionCliente:{2}", new Object[]{idCli, id, trans.toString()});
         if (id.equals(trans.getId())) {
@@ -106,7 +106,7 @@ public class TransaccionClienteResource
             throw new WebApplicationException(TC1 + idCli + TC2 + id + TC3, 404);
 
         }
-        TransaccionClienteDTO reviewDTO = new TransaccionClienteDTO(logic.updateTransaccionCliente(idCli, trans.toEntity()));
+        TransaccionClienteDetailDTO reviewDTO = new TransaccionClienteDetailDTO(logic.updateTransaccionCliente(idCli, trans.toEntity()));
         LOGGER.log(Level.INFO, "ReviewResource updateReview: output:{0}", reviewDTO.toString());
         return reviewDTO;
     }
@@ -118,4 +118,10 @@ public class TransaccionClienteResource
         }
         return list;
     }
+       
+    @Path("{transaccionesClienteId:\\d+}/productos")
+     public Class<TransaccionClienteProductoResource> getProductos()
+      {
+          return TransaccionClienteProductoResource.class;
+      }
 }
