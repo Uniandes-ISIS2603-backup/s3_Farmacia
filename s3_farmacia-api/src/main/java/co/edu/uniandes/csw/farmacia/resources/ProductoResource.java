@@ -35,24 +35,25 @@ import javax.inject.Inject;
 @Consumes("application/json")
 @RequestScoped
 public class ProductoResource {
+
     private static final Logger LOGGER = Logger.getLogger(
             ClienteResource.class.getName());
-    
+
     private static final String P1 = " El recurso /clientes/ ";
-    
+
     private static final String P2 = " no existe.";
-    
+
     @Inject
     private ProductoLogic logic;
-    
+
     @Path("registro/{registroId: \\d+}")
     @POST
     public ProductoDTO createProducto(@PathParam("registroId") Long registroId,
             ProductoDTO producto)
             throws WebApplicationException {
         if (producto == null) {
-           throw new WebApplicationException(
-                 "El nuevo producto no puede ser nulo", 400); 
+            throw new WebApplicationException(
+                    "El nuevo producto no puede ser nulo", 400);
         }
         try {
             ProductoEntity productoEntity = producto.toEntity();
@@ -61,13 +62,13 @@ public class ProductoResource {
         } catch (BusinessLogicException ble) {
             throw new WebApplicationException(ble.getMessage(), 400);
         }
-        
+
     }
-    
+
     @Path("{productoId: \\d+}/asociate/registro/{registroId: \\d+}")
     @POST
     public void asociateProductoRegistro(@PathParam("productoId") Long productoId,
-            @PathParam("registroId") Long registroId) 
+            @PathParam("registroId") Long registroId)
             throws WebApplicationException {
         try {
             logic.asociate(productoId, registroId);
@@ -75,24 +76,24 @@ public class ProductoResource {
             if (ble.getMessage()
                     .equals("El registro ya tiene un producto asociado")) {
                 throw new WebApplicationException(ble.getMessage(), 400);
-            }
-            else 
+            } else {
                 throw new WebApplicationException(ble.getMessage(), 404);
+            }
         }
     }
-    
+
     @GET
     public List<ProductoDetailDTO> getProductos() {
         List<ProductoEntity> productos = logic.list();
         List<ProductoDetailDTO> list = new ArrayList<>();
-        for(int i = 0; i < productos.size(); i++) {
+        for (int i = 0; i < productos.size(); i++) {
             //list[i] = new ProductoDTO(productos.get(i));
             list.add(new ProductoDetailDTO(productos.get(i)));
         }
         LOGGER.log(Level.INFO, "ProveedorResource getProveedores: output : {0}", list);
         return list;
     }
-    
+
     @GET
     @Path("{productosId:\\d+}")
     public ProductoDetailDTO getProducto(@PathParam("productosId") Long id) throws
@@ -100,48 +101,47 @@ public class ProductoResource {
         try {
             ProductoEntity producto = logic.get(id);
             return new ProductoDetailDTO(producto);
-        }  catch (BusinessLogicException ble) {
-                        throw new WebApplicationException(
-                               P1 + id + P2,
-                                404);
-        }     
+        } catch (BusinessLogicException ble) {
+            throw new WebApplicationException(
+                    P1 + id + P2,
+                    404);
+        }
     }
-    
+
     @DELETE
     @Path("{productosId:\\d+}")
-    public void deleteProducto(@PathParam("productosId") Long id)throws 
+    public void deleteProducto(@PathParam("productosId") Long id) throws
             WebApplicationException {
         try {
             logic.delete(id);
         } catch (BusinessLogicException ble) {
-         throw new WebApplicationException(
-                 P1 + id + P2, 404);   
+            throw new WebApplicationException(
+                    P1 + id + P2, 404);
         }
     }
-    
+
     @PUT
     @Path("{productosId: \\d+}")
-    public ProductoDTO refreshDataProducto ( @PathParam("productosId") 
-            Long productoId, 
-            ProductoDTO producto)throws WebApplicationException {
-        producto.setId(productoId);
-        
-        if(producto == null) {
+    public ProductoDTO refreshDataProducto(@PathParam("productosId") Long productoId,
+            ProductoDTO producto) throws WebApplicationException {
+
+        if (producto == null) {
             throw new WebApplicationException(
-                 "El nuevo producto no puede ser nulo", 400);
+                    "El nuevo producto no puede ser nulo", 400);
         }
         try {
+            producto.setId(productoId);
             ProductoEntity productoEntity = producto.toEntity();
             return new ProductoDTO(logic.update(productoId, productoEntity));
         } catch (BusinessLogicException ex) {
-            if(ex.getMessage()
+            if (ex.getMessage()
                     .equals("No se encontró el elemento a actualizar")) {
                 throw new WebApplicationException(
-                 P1 + productoId + P2, 404);
+                        P1 + productoId + P2, 404);
             } else {
                 throw new WebApplicationException(
-                 ex.getMessage(), 400);
+                        ex.getMessage(), 400);
             }
         }
-    } 
+    }
 }
