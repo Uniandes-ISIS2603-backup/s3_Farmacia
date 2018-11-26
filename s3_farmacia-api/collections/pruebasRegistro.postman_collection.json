@@ -232,7 +232,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/{{new_id_pdc}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/{{new_id_pd}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -242,7 +242,7 @@
 						"s3_farmacia-api",
 						"api",
 						"productos",
-						"{{new_id_pdc}}"
+						"{{new_id_pd}}"
 					]
 				}
 			},
