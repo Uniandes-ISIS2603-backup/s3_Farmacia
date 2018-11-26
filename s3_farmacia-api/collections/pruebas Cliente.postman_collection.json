@@ -131,7 +131,7 @@
 							"var data = JSON.parse(responseBody);",
 							"postman.setGlobalVariable(\"new_id_cl\", data.id);",
 							"tests[\"No hay error\"] = responseCode.code === 200;",
-							"console.log(data.id);"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -147,7 +147,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"nombre\":\"Harry\", \"apellido\":\"Potter\", \"ciudad\":\"Privet Drive\", \"direccionEnvio\":\"CRA6#1-39\",\"cedula\":1079690312}"
+					"raw": "{\"nombre\":\"Harry\", \"apellido\":\"Potter\", \"ciudad\":\"Privet Drive\", \"direccionEnvio\":\"CRA6#1-39\",\"cedula\":1020843798}"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/",
@@ -228,10 +228,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"id\":{{new_id_pr}},\"nombre\":\"Harry\", \"apellido\":\"Potter\", \"ciudad\":\"Privet Drive\", \"direccionEnvio\":\"CRA6#1-39\",\"cedula\":1079690311}"
+					"raw": "{\"id\":{{new_id_pr}},\"nombre\":\"Harry\", \"apellido\":\"Potter\", \"ciudad\":\"Privet Drive\", \"direccionEnvio\":\"CRA6#1-39\",\"cedula\":1020842797}"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_pr}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cl}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -241,7 +241,7 @@
 						"s3_farmacia-api",
 						"api",
 						"clientes",
-						"{{new_id_pr}}"
+						"{{new_id_cl}}"
 					]
 				}
 			},
