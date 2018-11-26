@@ -42,6 +42,8 @@ public class ClienteResource {
     
     private static final String C2  = " no existe";
     
+    private static final String C3 = "El recurso /clientes/cedula/ ";
+    
     @Inject
     ClienteLogic clienteLogic;
     
@@ -102,6 +104,19 @@ public class ClienteResource {
         }
         ClienteDetailDTO detailDTO = new ClienteDetailDTO(clienteEntity);
         LOGGER.log(Level.INFO, "ClienteResource getCliente: output: {0}", detailDTO.toString());
+        return detailDTO;
+    }
+    
+    @GET
+    @Path("cedula/{clientesCedula: \\d+}")
+    public ClienteDetailDTO getClienteByCedula(@PathParam("clientesCedula") Long cedula){
+        LOGGER.log(Level.INFO, "ClienteResource getClienteByCedula: input: {0}", cedula);
+        ClienteEntity clienteEntity = clienteLogic.getClienteByCedula(cedula);
+        if (clienteEntity == null) {
+            throw new WebApplicationException(C3 + cedula + C2, 404);
+        }
+        ClienteDetailDTO detailDTO = new ClienteDetailDTO(clienteEntity);
+        LOGGER.log(Level.INFO, "ClienteResource getClienteByCedula: output: {0}", detailDTO.toString());
         return detailDTO;
     }
     

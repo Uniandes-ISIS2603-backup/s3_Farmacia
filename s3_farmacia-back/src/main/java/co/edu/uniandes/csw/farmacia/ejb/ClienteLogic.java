@@ -79,6 +79,16 @@ public class ClienteLogic {
         return clienteEntity;
     }
     
+    public ClienteEntity getClienteByCedula(Long cedula){
+        LOGGER.log(Level.INFO, "Inicia el proceso de consultar el cliente con cedula = {0}", cedula);
+        ClienteEntity clienteEntity = persistence.findByCedula(cedula);
+        if (clienteEntity == null){
+            LOGGER.log(Level.SEVERE, "El cliente con la cedula {0} no existe", cedula);
+        }
+        LOGGER.log(Level.INFO, "Termina el proceso de consultar el cliente con cedula = {0}", cedula);
+        return clienteEntity;
+    }
+    
     /**
      * Actualizar un cliente.
      *
