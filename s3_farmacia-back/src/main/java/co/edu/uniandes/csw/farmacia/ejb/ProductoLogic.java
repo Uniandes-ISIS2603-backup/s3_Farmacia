@@ -121,7 +121,6 @@ public class ProductoLogic {
      */
     public ProductoEntity update(Long id, ProductoEntity productoEntity) throws
             BusinessLogicException{
-        productoEntity.setId(id);
         if (id == null)
             throw new BusinessLogicException(
                     "El id no puede ser nulo");
@@ -135,7 +134,17 @@ public class ProductoLogic {
             throw new BusinessLogicException(
                     "No se encontró el elemento a actualizar");
         }
-        return persistence.update(productoEntity);
+     
+        ProductoEntity producto = persistence.find(id);
+        List<RegistroEntity> registros = producto.getRegistros();
+        productoEntity.setRegistros(registros);
+         producto = persistence.update(productoEntity);
+            
+     
+        
+        
+        
+        return producto;
     }
     
     /**

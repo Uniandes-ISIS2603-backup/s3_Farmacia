@@ -9,7 +9,6 @@ import co.edu.uniandes.csw.farmacia.entities.RegistroEntity;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -62,6 +61,20 @@ public class RegistroPersistence {
         }
         LOGGER.log(Level.INFO, "Saliendo de consultar el registro con id = {0} del producto con id =" + productosId, registrosId);
         return review;
+    }
+    /**
+     * 
+     * @param productoId
+     * @return 
+     */
+    public List<RegistroEntity> findRegistros(Long productoId)
+    {
+         LOGGER.log(Level.INFO, "Consultando el registro con id = {0} del producto con id = " + productoId, productoId);
+        TypedQuery<RegistroEntity> q = em.createQuery("select p from RegistroEntity p where (p.producto.id = :productoid)", RegistroEntity.class);
+         q.setParameter("productoid", productoId);
+         List<RegistroEntity> results = q.getResultList();
+         return results;
+
     }
     
       /**

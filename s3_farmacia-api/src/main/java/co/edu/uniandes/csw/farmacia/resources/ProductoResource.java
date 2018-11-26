@@ -84,7 +84,7 @@ public class ProductoResource {
     @GET
     public List<ProductoDetailDTO> getProductos() {
         List<ProductoEntity> productos = logic.list();
-        List<ProductoDetailDTO> list = new ArrayList<ProductoDetailDTO>();
+        List<ProductoDetailDTO> list = new ArrayList<>();
         for(int i = 0; i < productos.size(); i++) {
             //list[i] = new ProductoDTO(productos.get(i));
             list.add(new ProductoDetailDTO(productos.get(i)));
@@ -121,9 +121,11 @@ public class ProductoResource {
     
     @PUT
     @Path("{productosId: \\d+}")
-    public ProductoDTO refreshDataCliente ( @PathParam("productosId") 
+    public ProductoDTO refreshDataProducto ( @PathParam("productosId") 
             Long productoId, 
             ProductoDTO producto)throws WebApplicationException {
+        producto.setId(productoId);
+        
         if(producto == null) {
             throw new WebApplicationException(
                  "El nuevo producto no puede ser nulo", 400);
