@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -104,8 +105,9 @@ public class TransaccionClienteProductoResource {
             throw new WebApplicationException(e.getMessage() + " 404");
         }
     }
-
-    public void removeProducto(@PathParam("transaccionClienteId") Long transId, @PathParam("productoId") Long productoId, @PathParam("clienteId") Long cliId) {
+    @DELETE
+    @Path("{productoId:\\d+}")
+    public void removeProducto(@PathParam("transaccionesClienteId") Long transId, @PathParam("productoId") Long productoId, @PathParam("clienteId") Long cliId) {
 
         try {
             LOGGER.log(Level.INFO, "TransaccionClienteResource removeProducto: input: transaccionClienteId {0} , productosId {1},cliente{0}", new Object[]{transId, productoId, cliId});

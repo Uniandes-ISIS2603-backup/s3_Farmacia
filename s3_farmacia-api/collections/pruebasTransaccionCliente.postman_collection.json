@@ -189,7 +189,7 @@
 						"id": "47b65099-cd72-4d91-a0d4-a77231e61a99",
 						"exec": [
 							"tests[\"Se obtuvo correctamente la lista\"] = responseCode.code === 200;",
-							"tests[\"Lista vacia esperada\"] = responseBody.has(\"credito\");"
+							"tests[\"Tipo de pago esperado\"] = responseBody.has(\"credito\");"
 						],
 						"type": "text/javascript"
 					}

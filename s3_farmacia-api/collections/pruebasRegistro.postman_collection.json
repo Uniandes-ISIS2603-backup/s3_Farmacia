@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a898b190-6f25-4440-885f-1957ac8fc8ab",
+		"_postman_id": "a1eb1fdc-e3bd-4203-b82c-e1cd5ab1e9f2",
 		"name": "pruebasRegistro",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -205,6 +205,44 @@
 						"registros",
 						"{{new_id_pd}}",
 						"{{new_id_r}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar producto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "92188ecb-404f-49b3-bd40-81ab162b3b3e",
+						"exec": [
+							"tests[\"Se elimino al producto\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/{{new_id_pdc}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"productos",
+						"{{new_id_pdc}}"
 					]
 				}
 			},
