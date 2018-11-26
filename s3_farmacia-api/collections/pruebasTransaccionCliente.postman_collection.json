@@ -1,0 +1,298 @@
+{
+	"info": {
+		"_postman_id": "6de9edc2-95f6-4b37-b1f0-663c53860eb7",
+		"name": "pruebasTransaccionCliente",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crea un cliente.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "de7ae748-b3e5-46eb-a944-d0ed07ee4723",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_cli\", data.id);",
+							"tests[\"No hay error\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\":\"Harry\", \"apellido\":\"Potter\", \"ciudad\":\"Privet Drive\", \"direccionEnvio\":\"CRA6#1-39\",\"cedula\":1099690611}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener la lista de transacciones sin tener nada por ahora Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "74dce76a-92cc-4f7b-a71a-a5d95370b215",
+						"exec": [
+							"tests[\"Se obtuvo correctamente la lista\"] = responseCode.code === 404;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cl}}/transaccionesCliente",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						"{{new_id_cl}}",
+						"transaccionesCliente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una transaccion cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "74dce76a-92cc-4f7b-a71a-a5d95370b215",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_trc\", data.id);",
+							"tests[\"Se obtuvo correctamente la lista\"] = responseCode.code === 200;",
+							"tests[\"Lista vacia esperada\"] = responseBody.has(\"tarjeta\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"monto\" : 4500 ,\n\t\"parcial\" : true,\n\t\"tipoDePago\" : \"tarjeta\" ,\n\t\"tiempo\" : 9000\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cli}}/transaccionesCliente",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						"{{new_id_cli}}",
+						"transaccionesCliente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una transaccion cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8e5bc2f9-e33f-4d09-b093-ba47a031244c",
+						"exec": [
+							"tests[\"Obtuve la transaccion\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cli}}/transaccionesCliente/{{new_id_trc}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						"{{new_id_cli}}",
+						"transaccionesCliente",
+						"{{new_id_trc}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar informacion de una transaccion cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "47b65099-cd72-4d91-a0d4-a77231e61a99",
+						"exec": [
+							"tests[\"Se obtuvo correctamente la lista\"] = responseCode.code === 200;",
+							"tests[\"Lista vacia esperada\"] = responseBody.has(\"credito\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"monto\" : 4500 ,\n\t\"parcial\" : true,\n\t\"tipoDePago\" : \"credito\" ,\n\t\"tiempo\" : 9000\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cli}}/transaccionesCliente/{{new_id_trc}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						"{{new_id_cli}}",
+						"transaccionesCliente",
+						"{{new_id_trc}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar una transaccion cliente.",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cli}}/transaccionesCliente/{{new_id_trc}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						"{{new_id_cli}}",
+						"transaccionesCliente",
+						"{{new_id_trc}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar un cliente determinado.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d31136bf-7890-46e1-8188-ffd247fa2639",
+						"exec": [
+							"tests[\"Se elimino correctamente\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cli}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						"{{new_id_cli}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

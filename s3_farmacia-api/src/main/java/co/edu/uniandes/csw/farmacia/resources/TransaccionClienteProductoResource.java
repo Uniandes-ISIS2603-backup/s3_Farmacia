@@ -29,7 +29,8 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author estudiante
  */
-@Path("transaccionesCliente/{transaccionClienteId:\\d+}/productos")
+
+@Path("transaccionesCliente/{transaccionesClienteId:\\d+}/productos")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
@@ -49,8 +50,8 @@ public class TransaccionClienteProductoResource {
     private TransaccionClienteLogic transLogic;
 
     @POST
-    @Path("{transaccionCliente: \\d+}")
-    public void addProducto(@PathParam("transaccionClienteId") Long transId, @PathParam("productosId") Long productosId, @PathParam("clienteId") Long clienteId) {
+    @Path("{productoId: \\d+}")
+    public void addProducto(@PathParam("transaccionesClienteId") Long transId, @PathParam("productoId") Long productosId, @PathParam("clienteId") Long clienteId) {
         try {
             LOGGER.log(Level.INFO, "TransaccionClienteProductoResource addProducto: input: transaccionClienteId {0} , ProductoId {1},cleinteId{0}", new Object[]{transId, productosId, clienteId});
             TransaccionClienteEntity trans
@@ -67,7 +68,7 @@ public class TransaccionClienteProductoResource {
     }
 
     @GET
-    public List<ProductoDetailDTO> getProductos(@PathParam("TransaccionClienteId") Long transId, @PathParam("ClienteId") Long idCli) {
+    public List<ProductoDetailDTO> getProductos(@PathParam("transaccionesClienteId") Long transId, @PathParam("clienteId") Long idCli) {
         try {
             LOGGER.log(Level.INFO, "TransaccionClienteProductoResource getProductos: input: {0}", transId);
             List<ProductoDetailDTO> lista = productosListEntity2DTO(relacionLogic.getProductos(idCli, transId));

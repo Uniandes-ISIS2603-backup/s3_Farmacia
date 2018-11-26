@@ -88,8 +88,10 @@ public class TransaccionProveedorResource extends TransaccionProveedorDTO {
         TransaccionProveedorEntity entity = transaccionProveedorLogic.getTransaccionProveedor(proveedorId, transaccionProveedorId);
         if (entity == null) {
             throw new WebApplicationException("El recurso /proveedor/" + proveedorId + "/transaccionProveedor/" + transaccionProveedorId + " no existe.", 404);
-
+            
         }
+        transaccionProveedor.setId(entity.getId());
+        
         TransaccionProveedorDTO transaccionProveedorDTO = new TransaccionProveedorDTO(transaccionProveedorLogic.updateTransaccionProveedor(proveedorId, transaccionProveedor.toEntity()));
         LOGGER.log(Level.INFO, "TransaccionProveedorResource updateTransaccionProveedor: output:{0}", transaccionProveedorDTO.toString());
         return transaccionProveedorDTO;
@@ -141,5 +143,11 @@ public class TransaccionProveedorResource extends TransaccionProveedorDTO {
         }
         return list;
     }
+    
+       @Path("{transaccionProveedorId:\\d+}/productos")
+     public Class<TransaccionProveedorProductoResource> getProductos()
+      {
+          return TransaccionProveedorProductoResource.class;
+      }
     
 }

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "fda64107-33d3-49ce-bd50-dd114c897c34",
+		"_postman_id": "ed25ed1d-e04e-46db-9b55-7e4e5ffd9ace",
 		"name": "pruebas Cliente",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -129,7 +129,7 @@
 						"id": "de7ae748-b3e5-46eb-a944-d0ed07ee4723",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_pr\", data.id);",
+							"postman.setGlobalVariable(\"new_id_cl\", data.id);",
 							"tests[\"No hay error\"] = responseCode.code === 200;",
 							"console.log(data.id);"
 						],
@@ -147,7 +147,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"nombre\":\"Harry\", \"apellido\":\"Potter\", \"ciudad\":\"Privet Drive\", \"direccionEnvio\":\"CRA6#1-39\",\"cedula\":1079690311}"
+					"raw": "{\"nombre\":\"Harry\", \"apellido\":\"Potter\", \"ciudad\":\"Privet Drive\", \"direccionEnvio\":\"CRA6#1-39\",\"cedula\":1079690312}"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/",
@@ -269,7 +269,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_pr}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cl}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -279,7 +279,7 @@
 						"s3_farmacia-api",
 						"api",
 						"clientes",
-						"{{new_id_pr}}"
+						"{{new_id_cl}}"
 					]
 				}
 			},

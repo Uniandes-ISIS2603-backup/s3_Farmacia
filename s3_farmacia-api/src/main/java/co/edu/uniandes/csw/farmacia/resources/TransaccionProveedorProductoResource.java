@@ -34,44 +34,44 @@ import javax.ws.rs.WebApplicationException;
 @Consumes("application/json")
 @RequestScoped
 public class TransaccionProveedorProductoResource {
+
     @Inject
     private TransaccionProveedorProductoLogic transaccionProveedorProductoLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
 
     @Inject
     private TransaccionProveedorLogic transaccionProveedorLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
-    
-        private static final Logger LOGGER = Logger.getLogger(TransaccionProveedorProductoResource.class.getName());
 
-        @GET
-        public List<ProductoDetailDTO> getProductos(@PathParam("proveedorId") Long proveedorId, @PathParam("transaccionProveedorId") Long transaccionProveedorId) throws BusinessLogicException {
-             LOGGER.log(Level.INFO, "TransaccionProveedorProductosResource getProductos: input: {0}", transaccionProveedorId);
+    private static final Logger LOGGER = Logger.getLogger(TransaccionProveedorProductoResource.class.getName());
+
+    @GET
+    public List<ProductoDetailDTO> getProductos(@PathParam("id") Long proveedorId, @PathParam("transaccionProveedorId") Long transaccionProveedorId) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "TransaccionProveedorProductosResource getProductos: input: {0}", transaccionProveedorId);
         List<ProductoDetailDTO> listaDetailDTOs = productosListEntity2DTO(transaccionProveedorProductoLogic.getProductos(proveedorId, transaccionProveedorId));
         LOGGER.log(Level.INFO, "TransaccionProveedorProductosResource getProductos: output: {0}", listaDetailDTOs.toString());
         return listaDetailDTOs;
-        }
-        
-        
-        @POST
-        @Path("{productoId:\\d+}")
-        public void asociarProducto(@PathParam("proveedorId") Long proveedorId, @PathParam("transaccionProveedorId") Long transaccionProveedorId, @PathParam("productoId") Long productoId) throws BusinessLogicException {
+    }
+
+    @POST
+    @Path("{productoId:\\d+}")
+    public void asociarProducto(@PathParam("id") Long proveedorId, @PathParam("transaccionProveedorId") Long transaccionProveedorId, @PathParam("productoId") Long productoId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "TransaccionProveedorProductosResource asociarProducto: input: proveedorId: {0} , transaccionProveedorId: {1}, productoId: {2}", new Object[]{proveedorId, transaccionProveedorId, productoId});
         if (transaccionProveedorLogic.getTransaccionProveedor(proveedorId, transaccionProveedorId) == null) {
             throw new WebApplicationException("El recurso /transaccionProveedor/" + transaccionProveedorId + " no existe.", 404);
         }
         transaccionProveedorProductoLogic.asociate(proveedorId, transaccionProveedorId, productoId);
     }
-        
-        @DELETE
-        @Path("{productoId:\\d+}")
-        public void desasociarProducto(@PathParam("proveedorId") Long proveedorId, @PathParam("transaccionProveedorId") Long transaccionProveedorid, @PathParam("productoId") Long productoId) throws BusinessLogicException  {
-            LOGGER.log(Level.INFO, "TransaccionProveedorProductosResource desasociarProducto: input: proveedorId: {0} transaccionProveedorId{1} productoId {2}", new Object[]{proveedorId, transaccionProveedorid, productoId});
-            if(transaccionProveedorLogic.getTransaccionProveedor(proveedorId, transaccionProveedorid) == null){
-                            throw new WebApplicationException("El recurso /transaccionProveedor/" + transaccionProveedorid + " no existe.", 404);
-            }
-            transaccionProveedorProductoLogic.deasociate(proveedorId, transaccionProveedorid, productoId);
+
+    @DELETE
+    @Path("{productoId:\\d+}")
+    public void desasociarProducto(@PathParam("id") Long proveedorId, @PathParam("transaccionProveedorId") Long transaccionProveedorid, @PathParam("productoId") Long productoId) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "TransaccionProveedorProductosResource desasociarProducto: input: proveedorId: {0} transaccionProveedorId{1} productoId {2}", new Object[]{proveedorId, transaccionProveedorid, productoId});
+        if (transaccionProveedorLogic.getTransaccionProveedor(proveedorId, transaccionProveedorid) == null) {
+            throw new WebApplicationException("El recurso /transaccionProveedor/" + transaccionProveedorid + " no existe.", 404);
         }
-        
-        private List<ProductoDetailDTO> productosListEntity2DTO(List<ProductoEntity> entityList) {
+        transaccionProveedorProductoLogic.deasociate(proveedorId, transaccionProveedorid, productoId);
+    }
+
+    private List<ProductoDetailDTO> productosListEntity2DTO(List<ProductoEntity> entityList) {
         List<ProductoDetailDTO> list = new ArrayList();
         for (ProductoEntity entity : entityList) {
             list.add(new ProductoDetailDTO(entity));

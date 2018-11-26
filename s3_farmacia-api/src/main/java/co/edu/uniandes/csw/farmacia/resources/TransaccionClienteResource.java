@@ -85,7 +85,7 @@ public class TransaccionClienteResource
    
         @DELETE
     @Path("{transaccionesClienteId:\\d+}")
-    public void deleteTransaccionCliente(@PathParam("ClienteId")Long idCLi,@PathParam("transaccionClienteId")Long id) throws BusinessLogicException
+    public void deleteTransaccionCliente(@PathParam("clienteId")Long idCLi,@PathParam("transaccionesClienteId")Long id) throws BusinessLogicException
     {
         TransaccionClienteEntity entity = logic.getTransaccionCliente(idCLi, id);
         if (entity == null) {
@@ -95,7 +95,7 @@ public class TransaccionClienteResource
     }
     @PUT
     @Path("{transaccionesClienteId:\\d+}")
-    public TransaccionClienteDetailDTO refreshDataTransaccionCliente(@PathParam("clienteId") Long idCli, @PathParam("transaccionClienteId") Long id, TransaccionClienteDTO trans) throws BusinessLogicException
+    public TransaccionClienteDetailDTO refreshDataTransaccionCliente(@PathParam("clienteId") Long idCli, @PathParam("transaccionesClienteId") Long id, TransaccionClienteDTO trans) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "TransaccionClienteResource refreshData: input: clienteId: {0} , transaccionId: {1} , transaccionCliente:{2}", new Object[]{idCli, id, trans.toString()});
         if (id.equals(trans.getId())) {
@@ -103,9 +103,9 @@ public class TransaccionClienteResource
         }
         TransaccionClienteEntity entity = logic.getTransaccionCliente(idCli, id);
         if (entity == null) {
-            throw new WebApplicationException(TC1 + idCli + TC2 + id + TC3, 404);
-
+            throw new WebApplicationException(TC1 + idCli + TC2 + id + TC3, 404); 
         }
+        trans.setId(entity.getId());
         TransaccionClienteDetailDTO reviewDTO = new TransaccionClienteDetailDTO(logic.updateTransaccionCliente(idCli, trans.toEntity()));
         LOGGER.log(Level.INFO, "ReviewResource updateReview: output:{0}", reviewDTO.toString());
         return reviewDTO;

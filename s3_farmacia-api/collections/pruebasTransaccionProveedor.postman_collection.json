@@ -1,128 +1,12 @@
 {
 	"info": {
-		"_postman_id": "6aadf3f2-5221-4488-b2be-d2a0b5314265",
-		"name": "pruebas Proveedor",
+		"_postman_id": "bb2bf050-28ee-4389-af5f-cbb7aa6637cd",
+		"name": "pruebasTransaccionProveedor",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Obtener la lista de proveedores",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "9d74bd17-889b-4c0d-99b9-bf20a5410ffa",
-						"exec": [
-							"tests[\"Se obtuvo correctamente la lista\"] = responseCode.code === 200;",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s3_farmacia-api",
-						"api",
-						"proveedores",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Obtener un proveedor inexistente",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "9e7f1aaa-f235-4104-80f3-a684570537b6",
-						"exec": [
-							"tests[\"Fallo porque el proveedor que se quiere obtener no existe\"] = responseCode.code === 404;",
-							"tests[\"Mensaje de error esperado\"] = responseBody.has(\"El recurso /proveedores/0 no existe.\");"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/0",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s3_farmacia-api",
-						"api",
-						"proveedores",
-						"0"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Eliminar un proveedor inexistente.",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "f6413440-5ca3-48b8-b0e3-78b5b4f2a356",
-						"exec": [
-							"tests[\"No elimina\"] = responseCode.code === 404;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/0",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s3_farmacia-api",
-						"api",
-						"proveedores",
-						"0"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Crear un proveedor",
+			"name": "Crear un proveedor.",
 			"event": [
 				{
 					"listen": "test",
@@ -130,9 +14,9 @@
 						"id": "428b2666-e404-49da-af86-a3b724d525df",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_pr\", data.id);",
+							"postman.setGlobalVariable(\"new_id_pro\", data.id);",
 							"tests[\"No hay error\"] = responseCode.code === 200;",
-							""
+							"console.log(data.id);"
 						],
 						"type": "text/javascript"
 					}
@@ -148,7 +32,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \n\t\"nombre\" : \"Nestle\"\n\t\n}"
+					"raw": "{ \n\t\"nombre\" : \"Baaba\"\n\t\n}"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/",
@@ -168,14 +52,56 @@
 			"response": []
 		},
 		{
-			"name": "Crear un proveedor con un nombre preexistente",
+			"name": "Obtener la lista de transacciones sin tener nada por ahora",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "d6ae2f13-470e-47d5-8287-3a56c7f200ca",
+						"id": "74dce76a-92cc-4f7b-a71a-a5d95370b215",
 						"exec": [
-							"tests[\"No crea el proveedor\"] = responseCode.code === 412;",
+							"tests[\"Se obtuvo correctamente la lista\"] = responseCode.code === 200;",
+							"tests[\"Lista vacia esperada\"] = responseBody.has(\"[]\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pro}}/transaccionProveedor",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"proveedores",
+						"{{new_id_pro}}",
+						"transaccionProveedor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear transaccion al proveedor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c23127c4-6964-424f-9bf5-de893fec1c96",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_tr\", data.id);",
+							"tests[\"No hay error\"] = responseCode.code === 200;",
 							""
 						],
 						"type": "text/javascript"
@@ -194,10 +120,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \n\t\"nombre\" : \"Nestle\"\n\t\n}"
+					"raw": "{\n\t\"monto\" : 4000,\n\t\"tiempo\": 3456\n\t\n}"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pro}}/transaccionProveedor",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -207,21 +133,22 @@
 						"s3_farmacia-api",
 						"api",
 						"proveedores",
-						""
+						"{{new_id_pro}}",
+						"transaccionProveedor"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Obtener un proveedor",
+			"name": "Obtener transaccion del proveedor",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "931b03d4-1889-4315-952f-be5379394f26",
+						"id": "5e5ed0f7-f8be-4f9e-aae4-e864cdc5cc59",
 						"exec": [
-							"tests[\"Se obtuvo correctamente\"] = responseCode.code === 200;"
+							"tests[\"Obtuvo el producto\"]= responseCode.code === 200;"
 						],
 						"type": "text/javascript"
 					}
@@ -235,7 +162,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pro}}/transaccionProveedor/{{new_id_tr}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -245,21 +172,25 @@
 						"s3_farmacia-api",
 						"api",
 						"proveedores",
-						"{{new_id_pr}}"
+						"{{new_id_pro}}",
+						"transaccionProveedor",
+						"{{new_id_tr}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Actualizar el nombre de un Proveedor.",
+			"name": "Actualizar la transaccion proveedor",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "0a9efa14-802d-47ed-8d77-21eead75758e",
+						"id": "9195ef7a-d423-443e-8d6e-f3d36867e4a9",
 						"exec": [
-							"tests[\"Se modifico correctamente\"] = responseCode.code === 200;"
+							"tests[\"Se modifico correctamente\"] = responseCode.code === 200;",
+							"tests[\"Modifica adecuadamente\"] = responseBody.has(\"17\");",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -270,15 +201,17 @@
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json"
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"id\" : {{new_id_pr}},\n\t\"nombre\" : \"Bayer\"\n}"
+					"raw": "{\n\t\"monto\" : 100,\n\t\"tiempo\" : 17\n}"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pro}}/transaccionProveedor/{{new_id_tr}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -288,14 +221,56 @@
 						"s3_farmacia-api",
 						"api",
 						"proveedores",
-						"{{new_id_pr}}"
+						"{{new_id_pro}}",
+						"transaccionProveedor",
+						"{{new_id_tr}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Eliminar un proveedor determinado",
+			"name": "Eliminar transaccion proveedor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1b97291b-684f-4636-9733-6da820f979c2",
+						"exec": [
+							"tests[\"Elimina correctamente\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pro}}/transaccionProveedor/{{new_id_tr}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"proveedores",
+						"{{new_id_pro}}",
+						"transaccionProveedor",
+						"{{new_id_tr}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar un proveedor determinado.",
 			"event": [
 				{
 					"listen": "test",
@@ -317,7 +292,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pro}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -327,7 +302,7 @@
 						"s3_farmacia-api",
 						"api",
 						"proveedores",
-						"{{new_id_pr}}"
+						"{{new_id_pro}}"
 					]
 				}
 			},
