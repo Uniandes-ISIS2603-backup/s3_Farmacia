@@ -88,7 +88,7 @@ public class ClientePersistence {
      * @return 
      */
     public ClienteEntity findByCedula(Long cedula){
-        LOGGER.log(Level.INFO, "Consultando cliente por cedula ", cedula);
+        LOGGER.log(Level.INFO, "Consultando cliente por cedula {0}", cedula);
         TypedQuery query = em.createQuery("Select e From ClienteEntity e where e.cedula = :cedula", ClienteEntity.class);
         query = query.setParameter("cedula", cedula);
         List<ClienteEntity> sameCedula = query.getResultList();
@@ -100,7 +100,7 @@ public class ClientePersistence {
         }else{
             result = sameCedula.get(0);
         }
-        LOGGER.log(Level.INFO,"Saliendo de consultar un cliente por nombre",cedula );
+        LOGGER.log(Level.INFO,"Saliendo de consultar un cliente por nombre {0}",cedula );
         return result;
     }
     

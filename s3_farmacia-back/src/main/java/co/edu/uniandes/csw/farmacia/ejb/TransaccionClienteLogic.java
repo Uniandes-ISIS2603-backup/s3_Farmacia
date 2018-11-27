@@ -60,24 +60,24 @@ public class TransaccionClienteLogic
     
     public TransaccionClienteEntity updateTransaccionCliente(Long ClienteId, TransaccionClienteEntity transaccionCliente)
     {
-       LOGGER.log(Level.INFO, "Inicia proceso de actualizar la transaccion con id = {0} del cliente con id = " + ClienteId, transaccionCliente.getId());
+       LOGGER.log(Level.INFO, "Inicia proceso de actualizar la transaccion con id = {0} del cliente con id = {1}", new Object[] { transaccionCliente.getId(), ClienteId});
         ClienteEntity entity = clientePersistence.find(ClienteId);
         transaccionCliente.setCliente(entity);
         persistence.update(transaccionCliente);
-        LOGGER.log(Level.INFO, "Termina proceso de actualizar la transaccion con id = {0} del cliente con id = " + ClienteId, transaccionCliente.getId());
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar la transaccion con id = {0} del cliente con id = {1}" , new Object[] { transaccionCliente.getId(), ClienteId});
         return transaccionCliente;
     }
     
     
     public void deleteTransaccionCliente( Long clienteId,Long transaccionClienteId) throws BusinessLogicException
     {
-         LOGGER.log(Level.INFO, "Inicia proceso de borrar la transaccion con id = {0} del cliente con id = " + clienteId, transaccionClienteId);
+         LOGGER.log(Level.INFO, "Inicia proceso de borrar la transaccion con id = {0} del cliente con id = {1}" , new Object[] { transaccionClienteId, clienteId});
         TransaccionClienteEntity old = getTransaccionCliente(clienteId, transaccionClienteId);
         if (old == null) {
             throw new BusinessLogicException("la transaccion con id = " + transaccionClienteId + " no esta asociado a el cliente con id = " + clienteId);
         }
         persistence.delete(old.getId());
-        LOGGER.log(Level.INFO, "Termina proceso de borrar la transaccion con id = {0} del cliente con id = " + clienteId, transaccionClienteId);
+        LOGGER.log(Level.INFO, "Termina proceso de borrar la transaccion con id = {0} del cliente con id {1}= " , new Object[] { transaccionClienteId, clienteId});
    
     }
     

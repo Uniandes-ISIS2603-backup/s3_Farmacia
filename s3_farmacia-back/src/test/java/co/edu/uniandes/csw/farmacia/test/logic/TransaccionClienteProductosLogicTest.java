@@ -119,6 +119,8 @@ public class TransaccionClienteProductosLogicTest {
         dataCliente.add(cliente);
 
         TransaccionClienteEntity en = transaccionClienteLogic.createTransaccionCliente(dataCliente.get(0).getId(), entity);
+             
+         
 
     }
 
