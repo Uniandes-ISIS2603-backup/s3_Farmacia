@@ -96,20 +96,27 @@ public class ProveedorProductosLogic {
         
         List<ProductoEntity> listaARetornar = new ArrayList<>();
         int tamanioMenor = listaMenor.size();
+        
+        LOGGER.severe("co.edu.uniandes.csw.farmacia.ejb.ProveedorProductosLogic.productosNoAniadidos()" + listaTotal.size());
+        LOGGER.severe("co.edu.uniandes.csw.farmacia.ejb.ProveedorProductosLogic.productosNoAniadidos()"+listaMenor.size());
         for (int i = 0; i < listaTotal.size() ; i++) 
         {
             ProductoEntity pr = listaTotal.get(i);
             for (int j = 0; j < tamanioMenor && !finalizo ; j++)
             {
-                if(pr.getId().equals(listaMenor.get(j).getId()))
+                if(pr.getId().compareTo(listaMenor.get(j).getId()) == 0)
                 {
                     finalizo = true;
+                            LOGGER.severe("co.edu.uniandes.csw.farmacia.ejb.ProveedorProductosLogic.productosNoAniadidos()uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
+
                 }
             }
             if(!finalizo)
             {
                 listaARetornar.add(pr);
             }
+            finalizo = false;
+
   
         }
         return listaARetornar;
