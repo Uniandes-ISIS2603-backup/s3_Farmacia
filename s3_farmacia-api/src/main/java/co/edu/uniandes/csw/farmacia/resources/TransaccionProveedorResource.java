@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.farmacia.resources;
 
 import co.edu.uniandes.csw.farmacia.dto.TransaccionProveedorDTO;
+import co.edu.uniandes.csw.farmacia.dto.TransaccionProveedorDetailDTO;
 import co.edu.uniandes.csw.farmacia.ejb.TransaccionProveedorLogic;
 import co.edu.uniandes.csw.farmacia.entities.TransaccionProveedorEntity;
 import co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException;
@@ -43,14 +44,14 @@ public class TransaccionProveedorResource extends TransaccionProveedorDTO {
       */
     @GET
     @Path("{transaccionProveedorId: \\d+}" )
-    public TransaccionProveedorDTO getTransaccionProveedor(@PathParam("id") Long proveedorId, @PathParam("transaccionProveedorId")Long id)
+    public TransaccionProveedorDetailDTO getTransaccionProveedor(@PathParam("id") Long proveedorId, @PathParam("transaccionProveedorId")Long id)
     {
       LOGGER.log(Level.INFO, "TransaccionProveedorResource getTransaccionProveedor: input: {0}", id);
       TransaccionProveedorEntity entity = transaccionProveedorLogic.getTransaccionProveedor(proveedorId, id);
       if (entity == null) {
             throw new WebApplicationException("El recurso /proveedor/" + proveedorId + "/transaccionProveedor/" + id + " no existe.", 404);
         }
-      TransaccionProveedorDTO transaccionProveedorDTO = new TransaccionProveedorDTO(entity);
+      TransaccionProveedorDetailDTO transaccionProveedorDTO = new TransaccionProveedorDetailDTO(entity);
       LOGGER.log(Level.INFO, "transaccionProveedorResource getransaccionProveedor: output: {0}", transaccionProveedorDTO);
         return transaccionProveedorDTO;    
     }
