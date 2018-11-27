@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.farmacia.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -21,7 +22,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class TransaccionProveedorEntity extends BaseEntity implements Serializable
 {
-    
+        private static final Logger LOGGER = Logger.getLogger(TransaccionProveedorEntity.class.getName());	
 
         
     @PodamExclude

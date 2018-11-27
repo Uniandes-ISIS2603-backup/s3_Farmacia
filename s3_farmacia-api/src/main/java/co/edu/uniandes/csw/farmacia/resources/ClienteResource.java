@@ -60,14 +60,14 @@ public class ClienteResource {
      */
     @POST
     public ClienteDTO createCliente(ClienteDTO cliente) throws BusinessLogicException{
-        LOGGER.log(Level.INFO, "ClienteResource createCliente: input: {0}", cliente.toString());
+        LOGGER.log(Level.INFO, "ClienteResource createCliente: input: {0}", cliente);
         // Convierte el DTO (json) en un objeto Entity para ser manejado por la lógica.
         ClienteEntity clienteEntity = cliente.toEntity();
         // Invoca la lógica para crear el cliente nueva
         ClienteEntity nuevoClienteEntity = clienteLogic.createCliente(clienteEntity);
         // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
         ClienteDTO nuevoClienteDTO = new ClienteDTO(nuevoClienteEntity);
-        LOGGER.log(Level.INFO, "ClienteResource createCliente: output: {0}", nuevoClienteDTO.toString());
+        LOGGER.log(Level.INFO, "ClienteResource createCliente: output: {0}", nuevoClienteDTO);
         return nuevoClienteDTO;
     }
     
@@ -81,7 +81,7 @@ public class ClienteResource {
     public List<ClienteDetailDTO> getClientes(){
         LOGGER.info("ClienteResource getClientes: input: void");
         List<ClienteDetailDTO> listaClientes = listEntity2DetailDTO(clienteLogic.getClientes());
-        LOGGER.log(Level.INFO, "ClienteResource getClientes: output: {0}", listaClientes.toString());
+        LOGGER.log(Level.INFO, "ClienteResource getClientes: output: {0}", listaClientes);
         return listaClientes;
     }
     
@@ -103,7 +103,7 @@ public class ClienteResource {
             throw new WebApplicationException(C1 + id + C2, 404);
         }
         ClienteDetailDTO detailDTO = new ClienteDetailDTO(clienteEntity);
-        LOGGER.log(Level.INFO, "ClienteResource getCliente: output: {0}", detailDTO.toString());
+        LOGGER.log(Level.INFO, "ClienteResource getCliente: output: {0}", detailDTO);
         return detailDTO;
     }
     
@@ -116,7 +116,7 @@ public class ClienteResource {
             throw new WebApplicationException(C3 + cedula + C2, 404);
         }
         ClienteDetailDTO detailDTO = new ClienteDetailDTO(clienteEntity);
-        LOGGER.log(Level.INFO, "ClienteResource getClienteByCedula: output: {0}", detailDTO.toString());
+        LOGGER.log(Level.INFO, "ClienteResource getClienteByCedula: output: {0}", detailDTO);
         return detailDTO;
     }
     
@@ -156,13 +156,13 @@ public class ClienteResource {
     @PUT
     @Path("{clientesId:\\d+}")
     public ClienteDTO updateCliente ( @PathParam("clientesId") Long id, ClienteDTO cliente)throws WebApplicationException,BusinessLogicException{
-         LOGGER.log(Level.INFO, "ClienteResource updateCliente: input: id:{0} , cliente: {1}", new Object[]{id, cliente.toString()});
+         LOGGER.log(Level.INFO, "ClienteResource updateCliente: input: id:{0} , cliente: {1}", new Object[]{id, cliente});
         cliente.setId(id);
         if (clienteLogic.getCliente(id) == null) {
             throw new WebApplicationException(C1 + id + C2, 404);
         }
         ClienteDTO detailDTO = new ClienteDTO(clienteLogic.updateCliente(id, cliente.toEntity()));
-        LOGGER.log(Level.INFO, "ClienteResource updateCliente: output: {0}", detailDTO.toString());
+        LOGGER.log(Level.INFO, "ClienteResource updateCliente: output: {0}", detailDTO);
         return detailDTO;
     } 
     @Path("{clienteId: \\d+}/transaccionesCliente")
