@@ -123,19 +123,6 @@ public class ClienteLogic {
     }
     
     /**
-     * Borrar un cliente
-     *
-     * @param clienteId: id del cliente a borrar
-     */
-    public void delete2Cliente(Long clienteId) {
-        LOGGER.log(Level.INFO, "Inicia proceso de borrar el cliente con id = {0}", clienteId);
-        // Note que, por medio de la inyección de dependencias se llama al método "delete(id)" que se encuentra en la persistencia.
-        
-        persistence.delete2(clienteId);
-        LOGGER.log(Level.INFO, "Termina proceso de borrar el cliente con id = {0}", clienteId);
-    }
-    
-    /**
      * valida el numero de cedula de un cliente.
      * Para que una cedula sea valida debe tener estrictamente 10 digitos.
      * @param cedula el numero de cedula que se quiere validar
