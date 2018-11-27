@@ -151,7 +151,7 @@ public class TransaccionClienteProductosLogicTest {
     }
 
     @Test
-    public void desasociateTest() {
+    public void deasociateTest() {
         Long idTransaccion = new Long(0);
         try {
             idTransaccion = dataCliente.get(0).getTransaccionesCliente().get(0).getId();

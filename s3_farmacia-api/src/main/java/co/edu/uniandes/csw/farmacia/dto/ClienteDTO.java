@@ -41,52 +41,100 @@ public class ClienteDTO implements Serializable {
             this.cedula = clienteEntity.getCedula();
         }
     }
-    
+    /**
+     * 
+     * @return 
+     */
     public Long getId(){
         return id;
     }
+    /**
+     * 
+     * @param id 
+     */
+    public void setId(Long id)
     
-    public void setId(Long id){
+    {
         this.id = id;
     }
-    
-    public String getNombre(){
+    /**
+     * 
+     * @return 
+     */
+    public String getNombre()
+    {
         return nombre;
     }
-    
-    public void setNombre(String nombre){
+    /**
+     * 
+     * @param nombre 
+     */
+    public void setNombre(String nombre)
+    {
         this.nombre = nombre;
     }
-    
-    public String getApellido(){
+    /**
+     * 
+     * @return 
+     */
+    public String getApellido()
+    {
         return apellido;
     }
-    
-    public void setApellido(String apellido){
+    /**
+     * 
+     * @param apellido 
+     */
+    public void setApellido(String apellido)
+    {
         this.apellido = apellido;
     }
-    
-    public String getCiudad(){
+    /**
+     * 
+     * @return 
+     */
+    public String getCiudad()
+    {
         return ciudad;
     }
-    
-    public void setCiudad(String ciudad){
+    /**
+     * 
+     * @param ciudad 
+     */
+    public void setCiudad(String ciudad)
+    {
         this.ciudad = ciudad;
     }
-    
-    public String getDireccionEnvio(){
+    /**
+     * 
+     * @return 
+     */
+    public String getDireccionEnvio()
+    {
         return direccionEnvio;
     }
-    
-    public void setDireccionEnvio(String direccionEnvio){
+    /**
+     * 
+     * @param direccionEnvio 
+     */
+    public void setDireccionEnvio(String direccionEnvio)
+    {
         this.direccionEnvio = direccionEnvio;
     }
-    
-    public Long getCedula(){
+    /**
+     * 
+     * @return 
+     */
+    public Long getCedula()
+    {
         return cedula;
     }
-    
-    public void setCedula(Long cedula){
+    /**
+     * 
+     * @param cedula 
+     */
+    public void setCedula(Long cedula)
+    {
         this.cedula = cedula;
     }
     
