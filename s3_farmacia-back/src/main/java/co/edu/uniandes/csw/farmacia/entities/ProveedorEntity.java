@@ -27,10 +27,6 @@ public class ProveedorEntity extends BaseEntity implements Serializable {
      * Representa el nombre del proveedor
      */
     private String nombre;
-    /**
-     * La constante que lleva el registro de las transacciones de las entidades
-     */
-    private static final Logger LOGGER = Logger.getLogger(ProveedorEntity.class.getName());
 
     /**
      * Los productos que ofrece el proveedor

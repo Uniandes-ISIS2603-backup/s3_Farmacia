@@ -26,7 +26,6 @@ public class ClienteEntity extends BaseEntity implements Serializable{
     private String direccionEnvio;
     private Long cedula;
     
-        private static final Logger LOGGER = Logger.getLogger(ClienteEntity.class.getName());
 
     
     @PodamExclude

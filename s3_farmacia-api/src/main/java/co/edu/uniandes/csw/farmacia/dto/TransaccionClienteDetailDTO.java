@@ -36,31 +36,28 @@ public class TransaccionClienteDetailDTO extends TransaccionClienteDTO implement
         }
     }
     
-    
-    @Override
-    public TransaccionClienteEntity toEntity() 
-    {
-        TransaccionClienteEntity transaccion = super.toEntity();
-        if (productos != null) {
-            List<ProductoEntity> productos1 = new ArrayList<>();
-            for (ProductoDTO dtoReview : getProductos()) {
-                productos1.add(dtoReview.toEntity());
-            }
-            transaccion.setProductos(productos1);
-        }
-           return transaccion;
-    }
-
-      
     public List<ProductoDTO> getProductos()
     {
           return productos;
-      
     }
     
     public void setProductos(List<ProductoDTO> pProductos)
     {
         productos = pProductos;
+    }
+    
+       @Override
+    public TransaccionClienteEntity toEntity() 
+    {
+        TransaccionClienteEntity transaEntity = super.toEntity();
+        if (productos != null) {
+            List<ProductoEntity> productosTransaccion = new ArrayList<>();
+            for (ProductoDTO productoDto : getProductos()) {
+                productosTransaccion.add(productoDto.toEntity());
+            }
+            transaEntity.setProductos(productosTransaccion);
+        }
+           return transaEntity;
     }
 }
 
