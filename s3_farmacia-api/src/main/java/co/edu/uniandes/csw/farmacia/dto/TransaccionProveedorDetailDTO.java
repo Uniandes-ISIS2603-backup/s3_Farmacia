@@ -44,7 +44,7 @@ public class TransaccionProveedorDetailDTO extends TransaccionProveedorDTO imple
         
         if (transaccionProveedorEntity != null) 
         {
-            if (transaccionProveedorEntity.getProductos() == null)
+            if (transaccionProveedorEntity.getProductos() != null)
             {
                 productos = new ArrayList<>();
                 for (ProductoEntity entityProduct : transaccionProveedorEntity.getProductos()) {
