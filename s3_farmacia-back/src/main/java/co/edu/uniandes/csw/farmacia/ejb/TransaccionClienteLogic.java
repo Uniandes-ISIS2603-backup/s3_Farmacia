@@ -34,7 +34,7 @@ public class TransaccionClienteLogic
      
      
      
-      public TransaccionClienteEntity createTransaccionCliente( Long clienteId, TransaccionClienteEntity trans) throws BusinessLogicException
+      public TransaccionClienteEntity createTransaccionCliente( Long clienteId, TransaccionClienteEntity trans) 
       {
          LOGGER.log(Level.INFO, "Inicia proceso de consultar las transacciones asociados al cliente con id = {0}", clienteId);
         ClienteEntity clienteEntity = clientePersistence.find(clienteId);

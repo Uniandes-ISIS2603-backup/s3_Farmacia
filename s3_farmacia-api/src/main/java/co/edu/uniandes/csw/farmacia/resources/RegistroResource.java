@@ -83,7 +83,7 @@ public class RegistroResource {
      */
     @GET
     @Path("{productosId: \\d+}/{registrosId: \\d+}")
-    public RegistroDTO getRegistro(@PathParam("productosId") Long productosId, @PathParam("registrosId") Long registrosId) throws BusinessLogicException {
+    public RegistroDTO getRegistro(@PathParam("productosId") Long productosId, @PathParam("registrosId") Long registrosId) {
         LOGGER.log(Level.INFO, "RegistroResource getRegistro: input: {0}", registrosId);
         RegistroEntity entity = registroLogic.getRegistro(productosId, registrosId);
         if (entity == null) {
