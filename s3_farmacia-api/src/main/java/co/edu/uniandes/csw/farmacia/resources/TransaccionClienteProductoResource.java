@@ -51,9 +51,11 @@ public class TransaccionClienteProductoResource {
     private TransaccionClienteLogic transLogic;
 
     @POST
-    @Path("{productoId: \\d+}")
-    public void addProducto(@PathParam("transaccionesClienteId") Long transId, @PathParam("productoId") Long productosId, @PathParam("clienteId") Long clienteId) {
+   @Path("{productoId: \\d+}") 
+    public void addProducto(@PathParam("transaccionesClienteId") Long transId, @PathParam("productoId")Long productosId, @PathParam("clienteId") Long clienteId) {
         try {
+            
+            
             LOGGER.log(Level.INFO, "TransaccionClienteProductoResource addProducto: input: transaccionClienteId {0} , ProductoId {1},cleinteId{0}", new Object[]{transId, productosId, clienteId});
             TransaccionClienteEntity trans
                     = transLogic.getTransaccionCliente(clienteId, transId);
