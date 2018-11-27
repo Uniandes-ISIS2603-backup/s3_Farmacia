@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "68f5f26d-a4d4-4ad3-8334-2a4a678a160c",
+		"_postman_id": "3228f061-c947-4462-a095-5577a5aca808",
 		"name": "pruebas productos",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -101,6 +101,44 @@
 			"response": []
 		},
 		{
+			"name": "Obtener lista de productos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0cbc5a02-18c8-49c0-ad47-64645d12d2e5",
+						"exec": [
+							"tests[\"Se encontro la lista de productos\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"productos",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Obtener un producto",
 			"event": [
 				{
@@ -133,6 +171,44 @@
 						"api",
 						"productos",
 						"{{new_id_pdc}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un producto inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b39c8696-eceb-462d-a323-46538954d2b0",
+						"exec": [
+							"tests[\"Se encontro producto\"] = responseCode.code === 404;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"productos",
+						"0"
 					]
 				}
 			},
@@ -179,6 +255,52 @@
 						"api",
 						"productos",
 						"{{new_id_pdc}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update del producto inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e80d1995-b326-4e35-a1d7-a604789e23f5",
+						"exec": [
+							"tests[\"Se obtuvo correctamente la lista\"] = responseCode.code === 404;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t \"fecha\" : \"9/20/2018\",\n\t \"precio\" : 71,\n\t \"tipoProducto\" : \"SUMINISTRO\",\n\t \"unidadesDisponibles\" : 100,\n\t \"perecedero\" : false ,\n\t \"cantidad\" : 95\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"productos",
+						"0"
 					]
 				}
 			},

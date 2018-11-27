@@ -97,10 +97,10 @@ public class TransaccionProveedorResource extends TransaccionProveedorDTO {
     }
     
     @POST
-    public TransaccionProveedorDTO createTransaccionProveedor(@PathParam("id") Long proveedorId, TransaccionProveedorDTO transaccionProveedor) throws BusinessLogicException
+    public TransaccionProveedorDetailDTO createTransaccionProveedor(@PathParam("id") Long proveedorId, TransaccionProveedorDTO transaccionProveedor) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "TransaccionProveedorResource createTransaccionProveedor: input: {0}", transaccionProveedor);
-        TransaccionProveedorDTO nuevaTransaccionProveedorDTO = new TransaccionProveedorDTO(transaccionProveedorLogic.createTransaccionProveedor(proveedorId, transaccionProveedor.toEntity() ));
+        TransaccionProveedorDetailDTO nuevaTransaccionProveedorDTO = new TransaccionProveedorDetailDTO(transaccionProveedorLogic.createTransaccionProveedor(proveedorId, transaccionProveedor.toEntity() ));
         LOGGER.log(Level.INFO, "TransaccionProveedorResource createTransaccionPRoveedor: output: {0}", nuevaTransaccionProveedorDTO);
         return nuevaTransaccionProveedorDTO;
     }

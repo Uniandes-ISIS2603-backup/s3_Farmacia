@@ -102,6 +102,18 @@
 		},
 		{
 			"name": "Obtiene un registro",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d487def9-f077-434b-ba19-18d741f7a6fa",
+						"exec": [
+							"tests[\"No hay error\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
