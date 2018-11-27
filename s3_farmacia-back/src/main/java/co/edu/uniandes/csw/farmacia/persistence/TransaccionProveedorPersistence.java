@@ -57,7 +57,7 @@ public class TransaccionProveedorPersistence {
      * devuelve siempre la primera que encuentra
      */
     public TransaccionProveedorEntity find(Long proveedorId, Long transaccionProveedorId) {
-        LOGGER.log(Level.INFO, String.format("Consultando la transaccionProveedor con id = {0} del proveedor con id = %d", proveedorId), transaccionProveedorId);
+        LOGGER.log(Level.INFO, "Consultando la transaccionProveedor con id = {0} del proveedor con id = " + proveedorId, transaccionProveedorId);
         TypedQuery<TransaccionProveedorEntity> q = em.createQuery("select p from TransaccionProveedorEntity p where (p.proveedor.id = :proveedorid) and (p.id = :id)", TransaccionProveedorEntity.class);
         q.setParameter("proveedorid", proveedorId);
         q.setParameter("id", transaccionProveedorId);
