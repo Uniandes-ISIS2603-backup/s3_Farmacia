@@ -48,8 +48,12 @@ public class TransaccionClientePersistence
         q.setParameter("id", transaccionId);
         List<TransaccionClienteEntity> results = q.getResultList();
         TransaccionClienteEntity transaccion = null;
-        if (results.size() >= 1) {
-            transaccion = results.get(0);
+        if (results == null) {	        
+            transaccion = null;	           
+        } else if (results.isEmpty()) {	        
+            transaccion = null;	           
+        } else if (results.size() >= 1) {	         
+            transaccion = results.get(0);	           
         }
         LOGGER.log(Level.INFO, "Saliendo de consultar la transaccion con id = {0} del cliente con id =" + clienteId, transaccionId);
         return transaccion;
