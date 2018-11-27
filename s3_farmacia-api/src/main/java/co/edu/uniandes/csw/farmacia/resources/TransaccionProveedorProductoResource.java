@@ -39,7 +39,7 @@ public class TransaccionProveedorProductoResource {
     private TransaccionProveedorProductoLogic transaccionProveedorProductoLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
 
     @Inject
-    private TransaccionProveedorLogic transaccionProveedorLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
+    private TransaccionProveedorLogic transaccionProveedorLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.()
 
     private static final Logger LOGGER = Logger.getLogger(TransaccionProveedorProductoResource.class.getName());
 
