@@ -96,7 +96,7 @@ public class ProveedorPersistence {
      * Si existe alguno devuelve el primero.
      */
     public ProveedorEntity findByName(String name) {
-        LOGGER.log(Level.INFO, "Consultando proveedor por nombre ", name);
+        LOGGER.log(Level.INFO, "Consultando proveedor por nombre {0}", name);
         TypedQuery query = em.createQuery("Select e From ProveedorEntity e where e.nombre = :nombre", ProveedorEntity.class);
         query = query.setParameter("nombre", name);
         List<ProveedorEntity> sameName = query.getResultList();
@@ -108,7 +108,7 @@ public class ProveedorPersistence {
         } else {
             result = sameName.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar proveedor por nombre ", name);
+        LOGGER.log(Level.INFO, "Saliendo de consultar proveedor por nombre {0}", name);
         return result;
     }
 
