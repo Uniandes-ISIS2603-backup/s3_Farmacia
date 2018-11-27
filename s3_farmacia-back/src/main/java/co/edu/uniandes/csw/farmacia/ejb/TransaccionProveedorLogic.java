@@ -69,7 +69,7 @@ public class TransaccionProveedorLogic {
      * @return la transaccion proveedor solicitada por medio de su id.
      */
     public TransaccionProveedorEntity getTransaccionProveedor(Long proveedorId,Long transaccionProveedorId) {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar la transaccion con id = {0} del proveedor con id = " + proveedorId, transaccionProveedorId);
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar la transaccion con id = {0} del proveedor con id = {1}", new Object[] { transaccionProveedorId, proveedorId});
         return persistence.find(proveedorId, transaccionProveedorId);
     }
 
@@ -84,11 +84,11 @@ public class TransaccionProveedorLogic {
      * @return la transaccionProveedor con los cambios actualizados en la base de datos.
      */
     public TransaccionProveedorEntity updateTransaccionProveedor(Long proveedorId, TransaccionProveedorEntity transaccionProveedorEntity) {
-        LOGGER.log(Level.INFO, "Inicia proceso de actualizar la transaccionProveedor con id = {0} del proveedor con id = " + proveedorId, transaccionProveedorEntity.getId());
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar la transaccionProveedor con id = {0} del proveedor con id = {1}" , new Object[] { transaccionProveedorEntity.getId(), proveedorId});
         ProveedorEntity proveedorEntity = proveedorPersistence.find(proveedorId);
         transaccionProveedorEntity.setProveedor(proveedorEntity);
         TransaccionProveedorEntity newEntity = persistence.update(transaccionProveedorEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de actualizar la transaccionProveedor con id = {0} del proveedor con id" + proveedorId, transaccionProveedorEntity.getId());
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar la transaccionProveedor con id = {0} del proveedor con id = {1}", new Object[] { transaccionProveedorEntity.getId(), proveedorId});
         return newEntity;
     }
 
@@ -100,7 +100,7 @@ public class TransaccionProveedorLogic {
      * @throws co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException
      */
     public void deleteTransaccionProveedor(Long proveedorId, Long transaccionProveedorId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de borrar la transaccionProveedor con id = {0} del proveedor con id" + proveedorId, transaccionProveedorId);
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar la transaccionProveedor con id = {0} del proveedor con id", new Object[] { transaccionProveedorId, proveedorId});
         TransaccionProveedorEntity old = getTransaccionProveedor(proveedorId, transaccionProveedorId);
         if (old == null) {
             throw new BusinessLogicException("la transaccion proveedor con id = " + transaccionProveedorId + " no esta asociado a el proveedor con id = " + proveedorId);
