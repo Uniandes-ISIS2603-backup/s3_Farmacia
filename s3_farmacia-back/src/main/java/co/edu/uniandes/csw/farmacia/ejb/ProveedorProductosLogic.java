@@ -86,5 +86,32 @@ public class ProveedorProductosLogic {
         ProveedorEntity proveedorEntity = proveedorPersistence.find(proveedorId);
         proveedorEntity.getProductos().remove(productoEntity);
         LOGGER.log(Level.INFO, "Termina proceso de  borrar un producto del proveedor con  id = {0}", proveedorId);
-    }    
+    }
+    
+    public List<ProductoEntity> productosNoAniadidos(Long proveedorId){
+        
+      List<ProductoEntity> listaTotal =   productoPersistence.list();
+        List<ProductoEntity> listaMenor = getProductos(proveedorId);
+        boolean finalizo = false;
+        
+        List<ProductoEntity> listaARetornar = new ArrayList<>();
+        int tamanioMenor = listaMenor.size();
+        for (int i = 0; i < listaTotal.size() ; i++) 
+        {
+            ProductoEntity pr = listaTotal.get(i);
+            for (int j = 0; j < tamanioMenor && !finalizo ; j++)
+            {
+                if(pr.getId().equals(listaMenor.get(j).getId()))
+                {
+                    finalizo = true;
+                }
+            }
+            if(!finalizo)
+            {
+                listaARetornar.add(pr);
+            }
+  
+        }
+        return listaARetornar;
+    }
 }

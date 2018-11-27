@@ -94,6 +94,15 @@ public class ProveedorProductosResource {
         proveedorProductosLogic.removeProducto(provId, productoId);
         LOGGER.info("ProveedorProductosResoruce removeProducto: output: void");
     }
+    
+    @GET
+    @Path("/faltantes")
+    public List<ProductoDetailDTO> darProductoNoAniadidos(@PathParam("id") Long provId)
+    {
+        LOGGER.log(Level.INFO, "ProveedorProductosResource getProductos: input: {0}", provId);
+        List<ProductoDetailDTO> lista = productosListEntity2DTO(proveedorProductosLogic.productosNoAniadidos(provId));
+        return lista;
+    }
 
 
     private List<ProductoDetailDTO> productosListEntity2DTO(List<ProductoEntity> entityList) {
