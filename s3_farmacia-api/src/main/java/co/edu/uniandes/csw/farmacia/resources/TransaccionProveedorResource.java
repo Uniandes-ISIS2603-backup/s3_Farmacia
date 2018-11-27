@@ -64,9 +64,9 @@ public class TransaccionProveedorResource extends TransaccionProveedorDTO {
      * proveedor. Si no hay ninguna retorna una lista vacía.
      */
     @GET
-    public List<TransaccionProveedorDTO> getTransaccionesProveedor(@PathParam("id") Long proveedorId) {
+    public List<TransaccionProveedorDetailDTO> getTransaccionesProveedor(@PathParam("id") Long proveedorId) {
         LOGGER.log(Level.INFO, "TransaccionProveedorResource getTransaccionProveedor: input: {0}", proveedorId);
-        List<TransaccionProveedorDTO> listaDTOs = listEntity2DTO(transaccionProveedorLogic.getTransaccionesProveedor(proveedorId));
+        List<TransaccionProveedorDetailDTO> listaDTOs = listEntity2DTO(transaccionProveedorLogic.getTransaccionesProveedor(proveedorId));
         return listaDTOs;
     }
     
@@ -135,10 +135,10 @@ public class TransaccionProveedorResource extends TransaccionProveedorDTO {
      * vamos a convertir a DTO.
      * @return la lista de transacciones en forma DTO (json)
      */
-    private List<TransaccionProveedorDTO> listEntity2DTO(List<TransaccionProveedorEntity> entityList) {
-        List<TransaccionProveedorDTO> list = new ArrayList<>();
+    private List<TransaccionProveedorDetailDTO> listEntity2DTO(List<TransaccionProveedorEntity> entityList) {
+        List<TransaccionProveedorDetailDTO> list = new ArrayList<>();
         for (TransaccionProveedorEntity entity : entityList) {
-            list.add(new TransaccionProveedorDTO(entity));
+            list.add(new TransaccionProveedorDetailDTO(entity));
         }
         return list;
     }
