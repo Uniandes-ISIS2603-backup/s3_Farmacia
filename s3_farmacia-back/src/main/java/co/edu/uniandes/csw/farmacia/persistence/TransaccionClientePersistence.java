@@ -51,7 +51,7 @@ public class TransaccionClientePersistence
         if (results.size() >= 1) {
             transaccion = results.get(0);
         }
-        LOGGER.log(Level.INFO, String.format("Saliendo de consultar la transaccion con id = {0} del cliente con id = %d", clienteId), transaccionId);
+        LOGGER.log(Level.INFO, "Saliendo de consultar la transaccion con id = {0} del cliente con id =" + clienteId, transaccionId);
         return transaccion;
     }
     
