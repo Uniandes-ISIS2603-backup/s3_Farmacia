@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.farmacia.test.persistence;
 
 import co.edu.uniandes.csw.farmacia.entities.ClienteEntity;
 import co.edu.uniandes.csw.farmacia.persistence.ClientePersistence;
+import co.edu.uniandes.csw.farmacia.persistence.TransaccionClientePersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -36,6 +37,13 @@ public class ClientePersistenceTest {
       */
     @Inject
     private ClientePersistence clientePersistence;
+    
+    /**
+      * Inyeccion de la dependencia a la clase ClientePersistence cuyos metodos se
+      * van a probar
+      */
+    @Inject
+    private TransaccionClientePersistence transaccionClientePersistence;
     
     /**
      * Contexto de Persistencia que se va a utilizar para acceder a la Base de
@@ -170,6 +178,17 @@ public class ClientePersistenceTest {
     public void deleteClienteTest() {
         ClienteEntity entity = data.get(0);
         clientePersistence.delete(entity.getId());
+        ClienteEntity deleted = em.find(ClienteEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
+    
+    /**
+     * Prueba para eliminar un cliente.
+     */
+    @Test
+    public void delete2ClienteTest() {
+        ClienteEntity entity = data.get(0);
+        clientePersistence.delete2(entity.getId());
         ClienteEntity deleted = em.find(ClienteEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }

@@ -13,6 +13,7 @@ import java.util.List;
 import javax.persistence.TypedQuery;
 import co.edu.uniandes.csw.farmacia.entities.ClienteEntity;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 /**
  *
@@ -25,6 +26,9 @@ public class ClientePersistence {
     
     @PersistenceContext (unitName = "DrugsHousePU")
     protected EntityManager em;
+    
+    @Inject
+    protected TransaccionClientePersistence tcp;
     
     /**
      * Metodo para persisitir la entidad en la base de datos
@@ -79,6 +83,22 @@ public class ClientePersistence {
        ClienteEntity entity = em.find(ClienteEntity.class, clienteId);
        em.remove(entity);
        LOGGER.log(Level.INFO, "Saliendo de eliminar a un cliente con id={0}", clienteId);
+    }
+    
+    public void delete2(Long clienteId)
+    {
+        LOGGER.log(Level.INFO, "Borrando cliente con id ={0}", clienteId);
+        ClienteEntity entity = em.find(ClienteEntity.class, clienteId);
+        if(entity.getTransaccionesCliente() != null)
+        {
+            for(int i = 0; i < entity.getTransaccionesCliente().size(); i++)
+            {
+               tcp.delete(entity.getTransaccionesCliente().get(i).getId());
+            }
+        }
+        
+        em.remove(entity);
+        LOGGER.log(Level.INFO, "Saliendo de eliminar a un cliente con id={0}", clienteId);
     }
     
     /**
