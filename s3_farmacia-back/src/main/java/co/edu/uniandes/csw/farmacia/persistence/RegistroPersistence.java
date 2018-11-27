@@ -52,11 +52,7 @@ public class RegistroPersistence {
         q.setParameter("registrosId", registrosId);
         List<RegistroEntity> results = q.getResultList();
         RegistroEntity review = null;
-        if (results == null) {
-            
-        } else if (results.isEmpty()) {
-            
-        } else if (results.size() >= 1) {
+        if (results.size() >= 1) {
             review = results.get(0);
         }
         LOGGER.log(Level.INFO, String.format("Saliendo de consultar el registro con id = {0} del producto con id = %d", productosId), registrosId);

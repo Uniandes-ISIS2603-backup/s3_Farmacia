@@ -23,7 +23,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class TransaccionClienteEntity extends BaseEntity implements Serializable
 {    
         	
-    
+    private static final Logger LOGGER = Logger.getLogger(TransaccionClienteEntity.class.getName());
 
     
     private Double monto;

@@ -63,11 +63,7 @@ public class TransaccionProveedorPersistence {
         q.setParameter("id", transaccionProveedorId);
         List<TransaccionProveedorEntity> results = q.getResultList();
         TransaccionProveedorEntity transaccionProveedor = null;
-        if (results == null) {
-            
-        } else if (results.isEmpty()) {
-            
-        } else if (results.size() >= 1) {
+        if (results.size() >= 1) {
             transaccionProveedor = results.get(0);
         }
         LOGGER.log(Level.INFO, String.format("Saliendo de consultar la transaccionProveedor con id = {0} del proveedor con id = %d", proveedorId), transaccionProveedorId);
