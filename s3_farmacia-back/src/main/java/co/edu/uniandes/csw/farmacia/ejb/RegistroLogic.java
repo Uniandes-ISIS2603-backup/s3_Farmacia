@@ -74,7 +74,7 @@ public class RegistroLogic {
      * @return Instancia de RegistroEntity con los datos del Registro consultado.
      */
     public RegistroEntity getRegistro(Long productosId,Long registrosId) {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar el registro con id = {0} del producto con id = " + productosId, registrosId);
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar el registro con id = {0} del producto con id = {1}", new Object[]{registrosId, productosId});
         return persistence.find(productosId, registrosId);
     }
     
