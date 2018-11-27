@@ -8,17 +8,30 @@ package co.edu.uniandes.csw.farmacia.dto;
 import co.edu.uniandes.csw.farmacia.entities.ProductoEntity;
 import java.util.Date;
 import java.io.Serializable;
+
 /**
  *
  * @author estudiante
  */
 public class ProductoDTO implements Serializable {
-    
+
     public ProductoDTO() {
-        
+
     }
-    
+
     private String nombre;
+
+    private Double precio;
+
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getNombre() {
         return nombre;
@@ -27,9 +40,17 @@ public class ProductoDTO implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
+
+    public Double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Double precio) {
+        this.precio = precio;
+    }
+
     public ProductoDTO(ProductoEntity producto) {
-        if(producto != null) {
+        if (producto != null) {
             this.id = producto.getId();
             this.fecha = producto.getFecha();
             this.precio = producto.getPrecio();
@@ -42,32 +63,22 @@ public class ProductoDTO implements Serializable {
             this.nombre = producto.getNombre();
         }
     }
-    
+
     public ProductoEntity toEntity() {
         ProductoEntity producto = new ProductoEntity();
         producto.setFecha(fecha);
         producto.setId(id);
         producto.setPrecio(precio);
         producto.setFotos(fotos);
-        producto.setVideos(videos);
         producto.setTipoProducto(tipoProducto);
         producto.setUnidadesDisponibles(unidadesDisponibles);
         producto.setPerecedero(perecedero);
         producto.setCantidad(cantidad);
         producto.setNombre(nombre);
+        producto.setVideos(videos);
         return producto;
     }
-    
-    private Long id;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
     private Boolean perecedero;
 
     public void setPerecedero(Boolean perecedero) {
@@ -77,7 +88,7 @@ public class ProductoDTO implements Serializable {
     public Boolean getPerecedero() {
         return perecedero;
     }
-    
+
     private ProductoEntity.TipoProducto tipoProducto;
 
     public ProductoEntity.TipoProducto getTipoProducto() {
@@ -87,38 +98,14 @@ public class ProductoDTO implements Serializable {
     public void setTipoProducto(ProductoEntity.TipoProducto tipoProducto) {
         this.tipoProducto = tipoProducto;
     }
-    
-    private Double precio;
 
-    public Double getPrecio() {
-        return precio;
-    }
 
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
-    
-    private Integer cantidad;
 
-    public Integer getCantidad() {
-        return cantidad;
-    }
+ 
 
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
-    }
-    
-    private Date fecha;
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-    
     private Integer unidadesDisponibles;
+        private Date fecha;
+
 
     public Integer getUnidadesDisponibles() {
         return unidadesDisponibles;
@@ -127,18 +114,19 @@ public class ProductoDTO implements Serializable {
     public void setUnidadesDisponibles(Integer unidadesDisponibles) {
         this.unidadesDisponibles = unidadesDisponibles;
     }
-    
-    private String[] fotos;
-
-    public String[] getFotos() {
-        return fotos;
+       public Date getFecha() {
+        return fecha;
     }
 
-    public void setFotos(String[] fotos) {
-        this.fotos = fotos;
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
-    
+
+
+
     private String[] videos;
+        private String[] fotos;
+
 
     public String[] getVideos() {
         return videos;
@@ -148,10 +136,26 @@ public class ProductoDTO implements Serializable {
         this.videos = videos;
     }
     
+       public String[] getFotos() {
+        return fotos;
+    }
+
+    public void setFotos(String[] fotos) {
+        this.fotos = fotos;
+    }
+        private Integer cantidad;
+
+    public Integer getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
+    }
+
+
     @Override
-    public String toString()
-    {
-        //Ctrl+shift+i importar.
+    public String toString() {
         return super.toString();
     }
 }
