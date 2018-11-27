@@ -118,13 +118,9 @@ public class TransaccionClienteProductosLogicTest {
         cliente.setTransaccionesCliente(lista);
         dataCliente.add(cliente);
 
-         try {
              TransaccionClienteEntity en = transaccionClienteLogic.createTransaccionCliente(dataCliente.get(0).getId(), entity);
              
-         } catch (BusinessLogicException ex) {
-             Logger.getLogger(TransaccionClienteProductosLogicTest.class.getName()).log(Level.SEVERE, null, ex);
-             Assert.fail("Algo fallo");
-         }
+         
 
     }
 

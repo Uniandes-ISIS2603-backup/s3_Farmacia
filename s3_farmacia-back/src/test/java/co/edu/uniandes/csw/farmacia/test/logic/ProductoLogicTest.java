@@ -49,6 +49,9 @@ public class ProductoLogicTest {
     private RegistroPersistence rp;
     
     @Inject
+    private ProductoPersistence pp;
+    
+    @Inject
     private ProductoLogic productoLogic;
     
     @PersistenceContext
@@ -163,12 +166,64 @@ public class ProductoLogicTest {
         ProductoEntity producto = productosData.get(0);
         ProductoEntity pojo = factory.manufacturePojo(ProductoEntity.class);
         pojo.setId(producto.getId());
+        try
+        {
+            productoLogic.update(null, pojo);
+            Assert.fail("Deberia lanzar excepción");
+        }
+        catch (BusinessLogicException ble)
+        {
+ 
+        }
+        try
+        {
+            productoLogic.update(pojo.getId()+9000, pojo);
+            Assert.fail("Deberia lanzar excepción");
+        }
+        catch (BusinessLogicException ble)
+        {
+ 
+        }     
         productoLogic.update(pojo.getId(), pojo);
         ProductoEntity resultado = em.find(ProductoEntity.class, 
                 producto.getId());
         Assert.assertEquals(pojo.getId(), resultado.getId());
         Assert.assertEquals(pojo.getUnidadesDisponibles(), 
                 resultado.getUnidadesDisponibles());
+
+    }
+    
+    @Test
+    public void asociateTest() throws BusinessLogicException 
+    {
+        
+        ProductoEntity producto = factory.manufacturePojo(ProductoEntity.class);
+        pp.create(producto);
+        RegistroEntity registro = factory.manufacturePojo(RegistroEntity.class);
+        RegistroEntity registroFinal = rp.create(registro);
+        productoLogic.asociate(producto.getId(), registroFinal.getId());
+        ProductoEntity productoPrueba = pp.find(producto.getId());
+        RegistroEntity registroPrueba = rp.find(registro.getId());;
+        Assert.assertEquals(productoPrueba.getId(), registroPrueba.getProducto().getId());
+        try
+        {
+            productoLogic.asociate(producto.getId(), registroFinal.getId());
+            Assert.fail("Deberia lanzar excepción");
+        }
+        catch (BusinessLogicException ble)
+        {
+ 
+        }
+         try
+        {
+            productoLogic.asociate(producto.getId() + 90000, registroFinal.getId() + 90000);
+            Assert.fail("Deberia lanzar excepción");
+        }
+        catch (BusinessLogicException ble)
+        {
+ 
+        }
+        
     }
     
 }
