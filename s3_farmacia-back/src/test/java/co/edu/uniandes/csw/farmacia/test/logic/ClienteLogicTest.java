@@ -224,6 +224,17 @@ public class ClienteLogicTest {
         Assert.assertNull(deleted);
     }
     
+    /**
+     * Prueba para eliminar un Cliente.
+     */
+    @Test
+    public void delete2ClienteTest() {
+        ClienteEntity entity = data.get(0);
+        clienteLogic.delete2Cliente(entity.getId());
+        ClienteEntity deleted = em.find(ClienteEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
+    
     
     
 }

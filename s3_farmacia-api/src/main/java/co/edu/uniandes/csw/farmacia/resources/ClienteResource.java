@@ -142,6 +142,27 @@ public class ClienteResource {
     }
     
     /**
+     * Borra el cliente con el id asociado recibido en la URL.
+     *
+     * @param id Identificador del cliente que se desea borrar.
+     * Este debe ser una cadena de dígitos.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
+     * Error de lógica que se genera cuando no se puede eliminar el cliente.
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra el cliente.
+     */
+    @DELETE
+    @Path("{clientesId:\\d+}/1")
+    public void delete2Cliente(@PathParam("clientesId") Long id)throws BusinessLogicException{
+        LOGGER.log(Level.INFO, "ClienteResource deleteCliente: input: {0}", id);
+        if (clienteLogic.getCliente(id) == null) {
+            throw new WebApplicationException(C1 + id + C2, 404);
+        }
+        clienteLogic.delete2Cliente(id);
+        LOGGER.info("ClienteResource deleteCliente: output: void");
+    }
+    
+    /**
      * Actualiza el cliente con el id recibido en la URL con la informacion
      * que se recibe en el cuerpo de la petición.
      *
