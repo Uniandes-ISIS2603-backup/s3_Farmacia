@@ -87,7 +87,6 @@ public class ProductoResource {
         List<ProductoEntity> productos = logic.list();
         List<ProductoDetailDTO> list = new ArrayList<>();
         for (int i = 0; i < productos.size(); i++) {
-            //list[i] = new ProductoDTO(productos.get(i));
             list.add(new ProductoDetailDTO(productos.get(i)));
         }
         LOGGER.log(Level.INFO, "ProveedorResource getProveedores: output : {0}", list);

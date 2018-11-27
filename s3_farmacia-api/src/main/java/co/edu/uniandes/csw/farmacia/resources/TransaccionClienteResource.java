@@ -53,9 +53,9 @@ public class TransaccionClienteResource
     @POST
     public TransaccionClienteDTO createTransacionCliente(@PathParam("clienteId")Long id,TransaccionClienteDTO transaccion) throws BusinessLogicException
     {
-        LOGGER.log(Level.INFO, "TransaccionResource createTransaccion: input: {0}", transaccion.toString());
+        LOGGER.log(Level.INFO, "TransaccionResource createTransaccion: input: {0}", transaccion);
         TransaccionClienteDTO DTO = new TransaccionClienteDTO(logic.createTransaccionCliente(id,transaccion.toEntity()));
-        LOGGER.log(Level.INFO, "TransaccionResource createTransaccion: output: {0}", DTO.toString());
+        LOGGER.log(Level.INFO, "TransaccionResource createTransaccion: output: {0}", DTO);
         return DTO;
     }
     @GET
@@ -63,7 +63,7 @@ public class TransaccionClienteResource
     {
          LOGGER.log(Level.INFO, "TransaccionClienteResource getTransacciones: input: {0}", id);
         List<TransaccionClienteDetailDTO> lista = listEntity2DetailDTO(logic.getTransaccionesCliente(id));
-        LOGGER.log(Level.INFO, "BookResource getBooks: output: {0}", lista.toString());
+        LOGGER.log(Level.INFO, "BookResource getBooks: output: {0}", lista);
         return lista;
     }
     
@@ -78,7 +78,7 @@ public class TransaccionClienteResource
             throw new WebApplicationException(TC1 + idCli + TC2 + id + TC3, 404);
         }
        TransaccionClienteDetailDTO DTO = new TransaccionClienteDetailDTO(entity);
-        LOGGER.log(Level.INFO, "TransaccionClienteResource getTransaccion: output: {0}", DTO.toString());
+        LOGGER.log(Level.INFO, "TransaccionClienteResource getTransaccion: output: {0}", DTO);
         return DTO;
     }
 
@@ -97,7 +97,7 @@ public class TransaccionClienteResource
     @Path("{transaccionesClienteId:\\d+}")
     public TransaccionClienteDetailDTO refreshDataTransaccionCliente(@PathParam("clienteId") Long idCli, @PathParam("transaccionesClienteId") Long id, TransaccionClienteDTO trans) throws BusinessLogicException
     {
-        LOGGER.log(Level.INFO, "TransaccionClienteResource refreshData: input: clienteId: {0} , transaccionId: {1} , transaccionCliente:{2}", new Object[]{idCli, id, trans.toString()});
+        LOGGER.log(Level.INFO, "TransaccionClienteResource refreshData: input: clienteId: {0} , transaccionId: {1} , transaccionCliente:{2}", new Object[]{idCli, id, trans});
         if (id.equals(trans.getId())) {
             throw new BusinessLogicException("Los ids de la transaccion no coinciden.");
         }
@@ -107,7 +107,7 @@ public class TransaccionClienteResource
         }
         trans.setId(entity.getId());
         TransaccionClienteDetailDTO reviewDTO = new TransaccionClienteDetailDTO(logic.updateTransaccionCliente(idCli, trans.toEntity()));
-        LOGGER.log(Level.INFO, "ReviewResource updateReview: output:{0}", reviewDTO.toString());
+        LOGGER.log(Level.INFO, "ReviewResource updateReview: output:{0}", reviewDTO);
         return reviewDTO;
     }
     

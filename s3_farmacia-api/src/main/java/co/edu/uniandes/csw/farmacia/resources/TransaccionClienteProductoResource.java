@@ -56,7 +56,7 @@ public class TransaccionClienteProductoResource {
         try {
             
             
-            LOGGER.log(Level.INFO, "TransaccionClienteProductoResource addProducto: input: transaccionClienteId {0} , ProductoId {1},cleinteId{0}", new Object[]{transId, productosId, clienteId});
+            LOGGER.log(Level.INFO, "TransaccionClienteProductoResource addProducto: input: transaccionClienteId {0} , ProductoId {1},cleinteId{2}", new Object[]{transId, productosId, clienteId});
             TransaccionClienteEntity trans
                     = transLogic.getTransaccionCliente(clienteId, transId);
             if (trans == null || trans.getProductos() == null) {
@@ -85,7 +85,7 @@ public class TransaccionClienteProductoResource {
     @Path("{productoId: \\d+}")
     public ProductoDetailDTO getProducto(@PathParam("transaccionClienteId") Long transId, @PathParam("productoId") Long productoId, @PathParam("clienteId") Long cliId) {
         try {
-            LOGGER.log(Level.INFO, "TransaccionClienteProductoResource getProducto: input: transaccionClienteId {0} , productosId {1} , clienteid{0}", new Object[]{transId, productoId, cliId});
+            LOGGER.log(Level.INFO, "TransaccionClienteProductoResource getProducto: input: transaccionClienteId {0} , productosId {1} , clienteid{2}", new Object[]{transId, productoId, cliId});
             if (transLogic.getTransaccionCliente(cliId, transId) == null) {
                 throw new WebApplicationException(TCP1 + transId + TCP2, 404);
             }
@@ -112,7 +112,7 @@ public class TransaccionClienteProductoResource {
     public void removeProducto(@PathParam("transaccionesClienteId") Long transId, @PathParam("productoId") Long productoId, @PathParam("clienteId") Long cliId) {
 
         try {
-            LOGGER.log(Level.INFO, "TransaccionClienteResource removeProducto: input: transaccionClienteId {0} , productosId {1},cliente{0}", new Object[]{transId, productoId, cliId});
+            LOGGER.log(Level.INFO, "TransaccionClienteResource removeProducto: input: transaccionClienteId {0} , productosId {1},cliente{2}", new Object[]{transId, productoId, cliId});
             if (transLogic.getTransaccionCliente(cliId, transId) == null) {
                 throw new WebApplicationException(TCP1 + transId + TCP2, 404);
             }

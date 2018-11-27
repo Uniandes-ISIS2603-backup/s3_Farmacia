@@ -54,9 +54,9 @@ public class RegistroResource {
      */
     @POST
     public RegistroDTO createRegistro(RegistroDTO registro) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "RegistroResource createRegistro: input: {0}", registro.toString());
+        LOGGER.log(Level.INFO, "RegistroResource createRegistro: input: {0}", registro);
         RegistroDTO nuevoRegistroDTO = new RegistroDTO(registroLogic.createRegistro( registro.toEntity()));
-        LOGGER.log(Level.INFO, "RegistroResource createRegistro: output: {0}", nuevoRegistroDTO.toString());
+        LOGGER.log(Level.INFO, "RegistroResource createRegistro: output: {0}", nuevoRegistroDTO);
         return nuevoRegistroDTO;
     }
     
@@ -70,7 +70,6 @@ public class RegistroResource {
     public List<RegistroDTO> getRegistros(@PathParam("productosId") Long productosId) {
         LOGGER.log(Level.INFO, "RegistroResource getRegistros: input: {0}", productosId);
         List<RegistroDTO> listaDTOs = listEntity2DTO(registroLogic.getRegistros(productosId));
-        //LOGGER.log(Level.INFO, "EditorialBooksResource getBooks: output: {0}", listaDTOs.toString());
         return listaDTOs;
     }
     
@@ -91,7 +90,7 @@ public class RegistroResource {
             throw new WebApplicationException(R1+ productosId + R2 + registrosId + R3, 404);
         }
         RegistroDTO registroDTO = new RegistroDTO(entity);
-        LOGGER.log(Level.INFO, "RegistroResource getRegistro: output: {0}", registroDTO.toString());
+        LOGGER.log(Level.INFO, "RegistroResource getRegistro: output: {0}", registroDTO);
         return registroDTO;
     }
     
@@ -107,7 +106,7 @@ public class RegistroResource {
     @PUT
     @Path("{productosId: \\d+}/{registrosId: \\d+}")
     public RegistroDTO updateRegistro(@PathParam("productosId") Long productosId, @PathParam("registrosId") Long registrosId, RegistroDTO registro) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "RegistroResource updateRegistro: input: productosId: {0} , registrosId: {1} , registro:{2}", new Object[]{productosId, registrosId, registro.toString()});
+        LOGGER.log(Level.INFO, "RegistroResource updateRegistro: input: productosId: {0} , registrosId: {1} , registro:{2}", new Object[]{productosId, registrosId, registro});
         if (registrosId.equals(registro.getId())) {
             throw new BusinessLogicException("Los ids del Registro no coinciden.");
         }
@@ -117,7 +116,7 @@ public class RegistroResource {
 
         }
         RegistroDTO registroDTO = new RegistroDTO(registroLogic.updateRegistro(productosId, registro.toEntity()));
-        LOGGER.log(Level.INFO, "RegistroResource updateRegistro: output:{0}", registroDTO.toString());
+        LOGGER.log(Level.INFO, "RegistroResource updateRegistro: output:{0}", registroDTO);
         return registroDTO;
 
     }

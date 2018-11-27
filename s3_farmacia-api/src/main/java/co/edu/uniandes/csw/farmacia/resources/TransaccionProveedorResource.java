@@ -51,7 +51,7 @@ public class TransaccionProveedorResource extends TransaccionProveedorDTO {
             throw new WebApplicationException("El recurso /proveedor/" + proveedorId + "/transaccionProveedor/" + id + " no existe.", 404);
         }
       TransaccionProveedorDTO transaccionProveedorDTO = new TransaccionProveedorDTO(entity);
-      LOGGER.log(Level.INFO, "transaccionProveedorResource getransaccionProveedor: output: {0}", transaccionProveedorDTO.toString());
+      LOGGER.log(Level.INFO, "transaccionProveedorResource getransaccionProveedor: output: {0}", transaccionProveedorDTO);
         return transaccionProveedorDTO;    
     }
     
@@ -81,10 +81,8 @@ public class TransaccionProveedorResource extends TransaccionProveedorDTO {
     @Path("{transaccionProveedorId: \\d+}" )
     public TransaccionProveedorDTO updateInformacion(@PathParam("id") Long proveedorId, @PathParam("transaccionProveedorId") Long transaccionProveedorId, TransaccionProveedorDTO transaccionProveedor) throws BusinessLogicException, BusinessLogicException
     {
-        LOGGER.log(Level.INFO, "TransaccionProveedorResource updateTransaccionProveedor: input: proveedorId: {0} , transaccionProveedorId: {1} , transaccionProveedor:{2}", new Object[]{proveedorId, transaccionProveedorId, transaccionProveedor.toString()});
-       // if (transaccionProveedorId.equals(transaccionProveedor.getId())) {
-         //   throw new BusinessLogicException("Los ids del TransaccionProveedor no coinciden.");
-       // }
+        LOGGER.log(Level.INFO, "TransaccionProveedorResource updateTransaccionProveedor: input: proveedorId: {0} , transaccionProveedorId: {1} , transaccionProveedor:{2}", new Object[]{proveedorId, transaccionProveedorId, transaccionProveedor});
+
         TransaccionProveedorEntity entity = transaccionProveedorLogic.getTransaccionProveedor(proveedorId, transaccionProveedorId);
         if (entity == null) {
             throw new WebApplicationException("El recurso /proveedor/" + proveedorId + "/transaccionProveedor/" + transaccionProveedorId + " no existe.", 404);
@@ -93,16 +91,16 @@ public class TransaccionProveedorResource extends TransaccionProveedorDTO {
         transaccionProveedor.setId(entity.getId());
         
         TransaccionProveedorDTO transaccionProveedorDTO = new TransaccionProveedorDTO(transaccionProveedorLogic.updateTransaccionProveedor(proveedorId, transaccionProveedor.toEntity()));
-        LOGGER.log(Level.INFO, "TransaccionProveedorResource updateTransaccionProveedor: output:{0}", transaccionProveedorDTO.toString());
+        LOGGER.log(Level.INFO, "TransaccionProveedorResource updateTransaccionProveedor: output:{0}", transaccionProveedorDTO);
         return transaccionProveedorDTO;
     }
     
     @POST
     public TransaccionProveedorDTO createTransaccionProveedor(@PathParam("id") Long proveedorId, TransaccionProveedorDTO transaccionProveedor) throws BusinessLogicException
     {
-        LOGGER.log(Level.INFO, "TransaccionProveedorResource createTransaccionProveedor: input: {0}", transaccionProveedor.toString());
+        LOGGER.log(Level.INFO, "TransaccionProveedorResource createTransaccionProveedor: input: {0}", transaccionProveedor);
         TransaccionProveedorDTO nuevaTransaccionProveedorDTO = new TransaccionProveedorDTO(transaccionProveedorLogic.createTransaccionProveedor(proveedorId, transaccionProveedor.toEntity() ));
-        LOGGER.log(Level.INFO, "TransaccionProveedorResource createTransaccionPRoveedor: output: {0}", nuevaTransaccionProveedorDTO.toString());
+        LOGGER.log(Level.INFO, "TransaccionProveedorResource createTransaccionPRoveedor: output: {0}", nuevaTransaccionProveedorDTO);
         return nuevaTransaccionProveedorDTO;
     }
     

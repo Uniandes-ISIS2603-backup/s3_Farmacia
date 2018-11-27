@@ -135,7 +135,7 @@ public class ProveedorResource {
 
         ProveedorDetailDTO proDetailDTO = new ProveedorDetailDTO(proveedorLogic.updateProveedor(id, proveedor.toEntity()));
 
-        LOGGER.log(Level.INFO, "ProveedorResource updateProveedor: output: {0}", proDetailDTO.toString());
+        LOGGER.log(Level.INFO, "ProveedorResource updateProveedor: output: {0}", proDetailDTO);
 
         return proDetailDTO;
 

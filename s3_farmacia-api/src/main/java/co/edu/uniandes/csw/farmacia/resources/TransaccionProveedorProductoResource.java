@@ -47,7 +47,7 @@ public class TransaccionProveedorProductoResource {
     public List<ProductoDetailDTO> getProductos(@PathParam("id") Long proveedorId, @PathParam("transaccionProveedorId") Long transaccionProveedorId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "TransaccionProveedorProductosResource getProductos: input: {0}", transaccionProveedorId);
         List<ProductoDetailDTO> listaDetailDTOs = productosListEntity2DTO(transaccionProveedorProductoLogic.getProductos(proveedorId, transaccionProveedorId));
-        LOGGER.log(Level.INFO, "TransaccionProveedorProductosResource getProductos: output: {0}", listaDetailDTOs.toString());
+        LOGGER.log(Level.INFO, "TransaccionProveedorProductosResource getProductos: output: {0}", listaDetailDTOs);
         return listaDetailDTOs;
     }
 
