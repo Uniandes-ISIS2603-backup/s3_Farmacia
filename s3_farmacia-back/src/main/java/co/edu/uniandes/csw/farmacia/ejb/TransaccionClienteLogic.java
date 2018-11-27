@@ -60,24 +60,24 @@ public class TransaccionClienteLogic
     
     public TransaccionClienteEntity updateTransaccionCliente(Long ClienteId, TransaccionClienteEntity transaccionCliente)
     {
-       LOGGER.log(Level.INFO, String.format("Inicia proceso de actualizar la transaccion con id = {0} del cliente con id = %d", ClienteId), transaccionCliente.getId());
+       LOGGER.log(Level.INFO, "Inicia proceso de actualizar la transaccion con id = {0} del cliente con id = " + ClienteId, transaccionCliente.getId());
         ClienteEntity entity = clientePersistence.find(ClienteId);
         transaccionCliente.setCliente(entity);
         persistence.update(transaccionCliente);
-        LOGGER.log(Level.INFO, String.format("Termina proceso de actualizar la transaccion con id = {0} del cliente con id = %d", ClienteId), transaccionCliente.getId());
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar la transaccion con id = {0} del cliente con id = " + ClienteId, transaccionCliente.getId());
         return transaccionCliente;
     }
     
     
     public void deleteTransaccionCliente( Long clienteId,Long transaccionClienteId) throws BusinessLogicException
     {
-         LOGGER.log(Level.INFO, String.format("Inicia proceso de borrar la transaccion con id = {0} del cliente con id = %d", clienteId), transaccionClienteId);
+         LOGGER.log(Level.INFO, "Inicia proceso de borrar la transaccion con id = {0} del cliente con id = " + clienteId, transaccionClienteId);
         TransaccionClienteEntity old = getTransaccionCliente(clienteId, transaccionClienteId);
         if (old == null) {
-            throw new BusinessLogicException(String.format("la transaccion con id = %d no esta asociado a el cliente con id = %d",transaccionClienteId, clienteId));
+            throw new BusinessLogicException("la transaccion con id = " + transaccionClienteId + " no esta asociado a el cliente con id = " + clienteId);
         }
         persistence.delete(old.getId());
-        LOGGER.log(Level.INFO, String.format("Termina proceso de borrar la transaccion con id = {0} del cliente con id = %d", clienteId), transaccionClienteId);
+        LOGGER.log(Level.INFO, "Termina proceso de borrar la transaccion con id = {0} del cliente con id = " + clienteId, transaccionClienteId);
    
     }
     

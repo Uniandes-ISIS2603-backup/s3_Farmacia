@@ -42,7 +42,7 @@ public class TransaccionClientePersistence
      * @return 
      */
     public TransaccionClienteEntity find (Long clienteId,Long transaccionId){
-        LOGGER.log(Level.INFO, String.format("Consultando la transaccion con id = {0} del Cliente con id = %d", clienteId), transaccionId);
+        LOGGER.log(Level.INFO, "Consultando la transaccion con id = {0} del Cliente con id = " + clienteId, transaccionId);
         TypedQuery<TransaccionClienteEntity> q = em.createQuery("select p from TransaccionClienteEntity p where (p.cliente.id = :cliente_id) and (p.id = :id)", TransaccionClienteEntity.class);
         q.setParameter("cliente_id", clienteId);
         q.setParameter("id", transaccionId);

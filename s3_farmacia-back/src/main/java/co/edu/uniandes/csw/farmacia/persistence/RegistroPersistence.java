@@ -46,7 +46,7 @@ public class RegistroPersistence {
      * devuelce siempre el primero que se encuentra)
      */
     public RegistroEntity find (Long productosId, Long registrosId){
-        LOGGER.log(Level.INFO, String.format("Consultando el registro con id = {0} del producto con id = %d", productosId), registrosId);
+        LOGGER.log(Level.INFO, "Consultando el registro con id = {0} del producto con id = " + productosId, registrosId);
         TypedQuery<RegistroEntity> q = em.createQuery("select p from RegistroEntity p where (p.producto.id = :productoid) and (p.id = :registrosId)", RegistroEntity.class);
         q.setParameter("productoid", productosId);
         q.setParameter("registrosId", registrosId);
@@ -65,7 +65,7 @@ public class RegistroPersistence {
      */
     public List<RegistroEntity> findRegistros(Long productoId)
     {
-         LOGGER.log(Level.INFO, String.format("Consultando el registro con id = {0} del producto con id = %d", productoId), productoId);
+         LOGGER.log(Level.INFO, "Consultando el registro con id = {0} del producto con id = " + productoId, productoId);
         TypedQuery<RegistroEntity> q = em.createQuery("select p from RegistroEntity p where (p.producto.id = :productoid)", RegistroEntity.class);
          q.setParameter("productoid", productoId);
          List<RegistroEntity> results = q.getResultList();

@@ -9,7 +9,6 @@ import co.edu.uniandes.csw.farmacia.ejb.RegistroLogic;
 import co.edu.uniandes.csw.farmacia.entities.ProductoEntity;
 import co.edu.uniandes.csw.farmacia.entities.RegistroEntity;
 import co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException;
-import co.edu.uniandes.csw.farmacia.persistence.ProductoPersistence;
 import co.edu.uniandes.csw.farmacia.persistence.RegistroPersistence;
 import java.util.ArrayList;
 import java.util.List;
