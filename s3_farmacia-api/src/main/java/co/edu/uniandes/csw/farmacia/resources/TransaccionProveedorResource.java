@@ -35,6 +35,12 @@ public class TransaccionProveedorResource extends TransaccionProveedorDTO {
     
     private static final Logger LOGGER = Logger.getLogger(ProveedorResource.class.getName());
     
+     private static final String TC1 = "El recurso /proveedor/ ";
+    
+    private static final String TC2 = "/transaccionesProveedor/";
+    
+    private static final String TC3 = " no existe.";
+    
     @Inject
     private TransaccionProveedorLogic transaccionProveedorLogic;
      /**
@@ -49,7 +55,7 @@ public class TransaccionProveedorResource extends TransaccionProveedorDTO {
       LOGGER.log(Level.INFO, "TransaccionProveedorResource getTransaccionProveedor: input: {0}", id);
       TransaccionProveedorEntity entity = transaccionProveedorLogic.getTransaccionProveedor(proveedorId, id);
       if (entity == null) {
-            throw new WebApplicationException("El recurso /proveedor/" + proveedorId + "/transaccionProveedor/" + id + " no existe.", 404);
+            throw new WebApplicationException(TC1 + proveedorId + TC2 + id + TC3 ,404);
         }
       TransaccionProveedorDetailDTO transaccionProveedorDTO = new TransaccionProveedorDetailDTO(entity);
       LOGGER.log(Level.INFO, "transaccionProveedorResource getransaccionProveedor: output: {0}", transaccionProveedorDTO);
@@ -86,7 +92,7 @@ public class TransaccionProveedorResource extends TransaccionProveedorDTO {
 
         TransaccionProveedorEntity entity = transaccionProveedorLogic.getTransaccionProveedor(proveedorId, transaccionProveedorId);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /proveedor/" + proveedorId + "/transaccionProveedor/" + transaccionProveedorId + " no existe.", 404);
+            throw new WebApplicationException(TC1 + proveedorId + TC2 + transaccionProveedorId + TC3, 404);
             
         }
         transaccionProveedor.setId(entity.getId());
@@ -120,7 +126,7 @@ public class TransaccionProveedorResource extends TransaccionProveedorDTO {
     public void deleteTransaccionProveedor(@PathParam("id") Long proveedorId, @PathParam("transaccionProveedorId") Long transaccionProveedorId) throws BusinessLogicException {
         TransaccionProveedorEntity entity = transaccionProveedorLogic.getTransaccionProveedor(proveedorId, transaccionProveedorId);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /proveedor/" + proveedorId + "/transaccionProveedor/" + transaccionProveedorId + " no existe.", 404);
+            throw new WebApplicationException(TC1 + proveedorId + TC2 + transaccionProveedorId + TC3, 404);
         }
         transaccionProveedorLogic.deleteTransaccionProveedor(proveedorId, transaccionProveedorId);
     }

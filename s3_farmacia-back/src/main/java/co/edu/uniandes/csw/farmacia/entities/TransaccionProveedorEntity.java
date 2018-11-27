@@ -22,7 +22,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class TransaccionProveedorEntity extends BaseEntity implements Serializable
 {
-        private static final Logger LOGGER = Logger.getLogger(TransaccionProveedorEntity.class.getName());	
+        	
 
         
     @PodamExclude

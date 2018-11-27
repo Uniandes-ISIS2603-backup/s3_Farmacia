@@ -46,20 +46,20 @@ public class RegistroPersistence {
      * devuelce siempre el primero que se encuentra)
      */
     public RegistroEntity find (Long productosId, Long registrosId){
-        LOGGER.log(Level.INFO, "Consultando el registro con id = {0} del producto con id = " + productosId, registrosId);
+        LOGGER.log(Level.INFO, String.format("Consultando el registro con id = {0} del producto con id = %d", productosId), registrosId);
         TypedQuery<RegistroEntity> q = em.createQuery("select p from RegistroEntity p where (p.producto.id = :productoid) and (p.id = :registrosId)", RegistroEntity.class);
         q.setParameter("productoid", productosId);
         q.setParameter("registrosId", registrosId);
         List<RegistroEntity> results = q.getResultList();
         RegistroEntity review = null;
         if (results == null) {
-            review = null;
+            
         } else if (results.isEmpty()) {
-            review = null;
+            
         } else if (results.size() >= 1) {
             review = results.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar el registro con id = {0} del producto con id =" + productosId, registrosId);
+        LOGGER.log(Level.INFO, String.format("Saliendo de consultar el registro con id = {0} del producto con id = %d", productosId), registrosId);
         return review;
     }
     /**
@@ -69,7 +69,7 @@ public class RegistroPersistence {
      */
     public List<RegistroEntity> findRegistros(Long productoId)
     {
-         LOGGER.log(Level.INFO, "Consultando el registro con id = {0} del producto con id = " + productoId, productoId);
+         LOGGER.log(Level.INFO, String.format("Consultando el registro con id = {0} del producto con id = %d", productoId), productoId);
         TypedQuery<RegistroEntity> q = em.createQuery("select p from RegistroEntity p where (p.producto.id = :productoid)", RegistroEntity.class);
          q.setParameter("productoid", productoId);
          List<RegistroEntity> results = q.getResultList();
@@ -89,13 +89,13 @@ public class RegistroPersistence {
         List<RegistroEntity> results = q.getResultList();
         RegistroEntity review = null;
         if (results == null) {
-            review = null;
+            
         } else if (results.isEmpty()) {
-            review = null;
+            
         } else if (results.size() >= 1) {
             review = results.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar el registro con id = " + registrosId);
+        LOGGER.log(Level.INFO, String.format("Saliendo de consultar el registro con id = %d", registrosId));
         return review;
     }
     

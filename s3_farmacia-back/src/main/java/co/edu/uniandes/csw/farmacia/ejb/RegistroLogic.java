@@ -74,7 +74,7 @@ public class RegistroLogic {
      * @return Instancia de RegistroEntity con los datos del Registro consultado.
      */
     public RegistroEntity getRegistro(Long productosId,Long registrosId) {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar el registro con id = {0} del producto con id = " + productosId, registrosId);
+        LOGGER.log(Level.INFO, String.format("Inicia proceso de consultar el registro con id = {0} del producto con id = %d", productosId), registrosId);
         return persistence.find(productosId, registrosId);
     }
     
@@ -87,14 +87,14 @@ public class RegistroLogic {
      * @throws BusinessLogicException Si el tipo de reigstro ya no es valido
      */
     public RegistroEntity updateRegistro(Long productosId, RegistroEntity registroEntity) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de actualizar el registro con id = {0} del producto con id = " + productosId, registroEntity.getId());
+        LOGGER.log(Level.INFO, String.format("Inicia proceso de actualizar el registro con id = {0} del producto con id = %d", productosId), registroEntity.getId());
         if (!validateRegistro(registroEntity.getTipoRegistro())) {
            throw new BusinessLogicException("El TipoRegistro es inválido");
         }
         ProductoEntity productoEntity = productoPersistence.find(productosId);
         registroEntity.setProducto(productoEntity);
         persistence.update(registroEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de actualizar el registro con id = {0} del producto con id = " + productosId, registroEntity.getId());
+        LOGGER.log(Level.INFO, String.format("Termina proceso de actualizar el registro con id = {0} del producto con id = %d", productosId), registroEntity.getId());
         return registroEntity;
     }
     
@@ -105,13 +105,13 @@ public class RegistroLogic {
      * @throws BusinessLogicException Si el registro no esta asociado al producto
      */
     public void deleteRegistro(Long productosId, Long registrosId)throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de borrar el registro con id = {0} del producto con id = " + productosId, registrosId);
+        LOGGER.log(Level.INFO, String.format("Inicia proceso de borrar el registro con id = {0} del producto con id = %d", productosId), registrosId);
         RegistroEntity old = getRegistro(productosId, registrosId);
         if (old == null) {
-            throw new BusinessLogicException("El registro con id = " + registrosId + " no esta asociado a el producto con id = " + productosId);
+            throw new BusinessLogicException(String.format("El registro con id = %d no esta asociado a el producto con id = %d", registrosId,  productosId));
         }
         persistence.delete(old.getId());
-        LOGGER.log(Level.INFO, "Termina proceso de borrar el registro con id = {0} del producto con id = " + productosId, registrosId);
+        LOGGER.log(Level.INFO,String.format( "Termina proceso de borrar el registro con id = {0} del producto con id = %d", productosId), registrosId);
     }
     
     /**

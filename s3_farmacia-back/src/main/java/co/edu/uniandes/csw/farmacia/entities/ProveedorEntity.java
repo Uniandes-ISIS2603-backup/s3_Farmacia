@@ -23,10 +23,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 //JPA recompila los datos y crea la respectiva base
 public class ProveedorEntity extends BaseEntity implements Serializable {
 
-    /**
-     * La constante que lleva el registro de las transacciones de las entidades
-     */
-    private static final Logger LOGGER = Logger.getLogger(ProveedorEntity.class.getName());
+    
     /**
      * Representa el nombre del proveedor
      */

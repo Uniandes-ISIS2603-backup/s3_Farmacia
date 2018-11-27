@@ -42,16 +42,13 @@ public class TransaccionProveedorDetailDTO extends TransaccionProveedorDTO imple
     public TransaccionProveedorDetailDTO(TransaccionProveedorEntity transaccionProveedorEntity) {
         super(transaccionProveedorEntity);
         
-        if (transaccionProveedorEntity != null) 
+        if (transaccionProveedorEntity != null && transaccionProveedorEntity.getProductos() != null) 
         {
-            if (transaccionProveedorEntity.getProductos() != null)
-            {
                 productos = new ArrayList<>();
                 for (ProductoEntity entityProduct : transaccionProveedorEntity.getProductos()) {
                     productos.add(new ProductoDTO(entityProduct));
 
                 }
-            }
         }
 
     }
