@@ -81,12 +81,11 @@ public class TransaccionProveedorResource extends TransaccionProveedorDTO {
      * @param proveedorId
      * @param transaccionProveedorId
      * @param transaccionProveedor
-     * @return 
-     * @throws co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException 
+     * @return  
      */
     @PUT
     @Path("{transaccionProveedorId: \\d+}" )
-    public TransaccionProveedorDTO updateInformacion(@PathParam("id") Long proveedorId, @PathParam("transaccionProveedorId") Long transaccionProveedorId, TransaccionProveedorDTO transaccionProveedor) throws BusinessLogicException, BusinessLogicException
+    public TransaccionProveedorDTO updateInformacion(@PathParam("id") Long proveedorId, @PathParam("transaccionProveedorId") Long transaccionProveedorId, TransaccionProveedorDTO transaccionProveedor) 
     {
         LOGGER.log(Level.INFO, "TransaccionProveedorResource updateTransaccionProveedor: input: proveedorId: {0} , transaccionProveedorId: {1} , transaccionProveedor:{2}", new Object[]{proveedorId, transaccionProveedorId, transaccionProveedor});
 
@@ -103,7 +102,7 @@ public class TransaccionProveedorResource extends TransaccionProveedorDTO {
     }
     
     @POST
-    public TransaccionProveedorDetailDTO createTransaccionProveedor(@PathParam("id") Long proveedorId, TransaccionProveedorDTO transaccionProveedor) throws BusinessLogicException
+    public TransaccionProveedorDetailDTO createTransaccionProveedor(@PathParam("id") Long proveedorId, TransaccionProveedorDTO transaccionProveedor) 
     {
         LOGGER.log(Level.INFO, "TransaccionProveedorResource createTransaccionProveedor: input: {0}", transaccionProveedor);
         TransaccionProveedorDetailDTO nuevaTransaccionProveedorDTO = new TransaccionProveedorDetailDTO(transaccionProveedorLogic.createTransaccionProveedor(proveedorId, transaccionProveedor.toEntity() ));

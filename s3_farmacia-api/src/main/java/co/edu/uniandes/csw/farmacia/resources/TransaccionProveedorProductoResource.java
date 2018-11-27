@@ -79,12 +79,5 @@ public class TransaccionProveedorProductoResource {
         return list;
     }
     
-    private List<ProductoEntity> productosListDTO2Entity(List<ProductoDetailDTO> dtos) {	
-        List<ProductoEntity> list = new ArrayList<>();	
-        for (ProductoDetailDTO dto : dtos) {	
-            list.add(dto.toEntity());	
-        }	
-        return list;	
-    }
 
 }

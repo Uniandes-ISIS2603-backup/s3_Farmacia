@@ -123,13 +123,6 @@ public class TransaccionClienteProductoResource {
         }
     }
 
-    private List<ProductoEntity> productosListDTO2Entity(List<ProductoDetailDTO> dtos) {
-        List<ProductoEntity> list = new ArrayList<>();
-        for (ProductoDetailDTO dto : dtos) {
-            list.add(dto.toEntity());
-        }
-        return list;
-    }
 
     private List<ProductoDetailDTO> productosListEntity2DTO(List<ProductoEntity> entityList) {
         List<ProductoDetailDTO> list = new ArrayList<>();

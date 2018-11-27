@@ -87,12 +87,12 @@ public class RegistroPersistence {
         TypedQuery<RegistroEntity> q = em.createQuery("select p from RegistroEntity p where (p.id = :registrosId)", RegistroEntity.class);
         q.setParameter("registrosId", registrosId);
         List<RegistroEntity> results = q.getResultList();
-        RegistroEntity review = null;
+        RegistroEntity review;
         if (results == null) {
-            
+            review = null;
         } else if (results.isEmpty()) {
-            
-        } else if (results.size() >= 1) {
+            review = null;
+        } else  {
             review = results.get(0);
         }
         LOGGER.log(Level.INFO, String.format("Saliendo de consultar el registro con id = %d", registrosId));
