@@ -54,7 +54,7 @@ public class TransaccionClientePersistence
         } else {	         
             transaccion = results.get(0);	           
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar la transaccion con id = {0} del cliente con id =", new Object[]{transaccionId, clienteId});
+        LOGGER.log(Level.INFO, "Saliendo de consultar la transaccion con id = {0} del cliente con id = {1}", new Object[]{transaccionId, clienteId});
         return transaccion;
     }
     

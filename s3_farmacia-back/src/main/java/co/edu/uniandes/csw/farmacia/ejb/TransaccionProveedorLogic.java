@@ -39,7 +39,7 @@ public class TransaccionProveedorLogic {
      * @return La entiddad de la transaccionProveedor luego de persistirla.
      */
     public TransaccionProveedorEntity createTransaccionProveedor( Long proveedorId,TransaccionProveedorEntity transaccionProveedorEntity){
-        LOGGER.log(Level.INFO, "Inicia proceso de creación de la transaccion proveedor", transaccionProveedorEntity.getMonto());
+        LOGGER.log(Level.INFO, "Inicia proceso de creación de la transaccion proveedor {0}", transaccionProveedorEntity.getMonto());
         ProveedorEntity proveedor = proveedorPersistence.find(proveedorId);
         transaccionProveedorEntity.setProveedor(proveedor);
         LOGGER.log(Level.INFO, "Termina proceso de creación de la transaccion proveedor");
@@ -100,7 +100,7 @@ public class TransaccionProveedorLogic {
      * @throws co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException
      */
     public void deleteTransaccionProveedor(Long proveedorId, Long transaccionProveedorId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de borrar la transaccionProveedor con id = {0} del proveedor con id", new Object[] { transaccionProveedorId, proveedorId});
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar la transaccionProveedor con id = {0} del proveedor con id {1}", new Object[] { transaccionProveedorId, proveedorId});
         TransaccionProveedorEntity old = getTransaccionProveedor(proveedorId, transaccionProveedorId);
         if (old == null) {
             throw new BusinessLogicException("la transaccion proveedor con id = " + transaccionProveedorId + " no esta asociado a el proveedor con id = " + proveedorId);
