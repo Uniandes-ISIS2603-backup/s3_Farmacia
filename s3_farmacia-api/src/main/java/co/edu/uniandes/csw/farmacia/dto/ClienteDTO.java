@@ -61,33 +61,33 @@ public class ClienteDTO implements Serializable {
      * 
      * @return 
      */
+    public String getDireccionEnvio()
+    {
+        return direccionEnvio;
+    }
+    /**
+     * 
+     * @param direccionEnvio 
+     */
+    public void setDireccionEnvio(String direccionEnvio)
+    {
+        this.direccionEnvio = direccionEnvio;
+    }
+    /**
+     * Obtiene el nombre de un cliente
+     * @return 
+     */
     public String getNombre()
     {
         return nombre;
     }
     /**
-     * 
+     * Modifica el nombre de un cliente
      * @param nombre 
      */
     public void setNombre(String nombre)
     {
         this.nombre = nombre;
-    }
-    /**
-     * 
-     * @return 
-     */
-    public String getApellido()
-    {
-        return apellido;
-    }
-    /**
-     * 
-     * @param apellido 
-     */
-    public void setApellido(String apellido)
-    {
-        this.apellido = apellido;
     }
     /**
      * 
@@ -109,22 +109,6 @@ public class ClienteDTO implements Serializable {
      * 
      * @return 
      */
-    public String getDireccionEnvio()
-    {
-        return direccionEnvio;
-    }
-    /**
-     * 
-     * @param direccionEnvio 
-     */
-    public void setDireccionEnvio(String direccionEnvio)
-    {
-        this.direccionEnvio = direccionEnvio;
-    }
-    /**
-     * 
-     * @return 
-     */
     public Long getCedula()
     {
         return cedula;
@@ -137,6 +121,22 @@ public class ClienteDTO implements Serializable {
     {
         this.cedula = cedula;
     }
+     /**
+     * 
+     * @return 
+     */
+    public String getApellido()
+    {
+        return apellido;
+    }
+    /**
+     * 
+     * @param apellido 
+     */
+    public void setApellido(String apellido)
+    {
+        this.apellido = apellido;
+    }
     
     /**
      * Tranforma un ClienteDTO a un ClienteEntity
@@ -145,11 +145,11 @@ public class ClienteDTO implements Serializable {
     public ClienteEntity toEntity(){
         ClienteEntity clienteEntity = new ClienteEntity();
         clienteEntity.setId(this.id);
+        clienteEntity.setCedula(this.cedula);
         clienteEntity.setApellido(this.apellido);
         clienteEntity.setNombre(this.nombre);
         clienteEntity.setCiudad(this.ciudad);
         clienteEntity.setDireccionEnvio(this.direccionEnvio);
-        clienteEntity.setCedula(this.cedula);
         return clienteEntity;
     }
     
