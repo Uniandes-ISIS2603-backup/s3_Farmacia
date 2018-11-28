@@ -193,37 +193,4 @@ public class ProductoLogicTest {
 
     }
     
-    @Test
-    public void asociateTest() throws BusinessLogicException 
-    {
-        
-        ProductoEntity producto = factory.manufacturePojo(ProductoEntity.class);
-        pp.create(producto);
-        RegistroEntity registro = factory.manufacturePojo(RegistroEntity.class);
-        RegistroEntity registroFinal = rp.create(registro);
-        productoLogic.asociate(producto.getId(), registroFinal.getId());
-        ProductoEntity productoPrueba = pp.find(producto.getId());
-        RegistroEntity registroPrueba = rp.find(registro.getId());;
-        Assert.assertEquals(productoPrueba.getId(), registroPrueba.getProducto().getId());
-        try
-        {
-            productoLogic.asociate(producto.getId(), registroFinal.getId());
-            Assert.fail("Deberia lanzar excepción");
-        }
-        catch (BusinessLogicException ble)
-        {
- 
-        }
-         try
-        {
-            productoLogic.asociate(producto.getId() + 90000, registroFinal.getId() + 90000);
-            Assert.fail("Deberia lanzar excepción");
-        }
-        catch (BusinessLogicException ble)
-        {
- 
-        }
-        
-    }
-    
 }
