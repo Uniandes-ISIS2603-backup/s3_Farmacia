@@ -83,7 +83,7 @@ public class TransaccionClienteProductoResource {
 
     @GET
     @Path("{productoId: \\d+}")
-    public ProductoDetailDTO getProducto(@PathParam("transaccionClienteId") Long transId, @PathParam("productoId") Long productoId, @PathParam("clienteId") Long cliId) {
+    public ProductoDetailDTO getProducto(@PathParam("transaccionesClienteId") Long transId, @PathParam("productoId") Long productoId, @PathParam("clienteId") Long cliId) {
         try {
             LOGGER.log(Level.INFO, "TransaccionClienteProductoResource getProducto: input: transaccionClienteId {0} , productosId {1} , clienteid{2}", new Object[]{transId, productoId, cliId});
             if (transLogic.getTransaccionCliente(cliId, transId) == null) {
