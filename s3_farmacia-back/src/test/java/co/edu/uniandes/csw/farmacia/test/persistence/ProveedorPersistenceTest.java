@@ -143,6 +143,16 @@ public class ProveedorPersistenceTest
         ProveedorEntity eliminado = em.find(ProveedorEntity.class, proEntity.getId());
         Assert.assertNull(eliminado);
     }
+    
+    @Test
+    public void delete2ProveedorTest()
+    {
+        ProveedorEntity proEntity = listaDePrueba.get(0);
+        proveedorPersistence.delete(proEntity.getId());
+        ProveedorEntity eliminado = em.find(ProveedorEntity.class, proEntity.getId());
+        Assert.assertNull(eliminado);
+    }
+    
     @Test 
     public void updateProveedorTest()
     {
