@@ -130,6 +130,7 @@
 						"exec": [
 							"var data = JSON.parse(responseBody);",
 							"postman.setGlobalVariable(\"new_id_cl\", data.id);",
+							"postman.setGlobalVariable(\"cedulaCl\", data.cedula);",
 							"tests[\"No hay error\"] = responseCode.code === 200;",
 							""
 						],
@@ -161,6 +162,46 @@
 						"api",
 						"clientes",
 						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener cliente por cedula",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "12553756-d42e-4070-a411-1367c703e7e8",
+						"exec": [
+							"tests[\"No hay error\"] = responseCode.code === 200;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/cedula/{{cedulaCl}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						"cedula",
+						"{{cedulaCl}}"
 					]
 				}
 			},
