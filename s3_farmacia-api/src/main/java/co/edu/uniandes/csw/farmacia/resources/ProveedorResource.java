@@ -114,6 +114,25 @@ public class ProveedorResource {
 
         LOGGER.info("ProveedorResource deleteProveedor: output : void");
     }
+    
+    /**
+     * Elimina el proveedor con el id especificado.
+     *
+     * @param id el id del proveedor a eliminar.
+     * @throws BusinessLogicException Si el proveedor que se desea eliminar no
+     * existe
+     */
+    @DELETE
+    @Path("{id:\\d+}/1")
+    public void delete2Proveedor(@PathParam("id") Long id) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "ProveedorResource deleteProveedor: input{0}", id);
+        if (proveedorLogic.getProveedor(id) == null) {
+            throw new WebApplicationException(A1 + id + A2, 404);
+        }
+        proveedorLogic.delete2Proveedor(id);
+
+        LOGGER.info("ProveedorResource deleteProveedor: output : void");
+    }
 
     /**
      * Modificar la información de un proveedor.

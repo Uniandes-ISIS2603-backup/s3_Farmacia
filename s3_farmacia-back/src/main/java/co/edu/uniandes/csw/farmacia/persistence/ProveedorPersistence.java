@@ -13,6 +13,7 @@ import java.util.List;
 import javax.persistence.TypedQuery;
 import co.edu.uniandes.csw.farmacia.entities.ProveedorEntity;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 /**
  *
@@ -25,6 +26,9 @@ public class ProveedorPersistence {
 
         @PersistenceContext(unitName = "DrugsHousePU")
     protected EntityManager em;
+        
+        @Inject
+    protected TransaccionProveedorPersistence tpp;
 
     public ProveedorEntity create(ProveedorEntity proveedorEntity) {
         LOGGER.log(Level.INFO, "Creando un nuevo proveedor");
@@ -36,7 +40,7 @@ public class ProveedorPersistence {
     }
 
     /**
-     * Busca todos los proveedores que estén en la base de datos.
+     * Busca todos los proveedores que estÃ©n en la base de datos.
      *
      * @return
      */
@@ -49,7 +53,7 @@ public class ProveedorPersistence {
     }
 
     /**
-     * Busca un proveedor entre todos los proveedores que estén en la base de
+     * Busca un proveedor entre todos los proveedores que estÃ©n en la base de
      * datos.
      *
      * @param proveedorId
@@ -88,10 +92,26 @@ public class ProveedorPersistence {
         LOGGER.log(Level.INFO, "Saliendo de eliminar un proveedor con id={0}", proveedorId);
     }
     
+    public void delete2(Long proveedorId)
+    {
+        LOGGER.log(Level.INFO, "Borrando proveedor con id={0}", proveedorId);
+        ProveedorEntity entity = em.find(ProveedorEntity.class, proveedorId);
+        if(entity.getTransacciones() != null)
+        {
+            for(int i = 0; i < entity.getTransacciones().size(); i++)
+            {
+               tpp.delete(entity.getTransacciones().get(i).getId());
+            }
+        }
+        
+        em.remove(entity);
+        LOGGER.log(Level.INFO, "Saliendo de eliminar un proveedor con id={0}", proveedorId);
+    }
+    
     /**
-     * Busca si hay algún proveedor con el nombre que se envía de parámetro
+     * Busca si hay algÃºn proveedor con el nombre que se envÃ­a de parÃ¡metro
      *
-     * @param name: Nombre del proveedor que se está buscando
+     * @param name: Nombre del proveedor que se estÃ¡ buscando
      * @return null si no existe ningun proveedor con el nombre del argumento.
      * Si existe alguno devuelve el primero.
      */

@@ -117,5 +117,20 @@ public class ProveedorLogic {
         LOGGER.log(Level.INFO, "Finaliza proceso de eliminación del proveedor con id={0} ", proveedorId);
 
     }
+    
+    /**
+     * Elimina un proveedor a partir de su id
+     * @param proveedorId el id del proveedor a eliminar
+     * @throws BusinessLogicException Si el proveedor que se desea eliminar no existe.
+     */
+    public void delete2Proveedor(Long proveedorId) throws BusinessLogicException
+    {
+       LOGGER.log(Level.INFO, "Inicia proceso de eliminación del proveedor con id={0} ", proveedorId);
+       
+       proveedorPersistence.delete2(proveedorId);
+       
+        LOGGER.log(Level.INFO, "Finaliza proceso de eliminación del proveedor con id={0} ", proveedorId);
+
+    }
 
 }
