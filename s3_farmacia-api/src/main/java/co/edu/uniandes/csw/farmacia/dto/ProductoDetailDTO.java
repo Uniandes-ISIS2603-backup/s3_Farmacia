@@ -41,7 +41,7 @@ public class ProductoDetailDTO extends ProductoDTO implements Serializable {
             }
             this.proveedores = prove;
             List<TransaccionProveedorDTO> transacciones = new ArrayList<>();
-            for (TransaccionProveedorEntity trans : producto.getTransaccionProveedor()) {
+            for (TransaccionProveedorEntity trans : producto.getTransaccionesProveedor()) {
                 transacciones.add(new TransaccionProveedorDTO(trans));
             }
             this.transaccionesProveedor = transacciones;

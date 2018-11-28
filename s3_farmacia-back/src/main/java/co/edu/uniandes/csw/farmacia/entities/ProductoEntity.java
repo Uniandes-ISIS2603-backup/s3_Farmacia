@@ -56,11 +56,11 @@ public class ProductoEntity extends BaseEntity implements Serializable {
     @ManyToMany
     private List<TransaccionProveedorEntity> transaccionesProveedor;
 
-    public List<TransaccionProveedorEntity> getTransaccionProveedor() {
+    public List<TransaccionProveedorEntity> getTransaccionesProveedor() {
         return transaccionesProveedor;
     }
 
-    public void setTransaccionProveedor(List<TransaccionProveedorEntity> transaccionProveedor) {
+    public void setTransaccionesProveedor(List<TransaccionProveedorEntity> transaccionProveedor) {
         this.transaccionesProveedor = transaccionProveedor;
     }
 

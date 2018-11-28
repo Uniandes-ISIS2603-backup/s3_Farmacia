@@ -80,6 +80,7 @@ public class DrugsHouseIT {
                 PostmanTestBuilder tp = new PostmanTestBuilder();
                 tp.setTestWithoutLogin(coleccion.getName().replaceFirst(".json", ""), "Entorno-IT.postman_environment");
                 String desiredResult = "0";
+                System.out.println("co.edu.uniandes.csw.farmacia.tests.postman.DrugsHouseIT.postman()"+ "----"+coleccion.getName());
                 String nombre = coleccion.getName().replaceFirst(".postman_environment.json", "");
 
                 Assert.assertEquals("Error en Iterations de: " + nombre, desiredResult, tp.getIterations_failed());

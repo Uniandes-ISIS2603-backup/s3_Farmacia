@@ -43,14 +43,14 @@ public class TransaccionProveedorProductoLogic {
         if (transaccion == null || producto == null) {
             throw new BusinessLogicException(
                     "No se encontraron los elementos a asociar");
-        }
-        List<TransaccionProveedorEntity> transacciones = new ArrayList<>();
-        transacciones.add(transaccion);
-        producto.setTransaccionProveedor(transacciones);
-        productoPersistence.update(producto);
-        List<ProductoEntity> productos = transaccion.getProductos();
+        }    
+          List<ProductoEntity> productos = transaccion.getProductos();
         productos.add(producto);
         transaccion.setProductos(productos);
+        List<TransaccionProveedorEntity> transacciones = 
+                producto.getTransaccionesProveedor();
+        transacciones.add(transaccion);
+        productoPersistence.update(producto);
         transaccionProveedorPersistence.update(transaccion);
     }
     
@@ -77,7 +77,7 @@ public class TransaccionProveedorProductoLogic {
         }
         transaccion.setProductos(productos);
         transaccionProveedorPersistence.update(transaccion);
-        producto.setTransaccionProveedor(null);
+        producto.setTransaccionesProveedor(null);
     }
     
     /**
@@ -109,6 +109,6 @@ public class TransaccionProveedorProductoLogic {
         if (producto == null) {
             throw new BusinessLogicException("No se encontró el producto");
         }
-        return producto.getTransaccionProveedor();
+        return producto.getTransaccionesProveedor();
     }
 }
