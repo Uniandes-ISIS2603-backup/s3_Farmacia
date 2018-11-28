@@ -127,7 +127,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"nombre\":\"Harry\", \"apellido\":\"Potter\", \"ciudad\":\"Privet Drive\", \"direccionEnvio\":\"CRA6#1-39\",\"cedula\":1120843608}"
+					"raw": "{\"nombre\":\"Harry\", \"apellido\":\"Potter\", \"ciudad\":\"Privet Drive\", \"direccionEnvio\":\"CRA6#1-39\",\"cedula\":1170843608}"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/",
@@ -281,6 +281,93 @@
 			"response": []
 		},
 		{
+			"name": "Asociar un producto a una transaccion inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0fe455c3-7636-42e9-b5ea-74f44a0be3ab",
+						"exec": [
+							"tests[\"No se asocia el producto\"] = responseCode.code === 404;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_clt}}/transaccionesCliente/0/productos/{{new_id_pdco}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						"{{new_id_clt}}",
+						"transaccionesCliente",
+						"0",
+						"productos",
+						"{{new_id_pdco}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Asociar un producto inexistente a la transaccion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1c139bf6-7196-4932-bc66-791d75a2c251",
+						"exec": [
+							"tests[\"No se asocia el producto\"] = responseCode.code === 500;",
+							"tests[\"Contiene la cadena\"] =  responseBody.has(\"No se encontró el elemento\");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_clt}}/transaccionesCliente/{{new_id_trca}}/productos/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						"{{new_id_clt}}",
+						"transaccionesCliente",
+						"{{new_id_trca}}",
+						"productos",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Obtener producto de la transaccion cliente",
 			"event": [
 				{
@@ -403,6 +490,79 @@
 						"transaccionesCliente",
 						"{{new_id_trca}}",
 						"productos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Desasociar un producto a una transaccion inexistente",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_clt}}/transaccionesCliente/0/productos/{{new_id_pdco}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						"{{new_id_clt}}",
+						"transaccionesCliente",
+						"0",
+						"productos",
+						"{{new_id_pdco}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Desasociar un producto inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c0f33a18-f2fc-4604-9443-ca2053856e73",
+						"exec": [
+							"tests[\"No se elimino correctamente\"] = responseCode.code === 500;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_clt}}/transaccionesCliente/{{new_id_trca}}/productos/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						"{{new_id_clt}}",
+						"transaccionesCliente",
+						"{{new_id_trca}}",
+						"productos",
+						"0"
 					]
 				}
 			},
