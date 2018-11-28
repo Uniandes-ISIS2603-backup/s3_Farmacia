@@ -80,8 +80,11 @@ public class DrugsHouseIT {
                 PostmanTestBuilder tp = new PostmanTestBuilder();
                 tp.setTestWithoutLogin(coleccion.getName().replaceFirst(".json", ""), "Entorno-IT.postman_environment");
                 String desiredResult = "0";
-                System.out.println("co.edu.uniandes.csw.farmacia.tests.postman.DrugsHouseIT.postman()"+ "----"+coleccion.getName());
+                System.out.println("co.edu.uniandes.csw.farmacia.tests.postman.DrugsHouseIT.postman()"+ "----"+coleccion.getName().replaceFirst(".json",""));
                 String nombre = coleccion.getName().replaceFirst(".postman_environment.json", "");
+                
+                if(!nombre.contains("target"))
+                {
 
                 Assert.assertEquals("Error en Iterations de: " + nombre, desiredResult, tp.getIterations_failed());
 
@@ -92,6 +95,7 @@ public class DrugsHouseIT {
                 Assert.assertEquals("Error en Assertions de: " + nombre, desiredResult, tp.getAssertions_failed());
 
                 sumaPeticiones += Integer.parseInt(tp.getTotal_Requests());
+                }
             }
         }
     }
