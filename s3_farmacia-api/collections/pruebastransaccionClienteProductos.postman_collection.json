@@ -14,7 +14,7 @@
 						"id": "969cdba3-d898-4d5e-8186-d51ecdcd0747",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_r\", data.id);",
+							"postman.setGlobalVariable(\"new_id_rt\", data.id);",
 							"tests[\"No hay error\"] = responseCode.code === 200;",
 							"console.log(data.id);"
 						],
@@ -60,7 +60,7 @@
 						"id": "4a9951ee-5b10-4061-8df4-1aac3c266795",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_pdc\", data.id);",
+							"postman.setGlobalVariable(\"new_id_pdco\", data.id);",
 							"tests[\"No hay error\"] = responseCode.code === 200;",
 							"console.log(data.id);"
 						],
@@ -83,7 +83,7 @@
 					"raw": "{\n\t \"fecha\" : \"9/20/2018\",\n\t \"precio\" : 73,\n\t \"tipoProducto\" : \"SUMINISTRO\",\n\t \"unidadesDisponibles\" : 100,\n\t \"perecedero\" : false ,\n\t \"cantidad\" : 95\n}"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/registro/{{new_id_r}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/registro/{{new_id_rt}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -94,7 +94,7 @@
 						"api",
 						"productos",
 						"registro",
-						"{{new_id_r}}"
+						"{{new_id_rt}}"
 					]
 				}
 			},
@@ -109,7 +109,7 @@
 						"id": "de7ae748-b3e5-46eb-a944-d0ed07ee4723",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_cl\", data.id);",
+							"postman.setGlobalVariable(\"new_id_clt\", data.id);",
 							"tests[\"No hay error\"] = responseCode.code === 200;",
 							""
 						],
@@ -127,7 +127,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"nombre\":\"Harry\", \"apellido\":\"Potter\", \"ciudad\":\"Privet Drive\", \"direccionEnvio\":\"CRA6#1-39\",\"cedula\":1120843798}"
+					"raw": "{\"nombre\":\"Harry\", \"apellido\":\"Potter\", \"ciudad\":\"Privet Drive\", \"direccionEnvio\":\"CRA6#1-39\",\"cedula\":1120843608}"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/",
@@ -155,7 +155,7 @@
 						"id": "74dce76a-92cc-4f7b-a71a-a5d95370b215",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_trc\", data.id);",
+							"postman.setGlobalVariable(\"new_id_trca\", data.id);",
 							"tests[\"Se obtuvo correctamente la lista\"] = responseCode.code === 200;",
 							"tests[\"Lista vacia esperada\"] = responseBody.has(\"tarjeta\");"
 						],
@@ -178,7 +178,7 @@
 					"raw": "{\n\t\"monto\" : 4500 ,\n\t\"parcial\" : true,\n\t\"tipoDePago\" : \"tarjeta\" ,\n\t\"tiempo\" : 9000\n}"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cl}}/transaccionesCliente",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_clt}}/transaccionesCliente",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -188,7 +188,7 @@
 						"s3_farmacia-api",
 						"api",
 						"clientes",
-						"{{new_id_cl}}",
+						"{{new_id_clt}}",
 						"transaccionesCliente"
 					]
 				}
@@ -218,7 +218,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cl}}/transaccionesCliente/{{new_id_trc}}/productos",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_clt}}/transaccionesCliente/{{new_id_trca}}/productos",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -228,9 +228,9 @@
 						"s3_farmacia-api",
 						"api",
 						"clientes",
-						"{{new_id_cl}}",
+						"{{new_id_clt}}",
 						"transaccionesCliente",
-						"{{new_id_trc}}",
+						"{{new_id_trca}}",
 						"productos"
 					]
 				}
@@ -260,7 +260,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cl}}/transaccionesCliente/{{new_id_trc}}/productos/{{new_id_pdc}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_clt}}/transaccionesCliente/{{new_id_trca}}/productos/{{new_id_pdco}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -270,11 +270,11 @@
 						"s3_farmacia-api",
 						"api",
 						"clientes",
-						"{{new_id_cl}}",
+						"{{new_id_clt}}",
 						"transaccionesCliente",
-						"{{new_id_trc}}",
+						"{{new_id_trca}}",
 						"productos",
-						"{{new_id_pdc}}"
+						"{{new_id_pdco}}"
 					]
 				}
 			},
@@ -303,7 +303,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cl}}/transaccionesCliente/{{new_id_trc}}/productos/{{new_id_pdc}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_clt}}/transaccionesCliente/{{new_id_trca}}/productos/{{new_id_pdco}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -313,11 +313,11 @@
 						"s3_farmacia-api",
 						"api",
 						"clientes",
-						"{{new_id_cl}}",
+						"{{new_id_clt}}",
 						"transaccionesCliente",
-						"{{new_id_trc}}",
+						"{{new_id_trca}}",
 						"productos",
-						"{{new_id_pdc}}"
+						"{{new_id_pdco}}"
 					]
 				}
 			},
@@ -346,7 +346,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cl}}/transaccionesCliente/{{new_id_trc}}/productos/0",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_clt}}/transaccionesCliente/{{new_id_trca}}/productos/0",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -356,9 +356,9 @@
 						"s3_farmacia-api",
 						"api",
 						"clientes",
-						"{{new_id_cl}}",
+						"{{new_id_clt}}",
 						"transaccionesCliente",
-						"{{new_id_trc}}",
+						"{{new_id_trca}}",
 						"productos",
 						"0"
 					]
@@ -389,7 +389,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cl}}/transaccionesCliente/{{new_id_trc}}/productos",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_clt}}/transaccionesCliente/{{new_id_trca}}/productos",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -399,9 +399,9 @@
 						"s3_farmacia-api",
 						"api",
 						"clientes",
-						"{{new_id_cl}}",
+						"{{new_id_clt}}",
 						"transaccionesCliente",
-						"{{new_id_trc}}",
+						"{{new_id_trca}}",
 						"productos"
 					]
 				}
@@ -431,7 +431,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cl}}/transaccionesCliente/{{new_id_trc}}/productos/{{new_id_pdc}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_clt}}/transaccionesCliente/{{new_id_trca}}/productos/{{new_id_pdco}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -441,11 +441,11 @@
 						"s3_farmacia-api",
 						"api",
 						"clientes",
-						"{{new_id_cl}}",
+						"{{new_id_clt}}",
 						"transaccionesCliente",
-						"{{new_id_trc}}",
+						"{{new_id_trca}}",
 						"productos",
-						"{{new_id_pdc}}"
+						"{{new_id_pdco}}"
 					]
 				}
 			},
@@ -461,7 +461,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cl}}/transaccionesCliente/{{new_id_trc}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_clt}}/transaccionesCliente/{{new_id_trca}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -471,9 +471,9 @@
 						"s3_farmacia-api",
 						"api",
 						"clientes",
-						"{{new_id_cl}}",
+						"{{new_id_clt}}",
 						"transaccionesCliente",
-						"{{new_id_trc}}"
+						"{{new_id_trca}}"
 					]
 				}
 			},
@@ -501,7 +501,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cl}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_clt}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -511,7 +511,7 @@
 						"s3_farmacia-api",
 						"api",
 						"clientes",
-						"{{new_id_cl}}"
+						"{{new_id_clt}}"
 					]
 				}
 			},
@@ -539,7 +539,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/registros/{{new_id_pdc}}/{{new_id_r}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/registros/{{new_id_pdco}}/{{new_id_rt}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -549,8 +549,8 @@
 						"s3_farmacia-api",
 						"api",
 						"registros",
-						"{{new_id_pdc}}",
-						"{{new_id_r}}"
+						"{{new_id_pdco}}",
+						"{{new_id_rt}}"
 					]
 				}
 			},
@@ -578,7 +578,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/{{new_id_pdc}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/{{new_id_pdco}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -588,7 +588,7 @@
 						"s3_farmacia-api",
 						"api",
 						"productos",
-						"{{new_id_pdc}}"
+						"{{new_id_pdco}}"
 					]
 				}
 			},

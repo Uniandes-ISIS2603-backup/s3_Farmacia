@@ -102,7 +102,7 @@
 						"id": "364fe33d-c664-4dcc-b4fa-1286001cb6ba",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_r\", data.id);",
+							"postman.setGlobalVariable(\"new_id_ro\", data.id);",
 							"tests[\"No hay error\"] = responseCode.code === 200;",
 							"console.log(data.id);"
 						],
@@ -172,7 +172,7 @@
 					"raw": "{\n\t \"fecha\" : \"9/20/2018\",\n\t \"precio\" : 73,\n\t \"tipoProducto\" : \"SUMINISTRO\",\n\t \"unidadesDisponibles\" : 100,\n\t \"perecedero\" : false ,\n\t \"cantidad\" : 95\n}"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/registro/{{new_id_r}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/registro/{{new_id_ro}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -183,7 +183,7 @@
 						"api",
 						"productos",
 						"registro",
-						"{{new_id_r}}"
+						"{{new_id_ro}}"
 					]
 				}
 			},

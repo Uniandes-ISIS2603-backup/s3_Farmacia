@@ -59,7 +59,7 @@
 					"script": {
 						"id": "74dce76a-92cc-4f7b-a71a-a5d95370b215",
 						"exec": [
-							"tests[\"Se obtuvo correctamente la lista\"] = responseCode.code === 404;",
+							"tests[\"Se obtuvo correctamente la lista\"] = responseCode.code === 200;",
 							""
 						],
 						"type": "text/javascript"
@@ -74,7 +74,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cl}}/transaccionesCliente",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cli}}/transaccionesCliente",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -84,7 +84,7 @@
 						"s3_farmacia-api",
 						"api",
 						"clientes",
-						"{{new_id_cl}}",
+						"{{new_id_cli}}",
 						"transaccionesCliente"
 					]
 				}

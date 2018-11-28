@@ -14,7 +14,7 @@
 						"id": "428b2666-e404-49da-af86-a3b724d525df",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_pr\", data.id);",
+							"postman.setGlobalVariable(\"new_id_prt\", data.id);",
 							"tests[\"No hay error\"] = responseCode.code === 200;",
 							""
 						],
@@ -32,7 +32,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \n\t\"nombre\" : \"Nestle\"\n\t\n}"
+					"raw": "{ \n\t\"nombre\" : \"Nestla\"\n\t\n}"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/",
@@ -60,7 +60,7 @@
 						"id": "c23127c4-6964-424f-9bf5-de893fec1c96",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_tr\", data.id);",
+							"postman.setGlobalVariable(\"new_id_tra\", data.id);",
 							"tests[\"No hay error\"] = responseCode.code === 200;",
 							""
 						],
@@ -83,7 +83,7 @@
 					"raw": "{\n\t\"monto\" : 4000,\n\t\"tiempo\": 3456\n\t\n}"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}/transaccionProveedor",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_prt}}/transaccionProveedor",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -93,7 +93,7 @@
 						"s3_farmacia-api",
 						"api",
 						"proveedores",
-						"{{new_id_pr}}",
+						"{{new_id_prt}}",
 						"transaccionProveedor"
 					]
 				}
@@ -109,7 +109,7 @@
 						"id": "969cdba3-d898-4d5e-8186-d51ecdcd0747",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_r\", data.id);",
+							"postman.setGlobalVariable(\"new_id_re\", data.id);",
 							"tests[\"No hay error\"] = responseCode.code === 200;",
 							"console.log(data.id);"
 						],
@@ -155,7 +155,7 @@
 						"id": "4a9951ee-5b10-4061-8df4-1aac3c266795",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_pdc\", data.id);",
+							"postman.setGlobalVariable(\"new_id_pdct\", data.id);",
 							"tests[\"No hay error\"] = responseCode.code === 200;",
 							"console.log(data.id);"
 						],
@@ -178,7 +178,7 @@
 					"raw": "{\n\t \"fecha\" : \"9/20/2018\",\n\t \"precio\" : 73,\n\t \"tipoProducto\" : \"SUMINISTRO\",\n\t \"unidadesDisponibles\" : 100,\n\t \"perecedero\" : false ,\n\t \"cantidad\" : 95\n}"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/registro/{{new_id_r}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/registro/{{new_id_re}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -189,7 +189,7 @@
 						"api",
 						"productos",
 						"registro",
-						"{{new_id_r}}"
+						"{{new_id_re}}"
 					]
 				}
 			},
@@ -218,7 +218,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}/transaccionProveedor/{{new_id_tr}}/productos",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_prt}}/transaccionProveedor/{{new_id_tra}}/productos",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -228,9 +228,9 @@
 						"s3_farmacia-api",
 						"api",
 						"proveedores",
-						"{{new_id_pr}}",
+						"{{new_id_prt}}",
 						"transaccionProveedor",
-						"{{new_id_tr}}",
+						"{{new_id_tra}}",
 						"productos"
 					]
 				}
@@ -260,7 +260,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}/transaccionProveedor/{{new_id_tr}}/productos/{{new_id_pdc}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_prt}}/transaccionProveedor/{{new_id_tra}}/productos/{{new_id_pdct}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -270,11 +270,11 @@
 						"s3_farmacia-api",
 						"api",
 						"proveedores",
-						"{{new_id_pr}}",
+						"{{new_id_prt}}",
 						"transaccionProveedor",
-						"{{new_id_tr}}",
+						"{{new_id_tra}}",
 						"productos",
-						"{{new_id_pdc}}"
+						"{{new_id_pdct}}"
 					]
 				}
 			},
@@ -303,7 +303,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}/transaccionProveedor/{{new_id_tr}}/productos",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_prt}}/transaccionProveedor/{{new_id_tra}}/productos",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -313,9 +313,9 @@
 						"s3_farmacia-api",
 						"api",
 						"proveedores",
-						"{{new_id_pr}}",
+						"{{new_id_prt}}",
 						"transaccionProveedor",
-						"{{new_id_tr}}",
+						"{{new_id_tra}}",
 						"productos"
 					]
 				}
@@ -345,7 +345,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}/transaccionProveedor/{{new_id_tr}}/productos/0",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_prt}}/transaccionProveedor/{{new_id_tra}}/productos/0",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -355,9 +355,9 @@
 						"s3_farmacia-api",
 						"api",
 						"proveedores",
-						"{{new_id_pr}}",
+						"{{new_id_prt}}",
 						"transaccionProveedor",
-						"{{new_id_tr}}",
+						"{{new_id_tra}}",
 						"productos",
 						"0"
 					]
@@ -388,7 +388,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}/transaccionProveedor/{{new_id_tr}}/productos/{{new_id_pdc}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_prt}}/transaccionProveedor/{{new_id_tra}}/productos/{{new_id_pdct}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -398,11 +398,11 @@
 						"s3_farmacia-api",
 						"api",
 						"proveedores",
-						"{{new_id_pr}}",
+						"{{new_id_prt}}",
 						"transaccionProveedor",
-						"{{new_id_tr}}",
+						"{{new_id_tra}}",
 						"productos",
-						"{{new_id_pdc}}"
+						"{{new_id_pdct}}"
 					]
 				}
 			},
@@ -430,7 +430,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/registros/{{new_id_pdc}}/{{new_id_r}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/registros/{{new_id_pdct}}/{{new_id_re}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -440,8 +440,8 @@
 						"s3_farmacia-api",
 						"api",
 						"registros",
-						"{{new_id_pdc}}",
-						"{{new_id_r}}"
+						"{{new_id_pdct}}",
+						"{{new_id_re}}"
 					]
 				}
 			},
@@ -469,7 +469,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/{{new_id_pdc}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/{{new_id_pdct}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -479,7 +479,7 @@
 						"s3_farmacia-api",
 						"api",
 						"productos",
-						"{{new_id_pdc}}"
+						"{{new_id_pdct}}"
 					]
 				}
 			},
@@ -507,7 +507,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}/transaccionProveedor/{{new_id_tr}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_prt}}/transaccionProveedor/{{new_id_tra}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -517,9 +517,9 @@
 						"s3_farmacia-api",
 						"api",
 						"proveedores",
-						"{{new_id_pr}}",
+						"{{new_id_prt}}",
 						"transaccionProveedor",
-						"{{new_id_tr}}"
+						"{{new_id_tra}}"
 					]
 				}
 			},
@@ -548,7 +548,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_prt}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -558,7 +558,7 @@
 						"s3_farmacia-api",
 						"api",
 						"proveedores",
-						"{{new_id_pr}}"
+						"{{new_id_prt}}"
 					]
 				}
 			},
