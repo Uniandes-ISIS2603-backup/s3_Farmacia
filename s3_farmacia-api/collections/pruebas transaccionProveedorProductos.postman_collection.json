@@ -330,7 +330,7 @@
 					"script": {
 						"id": "3cf2f56e-d157-45d5-b504-ae081183ac65",
 						"exec": [
-							"tests[\"No se obtubo correctamente\"] = responseCode.code === 404;",
+							"tests[\"No se obtubo correctamente\"] = responseCode.code === 405;",
 							""
 						],
 						"type": "text/javascript"
