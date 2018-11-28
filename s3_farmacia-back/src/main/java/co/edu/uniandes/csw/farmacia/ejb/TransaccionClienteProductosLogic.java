@@ -18,6 +18,7 @@ import javax.inject.Inject;
  *
  * @author estudiante
  */
+
 @Stateless
 public class TransaccionClienteProductosLogic {
     
