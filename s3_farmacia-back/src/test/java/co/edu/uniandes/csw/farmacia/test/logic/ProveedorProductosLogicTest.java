@@ -13,6 +13,8 @@ import co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.farmacia.persistence.ProveedorPersistence;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +29,7 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Assert;
+import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -154,6 +157,18 @@ public class ProveedorProductosLogicTest {
 
         Assert.assertNotNull(response);
         Assert.assertEquals(productoEntity.getId(), response.getId());
+        
+        proveedorProductosLogic.removeProducto(entity.getId(), response.getId());
+        try {
+           ProductoEntity p =  proveedorProductosLogic.getProducto(entity.getId(), productoEntity.getId());
+           Assert.assertNull(p);
+            fail("No deberia haber logrado obtenerlo");
+        } catch (BusinessLogicException ex) 
+        {
+            Assert.assertEquals("El producto no está asociado al proveedor.", ex.getMessage());
+            int t = proveedorProductosLogic.productosNoAniadidos(entity.getId()).size();
+            Assert.assertEquals(2, t);
+        }   
     }
 
     @Test(expected = BusinessLogicException.class)

@@ -84,7 +84,13 @@ public class ProveedorProductosLogic {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar un producto del proveedor con id = {0}", proveedorId);
         ProductoEntity productoEntity = productoPersistence.find(productoId);
         ProveedorEntity proveedorEntity = proveedorPersistence.find(proveedorId);
-        proveedorEntity.getProductos().remove(productoEntity);
+        List<ProductoEntity> lista = proveedorEntity.getProductos();
+        lista.remove(productoEntity);
+        proveedorPersistence.delete2(proveedorEntity.getId());
+        proveedorEntity.setProductos(lista);
+        proveedorPersistence.create(proveedorEntity);
+        productoEntity.getProveedores().remove(proveedorEntity);
+        productoPersistence.update(productoEntity);
         LOGGER.log(Level.INFO, "Termina proceso de  borrar un producto del proveedor con  id = {0}", proveedorId);
     }
     
@@ -96,9 +102,6 @@ public class ProveedorProductosLogic {
         
         List<ProductoEntity> listaARetornar = new ArrayList<>();
         int tamanioMenor = listaMenor.size();
-        
-        LOGGER.severe("co.edu.uniandes.csw.farmacia.ejb.ProveedorProductosLogic.productosNoAniadidos()" + listaTotal.size());
-        LOGGER.severe("co.edu.uniandes.csw.farmacia.ejb.ProveedorProductosLogic.productosNoAniadidos()"+listaMenor.size());
         for (int i = 0; i < listaTotal.size() ; i++) 
         {
             ProductoEntity pr = listaTotal.get(i);
@@ -107,8 +110,6 @@ public class ProveedorProductosLogic {
                 if(pr.getId().compareTo(listaMenor.get(j).getId()) == 0)
                 {
                     finalizo = true;
-                            LOGGER.severe("co.edu.uniandes.csw.farmacia.ejb.ProveedorProductosLogic.productosNoAniadidos()uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
-
                 }
             }
             if(!finalizo)
