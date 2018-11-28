@@ -59,7 +59,7 @@ public class TransaccionClienteProductoResource {
             LOGGER.log(Level.INFO, "TransaccionClienteProductoResource addProducto: input: transaccionClienteId {0} , ProductoId {1},cleinteId{2}", new Object[]{transId, productosId, clienteId});
             TransaccionClienteEntity trans
                     = transLogic.getTransaccionCliente(clienteId, transId);
-            if (trans == null || trans.getProductos() == null) {
+            if (trans == null || trans.getProductosCliente() == null) {
                 throw new WebApplicationException(TCP1 + transId + TCP2, 404);
             }
 

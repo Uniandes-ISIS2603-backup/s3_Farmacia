@@ -43,9 +43,9 @@ public class TransaccionClienteProductosLogic {
         if (producto == null || transaccionCliente == null) {
             throw new BusinessLogicException("No se encontró el elemento");
         }
-        List<ProductoEntity> productos = transaccionCliente.getProductos();
+        List<ProductoEntity> productos = transaccionCliente.getProductosCliente();
         productos.add(producto);
-        transaccionCliente.setProductos(productos);
+        transaccionCliente.setProductosCliente(productos);
         List<TransaccionClienteEntity> transacciones = 
                 producto.getTransaccionesCliente();
         transacciones.add(transaccionCliente);
@@ -70,7 +70,7 @@ public class TransaccionClienteProductosLogic {
         if (producto == null || transaccionCliente == null) {
             throw new BusinessLogicException("No se encontró el elemento");
         }
-        List<ProductoEntity> productos = transaccionCliente.getProductos();
+        List<ProductoEntity> productos = transaccionCliente.getProductosCliente();
         if (!productos.remove(producto)) {
             throw new BusinessLogicException("No existe la asociación");
         }
@@ -96,7 +96,7 @@ public class TransaccionClienteProductosLogic {
         if (transaccionCliente == null)
             throw new BusinessLogicException(
                     "No se encontró la transacción del cliente");
-        return transaccionCliente.getProductos();
+        return transaccionCliente.getProductosCliente();
     }
     
     /**

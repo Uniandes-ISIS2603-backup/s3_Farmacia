@@ -136,8 +136,8 @@ public class TransaccionClienteProductosLogicTest {
 
                 transaccionClienteProductoLogic.asociate(dataCliente.get(0).getId(), dataCliente.get(0).getTransaccionesCliente().get(0).getId(), dataProducto.get(0).getId());
                 TransaccionClienteEntity entity = em.find(TransaccionClienteEntity.class, idTransaccion);
-                Assert.assertNotNull(entity.getProductos());
-                Assert.assertEquals(dataProducto.get(0).getId(), entity.getProductos().get(0).getId());
+                Assert.assertNotNull(entity.getProductosCliente());
+                Assert.assertEquals(dataProducto.get(0).getId(), entity.getProductosCliente().get(0).getId());
 
             } catch (Exception ex) {
                 Assert.fail("No debería haber tirado excepcion" );
@@ -162,11 +162,11 @@ public class TransaccionClienteProductosLogicTest {
                 try {
                     transaccionClienteProductoLogic.asociate(dataCliente.get(0).getId(), dataCliente.get(0).getTransaccionesCliente().get(0).getId(), dataProducto.get(0).getId());
                     TransaccionClienteEntity entity = em.find(TransaccionClienteEntity.class, idTransaccion);
-                    Assert.assertNotNull(entity.getProductos());
-                    Assert.assertEquals(dataProducto.get(0).getId(), entity.getProductos().get(0).getId());
+                    Assert.assertNotNull(entity.getProductosCliente());
+                    Assert.assertEquals(dataProducto.get(0).getId(), entity.getProductosCliente().get(0).getId());
                      transaccionClienteProductoLogic.deasociate(dataCliente.get(0).getId(), dataCliente.get(0).getTransaccionesCliente().get(0).getId(), dataProducto.get(0).getId());
                      entity = em.find(TransaccionClienteEntity.class, idTransaccion);
-                     Assert.assertEquals(0, entity.getProductos().size());                     
+                     Assert.assertEquals(0, entity.getProductosCliente().size());                     
                     
                 } catch (Exception ex) {
                     Assert.fail("No debería haber tirado excepcion");

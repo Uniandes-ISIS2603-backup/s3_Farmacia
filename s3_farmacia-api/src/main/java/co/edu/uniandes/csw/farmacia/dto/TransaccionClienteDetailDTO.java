@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class TransaccionClienteDetailDTO extends TransaccionClienteDTO implements Serializable
 {
-    private List<ProductoDTO> productos;    
+    private List<ProductoDTO> productosCliente;    
     
     public TransaccionClienteDetailDTO()
     {
@@ -27,35 +27,35 @@ public class TransaccionClienteDetailDTO extends TransaccionClienteDTO implement
     public TransaccionClienteDetailDTO(TransaccionClienteEntity transaccion)
     {
         super(transaccion);
-        if(transaccion.getProductos()!=null)
+        if(transaccion.getProductosCliente()!=null)
         {
-            productos = new ArrayList<>();
-            for (ProductoEntity entityReview : transaccion.getProductos()) {
-                productos.add(new ProductoDTO(entityReview));
+            productosCliente = new ArrayList<>();
+            for (ProductoEntity entityReview : transaccion.getProductosCliente()) {
+                productosCliente.add(new ProductoDTO(entityReview));
             }
         }
     }
     
     public List<ProductoDTO> getProductos()
     {
-          return productos;
+          return productosCliente;
     }
     
     public void setProductos(List<ProductoDTO> pProductos)
     {
-        productos = pProductos;
+        productosCliente = pProductos;
     }
     
        @Override
     public TransaccionClienteEntity toEntity() 
     {
         TransaccionClienteEntity transaEntity = super.toEntity();
-        if (productos != null) {
+        if (productosCliente != null) {
             List<ProductoEntity> productosTransaccion = new ArrayList<>();
             for (ProductoDTO productoDto : getProductos()) {
                 productosTransaccion.add(productoDto.toEntity());
             }
-            transaEntity.setProductos(productosTransaccion);
+            transaEntity.setProductosCliente(productosTransaccion);
         }
            return transaEntity;
     }

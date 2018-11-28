@@ -42,7 +42,7 @@ public class TransaccionClienteEntity extends BaseEntity implements Serializable
     
     @PodamExclude
     @ManyToMany(mappedBy = "transaccionesCliente")
-    private List<ProductoEntity> productos = new ArrayList<>();
+    private List<ProductoEntity> productosCliente = new ArrayList<>();
  
     
     public void setTipoDePago(String pTipoDePago)
@@ -93,13 +93,13 @@ public class TransaccionClienteEntity extends BaseEntity implements Serializable
         this.cliente= pCliente;
     }
     
-    public void setProductos(List<ProductoEntity> pProductos)
+    public void setProductosCliente(List<ProductoEntity> pProductos)
     {
-        productos= pProductos;
+        productosCliente= pProductos;
     }
     
-    public List<ProductoEntity> getProductos()
+    public List<ProductoEntity> getProductosCliente()
     {
-        return productos;
+        return productosCliente;
     }
 }
