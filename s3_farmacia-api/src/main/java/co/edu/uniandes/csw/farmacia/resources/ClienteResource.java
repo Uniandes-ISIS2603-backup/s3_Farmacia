@@ -152,13 +152,15 @@ public class ClienteResource {
      * Error de lógica que se genera cuando no se encuentra el cliente.
      */
     @DELETE
-    @Path("{clientesId:\\d+}/1")
+    @Path("{clientesId:\\d+}/delete")
     public void delete2Cliente(@PathParam("clientesId") Long id)throws BusinessLogicException{
         LOGGER.log(Level.INFO, "ClienteResource deleteCliente: input: {0}", id);
         if (clienteLogic.getCliente(id) == null) {
             throw new WebApplicationException(C1 + id + C2, 404);
         }
-        clienteLogic.delete2Cliente(id);
+
+                    clienteLogic.delete2Cliente(id);
+
         LOGGER.info("ClienteResource deleteCliente: output: void");
     }
     

@@ -382,6 +382,32 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Eliminar producto inexistente",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"productos",
+						"0"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [

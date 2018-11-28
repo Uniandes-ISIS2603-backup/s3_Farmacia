@@ -101,6 +101,45 @@
 			"response": []
 		},
 		{
+			"name": "Obtiene un registro inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "66ca1da9-db5a-4430-8e0f-367816fe9402",
+						"exec": [
+							"tests[\"No encuentra registro\"] = responseCode.code === 404;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/registros/{{new_id_pdo}}/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"registros",
+						"{{new_id_pdo}}",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Obtiene un registro",
 			"event": [
 				{
@@ -134,6 +173,45 @@
 						"registros",
 						"{{new_id_pdo}}",
 						"{{new_id_rg}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtiene los registros de un producto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "87d8a43e-1ae7-4535-a5e2-9ce896cd39af",
+						"exec": [
+							"tests[\"No hay error\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/registros/{{new_id_pdo}}/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"registros",
+						"{{new_id_pdo}}",
+						""
 					]
 				}
 			},
@@ -178,6 +256,45 @@
 						"registros",
 						"{{new_id_pdo}}",
 						"{{new_id_rg}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar un registro inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9d04e69a-8805-4a13-b37a-dd673db267b0",
+						"exec": [
+							"tests[\"No se elimino al registro\"] = responseCode.code === 404;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/registros/{{new_id_pdo}}/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"registros",
+						"{{new_id_pdo}}",
+						"0"
 					]
 				}
 			},
