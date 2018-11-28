@@ -1,105 +1,10 @@
 {
 	"info": {
-		"_postman_id": "f214ecd6-4474-42bb-813f-9167b7620236",
-		"name": "pruebas transaccionProveedorProductos",
+		"_postman_id": "76067be4-19b1-414a-a019-2c6ee1500595",
+		"name": "pruebastransaccionClienteProductos",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
-		{
-			"name": "Crear un proveedor.",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "428b2666-e404-49da-af86-a3b724d525df",
-						"exec": [
-							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_pr\", data.id);",
-							"tests[\"No hay error\"] = responseCode.code === 200;",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{ \n\t\"nombre\" : \"Nestle\"\n\t\n}"
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s3_farmacia-api",
-						"api",
-						"proveedores",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Crear transaccion al proveedor.",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "c23127c4-6964-424f-9bf5-de893fec1c96",
-						"exec": [
-							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_tr\", data.id);",
-							"tests[\"No hay error\"] = responseCode.code === 200;",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"monto\" : 4000,\n\t\"tiempo\": 3456\n\t\n}"
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}/transaccionProveedor",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s3_farmacia-api",
-						"api",
-						"proveedores",
-						"{{new_id_pr}}",
-						"transaccionProveedor"
-					]
-				}
-			},
-			"response": []
-		},
 		{
 			"name": "Crea un registro",
 			"event": [
@@ -196,12 +101,107 @@
 			"response": []
 		},
 		{
-			"name": "Obtener productos de una transaccion",
+			"name": "Crea un cliente ",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "d52d89b3-69df-4e2f-a01c-1df4eeca3f20",
+						"id": "de7ae748-b3e5-46eb-a944-d0ed07ee4723",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_cl\", data.id);",
+							"tests[\"No hay error\"] = responseCode.code === 200;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\":\"Harry\", \"apellido\":\"Potter\", \"ciudad\":\"Privet Drive\", \"direccionEnvio\":\"CRA6#1-39\",\"cedula\":1120843798}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una transaccion cliente ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "74dce76a-92cc-4f7b-a71a-a5d95370b215",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_trc\", data.id);",
+							"tests[\"Se obtuvo correctamente la lista\"] = responseCode.code === 200;",
+							"tests[\"Lista vacia esperada\"] = responseBody.has(\"tarjeta\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"monto\" : 4500 ,\n\t\"parcial\" : true,\n\t\"tipoDePago\" : \"tarjeta\" ,\n\t\"tiempo\" : 9000\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cl}}/transaccionesCliente",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						"{{new_id_cl}}",
+						"transaccionesCliente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener lista de productos de la transaccion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "430a011e-ee4c-421f-9d54-468de753cfbc",
 						"exec": [
 							"tests[\"Se obtuvo correctamente la lista\"] = responseCode.code === 200;",
 							"tests[\"Lista vacia esperada\"] = responseBody.has(\"[]\");"
@@ -218,7 +218,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}/transaccionProveedor/{{new_id_tr}}/productos",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cl}}/transaccionesCliente/{{new_id_trc}}/productos",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -227,10 +227,10 @@
 					"path": [
 						"s3_farmacia-api",
 						"api",
-						"proveedores",
-						"{{new_id_pr}}",
-						"transaccionProveedor",
-						"{{new_id_tr}}",
+						"clientes",
+						"{{new_id_cl}}",
+						"transaccionesCliente",
+						"{{new_id_trc}}",
 						"productos"
 					]
 				}
@@ -238,14 +238,14 @@
 			"response": []
 		},
 		{
-			"name": "Asociar producto existente a la transaccion",
+			"name": "Asociar un producto a la transaccion cliente",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "62b34ab1-0c8c-4dbd-8b6d-282afc484b2f",
+						"id": "3c6795c1-54cb-4637-9121-28c2e82b3648",
 						"exec": [
-							"tests[\"Se anadio correctamente a la lista\"] = responseCode.code === 204;",
+							"tests[\"Se elimino correctamente\"] = responseCode.code === 204;",
 							""
 						],
 						"type": "text/javascript"
@@ -260,7 +260,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}/transaccionProveedor/{{new_id_tr}}/productos/{{new_id_pdc}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cl}}/transaccionesCliente/{{new_id_trc}}/productos/{{new_id_pdc}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -269,10 +269,10 @@
 					"path": [
 						"s3_farmacia-api",
 						"api",
-						"proveedores",
-						"{{new_id_pr}}",
-						"transaccionProveedor",
-						"{{new_id_tr}}",
+						"clientes",
+						"{{new_id_cl}}",
+						"transaccionesCliente",
+						"{{new_id_trc}}",
 						"productos",
 						"{{new_id_pdc}}"
 					]
@@ -281,56 +281,14 @@
 			"response": []
 		},
 		{
-			"name": "Obtener productos de una transaccion2",
+			"name": "Obtener producto de la transaccion cliente",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "d52d89b3-69df-4e2f-a01c-1df4eeca3f20",
+						"id": "af615283-bbe7-4793-81d7-3ebb0261cee2",
 						"exec": [
-							"tests[\"Se obtuvo correctamente la lista\"] = responseCode.code === 200;",
-							"tests[\"Lista vacia esperada\"] = responseBody.has(\"3456\");"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}/transaccionProveedor/{{new_id_tr}}/productos",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s3_farmacia-api",
-						"api",
-						"proveedores",
-						"{{new_id_pr}}",
-						"transaccionProveedor",
-						"{{new_id_tr}}",
-						"productos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Obtener un producto de la transaccion proveedor inexistente.",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "3cf2f56e-d157-45d5-b504-ae081183ac65",
-						"exec": [
-							"tests[\"No se obtubo correctamente\"] = responseCode.code === 405;",
+							"tests[\"Se obtuvo correctamente\"] = responseCode.code === 200;",
 							""
 						],
 						"type": "text/javascript"
@@ -345,7 +303,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}/transaccionProveedor/{{new_id_tr}}/productos/0",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cl}}/transaccionesCliente/{{new_id_trc}}/productos/{{new_id_pdc}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -354,10 +312,53 @@
 					"path": [
 						"s3_farmacia-api",
 						"api",
-						"proveedores",
-						"{{new_id_pr}}",
-						"transaccionProveedor",
-						"{{new_id_tr}}",
+						"clientes",
+						"{{new_id_cl}}",
+						"transaccionesCliente",
+						"{{new_id_trc}}",
+						"productos",
+						"{{new_id_pdc}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener producto inexistente de la transaccion.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f8d98bef-38cd-4f08-b96d-b494ae7950d8",
+						"exec": [
+							"tests[\"No se obtubo correctamente\"] = responseCode.code === 404;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cl}}/transaccionesCliente/{{new_id_trc}}/productos/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						"{{new_id_cl}}",
+						"transaccionesCliente",
+						"{{new_id_trc}}",
 						"productos",
 						"0"
 					]
@@ -366,12 +367,54 @@
 			"response": []
 		},
 		{
-			"name": "Desasociar producto de la transaccion",
+			"name": "Obtener productos del carrito2",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "5b6be9bd-bdb0-4e30-a2a8-35c8d2615de9",
+						"id": "a0c8fe5a-e050-4f71-86a5-0e93f0e29833",
+						"exec": [
+							"tests[\"Se obtuvo correctamente la lista\"] = responseCode.code === 200;",
+							"tests[\"Lista vacia esperada\"] = responseBody.has(\"Potter\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cl}}/transaccionesCliente/{{new_id_trc}}/productos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						"{{new_id_cl}}",
+						"transaccionesCliente",
+						"{{new_id_trc}}",
+						"productos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Desasociar producto del carrito",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5805f5a6-07cc-4edb-b047-57e93806c9f7",
 						"exec": [
 							"tests[\"Se elimino correctamente\"] = responseCode.code === 204;",
 							""
@@ -388,7 +431,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}/transaccionProveedor/{{new_id_tr}}/productos/{{new_id_pdc}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cl}}/transaccionesCliente/{{new_id_trc}}/productos/{{new_id_pdc}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -397,12 +440,78 @@
 					"path": [
 						"s3_farmacia-api",
 						"api",
-						"proveedores",
-						"{{new_id_pr}}",
-						"transaccionProveedor",
-						"{{new_id_tr}}",
+						"clientes",
+						"{{new_id_cl}}",
+						"transaccionesCliente",
+						"{{new_id_trc}}",
 						"productos",
 						"{{new_id_pdc}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar una transaccion cliente",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cl}}/transaccionesCliente/{{new_id_trc}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						"{{new_id_cl}}",
+						"transaccionesCliente",
+						"{{new_id_trc}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar un cliente determinado ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d31136bf-7890-46e1-8188-ffd247fa2639",
+						"exec": [
+							"tests[\"Se elimino correctamente\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cl}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						"{{new_id_cl}}"
 					]
 				}
 			},
@@ -484,85 +593,28 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "c652eebd-de78-45d3-a2bc-ef66a5c58fb0",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		},
 		{
-			"name": "Eliminar transaccion proveedor.",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "1b97291b-684f-4636-9733-6da820f979c2",
-						"exec": [
-							"tests[\"Elimina correctamente\"] = responseCode.code === 204;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}/transaccionProveedor/{{new_id_tr}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s3_farmacia-api",
-						"api",
-						"proveedores",
-						"{{new_id_pr}}",
-						"transaccionProveedor",
-						"{{new_id_tr}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Eliminar un proveedor determinado.",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "20a65e2f-8b37-461d-813e-3be2a287123e",
-						"exec": [
-							"tests[\"Se elimino correctamente\"] = responseCode.code === 204;",
-							"//codigo de exito para el eliminar."
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s3_farmacia-api",
-						"api",
-						"proveedores",
-						"{{new_id_pr}}"
-					]
-				}
-			},
-			"response": []
+			"listen": "test",
+			"script": {
+				"id": "91ab8faf-b649-43b0-b7eb-3f7e6c84b2d2",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }

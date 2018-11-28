@@ -1,62 +1,22 @@
 {
 	"info": {
-		"_postman_id": "e8c46a20-129f-4f61-af6e-9ceac3b97983",
-		"name": "pruebas ProveedorProductos",
+		"_postman_id": "f214ecd6-4474-42bb-813f-9167b7620236",
+		"name": "pruebastransaccionProveedorProductos",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
-		{
-			"name": "Anadir un producto a un proveedor inexistente",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "d0164059-647a-41e0-8c15-b4ed57f23fa5",
-						"exec": [
-							"tests [\"No se pudo anadir porque el producto no existe\"] = responseCode.code === 404;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/0/productos/200",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s3_farmacia-api",
-						"api",
-						"proveedores",
-						"0",
-						"productos",
-						"200"
-					]
-				}
-			},
-			"response": []
-		},
 		{
 			"name": "Crear un proveedor.",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "cd457d80-dfc4-44fa-bdc5-962ac4eb3f95",
+						"id": "428b2666-e404-49da-af86-a3b724d525df",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_pr_pd\", data.id);",
+							"postman.setGlobalVariable(\"new_id_pr\", data.id);",
 							"tests[\"No hay error\"] = responseCode.code === 200;",
-							"console.log(data.id);"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -67,14 +27,12 @@
 				"header": [
 					{
 						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
+						"value": "application/json"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\" : \"LaRebaja\"\n}"
+					"raw": "{ \n\t\"nombre\" : \"Nestle\"\n\t\n}"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/",
@@ -94,17 +52,17 @@
 			"response": []
 		},
 		{
-			"name": "Añadir un registro",
+			"name": "Crear transaccion al proveedor.",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "364fe33d-c664-4dcc-b4fa-1286001cb6ba",
+						"id": "c23127c4-6964-424f-9bf5-de893fec1c96",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_r\", data.id);",
+							"postman.setGlobalVariable(\"new_id_tr\", data.id);",
 							"tests[\"No hay error\"] = responseCode.code === 200;",
-							"console.log(data.id);"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -122,10 +80,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"cantidad\" : 32, \"tipoRegistro\" : \"ROBO\"}\r\n"
+					"raw": "{\n\t\"monto\" : 4000,\n\t\"tiempo\": 3456\n\t\n}"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/registros",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}/transaccionProveedor",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -134,14 +92,62 @@
 					"path": [
 						"s3_farmacia-api",
 						"api",
-						"registros"
+						"proveedores",
+						"{{new_id_pr}}",
+						"transaccionProveedor"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Añadir un producto",
+			"name": "Crea un registro",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "969cdba3-d898-4d5e-8186-d51ecdcd0747",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_r\", data.id);",
+							"tests[\"No hay error\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"cantidad\":\"10\",\"tipoRegistro\":\"TRASLADO_BODEGA\"}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/registros/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"registros",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un producto",
 			"event": [
 				{
 					"listen": "test",
@@ -149,7 +155,7 @@
 						"id": "4a9951ee-5b10-4061-8df4-1aac3c266795",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_pd\", data.id);",
+							"postman.setGlobalVariable(\"new_id_pdc\", data.id);",
 							"tests[\"No hay error\"] = responseCode.code === 200;",
 							"console.log(data.id);"
 						],
@@ -190,15 +196,15 @@
 			"response": []
 		},
 		{
-			"name": "Obtener productos del proveedor",
+			"name": "Obtener productos de una transaccion",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "245024f8-51f4-48a8-8efc-0654fb153387",
+						"id": "d52d89b3-69df-4e2f-a01c-1df4eeca3f20",
 						"exec": [
 							"tests[\"Se obtuvo correctamente la lista\"] = responseCode.code === 200;",
-							""
+							"tests[\"Lista vacia esperada\"] = responseBody.has(\"[]\");"
 						],
 						"type": "text/javascript"
 					}
@@ -212,7 +218,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr_pd}}/productos",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}/transaccionProveedor/{{new_id_tr}}/productos",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -222,7 +228,9 @@
 						"s3_farmacia-api",
 						"api",
 						"proveedores",
-						"{{new_id_pr_pd}}",
+						"{{new_id_pr}}",
+						"transaccionProveedor",
+						"{{new_id_tr}}",
 						"productos"
 					]
 				}
@@ -230,14 +238,15 @@
 			"response": []
 		},
 		{
-			"name": "Anadirle un producto al proveedor",
+			"name": "Asociar producto existente a la transaccion",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "095b7af0-fc6e-4bce-ad23-a5df2efeab52",
+						"id": "62b34ab1-0c8c-4dbd-8b6d-282afc484b2f",
 						"exec": [
-							"tests[\"Se anadio el producto 200 al proveedor especificado \"] = responseCode.code === 200;"
+							"tests[\"Se anadio correctamente a la lista\"] = responseCode.code === 204;",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -251,7 +260,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr_pd}}/productos/{{new_id_pd}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}/transaccionProveedor/{{new_id_tr}}/productos/{{new_id_pdc}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -261,23 +270,26 @@
 						"s3_farmacia-api",
 						"api",
 						"proveedores",
-						"{{new_id_pr_pd}}",
+						"{{new_id_pr}}",
+						"transaccionProveedor",
+						"{{new_id_tr}}",
 						"productos",
-						"{{new_id_pd}}"
+						"{{new_id_pdc}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Obtener el producto asociado al proveedor",
+			"name": "Obtener productos de una transaccion2",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "1200e885-6a08-4871-bdd3-eaabbf99a219",
+						"id": "d52d89b3-69df-4e2f-a01c-1df4eeca3f20",
 						"exec": [
-							"tests[\"Se obtuvo el producto 200 del proveedor especificado \"] = responseCode.code === 200;"
+							"tests[\"Se obtuvo correctamente la lista\"] = responseCode.code === 200;",
+							"tests[\"Lista vacia esperada\"] = responseBody.has(\"3456\");"
 						],
 						"type": "text/javascript"
 					}
@@ -291,7 +303,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr_pd}}/productos/{{new_id_pd}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}/transaccionProveedor/{{new_id_tr}}/productos",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -301,23 +313,24 @@
 						"s3_farmacia-api",
 						"api",
 						"proveedores",
-						"{{new_id_pr_pd}}",
-						"productos",
-						"{{new_id_pd}}"
+						"{{new_id_pr}}",
+						"transaccionProveedor",
+						"{{new_id_tr}}",
+						"productos"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Obtener productos faltantes",
+			"name": "Obtener un producto de la transaccion proveedor inexistente.",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "51435148-554d-414f-b75d-3a0cb4476fd5",
+						"id": "3cf2f56e-d157-45d5-b504-ae081183ac65",
 						"exec": [
-							"tests[\"No se obtubo correctamente\"] = responseCode.code === 200;",
+							"tests[\"No se obtubo correctamente\"] = responseCode.code === 405;",
 							""
 						],
 						"type": "text/javascript"
@@ -332,7 +345,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr_pd}}/productos/faltantes",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}/transaccionProveedor/{{new_id_tr}}/productos/0",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -342,23 +355,26 @@
 						"s3_farmacia-api",
 						"api",
 						"proveedores",
-						"{{new_id_pr_pd}}",
+						"{{new_id_pr}}",
+						"transaccionProveedor",
+						"{{new_id_tr}}",
 						"productos",
-						"faltantes"
+						"0"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Eliminar producto al proveedor",
+			"name": "Desasociar producto de la transaccion",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "5faae40b-60c8-49e5-8bdf-b32a24ef9c74",
+						"id": "5b6be9bd-bdb0-4e30-a2a8-35c8d2615de9",
 						"exec": [
-							"tests[\"Elimina el producto\"] = responseCode.code === 204;"
+							"tests[\"Se elimino correctamente\"] = responseCode.code === 204;",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -372,7 +388,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr_pd}}/productos/{{new_id_pd}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}/transaccionProveedor/{{new_id_tr}}/productos/{{new_id_pdc}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -382,23 +398,25 @@
 						"s3_farmacia-api",
 						"api",
 						"proveedores",
-						"{{new_id_pr_pd}}",
+						"{{new_id_pr}}",
+						"transaccionProveedor",
+						"{{new_id_tr}}",
 						"productos",
-						"{{new_id_pd}}"
+						"{{new_id_pdc}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Eliminar proveedor",
+			"name": "Elimina un registro",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "accbd88e-a24c-441f-a51e-742d2f4dbcee",
+						"id": "515e0e30-934f-4d24-a09a-63d719341b2b",
 						"exec": [
-							"tests[\"Se elimino al proveedor\"] = responseCode.code === 204;"
+							"tests[\"Se elimino al registro\"] = responseCode.code === 204;"
 						],
 						"type": "text/javascript"
 					}
@@ -412,7 +430,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr_pd}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/registros/{{new_id_pdc}}/{{new_id_r}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -421,22 +439,23 @@
 					"path": [
 						"s3_farmacia-api",
 						"api",
-						"proveedores",
-						"{{new_id_pr_pd}}"
+						"registros",
+						"{{new_id_pdc}}",
+						"{{new_id_r}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Eliminar el producto",
+			"name": "Eliminar producto",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "c9a8ac5c-0082-4832-95d3-49be3141f738",
+						"id": "966f74e3-0727-4142-af71-c505e820bc9e",
 						"exec": [
-							"tests[\"Se elimino al proveedor\"] = responseCode.code === 204;"
+							"tests[\"Se elimino al producto\"] = responseCode.code === 204;"
 						],
 						"type": "text/javascript"
 					}
@@ -450,7 +469,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/{{new_id_pd}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/{{new_id_pdc}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -460,11 +479,112 @@
 						"s3_farmacia-api",
 						"api",
 						"productos",
-						"{{new_id_pd}}"
+						"{{new_id_pdc}}"
 					]
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Eliminar transaccion proveedor.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1b97291b-684f-4636-9733-6da820f979c2",
+						"exec": [
+							"tests[\"Elimina correctamente\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}/transaccionProveedor/{{new_id_tr}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"proveedores",
+						"{{new_id_pr}}",
+						"transaccionProveedor",
+						"{{new_id_tr}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar un proveedor determinado.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "20a65e2f-8b37-461d-813e-3be2a287123e",
+						"exec": [
+							"tests[\"Se elimino correctamente\"] = responseCode.code === 204;",
+							"//codigo de exito para el eliminar."
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"proveedores",
+						"{{new_id_pr}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "8f71a120-491c-4b1a-8703-8ec3951e574b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "4793f800-8764-40d0-9728-618be2d5a57b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }
