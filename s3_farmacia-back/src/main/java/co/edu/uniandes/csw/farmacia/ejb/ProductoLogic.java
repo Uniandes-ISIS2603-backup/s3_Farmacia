@@ -61,7 +61,32 @@ public class ProductoLogic {
         registroPersistence.update(registro);
         return productoEntity;
     }
-   
+    
+    /**
+     * Asocia el producto con el registro, ambos dados por parámetros
+     * @param productoId id del producto
+     * @param registroId id del registro
+     * @throws BusinessLogicException si no se encuentra el producto o el registro,
+     * o si el registro ya se encuentra asociado a un producto
+     */
+    public void asociate(Long productoId, Long registroId) 
+            throws BusinessLogicException {
+        ProductoEntity producto = persistence.find(productoId);
+        RegistroEntity registro = registroPersistence.find(registroId);
+        if (producto == null || registro == null)
+            throw new BusinessLogicException("No se encontró el recurso");
+        else if (registro.getProducto() != null) {
+            throw new BusinessLogicException(
+                    "El registro ya tiene un producto asociado");
+        }
+        List<RegistroEntity> registros = producto.getRegistros();
+        registro.setProducto(producto);
+        registros.add(registro);
+        producto.setRegistros(registros);
+        persistence.update(producto);
+        registroPersistence.update(registro);
+    }
+    
     /**
      * Obtiene los productos creados en la base de datos 
      * @return lista de los productos creados
