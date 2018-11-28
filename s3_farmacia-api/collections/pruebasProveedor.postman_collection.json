@@ -214,6 +214,92 @@
 			"response": []
 		},
 		{
+			"name": "Eliminar de manera definitiva.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2ceaac6f-7110-48ac-89a3-40033ca94a2a",
+						"exec": [
+							"tests[\"Se elimino correctamente\"] = responseCode.code === 204;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}/delete",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"proveedores",
+						"{{new_id_pr}}",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un proveedor Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "428b2666-e404-49da-af86-a3b724d525df",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_pr\", data.id);",
+							"tests[\"No hay error\"] = responseCode.code === 200;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"nombre\" : \"Nesttle\"\n\t\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"proveedores",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Obtener un proveedor",
 			"event": [
 				{
@@ -328,6 +414,44 @@
 						"api",
 						"proveedores",
 						"{{new_id_pr}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar proveedor inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8e29c8d3-cabf-45f6-a95f-b5a5c6593da7",
+						"exec": [
+							"tests[\"No actualiza\"] = responseCode.code === 404;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"proveedores",
+						"{0"
 					]
 				}
 			},
