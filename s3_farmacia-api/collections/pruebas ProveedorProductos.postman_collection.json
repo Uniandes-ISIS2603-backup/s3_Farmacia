@@ -310,6 +310,47 @@
 			"response": []
 		},
 		{
+			"name": "Obtener productos faltantes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "51435148-554d-414f-b75d-3a0cb4476fd5",
+						"exec": [
+							"tests[\"No se obtubo correctamente\"] = responseCode.code === 200;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr_pd}}/productos/faltantes",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"proveedores",
+						"{{new_id_pr_pd}}",
+						"productos",
+						"faltantes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Eliminar producto al proveedor",
 			"event": [
 				{

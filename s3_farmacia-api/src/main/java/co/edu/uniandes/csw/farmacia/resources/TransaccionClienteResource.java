@@ -66,6 +66,15 @@ public class TransaccionClienteResource
         LOGGER.log(Level.INFO, "BookResource getBooks: output: {0}", lista);
         return lista;
     }
+    @GET
+    @Path("/ultima")
+    public TransaccionClienteDetailDTO getUltimaTransaccion(@PathParam("clienteId")Long id)
+    {
+        LOGGER.log(Level.INFO,"TransaccionCLienteResource");
+        List<TransaccionClienteDetailDTO> transacciones = getTransacciones(id);
+        
+        return transacciones.get(transacciones.size()-1);
+    }
     
     
     @GET
@@ -83,7 +92,7 @@ public class TransaccionClienteResource
     }
 
    
-        @DELETE
+    @DELETE
     @Path("{transaccionesClienteId:\\d+}")
     public void deleteTransaccionCliente(@PathParam("clienteId")Long idCLi,@PathParam("transaccionesClienteId")Long id) throws BusinessLogicException
     {

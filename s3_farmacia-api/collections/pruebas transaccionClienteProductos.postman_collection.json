@@ -281,6 +281,92 @@
 			"response": []
 		},
 		{
+			"name": "Obtener producto de la transaccion cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "af615283-bbe7-4793-81d7-3ebb0261cee2",
+						"exec": [
+							"tests[\"Se obtuvo correctamente\"] = responseCode.code === 200;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cl}}/transaccionesCliente/{{new_id_trc}}/productos/{{new_id_pdc}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						"{{new_id_cl}}",
+						"transaccionesCliente",
+						"{{new_id_trc}}",
+						"productos",
+						"{{new_id_pdc}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener producto inexistente de la transaccion.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f8d98bef-38cd-4f08-b96d-b494ae7950d8",
+						"exec": [
+							"tests[\"No se obtubo correctamente\"] = responseCode.code === 404;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cl}}/transaccionesCliente/{{new_id_trc}}/productos/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						"{{new_id_cl}}",
+						"transaccionesCliente",
+						"{{new_id_trc}}",
+						"productos",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Obtener productos del carrito2",
 			"event": [
 				{

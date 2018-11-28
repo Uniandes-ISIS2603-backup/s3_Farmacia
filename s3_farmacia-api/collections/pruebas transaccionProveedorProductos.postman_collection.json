@@ -323,6 +323,49 @@
 			"response": []
 		},
 		{
+			"name": "Obtener un producto de la transaccion proveedor inexistente.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3cf2f56e-d157-45d5-b504-ae081183ac65",
+						"exec": [
+							"tests[\"No se obtubo correctamente\"] = responseCode.code === 404;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_pr}}/transaccionProveedor/{{new_id_tr}}/productos/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"proveedores",
+						"{{new_id_pr}}",
+						"transaccionProveedor",
+						"{{new_id_tr}}",
+						"productos",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Desasociar producto de la transaccion",
 			"event": [
 				{
