@@ -53,11 +53,11 @@ public class ProveedorResource {
      * @throws co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException
      */
     @POST
-    public ProveedorDTO createProveedor(ProveedorDTO proveedor) throws BusinessLogicException {
+    public ProveedorDetailDTO createProveedor(ProveedorDetailDTO proveedor) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "ProveedorResource.createProveedor: input:{0}", proveedor);
         ProveedorEntity proveedorEntity = proveedor.toEntity();
         ProveedorEntity nuevoProveedorEntity = proveedorLogic.createProveedor(proveedorEntity);
-        ProveedorDTO nuevoProveedorDTO = new ProveedorDTO(nuevoProveedorEntity);
+        ProveedorDetailDTO nuevoProveedorDTO = new ProveedorDetailDTO(nuevoProveedorEntity);
         LOGGER.log(Level.INFO, "ProveedorResource createProveedor: output: {0}", nuevoProveedorDTO);
         return nuevoProveedorDTO;
     }
