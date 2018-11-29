@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.farmacia.test.persistence;
 
 import co.edu.uniandes.csw.farmacia.entities.ProveedorEntity;
+import co.edu.uniandes.csw.farmacia.entities.TransaccionProveedorEntity;
 import co.edu.uniandes.csw.farmacia.persistence.ProveedorPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -148,7 +149,10 @@ public class ProveedorPersistenceTest
     public void delete2ProveedorTest()
     {
         ProveedorEntity proEntity = listaDePrueba.get(0);
-        proveedorPersistence.delete(proEntity.getId());
+        ArrayList<TransaccionProveedorEntity> transacciones = new ArrayList<TransaccionProveedorEntity>();
+        transacciones.add(new TransaccionProveedorEntity());
+        proEntity.setTransacciones(transacciones);
+        proveedorPersistence.delete2(proEntity.getId());
         ProveedorEntity eliminado = em.find(ProveedorEntity.class, proEntity.getId());
         Assert.assertNull(eliminado);
     }
@@ -178,6 +182,8 @@ public class ProveedorPersistenceTest
         Assert.assertEquals(proveedorEntity.getNombre(), nuevaEntidad.getNombre());
         
         nuevaEntidad = proveedorPersistence.findByName(null);
+        Assert.assertNull(nuevaEntidad);
+        nuevaEntidad = proveedorPersistence.findByName("noEncuentra");
         Assert.assertNull(nuevaEntidad);
     }
 
