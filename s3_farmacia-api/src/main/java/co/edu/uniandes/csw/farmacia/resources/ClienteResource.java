@@ -59,14 +59,14 @@ public class ClienteResource {
      * Error de logica que se genera cuando ya existe un cliente.
      */
     @POST
-    public ClienteDTO createCliente(ClienteDTO cliente) throws BusinessLogicException{
+    public ClienteDetailDTO createCliente(ClienteDTO cliente) throws BusinessLogicException{
         LOGGER.log(Level.INFO, "ClienteResource createCliente: input: {0}", cliente);
         // Convierte el DTO (json) en un objeto Entity para ser manejado por la lógica.
         ClienteEntity clienteEntity = cliente.toEntity();
         // Invoca la lógica para crear el cliente nueva
         ClienteEntity nuevoClienteEntity = clienteLogic.createCliente(clienteEntity);
         // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
-        ClienteDTO nuevoClienteDTO = new ClienteDTO(nuevoClienteEntity);
+        ClienteDetailDTO nuevoClienteDTO = new ClienteDetailDTO(nuevoClienteEntity);
         LOGGER.log(Level.INFO, "ClienteResource createCliente: output: {0}", nuevoClienteDTO);
         return nuevoClienteDTO;
     }
