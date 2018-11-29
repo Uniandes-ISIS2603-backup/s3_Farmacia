@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.farmacia.test.logic;
 
 import co.edu.uniandes.csw.farmacia.ejb.ProveedorLogic;
+import co.edu.uniandes.csw.farmacia.ejb.TransaccionProveedorLogic;
 import co.edu.uniandes.csw.farmacia.entities.ProductoEntity;
 import co.edu.uniandes.csw.farmacia.entities.ProveedorEntity;
 import co.edu.uniandes.csw.farmacia.entities.TransaccionProveedorEntity;
@@ -40,6 +41,9 @@ public class ProveedorLogicTest
 
     @Inject
     private ProveedorLogic proveedorLogic;
+    
+    @Inject
+    private TransaccionProveedorLogic tpl;
 
     @PersistenceContext
     private EntityManager em;
@@ -167,6 +171,8 @@ public class ProveedorLogicTest
         Assert.assertNotNull(resul);
         Assert.assertEquals(entity.getId(), resul.getId());
         Assert.assertEquals(entity.getNombre(), resul.getNombre());
+        ProveedorEntity entity2 = proveedorLogic.getProveedor(entity.getId()+999999);
+        Assert.assertNull(entity2);
     }
     @Test
     public void updateProveedorTest()
@@ -182,10 +188,25 @@ public class ProveedorLogicTest
     @Test
     public void deleteProveedorTest() throws BusinessLogicException 
     {
-         ProveedorEntity entity = data.get(1);
-        proveedorLogic.deleteProveedor(entity.getId());
-        ProveedorEntity deleted = em.find(ProveedorEntity.class, entity.getId());
+         ProveedorEntity entity2 = data.get(1);
+         ProveedorEntity entity = factory.manufacturePojo(ProveedorEntity.class);
+         TransaccionProveedorEntity tpe = factory.manufacturePojo(TransaccionProveedorEntity.class);
+        proveedorLogic.createProveedor(entity);
+        tpl.createTransaccionProveedor(entity.getId(), tpe);
+        try
+        {
+            Assert.assertEquals(proveedorLogic.getProveedor(entity.getId()).getTransacciones().size(), 1);
+            proveedorLogic.deleteProveedor(entity.getId());
+            Assert.fail("Deberia lanzar excepcion");
+        }
+        catch(BusinessLogicException e)
+        {
+            
+        }
+        proveedorLogic.deleteProveedor(entity2.getId());
+        ProveedorEntity deleted = em.find(ProveedorEntity.class, entity2.getId());
         Assert.assertNull(deleted);
+        proveedorLogic.delete2Proveedor(entity.getId());
     }
     
     @Test
