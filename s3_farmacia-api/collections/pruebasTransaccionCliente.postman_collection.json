@@ -229,6 +229,46 @@
 			"response": []
 		},
 		{
+			"name": "Obtener la ultima transaccion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a7a5e295-7a18-4fb7-8ccd-3929ba788f90",
+						"exec": [
+							"tests[\"la retorna\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/clientes/{{new_id_cli}}/transaccionesCliente/ultima",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"clientes",
+						"{{new_id_cli}}",
+						"transaccionesCliente",
+						"ultima"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Eliminar una transaccion cliente.",
 			"request": {
 				"method": "DELETE",
