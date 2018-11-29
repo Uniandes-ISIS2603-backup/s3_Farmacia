@@ -178,6 +178,22 @@ public class ClienteLogicTest {
     }
     
     /**
+     * Prueba para consultar un Cliente por cedula.
+     */
+    @Test
+    public void getClienteByCedulaTest()
+    {
+        ClienteEntity entity = data.get(0);
+        ClienteEntity resultEntity = clienteLogic.getCliente(entity.getId());
+        ClienteEntity aComparar = clienteLogic.getClienteByCedula(entity.getCedula());
+        Assert.assertEquals(aComparar.getId(), resultEntity.getId());
+        Assert.assertEquals(aComparar.getNombre(), resultEntity.getNombre());
+        Assert.assertEquals(aComparar.getApellido(), resultEntity.getApellido());
+        ClienteEntity pruebaNull = clienteLogic.getClienteByCedula(entity.getId()-9000000);
+        Assert.assertNull(pruebaNull);
+    }
+    
+    /**
      * Prueba para actualizar un Cliente.
      * @throws co.edu.uniandes.csw.farmacia.exceptions.BusinessLogicException
      */

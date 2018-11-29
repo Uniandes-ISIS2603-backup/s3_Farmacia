@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.farmacia.test.persistence;
 import co.edu.uniandes.csw.farmacia.entities.ProductoEntity;
 import co.edu.uniandes.csw.farmacia.entities.RegistroEntity;
 import co.edu.uniandes.csw.farmacia.persistence.RegistroPersistence;
+import com.sun.messaging.jmq.util.log.SysLog;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -112,6 +113,16 @@ public class RegistroPersistenceTest {
     }
     
     /**
+     * Prueba el metodo de listar los registros
+     */
+        @Test
+    public void listTest()
+    {  
+        List<RegistroEntity> respuesta = registroPersistence.list();
+        Assert.assertNotNull(respuesta.size());
+    }
+    
+    /**
      * Prueba para crear un regsitro
      */
     @Test
@@ -128,6 +139,18 @@ public class RegistroPersistenceTest {
         Assert.assertEquals(newRegistroEntity.getCantidad(),entity.getCantidad());
     }
     
+    /**
+     * Prueba para encontrar los registros de un producto
+     */
+    @Test
+    public void findRegistrosTest()
+    {
+        ProductoEntity entity = dataProducto.get(0);
+        List<RegistroEntity> lista = registroPersistence.findRegistros(entity.getId());
+        entity.setRegistros(registroPersistence.findRegistros(entity.getId()));
+        Assert.assertEquals(entity.getRegistros(), lista);
+    }
+    
     
     /**
      * Prueba para consultar un Registro.
@@ -142,7 +165,8 @@ public class RegistroPersistenceTest {
         Assert.assertEquals(entity.getCantidad(), newEntity.getCantidad());
     }
     
-    
+
+
     /**
      * Prueba para eliminar un Registro.
      */
