@@ -107,7 +107,8 @@ public class RegistroResource {
     @Path("{productosId: \\d+}/{registrosId: \\d+}")
     public RegistroDTO updateRegistro(@PathParam("productosId") Long productosId, @PathParam("registrosId") Long registrosId, RegistroDTO registro) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "RegistroResource updateRegistro: input: productosId: {0} , registrosId: {1} , registro:{2}", new Object[]{productosId, registrosId, registro});
-        if (registrosId.equals(registro.getId())) {
+       registro.setId(registrosId);
+        if (!registrosId.equals(registro.getId())) {
             throw new BusinessLogicException("Los ids del Registro no coinciden.");
         }
         RegistroEntity entity = registroLogic.getRegistro(productosId, registrosId);

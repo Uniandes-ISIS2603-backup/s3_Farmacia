@@ -102,7 +102,7 @@ public class TransaccionProveedorResource extends TransaccionProveedorDTO {
     }
     
     @POST
-    public TransaccionProveedorDetailDTO createTransaccionProveedor(@PathParam("id") Long proveedorId, TransaccionProveedorDTO transaccionProveedor) 
+    public TransaccionProveedorDetailDTO createTransaccionProveedor(@PathParam("id") Long proveedorId, TransaccionProveedorDetailDTO transaccionProveedor) 
     {
         LOGGER.log(Level.INFO, "TransaccionProveedorResource createTransaccionProveedor: input: {0}", transaccionProveedor);
         TransaccionProveedorDetailDTO nuevaTransaccionProveedorDTO = new TransaccionProveedorDetailDTO(transaccionProveedorLogic.createTransaccionProveedor(proveedorId, transaccionProveedor.toEntity() ));
