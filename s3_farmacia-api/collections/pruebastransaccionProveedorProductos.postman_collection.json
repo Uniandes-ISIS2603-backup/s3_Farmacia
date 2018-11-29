@@ -409,6 +409,49 @@
 			"response": []
 		},
 		{
+			"name": "Desasociar inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "27b959d5-c3b8-4518-9818-f67a28546fb6",
+						"exec": [
+							"tests[\"Se elimino correctamente\"] = responseCode.code === 404;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/proveedores/{{new_id_prt}}/transaccionProveedor/0/productos/{{new_id_pdct}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"proveedores",
+						"{{new_id_prt}}",
+						"transaccionProveedor",
+						"0",
+						"productos",
+						"{{new_id_pdct}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Desasociar producto de la transaccion",
 			"event": [
 				{
