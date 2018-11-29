@@ -1,0 +1,392 @@
+{
+	"info": {
+		"_postman_id": "08d5322e-d0a0-40fe-83ab-bfd4d69f84a0",
+		"name": "pruebasExtras",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crea un registro. Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "969cdba3-d898-4d5e-8186-d51ecdcd0747",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_ro\", data.id);",
+							"tests[\"No hay error\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"cantidad\":\"10\",\"tipoRegistro\":\"TRASLADO_BODEGA\"}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/registros/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"registros",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crea un registro. Copy Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "969cdba3-d898-4d5e-8186-d51ecdcd0747",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_rot\", data.id);",
+							"tests[\"No hay error\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"cantidad\":\"10\",\"tipoRegistro\":\"TRASLADO_BODEGA\"}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/registros/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"registros",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un producto. Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4a9951ee-5b10-4061-8df4-1aac3c266795",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_pdcp\", data.id);",
+							"tests[\"No hay error\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t \"fecha\" : \"9/20/2018\",\n\t \"precio\" : 73,\n\t \"tipoProducto\" : \"SUMINISTRO\",\n\t \"unidadesDisponibles\" : 100,\n\t \"perecedero\" : false ,\n\t \"cantidad\" : 95\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/registro/{{new_id_ro}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"productos",
+						"registro",
+						"{{new_id_ro}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Asociar un registro a un producto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "458cb7cd-6927-4dfd-89c2-34c2728f9c13",
+						"exec": [
+							"tests[\"No hay error\"] = responseCode.code === 204;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/{{new_id_pdcp}}/asociate/registro/{{new_id_rot}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"productos",
+						"{{new_id_pdcp}}",
+						"asociate",
+						"registro",
+						"{{new_id_rot}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Asociar un registro ya asignado a un producto ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c30a1edd-2144-40aa-b9d7-357b58e1efff",
+						"exec": [
+							"tests[\" hay error\"] = responseCode.code === 400;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/{{new_id_pdcp}}/asociate/registro/{{new_id_ro}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"productos",
+						"{{new_id_pdcp}}",
+						"asociate",
+						"registro",
+						"{{new_id_ro}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Asociar un registro ya asignado a un producto  Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "030863ed-203f-4c03-a20e-53b814264464",
+						"exec": [
+							"tests[\"Hay error\"] = responseCode.code === 404;",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/{{new_id_pdcp}}/asociate/registro/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"productos",
+						"{{new_id_pdcp}}",
+						"asociate",
+						"registro",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Elimina el segundo registro.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "515e0e30-934f-4d24-a09a-63d719341b2b",
+						"exec": [
+							"tests[\"Se elimino al registro\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/registros/{{new_id_pdcp}}/{{new_id_rot}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"registros",
+						"{{new_id_pdcp}}",
+						"{{new_id_rot}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar el primer registro",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "515e0e30-934f-4d24-a09a-63d719341b2b",
+						"exec": [
+							"tests[\"Se elimino al registro\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/registros/{{new_id_pdcp}}/{{new_id_ro}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"registros",
+						"{{new_id_pdcp}}",
+						"{{new_id_ro}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar producto.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "966f74e3-0727-4142-af71-c505e820bc9e",
+						"exec": [
+							"tests[\"Se elimino al producto\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_farmacia-api/api/productos/{{new_id_pdcp}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_farmacia-api",
+						"api",
+						"productos",
+						"{{new_id_pdcp}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
