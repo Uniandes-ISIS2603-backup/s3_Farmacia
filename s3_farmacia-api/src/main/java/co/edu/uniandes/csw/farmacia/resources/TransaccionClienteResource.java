@@ -51,7 +51,7 @@ public class TransaccionClienteResource
     
     
     @POST
-    public TransaccionClienteDetailDTO createTransacionCliente(@PathParam("clienteId")Long id,TransaccionClienteDTO transaccion) throws BusinessLogicException
+    public TransaccionClienteDetailDTO createTransacionCliente(@PathParam("clienteId")Long id,TransaccionClienteDetailDTO transaccion) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "TransaccionResource createTransaccion: input: {0}", transaccion);
         TransaccionClienteDetailDTO DTO = new TransaccionClienteDetailDTO(logic.createTransaccionCliente(id,transaccion.toEntity()));
