@@ -44,9 +44,10 @@ public class ClienteResource {
     
     private static final String C3 = "El recurso /clientes/cedula/ ";
     
+    
     @Inject
     ClienteLogic clienteLogic;
-    
+
     /**
      * Crea un nuevo cliente con la informacion que se recibe en el cuerpo de
      * la peticion y se regresa un objeto identico con un id auto-generado por
